@@ -39,8 +39,8 @@ function guess_match($title, $normalize = FALSE) {
     $quality.='1080i'  .'|';
     $quality.='1080p)\b/i';
 
-    // Audi
-    $audio = '/(AC3[_.\s])/i';
+    // Audio
+    $audio = '/([_.\s]AC3)/i';
     
     //Sanatize title
     if($filter = get_item_filter()) $title = preg_replace($filter, '', $title);

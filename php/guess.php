@@ -2,7 +2,7 @@
 function guess_match($title, $normalize = FALSE) { 
     
     // Episode
-    $epi ='/[_.\s]';  //Start with _ , . or space
+    $epi ='/[_.\s\(]';  //Start with _ , . or space
     $epi.='(S\d+[_.\s]?EP? ?\d+(?:-EP? ?\d+)?'.'|';  // S12E1 or S12EP1-EP2 
     $epi.='S\d+[_.\s]'.'|';
     $epi.='\d{1,2}x\d+(?:-\d+)?' .'|';  // 1x23 or 1x23-24
@@ -46,16 +46,16 @@ function guess_match($title, $normalize = FALSE) {
     if($filter = get_item_filter()) $title = preg_replace($filter, '', $title);
     $title = preg_replace('/( ?\/ ?)/', ' ', $title);
     $title = preg_replace($audio, '', $title);
-    if(preg_match('/\b(720p|1080p)\b/i', $title)) {
+    if(preg_match('/\b(720p|1080p|1080i)\b/i', $title)) {
         $title = preg_replace('/( -)?[_. ]HDTV/', '', $title);
     }
     
     if(preg_match($epi, $title, $match)) {
-        $episode_guess = $match[0];
-        $key_guess = preg_replace("/([^-\(\.]+)[\. ]*(?:[_.\s]-[_.\s].+)?" . $episode_guess. "(.*$)/", '\1', $title);
+        $episode_guess = $match[1];
+        $key_guess = preg_replace("/([^-\(\.]+)[\. ]*(?:[_.\s]-[_.\s].+)?(:?[_.\s]\(.+)?" . $episode_guess. "(.*$)/", '\1', $title);
     } elseif(preg_match($quality, $title, $match)) {
-        $quality_guess = $match[0];
-        $key_guess = preg_replace("/([^-\(\.]+)[\. ]*(?:[_.\s]-[_.\s].+)?" . $quality_guess. "(.*$)/", '\1', $title);
+        $quality_guess = $match[1];
+        $key_guess = preg_replace("/([^-\(\.]+)[\. ]*(?:[_.\s]-[_.\s].+)?(:?[_.\s]\(.+)?" . $quality_guess. "(.*$)/", '\1', $title);
     } else {
         return False;
     }

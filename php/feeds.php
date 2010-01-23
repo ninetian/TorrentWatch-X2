@@ -222,7 +222,7 @@ function rss_perform_matching($rs, $idx, $feedName) {
   $alt = 'alt';
   foreach($rs['items'] as $item) {
     if($filter = get_item_filter()) $item['title'] = preg_replace($filter, '', $item['title']);
-    if(preg_match('/\b(720p|1080p)\b/i', $item['title'])) {
+    if(preg_match('/\b(720p|1080p|1080i)\b/i', $item['title'])) {
         $item['title'] = preg_replace('/( -)?[_. ]HDTV/', '', $item['title']);
     }
     $percentage = '';
@@ -280,7 +280,7 @@ function atom_perform_matching($atom, $idx, $feedName) {
   
   foreach($atom['feed']['entry'] as $item) {
     if($filter = get_item_filter()) $item['title'] = preg_replace($filter, '', $item['title']);
-    if(preg_match('/\b(720p|1080p)\b/i', $item['title'])) {
+    if(preg_match('/\b(720p|1080p|1080i)\b/i', $item['title'])) {
         $item['title'] = preg_replace('/( -)?[_. ]HDTV/', '', $item['title']);
     }
     $matched = "nomatch";

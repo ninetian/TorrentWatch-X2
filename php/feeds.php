@@ -143,6 +143,7 @@ function check_for_torrent(&$item, $key, $opts) {
             $matched = "season";
             return FALSE;
         } else if($guess['episode'] != 'noShow') {
+            _debug("$item is in a workable format.");
             $matched = "nomatch";
             return FALSE;
         }

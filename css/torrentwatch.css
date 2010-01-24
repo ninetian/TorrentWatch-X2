@@ -309,6 +309,11 @@ ul.torrentlist td.buttons.match_nomatch {
     background-color: #fbbfbf;
 }
 
+div#show_legend li.legend.match_season,
+ul.torrentlist td.buttons.match_season {
+    background-color: #66cdaa;
+}
+
 div#show_legend li.legend.match_old_download,
 ul.torrentlist td.buttons.match_old_download {
     background-color: #CDCDCD;

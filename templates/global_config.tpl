@@ -146,7 +146,7 @@
                             <label class="item checkbox">
                                 <input type="checkbox" name="favdefaultall" value="1" <?php echo $favdefaultall; ?>
                                 title="Set feed to all when adding favorite. (This doesn't affect existing favorites)"/>
-                            Set default feed to "All"</label>
+                            Set default feed to "All" for tv shows with episode info.</label>
                         </div>
                     </div>
                     <div class="fav_settings right">

@@ -84,14 +84,10 @@ function guess_match($title, $normalize = FALSE) {
     if(preg_match('/^x\d+/', $episode_guess)) {
         $episode_guess = preg_replace('/(^x)(\d+)/', '1x\2', $episode_guess);
     }
+    $episode_guess = preg_replace('/0*(\d+)x0*(\d+)/', '\1x\2', $episode_guess);
     if(preg_match('/^(S\d\d?|Season[_.\s]?\d\d?)$/i', $episode_guess)) {
         $episode_guess = 'fullSeason';
-    }
-    if(preg_match('/^(\d{2,4} \d{1,2} \d{2,4})$/', $episode_guess)) {
-        $episode_guess = 'dateEpi';
-    }
-    $episode_guess = preg_replace('/0*(\d+)x0*(\d+)/', '\1x\2', $episode_guess);
-            
+    }            
   }  
   return array("key" => $key_guess, "data" => $data_guess, "episode" => $episode_guess);
 }

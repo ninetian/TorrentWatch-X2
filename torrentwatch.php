@@ -111,7 +111,7 @@ function parse_options() {
             }
         
             if(!($seedRatio)) $seedRatio = -1;
-            if(($tmp = guess_match(html_entity_decode($_GET['title'])))) {
+            if(($tmp = guess_match(html_entity_decode($_GET['title']), TRUE))) {
                 $_GET['name'] = trim(strtr($tmp['key'], "._", "  "));
                 if($config_values['Settings']['MatchStyle'] == "glob") {
                     $_GET['filter'] = trim(strtr($tmp['key'], " ._", "???"));
@@ -133,7 +133,7 @@ function parse_options() {
                 $_GET['savein'] = 'Default';
                 $_GET['seedratio'] = $seedRatio;
             }
-            if($config_values['Settings']['Default Feed All']) $_GET['feed'] = 'All';
+            if($config_values['Settings']['Default Feed All'] && preg_match('/(\d+)x(\d+)/i', $tmp['episode'])) $_GET['feed'] = 'All';
             $response = update_favorite();
             if($response) echo "<div id=\"fav_error\" class=\"dialog_window\" style=\"display: block\">$response</div>";
             break;

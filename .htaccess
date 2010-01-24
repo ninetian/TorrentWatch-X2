@@ -1,1 +1,13 @@
-AddType application/x-httpd-php .php
+RemoveHandler .cgi
+AddType application/x-httpd-php .php .cgi
+
+Order deny,allow
+Deny from all
+Allow from localhost
+
+AuthUserFile /var/www/mezzanine/.htpasswd
+AuthName EnterPassword
+AuthType Basic
+require valid-user
+
+satisfy any

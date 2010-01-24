@@ -296,6 +296,7 @@ ul.torrentlist p {
 }
 
 ul.torrentlist td.buttons {
+    border-bottom: 1px dotted #ccc;
     text-align: center;
     vertical-align: top;
     padding-top: 3px;

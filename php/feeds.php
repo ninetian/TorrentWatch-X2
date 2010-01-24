@@ -142,6 +142,9 @@ function check_for_torrent(&$item, $key, $opts) {
         } else if($guess['episode'] == 'fullSeason'){
             $matched = "season";
             return FALSE;
+        } else if($guess['episode'] != 'noShow') {
+            $matched = "nomatch";
+            return FALSE;
         }
       }
       _debug('Match found for '.$rs['title']."\n");

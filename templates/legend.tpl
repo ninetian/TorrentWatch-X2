@@ -5,7 +5,7 @@
       <li class='legend match_cachehit'>
         <span class='torrent_name'><b>Cache Hit - Download</b><br><i> This item is either downloading or downloaded.</i></span>
       <li class='legend match_season'>
-        <span class='torrent_name'><b>Full Season</b> <br> <i>Full season match</i></span>        
+        <span class='torrent_name'><b>Full Season</b> <br> <i>Full season of a favorite tv show</i></span>        
       <li class='legend match_duplicate'>
         <span class='torrent_name'><b>Duplicate Episode</b><br><i> Same episode downloaded previously.  Will not be downloaded.</i></span>
       <li class='legend match_old'>

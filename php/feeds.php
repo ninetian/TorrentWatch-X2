@@ -140,6 +140,7 @@ function check_for_torrent(&$item, $key, $opts) {
             return FALSE;
           }
         } else {
+            $matched = "old";
             return FALSE;
         }
       }

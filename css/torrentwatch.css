@@ -314,14 +314,10 @@ ul.torrentlist td.buttons.match_season {
     background-color: #66cdaa;
 }
 
+ul.torrentlist td.buttons.match_duplicate,
 div#show_legend li.legend.match_old_download,
 ul.torrentlist td.buttons.match_old_download {
     background-color: #CDCDCD;
-}
-
-div#show_legend li.legend.match_duplicate,
-ul.torrentlist td.buttons.match_duplicate {
-    background-color: #FFFFCC;
 }
 
 div#show_legend li.legend.match_match,

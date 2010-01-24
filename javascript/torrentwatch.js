@@ -250,7 +250,7 @@ $(function() {
         '<a href="#" onclick="$.delTorrent(\'' + item.hashString + '\', \'false\');">' +
         '<img height=10 src="images/tor_stop.png" /></a></p>' +
         '</td><td class="buttons right match_transmission">' +
-        '<p title="Set location or move torrent data.&#13;Current loaction: ' + item.downloadDir + '" class="button torMove">' +
+        '<p title="Set location or move torrent data.&#13;Current location: ' + item.downloadDir + '" class="button torMove">' +
         '<a href="#" onclick="toggleTorMove(\'' + item.hashString + '\');"><img height=10 src="images/tor_move.png" /></a></p>' +
         '<p title="Delete torrent and its data" class="button torTrash">' +
         '<a href="#" onclick="$.delTorrent(\'' + item.hashString + '\', \'true\');">' +

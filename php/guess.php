@@ -4,7 +4,7 @@ function guess_match($title, $normalize = FALSE) {
     // Episode
     $epi ='/[_.\s\(]';  //Start with _ , . or space
     $epi.='(S\d+[_.\s]?EP? ?\d+(?:-EP? ?\d+)?'.'|';  // S12E1 or S12EP1-EP2 
-    $epi.='S\d+'.'|';
+    //$epi.='S\d+'.'|';
     $epi.='\d{1,2}x\d+(?:-\d+)?' .'|';  // 1x23 or 1x23-24
     $epi.='\d+[_.\s]?of[_.\s]?\d+'.'|';  // 03of18
     $epi.='Season[_.\s]?\d+,?[_.\s]?Episode[_.\s]?\d+'.'|'; // Season 4, episode 15

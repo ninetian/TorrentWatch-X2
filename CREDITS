@@ -1,11 +1,9 @@
-Name: Torrent Watch 
-Description: Watch folder and RSS Downloader for torrents on the 
-               Networked Media Tank Platform
+Name: TorrentWatch-X
+Developer: Joris Vandalon
 
-Torrent Watch is available under the GNU General Public License v2 except where noted. The complete
-text of this license can be found in the file LICENSE
+Description: TorrentWatch-X is a web based tool to automate downloads of tv shows via torrents and rss. This is a fork of the torrentwatch project, but more aimed at non-NMT devices. The goal is to make it run on linux and OSX with different torrent clients and to make it work in all browsers.
 
-TorrentWatch-X by Joris Vandalon
+Torrent Watch is available under the GNU General Public License v2 except where noted. The complete text of this license can be found in the file LICENSE
 
 Origional Torrentwatch by Erik Bernhardson
 Origional Torrentwatch CSS styling, images and general html tweaking by Keith Solomon http://reciprocity.be/

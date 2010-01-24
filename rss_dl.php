@@ -1,8 +1,6 @@
 #!/usr/bin/php-cgi -q
 <?php
 // rss_dl.php
-// By Erik Bernhardson
-//
 // This program is a command line interface to torrentwatch
 // 
 ini_set('include_path', '.:'.dirname(__FILE__).'/php');

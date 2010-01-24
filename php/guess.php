@@ -4,7 +4,7 @@ function guess_match($title, $normalize = FALSE) {
     // Episode
     $epi ='/[_.\s\(]';  //Start with _ , . or space
     $epi.='(S\d+[_.\s]?EP? ?\d+(?:-EP? ?\d+)?'.'|';  // S12E1 or S12EP1-EP2 
-    $epi.='S\d+[_.\s]'.'|';
+    $epi.='S\d+'.'|';
     $epi.='\d{1,2}x\d+(?:-\d+)?' .'|';  // 1x23 or 1x23-24
     $epi.='\d+[_.\s]?of[_.\s]?\d+'.'|';  // 03of18
     $epi.='Season[_.\s]?\d+,?[_.\s]?Episode[_.\s]?\d+'.'|'; // Season 4, episode 15
@@ -16,27 +16,29 @@ function guess_match($title, $normalize = FALSE) {
     $epi.='\d{8}[_.\s])/i';   // 20082306 etc
 
     // Quality
-    $quality ='/\b(DVB'.'|';
-    $quality.='DSRIP'  .'|';
-    $quality.='DVBRip' .'|';
-    $quality.='DVDR'   .'|';
-    $quality.='DVDRip' .'|';
-    $quality.='DVDScr' .'|';
-    $quality.='XviDVD' .'|';
-    $quality.='DSR'    .'|';
-    $quality.='HDTVRip'.'|';
-    $quality.='VHSRiP' .'|';
-    $quality.='HR.HDTV'.'|';
-    $quality.='HDTV'   .'|';
-    $quality.='HR.PDTV'.'|';
-    $quality.='PDTV'   .'|';
-    $quality.='SatRip' .'|';
-    $quality.='SVCD'   .'|';
-    $quality.='TVRip'  .'|';
-    $quality.='TVCap'  .'|';
-    $quality.='WebRip' .'|';
-    $quality.='720p'   .'|';
-    $quality.='1080i'  .'|';
+    $quality ='/\b(DVB '.'|';
+    $quality.='DSRIP'   .'|';
+    $quality.='DVBRip'  .'|';
+    $quality.='DVDR'    .'|';
+    $quality.='DVDRip'  .'|';
+    $quality.='DVDScr'  .'|';
+    $quality.='XviDVD'  .'|';
+    $quality.='DSR'     .'|';
+    $quality.='HDTVRip' .'|';
+    $quality.='VHSRiP'  .'|';
+    $quality.='BDRip'   .'|';
+    $quality.='TELESYNC'.'|';
+    $quality.='HR.HDTV' .'|';
+    $quality.='HDTV'    .'|';
+    $quality.='HR.PDTV' .'|';
+    $quality.='PDTV'    .'|';
+    $quality.='SatRip'  .'|';
+    $quality.='SVCD'    .'|';
+    $quality.='TVRip'   .'|';
+    $quality.='TVCap'   .'|';
+    $quality.='WebRip'  .'|';
+    $quality.='720p'    .'|';
+    $quality.='1080i'   .'|';
     $quality.='1080p)\b/i';
 
     // Audio
@@ -56,6 +58,7 @@ function guess_match($title, $normalize = FALSE) {
     } elseif(preg_match($quality, $title, $match)) {
         $quality_guess = $match[1];
         $key_guess = preg_replace("/([^-\(\.]+)[\. ]*(?:[_.\s]-[_.\s].+)?(:?[_.\s]\(.+)?" . $quality_guess. "(.*$)/", '\1', $title);
+        $episode_guess = "noShow";
     } else {
         return False;
     }
@@ -75,13 +78,13 @@ function guess_match($title, $normalize = FALSE) {
     $episode_guess = trim(strtr($episode_guess, $from, $to));
     // Standardize episode output to SSxEE, strip leading 0
     // This is (b|c|d) from earlier.  If it is style e there will be no replacement, only strip leading 0
-    $episode_guess = preg_replace('/\b((?:S(\d+))?[_.\s]?EP? ?(\d+)(?:-EP? ?\d+)?\b|\b(\d+)x(\d+)|(\d+)[. ?]of[_.\s]?(\d+))\b|\bseason[_.\s]?(\d+),?[_.\s]?episode[_.\s]?(\d+)\b|\b0?(\d)(\d\d)\b|\bEps[_.\s]?(\d+)-\d+\b|\bPart[_.\s]?(\d+)\b/i',
+    $episode_guess = preg_replace('/(\b(?:S(\d+))?[_.\s]?EP? ?(\d+)(?:-EP? ?\d+)?\b|\b(\d+)x(\d+)|(\d+)[. ?]of[_.\s]?(\d+)\b|\bseason[_.\s]?(\d+),?[_.\s]?episode[_.\s]?(\d+)\b|\b0?(\d)(\d\d)\b|\bEps[_.\s]?(\d+)-\d+\b|\bPart[_.\s]?(\d+)\b)/i',
         '\2\4\6\8\10x\3\5\7\9\11\12\13', $episode_guess);
     if(preg_match('/^x\d+/', $episode_guess)) {
         $episode_guess = preg_replace('/(^x)(\d+)/', '1x\2', $episode_guess);
     }
     if(preg_match('/^\d+x$/', $episode_guess)) {
-        $episode_guess = preg_replace('/(^\d+)x$/', '\1x1', $episode_guess);
+        $episode_guess = preg_replace('/(^\d+)(x$)/', '\2x1', $episode_guess);
     }
     $episode_guess = preg_replace('/0*(\d+)x0*(\d+)/', '\1x\2', $episode_guess);
             

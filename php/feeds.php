@@ -138,7 +138,9 @@ function check_for_torrent(&$item, $key, $opts) {
             _debug($item['Episode'] .' >= '.$regs[2] . "; ", 1);
             $matched = "old";
             return FALSE;
-      }
+          }
+        } else {
+            return FALSE;
         }
       }
       _debug('Match found for '.$rs['title']."\n");

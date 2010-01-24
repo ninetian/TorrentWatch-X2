@@ -314,7 +314,6 @@ ul.torrentlist td.buttons.match_season {
     background-color: #66cdaa;
 }
 
-ul.torrentlist td.buttons.match_duplicate,
 div#show_legend li.legend.match_old_download,
 ul.torrentlist td.buttons.match_old_download {
     background-color: #CDCDCD;
@@ -325,6 +324,7 @@ ul.torrentlist td.buttons.match_match {
     background-color: #FFCC66;
 }
 
+ul.torrentlist td.buttons.match_duplicate,
 div#show_legend li.legend.match_old,
 ul.torrentlist td.buttons.match_old {
     background-color: #CCCCFF;

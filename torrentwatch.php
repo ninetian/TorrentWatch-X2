@@ -133,7 +133,7 @@ function parse_options() {
                 $_GET['savein'] = 'Default';
                 $_GET['seedratio'] = $seedRatio;
             }
-            if($config_values['Settings']['Default Feed All'] && preg_match('/(\d+)x(\d+)/i', $tmp['episode'])) $_GET['feed'] = 'All';
+            if($config_values['Settings']['Default Feed All'] && preg_match('/^(\d+)x(\d+)$|^(\d{8})$/i', $tmp['episode'])) $_GET['feed'] = 'All';
             $response = update_favorite();
             if($response) echo "<div id=\"fav_error\" class=\"dialog_window\" style=\"display: block\">$response</div>";
             break;

@@ -291,10 +291,7 @@ function atom_perform_matching($atom, $idx, $feedName, $feedLink) {
   $atom  = array_change_key_case_ext($atom, ARRAY_KEY_LOWERCASE);
   if(count($atom['feed']) == 0)
     return;
-  
-  $torHash = '';
-  $matched = "nomatch";
-  
+    
   if(isset($config_values['Global']['HTMLOutput']) && $config_values['Settings']['Combine Feeds'] == 0) {
     show_feed_html($idx);
   }
@@ -306,6 +303,7 @@ function atom_perform_matching($atom, $idx, $feedName, $feedLink) {
     if(preg_match('/\b(720p|1080p|1080i)\b/i', $item['title'])) {
         $item['title'] = preg_replace('/( -)?[_. ]HDTV/', '', $item['title']);
     }
+    $torHash = '';
     $matched = "nomatch";
     array_walk($config_values['Favorites'], 'check_for_torrent', 
                array('Obj' =>$item, 'URL' => $feedLink));
@@ -337,13 +335,16 @@ function atom_perform_matching($atom, $idx, $feedName, $feedLink) {
     } else {
         $alt='alt';
     }
-    unset($item);
   }
   _debug(print_r($htmlList,true));
   $htmlList = array_reverse($htmlList, true); 
   foreach($htmlList as $item) {
       show_torrent_html($item[item], $item[URL], $item[feedName], $item[alt], $item[torHash], $item[matched], $item[id]);
   }
+  if(isset($config_values['Global']['HTMLOutput']) && $config_values['Settings']['Combine Feeds'] == 0) {
+    close_feed_html($idx, 0);
+  }
+  unset($item);
 }
 
 

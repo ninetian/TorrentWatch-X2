@@ -539,7 +539,6 @@ $(function() {
               window.input_change = 1;
             });    
             if(window.input_change && this.text != 'Next') {
-                console.dir(this);
                 var answer = confirm('You have unsaved changes.\nAre you sure you want to continue?');
                 if(!(answer)) return;
                 window.input_change = 0;

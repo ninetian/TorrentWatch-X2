@@ -35,9 +35,13 @@
     <input type="text" class="seedratio text" name="seedratio" value="<?php echo _isset($item, 'seedRatio'); ?>">
     <label class="seedratio item" title="Maximum seeding ratio, set to -1 to disable">Seed Ratio:</label>
      <label class="lastSeason item"> Last Downloaded Episode:</label>
-    <input class='lastSeason text' type="text" name="season" value="<?php echo $item['Season']; ?>">
-     <label class="lastEpisode item">x</label>
-    <input class='lastEpisode text' type="text" name="episode" value="<?php echo $item['Episode']; ?>">
+    <?php if(!preg_match('/^(\d{8})$/', $item['Episode'])) { ?>
+     <input class='lastSeason text' type="text" name="season" value="<?php echo $item['Season']; ?>">
+      <label class="lastEpisode item">x</label>
+     <input class='lastEpisode text' type="text" name="episode" value="<?php echo $item['Episode']; ?>">
+    <?php } else { ?> 
+     <input class='lastEpisode text' type="text" style="width: 55px" name="episode" value="<?php echo $item['Episode']; ?>">
+    <?php } ?> 
   </div>
   
 <?php if($config_values['Settings']['Client'] == "folder") { echo '<br><br><br>'; }; ?>

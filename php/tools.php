@@ -7,7 +7,7 @@ function sendmail($msg, $subject) {
         $mail = <<<END
 Hi,
 
-This is an automated warning from TorrentWatch-X.
+This is an automated message from TorrentWatch-X.
 
 $msg
 END;

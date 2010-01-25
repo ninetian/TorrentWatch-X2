@@ -340,13 +340,16 @@ function updateFavoriteEpisode(&$fav, $title) {
   
   if(!$guess = guess_match($title, TRUE))
     return;
-    
-  if(!preg_match('/(\d+)x(\d+)/i', $guess['episode'], $regs))
-    return;
-    
-  $curEpisode = preg_replace('/(\d+)x/i', "", $guess['episode']);
-  $curSeason = preg_replace('/x(\d+)/i', "", $guess['episode']);
-  $expectedEpisode = sprintf('%02d', $fav['Episode'] + 1);
+  if(preg_match('/(^)(\d{8})$/', $guess['episode'], $regs)) {
+      $curEpisode = $regs[2];
+      $expectedEpisode = $regs[2] + 1;
+  } else if(preg_match('/^(\d+)x(\d+)$/i', $guess['episode'], $regs)) {    
+      $curEpisode = preg_replace('/(\d+)x/i', "", $guess['episode']);
+      $curSeason = preg_replace('/x(\d+)/i', "", $guess['episode']);
+      $expectedEpisode = sprintf('%02d', $fav['Episode'] + 1);
+  } else {
+      return;
+  }
   if($fav['Episode'] && $curEpisode > $expectedEpisode) {
       $show = $guess['key'];
       $episode = $guess['episode'];

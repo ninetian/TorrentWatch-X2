@@ -20,7 +20,7 @@ function show_transmission_div() {
 }
 
 function show_torrent_html($item, $feed, $feedName, $alt, $torHash, $matched, $id) {
-  global $html_out, $matched, $test_run, $config_values;
+  global $html_out, $test_run, $config_values;
   $guess = guess_match($item['title']);
   if($config_values['Settings']['Require Episode Info']) {
       if(!$guess) return;

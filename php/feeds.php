@@ -129,16 +129,20 @@ function check_for_torrent(&$item, $key, $opts) {
     $matched = 'match';
     if(check_cache($rs['title'])) {
       if(_isset($config_values['Settings'], 'Only Newer') == 1) {
-        if(!empty($guess['episode']) && preg_match('/(\d+)x(\d+)/i',$guess['episode'],$regs)) {
-          if($item['Season'] > $regs[1]) {
+        if(!empty($guess['episode']) && preg_match('/(\d+)x(\d+)|(\d{8})/i',$guess['episode'],$regs)) {
+          if(preg_match('/^(\d{8})$/', $regs[3]) && $item['Episode'] >= $regs[3]) {
+            _debug("bla: " . $item['Episode'] .' >= '.$regs[3] . "; ", 1);
+            $matched = "old";
+            return FALSE;
+          } else if(preg_match('/^(\d{1,3})$/', $regs[1]) && $item['Season'] > $regs[1]) {
             _debug($item['Season'] .' > '.$regs[1] . "; ", 1);
             $matched = "old";
             return FALSE;
-          } else if($item['Season'] == $regs[1] && $item['Episode'] >= $regs[2] && (!(preg_match('/proper|repack/i', $rs['title'])))) {
+          } else if(preg_match('/^(\d{1,3})$/', $regs[1]) && $item['Season'] == $regs[1] && $item['Episode'] >= $regs[2] && (!(preg_match('/proper|repack/i', $rs['title'])))) {
             _debug($item['Episode'] .' >= '.$regs[2] . "; ", 1);
             $matched = "old";
             return FALSE;
-          }
+          } 
         } else if($guess['episode'] == 'fullSeason'){
             $matched = "season";
             return FALSE;
@@ -216,30 +220,31 @@ function get_torHash($cache_file) {
   }
 }
 
-function rss_perform_matching($rs, $idx, $feedName) {
+function rss_perform_matching($rs, $idx, $feedName, $feedLink) {
   global $config_values, $matched;
-
   if(count($rs['items']) == 0)
     return;
+
   $percPerFeed = 80/count($config_values['Feeds']);
   $percPerItem = $percPerFeed/count($rs['items']);
   if(isset($config_values['Global']['HTMLOutput']) && $config_values['Settings']['Combine Feeds'] == 0) {
     show_feed_html($idx);
   }
   $alt = 'alt';
-  foreach($rs['items'] as $item) {
+  
+  $items = array_reverse($rs['items']);
+  $htmlList = array();
+  foreach($items as $item) {
     if($filter = get_item_filter()) $item['title'] = preg_replace($filter, '', $item['title']);
     if(preg_match('/\b(720p|1080p|1080i)\b/i', $item['title'])) {
         $item['title'] = preg_replace('/( -)?[_. ]HDTV/', '', $item['title']);
     }
-    $percentage = '';
     $torHash = '';
-    $matched = "nomatch";
+    $matched = 'nomatch';
     if(isset($config_values['Favorites'])) {
       array_walk($config_values['Favorites'], 'check_for_torrent', 
                  array('Obj' => $item, 'URL' => $rs['URL']));
     }
-    _debug("$matched: $item[title]\n", 1);
     $client = $config_values['Settings']['Client'];
     $cache_file = $config_values['Settings']['Cache Dir'].'rss_dl_'.filename_encode($item['title']);
     if(file_exists($cache_file)) {
@@ -253,30 +258,40 @@ function rss_perform_matching($rs, $idx, $feedName) {
       if(!($rsnr)) { $rsnr = 1; } else { $rsnr ++; };
       if(strlen($rsnr) <= 1) $rsnr = 0 . $rsnr;
       $id = $idx . $rsnr;
-      show_torrent_html($item, $rs['URL'], $feedName, $alt, $torHash, $matched, $id);
+      $htmlItems = array( 'item' => $item,
+                          'URL' => $feedLink,
+                          'feedName' => $feedName,
+                          'alt' => $alt,
+                          'torHash' => $torHash,
+                          'matched' => $matched,
+                          'id' => $id);
+      array_push($htmlList, $htmlItems);
     }
-    
+        
     if($alt=='alt') {
       $alt='';
     } else {
       $alt='alt';
     }
   }
-  
+  $htmlList = array_reverse($htmlList, true); 
+  foreach($htmlList as $item) {
+      show_torrent_html($item[item], $item[URL], $item[feedName], $item[alt], $item[torHash], $item[matched], $item[id]);
+  }
+      
   if(isset($config_values['Global']['HTMLOutput']) && $config_values['Settings']['Combine Feeds'] == 0) {
     close_feed_html($idx, 0);
   }
   unset($item);
 }
 
-function atom_perform_matching($atom, $idx, $feedName) {
+function atom_perform_matching($atom, $idx, $feedName, $feedLink) {
   global $config_values, $matched;
   
   $atom  = array_change_key_case_ext($atom, ARRAY_KEY_LOWERCASE);
   if(count($atom['feed']) == 0)
     return;
   
-  $percentage = '';
   $torHash = '';
   $matched = "nomatch";
   
@@ -284,18 +299,16 @@ function atom_perform_matching($atom, $idx, $feedName) {
     show_feed_html($idx);
   }
   $alt='alt';
-  
-  foreach($atom['feed']['entry'] as $item) {
+  $htmlList = array();
+  $items = array_reverse($atom['feed']['entry']);
+  foreach($items as $item) {
     if($filter = get_item_filter()) $item['title'] = preg_replace($filter, '', $item['title']);
     if(preg_match('/\b(720p|1080p|1080i)\b/i', $item['title'])) {
         $item['title'] = preg_replace('/( -)?[_. ]HDTV/', '', $item['title']);
     }
     $matched = "nomatch";
     array_walk($config_values['Favorites'], 'check_for_torrent', 
-               array('Obj' =>$item, 'URL' => $atom['URL']));
-    if($matched == "nomatch") {
-      _debug("No match for ".$item['title']."\n");
-    }
+               array('Obj' =>$item, 'URL' => $feedLink));
     $client = $config_values['Settings']['Client'];
     $cache_file = $config_values['Settings']['Cache Dir'].'rss_dl_'.filename_encode($item['title']);
     if(file_exists($cache_file)) {
@@ -309,7 +322,14 @@ function atom_perform_matching($atom, $idx, $feedName) {
      if(!($rsnr)) { $rsnr = 1; } else { $rsnr ++; };
      if(strlen($rsnr) <= 1) $rsnr = 0 . $rsnr;
      $id = $idx . $rsnr;
-     show_torrent_html($item, $atom['feed']['link'], $feedName, $alt, $torHash, $matched, $id);
+     $htmlItems = array( 'item' => $item,
+                         'URL' => $feedLink,
+                         'feedName' => $feedName,
+                         'alt' => $alt,
+                         'torHash' => $torHash,
+                         'matched' => $matched,
+                         'id' => $id);
+     array_push($htmlList, $htmlItems);
     }
 
     if($alt=='alt') {
@@ -318,6 +338,11 @@ function atom_perform_matching($atom, $idx, $feedName) {
         $alt='alt';
     }
     unset($item);
+  }
+  _debug(print_r($htmlList,true));
+  $htmlList = array_reverse($htmlList, true); 
+  foreach($htmlList as $item) {
+      show_torrent_html($item[item], $item[URL], $item[feedName], $item[alt], $item[torHash], $item[matched], $item[id]);
   }
 }
 
@@ -338,10 +363,10 @@ function feeds_perform_matching($feeds) {
   foreach($feeds as $key => $feed) {
     switch($feed['Type']) {
       case 'RSS':
-        rss_perform_matching($config_values['Global']['Feeds'][$feed['Link']], $key, $feed['Name']);
+        rss_perform_matching($config_values['Global']['Feeds'][$feed['Link']], $key, $feed['Name'], $feed['Link']);
         break;
       case 'Atom':
-        atom_perform_matching($config_values['Global']['Feeds'][$feed['Link']], $key, $feed['Name']);
+        atom_perform_matching($config_values['Global']['Feeds'][$feed['Link']], $key, $feed['Name'], $feed['Link']);
         break;
       default:
         _debug("Unknown Feed. Feed: ".$feed['Link']."Type: ".$feed['Type']."\n",-1);

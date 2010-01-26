@@ -129,7 +129,7 @@ function check_for_torrent(&$item, $key, $opts) {
     $matched = 'match';
     if(check_cache($rs['title'])) {
       if(_isset($config_values['Settings'], 'Only Newer') == 1) {
-        if(!empty($guess['episode']) && preg_match('/^(\d+)x(\d+)p?$|^(\d{8})$/i',$guess['episode'],$regs)) {
+        if(!empty($guess['episode']) && preg_match('/^(\d+)x(\d+)p?$|^(\d{8})p?$/i',$guess['episode'],$regs)) {
           if(preg_match('/^(\d{8})$/', $regs[3]) && $item['Episode'] >= $regs[3]) {
             _debug("bla: " . $item['Episode'] .' >= '.$regs[3] . "; ", 1);
             $matched = "old";

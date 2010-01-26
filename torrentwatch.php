@@ -133,7 +133,8 @@ function parse_options() {
                 $_GET['savein'] = 'Default';
                 $_GET['seedratio'] = $seedRatio;
             }
-            if($config_values['Settings']['Default Feed All'] && preg_match('/^(\d+)x(\d+)$|^(\d{8})$/i', $tmp['episode'])) $_GET['feed'] = 'All';
+            if($config_values['Settings']['Default Feed All'] && 
+                preg_match('/^(\d+)x(\d+)p?$|^(\d{8})$/i', $tmp['episode'])) $_GET['feed'] = 'All';
             $response = update_favorite();
             if($response) echo "<div id=\"fav_error\" class=\"dialog_window\" style=\"display: block\">$response</div>";
             break;
@@ -156,7 +157,9 @@ function parse_options() {
             if(!$downloadDir || $downloadDir == "Default" ) $downloadDir = $config_values['Settings']['Download Dir'];
             $r = client_add_torrent(trim($_GET['link']),
                 $downloadDir, $_GET['title'], $_GET['feed']);
-            if($r) { $torHash = get_torHash(add_cache($_GET['title'])); }
+            if($r) { 
+                $torHash = get_torHash(add_cache($_GET['title'])); 
+            }
             echo $torHash;
             exit(0);
             break;

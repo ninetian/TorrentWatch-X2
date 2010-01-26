@@ -254,7 +254,7 @@ function client_add_torrent($filename, $dest, $title, $feed = NULL, &$fav = NULL
           $subject = "TorrentWatch-X: Started downloading $tor_name";
           $msg = "TorrentWatch started downloading $tor_name";
           sendmail($msg, $subject);
-      }    
+      }
       updateFavoriteEpisode($fav, $tor_name);
       _debug("Updated Favorites");
     } else {

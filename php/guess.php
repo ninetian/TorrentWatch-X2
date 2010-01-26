@@ -84,7 +84,11 @@ function guess_match($title, $normalize = FALSE) {
     if(preg_match('/^x\d+/', $episode_guess)) {
         $episode_guess = preg_replace('/(^x)(\d+)/', '1x\2', $episode_guess);
     }
-    $episode_guess = preg_replace('/0*(\d+)x0*(\d+)/', '\1x\2', $episode_guess);
+    if(preg_match('/[_.\s]PROPER[_.\s]|[_.\s]REPACK[_.\s]/i', $title)) {
+        $episode_guess = preg_replace('/0*(\d+)x0*(\d+)/', '\1x\2p', $episode_guess);
+    } else {
+        $episode_guess = preg_replace('/0*(\d+)x0*(\d+)/', '\1x\2', $episode_guess);
+    }
     if(preg_match('/^(\d\d\d\d \d\d \d\d)$/', $episode_guess)) {
         $episode_guess = preg_replace('/ /', '', $episode_guess);
     }

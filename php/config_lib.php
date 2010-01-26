@@ -343,7 +343,11 @@ function updateFavoriteEpisode(&$fav, $title) {
   if(preg_match('/(^)(\d{8})$/', $guess['episode'], $regs)) {
       $curEpisode = $regs[2];
       $expectedEpisode = $regs[2] + 1;
-  } else if(preg_match('/^(\d+)x(\d+)$/i', $guess['episode'], $regs)) {    
+  } else if(preg_match('/^(\d+)x(\d+p?)$/i', $guess['episode'], $regs)) {
+      if(preg_match('/^\d+p$/', $regs[2])) { 
+          $regs[2] = preg_replace('/^(\d+)p$/', '\1', $regs[2]);
+          $PROPER = "p";
+      }
       $curEpisode = preg_replace('/(\d+)x/i', "", $guess['episode']);
       $curSeason = preg_replace('/x(\d+)/i', "", $guess['episode']);
       $expectedEpisode = sprintf('%02d', $fav['Episode'] + 1);
@@ -372,9 +376,13 @@ function updateFavoriteEpisode(&$fav, $title) {
   }
   if(!isset($fav['Season'],$fav['Episode']) || $regs[1] > $fav['Season']) {
     $fav['Season'] = $regs[1];
-    $fav['Episode'] = $regs[2];
-  } else if($regs[1] == $fav['Season'] && $regs[2] > $fav['Episode'])
-    $fav['Episode'] = $regs[2];
+    $fav['Episode'] = $regs[2] . $PROPER;
+  } else if($regs[1] == $fav['Season'] && $regs[2] > $fav['Episode']) {
+    $fav['Episode'] = $regs[2]. $PROPER;
+  } else {
+    $fav['Episode'] .= $PROPER;
+  }
+  _debug(print_r($fav,true));
   write_config_file();
 } 
 

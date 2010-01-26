@@ -126,25 +126,29 @@ function check_for_torrent(&$item, $key, $opts) {
     $guess = guess_match($title, TRUE);
    
   if($hit && episode_filter($guess, $item['Episodes']) == true) {
-    $item['Episode'] = preg_replace('/^(\d+)p/', '\1', $item['Episode']);
     $matched = 'match';
+    if(preg_match('/^\d+p$/', $item['Episode'])) {
+        $item['Episode'] = preg_replace('/^(\d+)p/', '\1', $item['Episode']);
+        $PROPER = 1;
+        _debug("$PROPER " . $item['Episode'] . "\n");
+    }
     if(check_cache($rs['title'])) {
       if(_isset($config_values['Settings'], 'Only Newer') == 1) {
         if(!empty($guess['episode']) && preg_match('/^(\d+)x(\d+)p?$|^(\d{8})p?$/i',$guess['episode'],$regs)) {
           if(preg_match('/^(\d{8})$/', $regs[3]) && $item['Episode'] >= $regs[3]) {
-            _debug($item['Episode'] .' >= '.$regs[3] . "; ", 1);
+            _debug($item['Episode'] .' >= '.$regs[3] . "\r\n", 1);
             $matched = "old";
             return FALSE;
           } else if(preg_match('/^(\d{1,3})$/', $regs[1]) && $item['Season'] > $regs[1]) {
-            _debug($item['Season'] .' > '.$regs[1] . "; ", 1);
+            _debug($item['Season'] .' > '.$regs[1] . "\r\n", 1);
             $matched = "old";
             return FALSE;
           } else if(preg_match('/^(\d{1,3})$/', $regs[1]) && $item['Season'] == $regs[1] && $item['Episode'] >= $regs[2]) {
             if(!preg_match('/proper|repack/i', $rs['title'])) {
-                _debug($item['Episode'] .' >= '.$regs[2] . "; ", 1);
+                _debug($item['Name'] . ": " . $item['Episode'] .' >= '.$regs[2] . "\r\n", 1);
                 $matched = "old";
                 return FALSE;
-            } else if (preg_match('/^(\d+x)?\d+p$/i', $item['Episode'])) {
+            } else if($PROPER = 1) {
                 _debug("Allready downloaded this Proper or Repack" . $regs[3] . "\r\n");
                 $matched = "old";
                 return FALSE;
@@ -159,6 +163,7 @@ function check_for_torrent(&$item, $key, $opts) {
             return FALSE;
         }
       }
+      _debug("PROPER: $PROPER\n");
       _debug('Match found for '.$rs['title']."\n");
       if($test_run) {
         $matched = 'test';

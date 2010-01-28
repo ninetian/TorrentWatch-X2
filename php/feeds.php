@@ -157,7 +157,8 @@ function check_for_torrent(&$item, $key, $opts) {
         } else if($guess['episode'] == 'fullSeason'){
             $matched = "season";
             return FALSE;
-        } else if($guess['episode'] != 'noShow' && !preg_match('/^(\d{2,4} \d{1,2} \d{2,4})$/', $guess['episode'])) {
+        } else if(($guess['episode'] != 'noShow' && !preg_match('/^(\d{1,2} \d{1,2} \d{2,4})$/', $guess['episode']))
+                || $config_values['Settings']['Require Episode Info'] == 1) {
             _debug("$item is not in a workable format.");
             $matched = "nomatch";
             return FALSE;

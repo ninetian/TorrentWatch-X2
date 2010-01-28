@@ -14,3 +14,7 @@ A:  First you will have to find the cookies containing the uid and password:
     http://<feed_url>:COOKIE:<cookie1>=<value1>&<cookie2>=<value2>&<cookie3>.....)
     or:
     http://<feed_url>:COOKIE:<cookie1>=<value1>;<cookie2>=<value2>;<cookie3>.....)
+
+Q: I have movies and tv shows combined in my feed(s) and now movies with similar titels as tv shows also are downloaded.
+A: Enable the "Require episode info" in the configure menu. This will cause tw-x to match only items with episode information (like: S01E12?, 1x12, 2010-01-27, etc...).
+

@@ -28,11 +28,6 @@
                                 </option>
                             </select>
                         </div>
-                        <div id="config_require_epi_info">
-                            <label class="item checkbox" title="Combine all feeds into 1 list">
-                                <input type="checkbox" name="require_epi_info" value="1" <?php echo $require_epi_info; ?>/>
-                            Hide shows without decent episode info</label>
-                        </div>
                     </div>
                     <div class="int_settings right">
                         <div id="config_combinefeeds">
@@ -146,10 +141,16 @@
                             <label class="item checkbox">
                                 <input type="checkbox" name="favdefaultall" value="1" <?php echo $favdefaultall; ?>
                                 title="Set feed to all when adding favorite. (This doesn't affect existing favorites)"/>
-                            Set default feed to "All" for tv shows with episode info.</label>
+                            Set default feed to "All" for tv shows with episode info</label>
                         </div>
                     </div>
                     <div class="fav_settings right">
+                        <div id="config_require_epi_info">
+                            <label class="item checkbox" 
+                                title="When enabled only shows with episode information (S01E12, 1x12, etc... ) wil be matched.">
+                                <input type="checkbox" name="require_epi_info" value="1" <?php echo $require_epi_info; ?>/>
+                            Require episode info</label>
+                        </div>
                         <div id="config_verifyepisodes" title="Try not to download duplicate episodes">
                             <label class="item checkbox">
                                 <input type="checkbox" name="verifyepisodes" value="1" <?php echo $verifyepisode; ?>/>

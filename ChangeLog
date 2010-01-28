@@ -89,6 +89,7 @@ IMPORTANT: If you are updating from a previous version. Please copy php/config.p
     -- Fixed focus issue in "move torrent" input.
 
 current:
+    -- Added configure option to match only shows with episode info.
     -- Added Full season recognition. 
     -- Added script hook (read docs/script.txt for more info).
     -- Better Episode guessing.

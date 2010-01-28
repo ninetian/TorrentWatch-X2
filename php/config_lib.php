@@ -23,7 +23,6 @@ function setup_default_config() {
   _default('Cache Dir', $basedir."/rss_cache/");
   _default('Save Torrents', "0");
   _default('Run Torrentwatch', "True");
-  _default('Cron', "/etc/cron.hourly");
   _default('Client', "");
   _default('Verify Episode', "1");
   _default('Only Newer', "1");

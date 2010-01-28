@@ -457,7 +457,7 @@ div.move_data label {
 }
     
 div#configuration  {
-    top: 10px;
+    top: 5px;
     width: 700px;
     margin-left: -350px;
 }
@@ -664,7 +664,7 @@ div.config_form {
     border: 1px solid grey;
     padding: 0 0 5px 0;
     margin: 5px 0 0 0 ;
-    height: 475px;
+    height: 485px;
 }
 
 form#config_form div {

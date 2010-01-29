@@ -179,6 +179,12 @@ function parse_options() {
             global $config_values;
             echo $config_values['Settings']['Client'];
             exit;
+        case 'get_dialog_data':
+            display_favorites();
+            display_global_config();
+            display_hidelist();
+            display_history();
+            exit;
         default:
             $output = "<script type='text/javascript'>alert('Bad Paramaters passed to ".$_SERVER['PHP_SELF'].":  ".$_SERVER['REQUEST_URI']."');</script>";
     }
@@ -250,7 +256,7 @@ function display_global_config() {
         ob_start();
         require('templates/global_config.tpl');
         require('templates/feeds.tpl');
-        $html_out .= ob_get_contents();
+        return ob_get_contents();
         ob_end_clean();
     }
 }
@@ -283,7 +289,7 @@ function display_favorites() {
 
   ob_start();
   require('templates/favorites.tpl');
-  $html_out .= ob_get_contents();
+  return ob_get_contents();
   ob_end_clean();
 }
 
@@ -292,7 +298,7 @@ function display_hidelist() {
 
   ob_start();
   require('templates/hidelist.tpl');
-  $html_out .= ob_get_contents();
+  return ob_get_contents();
   ob_end_clean();
 }
 
@@ -307,7 +313,7 @@ function display_history() {
 
     ob_start();
     require('templates/history.tpl');
-    $html_out .= ob_get_contents();
+    return ob_get_contents();
     ob_end_clean();
 }
 
@@ -402,12 +408,8 @@ $debug_output = "Torrentwatch Debug:";
 $verbosity = 0;
 
 parse_options();
-display_global_config();
 if(check_requirements()) return;
 check_files();
-display_favorites();
-display_hidelist();
-display_history();
 display_clearCache();
 display_legend();
 

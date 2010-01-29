@@ -277,7 +277,7 @@ $(function() {
             var recent;
             if(window.gotAllData) { recent = 1; } else { recent = 0; };
             
-            window.torInfo = recent;
+            window.hideProgressBar = recent;
             $.get('torrentwatch.php', {
                 'getClientData': 1,
                 'recent': recent
@@ -315,7 +315,7 @@ $(function() {
                     });
                 }
             });
-            window.torInfo = null;
+            window.hideProgressBar = null;
         }
     };
 
@@ -436,6 +436,9 @@ $(function() {
     };
 
     $(document).ready(function() { 
+        $.get('torrentwatch.php', { get_client: 1 }, function(client) {
+            window.client = client
+        })
         setTimeout(function() {
             setInterval(function() {
                 getClientData();
@@ -446,7 +449,7 @@ $(function() {
 
     // Ajax progress bar
     $("#progressbar").ajaxStart(function() {
-        if (!(window.torInfo)) {
+        if (!(window.hideProgressBar)) {
             $(this).show();
         }
     }).ajaxStop(function() {
@@ -535,9 +538,6 @@ $(function() {
 
     $.fn.toggleDialog = function() {
         this.each(function() {
-            $(".dialog_window input, .dialog_window select").change(function() {
-              window.input_change = 1;
-            });    
             if(window.input_change && this.text != 'Next') {
                 var answer = confirm('You have unsaved changes.\nAre you sure you want to continue?');
                 if(!(answer)) return;
@@ -550,12 +550,23 @@ $(function() {
                 $(last).fadeOut("normal");
             }
             if (current_dialog && this.hash != '#') {
-                $(current_dialog + ' form').resetForm();
-                $(current_dialog).fadeIn("normal");
-                window.dialog = 1;
-                $(current_dialog + ' a.submitForm').click(function() { window.dialog = 0 })
+                window.hideProgressBar = 1;
+                $.get('torrentwatch.php', { get_dialog_data: 1 }, function(data) {
+                    $('#favorites, #configuration, #feeds, #history, #hidelist').remove();
+                    $('#dynamicdata').prepend(data);
+                    $('#dynamicdata').find("ul.favorite > li").initFavorites().end().find("form").initForm().end().initConfigDialog();
+                    $(current_dialog).fadeIn("normal");
+                    setTimeout(function() {
+                        $(".dialog_window input, .dialog_window select").change(function() {
+                          window.input_change = 1;
+                        });    
+                    },500);
+                    window.dialog = 1;
+                    $(current_dialog + ' a.submitForm').click(function() { window.dialog = 0 })
+                });
             }
         });
+        window.hideProgressBar = 1;
         return this;
     };
     $.fn.initFavorites = function() {
@@ -612,10 +623,7 @@ $(function() {
         return this;
     };
     $.fn.initConfigDialog = function() {
-        setTimeout(function() {
-            $('select#client').change();
-        },
-        500);
+        $('select#client').change();
         return this;
     };
     $.fn.buildDataString = function(buttonElement) {

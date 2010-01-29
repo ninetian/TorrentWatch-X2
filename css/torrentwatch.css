@@ -768,6 +768,7 @@ div.favorite {
 }
 
 ul.favorite {
+    height: 245px;
     font-size: 120%;
     overflow: auto;
 }

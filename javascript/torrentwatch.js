@@ -548,11 +548,11 @@ $(function() {
             current_dialog = target === last && window.dialog === 1 ? '': this.hash
             if (last) {
                 $(last).fadeOut("normal");
+                $('#favorites, #configuration, #feeds, #history, #hidelist').remove();
             }
             if (current_dialog && this.hash != '#') {
                 window.hideProgressBar = 1;
-                $.get('torrentwatch.php', { get_dialog_data: 1 }, function(data) {
-                    $('#favorites, #configuration, #feeds, #history, #hidelist').remove();
+                $.get('torrentwatch.php', { get_dialog_data: this.text }, function(data) {
                     $('#dynamicdata').prepend(data);
                     $('#dynamicdata').find("ul.favorite > li").initFavorites().end().find("form").initForm().end().initConfigDialog();
                     $(current_dialog).fadeIn("normal");

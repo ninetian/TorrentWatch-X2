@@ -180,11 +180,31 @@ function parse_options() {
             echo $config_values['Settings']['Client'];
             exit;
         case 'get_dialog_data':
-            display_favorites();
-            display_global_config();
-            display_hidelist();
-            display_history();
-            exit;
+            switch($_GET['get_dialog_data']) {
+                case 'Favorites':
+                    display_favorites();
+                    exit;
+                case 'Configure':
+                    display_global_config();
+                    exit;
+                case 'Hide List':
+                    display_hidelist();
+                    exit;
+                case 'Feeds':
+                    display_feeds();
+                    exit;
+                case 'View History': 
+                    display_history();
+                    exit;
+                case 'Legend':
+                    display_legend();
+                    exit;
+                case 'Empty Cache':
+                    display_clearCache();
+                    exit;
+                default:
+                    exit;
+            }
         default:
             $output = "<script type='text/javascript'>alert('Bad Paramaters passed to ".$_SERVER['PHP_SELF'].":  ".$_SERVER['REQUEST_URI']."');</script>";
     }
@@ -255,7 +275,6 @@ function display_global_config() {
         // Include the templates and append the results to html_out
         ob_start();
         require('templates/global_config.tpl');
-        require('templates/feeds.tpl');
         return ob_get_contents();
         ob_end_clean();
     }
@@ -302,6 +321,15 @@ function display_hidelist() {
   ob_end_clean();
 }
 
+function display_feeds() {
+    global $config_values, $html_out;
+    
+    ob_start();
+    require('templates/feeds.tpl');
+    return ob_get_contents();
+    ob_end_clean();
+}
+    
 function display_history() {
     global $html_out, $config_values;
 
@@ -322,7 +350,7 @@ function display_legend() {
 
     ob_start();
     require('templates/legend.tpl');
-    $html_out .= ob_get_contents();
+    return ob_get_contents();
     ob_end_clean();
 }
 
@@ -331,7 +359,7 @@ function display_clearCache() {
 
     ob_start();
     require('templates/clear_cache.tpl');
-    $html_out .= ob_get_contents();
+    return ob_get_contents();
     ob_end_clean();
 }
 
@@ -410,8 +438,6 @@ $verbosity = 0;
 parse_options();
 if(check_requirements()) return;
 check_files();
-display_clearCache();
-display_legend();
 
 echo $html_out;
 $html_out = "";

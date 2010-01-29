@@ -7,7 +7,6 @@ require_once("config.php");
 require_once("feeds.php");
 require_once("html.php");
 require_once("lastRSS.php");
-require_once("progressbar.php");
 require_once("tor_client.php");
 require_once("platform.php");
 require_once("guess.php");

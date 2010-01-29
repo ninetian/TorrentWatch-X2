@@ -12,3 +12,5 @@ function platform_initialize() {
 function platform_getConfigFile() {
   return platform_getConfigDir() . "/torrentwatch.config";
 }
+
+?>

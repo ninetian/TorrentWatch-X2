@@ -69,19 +69,19 @@ function parse_options() {
             echo json_encode($response);
             exit;
         case 'delTorrent':
-                $response = delTorrent($_REQUEST['delTorrent'], $_REQUEST['trash']);
+            $response = delTorrent($_REQUEST['delTorrent'], $_REQUEST['trash']);
             echo "$response";
             exit;
         case 'stopTorrent':
-                $response = stopTorrent($_REQUEST['stopTorrent']);
+            $response = stopTorrent($_REQUEST['stopTorrent']);
             echo "$response";
             exit;
         case 'startTorrent':
-                $response = startTorrent($_REQUEST['startTorrent']);
+            $response = startTorrent($_REQUEST['startTorrent']);
             echo "$response";
             exit;
         case 'moveTo':
-                $response = moveTorrent($_REQUEST['moveTo'], $_REQUEST['torHash']);
+            $response = moveTorrent($_REQUEST['moveTo'], $_REQUEST['torHash']);
             echo "$response";
             exit;
         case 'updateFavorite':

@@ -130,7 +130,6 @@ function check_for_torrent(&$item, $key, $opts) {
     if(preg_match('/^\d+p$/', $item['Episode'])) {
         $item['Episode'] = preg_replace('/^(\d+)p/', '\1', $item['Episode']);
         $PROPER = 1;
-        _debug("$PROPER " . $item['Episode'] . "\n");
     }
     if(check_cache($rs['title'])) {
       if(_isset($config_values['Settings'], 'Only Newer') == 1) {
@@ -148,7 +147,7 @@ function check_for_torrent(&$item, $key, $opts) {
                 _debug($item['Name'] . ": " . $item['Episode'] .' >= '.$regs[2] . "\r\n", 1);
                 $matched = "old";
                 return FALSE;
-            } else if($PROPER = 1) {
+            } else if($PROPER == 1) {
                 _debug("Allready downloaded this Proper or Repack of " . $item['Name'] . " $regs[1]x$regs[2]$regs[3]\r\n");
                 $matched = "old";
                 return FALSE;

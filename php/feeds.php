@@ -143,12 +143,12 @@ function check_for_torrent(&$item, $key, $opts) {
             $matched = "old";
             return FALSE;
           } else if(preg_match('/^(\d{1,3})$/', $regs[1]) && $item['Season'] == $regs[1] && $item['Episode'] >= $regs[2]) {
-            if(!preg_match('/proper|repack/i', $rs['title'])) {
+            if(!preg_match('/proper|repack|rerip/i', $rs['title'])) {
                 _debug($item['Name'] . ": " . $item['Episode'] .' >= '.$regs[2] . "\r\n", 1);
                 $matched = "old";
                 return FALSE;
             } else if($PROPER == 1) {
-                _debug("Allready downloaded this Proper or Repack of " . $item['Name'] . " $regs[1]x$regs[2]$regs[3]\r\n");
+                _debug("Allready downloaded this Proper, Repack or Rerip of " . $item['Name'] . " $regs[1]x$regs[2]$regs[3]\r\n");
                 $matched = "old";
                 return FALSE;
             }

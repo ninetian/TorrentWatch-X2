@@ -61,10 +61,6 @@ function clear_cache() {
  */
 function check_cache_episode($title) {
   global $config_values, $matched;
-  // Dont skip a proper/repack
-  if(preg_match('/proper|repack/i', $title)) {
-    return 1;
-  }
   $guess = guess_match($title, TRUE);
   if($guess == False) {
     _debug("Unable to guess for $title\n");
@@ -78,7 +74,7 @@ function check_cache_episode($title) {
         continue;
       $cacheguess = guess_match(substr($file, 7), TRUE);
       if($cacheguess != false && $guess['episode'] == $cacheguess['episode']) {
-        _debug("Full Episode Match, ignoring\n",2);
+        _debug("Full Episode Match, ignoring " . $guess['episode'] . "\n",2);
         $matched = "duplicate";
         return 0;
       }

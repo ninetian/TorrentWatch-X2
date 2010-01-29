@@ -88,7 +88,7 @@ function guess_match($title, $normalize = FALSE) {
     if(preg_match('/^(\d\d\d\d \d\d \d\d)$/', $episode_guess)) {
         $episode_guess = preg_replace('/ /', '', $episode_guess);
     }
-    if(preg_match('/[_.\s]PROPER[_.\s]|[_.\s]REPACK[_.\s]/i', $title)) {
+    if(preg_match('/[_.\s]PROPER[_.\s]|[_.\s]REPACK[_.\s]|[_.\s]RERIP[_.\s]/i', $title)) {
         $episode_guess .= "p";
     } 
     if(preg_match('/^(S\d\d?|Season[_.\s]?\d\d?)$/i', $episode_guess)) {

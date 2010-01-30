@@ -819,48 +819,48 @@ form.favinfo input#idx {
 
 form.favinfo select {
     position: absolute;
-    right: 45px;
-    width: 242px;
+    right: 25px;
+    width: 262px;
 }
 
 form.favinfo input.text,
 form.favinfo input[type=text] {
     position: absolute;
-    right: 45px;
-    width: 240px;
+    right: 25px;
+    width: 260px;
 }
 
 form.favinfo div.favorite_seed_and_episode {
      position: absolute;
      float: right;
-     right: 45px;
-     width: 340px;
+     right: 25px;
+     width: 360px;
 }
 
 form.favinfo label.lastSeason {
     position: absolute;
-    right: 60px;
+    right: 70px;
     top: 2px;
     margin-left: 0;
 }
 
 form.favinfo label.lastEpisode{
     position: absolute;
-    right: 25px;
+    right: 30px;
     top: 2px;
     margin-left: 0;
 }
 
 form.favinfo input.seedratio[type=text] {
     position: absolute;
-    right: 220px;
+    right: 240px;
     width: 20px;
     text-align: center;
 }
 
 form.favinfo input.lastSeason[type=text] {
     position: absolute;
-    right: 35px;
+    right: 40px;
     width: 20px;
     text-align: center;
 }
@@ -868,7 +868,7 @@ form.favinfo input.lastSeason[type=text] {
 form.favinfo input.lastEpisode[type=text] {
     position: absolute;
     right: 0;
-    width: 20px;
+    width: 25px;
     text-align: center;
 }
 

@@ -181,25 +181,25 @@ function parse_options() {
             exit;
         case 'get_dialog_data':
             switch($_GET['get_dialog_data']) {
-                case 'Favorites':
+                case '#favorites':
                     display_favorites();
                     exit;
-                case 'Configure':
+                case '#configuration':
                     display_global_config();
                     exit;
-                case 'Hide List':
+                case '#hidelist':
                     display_hidelist();
                     exit;
-                case 'Feeds':
+                case '#feeds':
                     display_feeds();
                     exit;
-                case 'View History': 
+                case '#history': 
                     display_history();
                     exit;
-                case 'Legend':
+                case '#legend':
                     display_legend();
                     exit;
-                case 'Empty Cache':
+                case '#clear_cache':
                     display_clearCache();
                     exit;
                 default:

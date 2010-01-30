@@ -553,7 +553,7 @@ $(function() {
             }
             if (current_dialog && this.hash != '#') {
                 window.hideProgressBar = 1;
-                $.get('torrentwatch.php', { get_dialog_data: this.innerHTML }, function(data) {
+                $.get('torrentwatch.php', { get_dialog_data: this.hash }, function(data) {
                     $('#dynamicdata.dyndata').append(data);
                     $('#dynamicdata').find("ul.favorite > li").initFavorites().end().find("form").initForm().end().initConfigDialog();
                     $(current_dialog).fadeIn("normal");

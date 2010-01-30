@@ -96,6 +96,7 @@ ul.mainoptions li#legend {
     }
 
 ul.mainoptions li#webui {
+    display: none;
     float: right;
     }
 

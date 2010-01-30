@@ -438,6 +438,7 @@ $(function() {
     $(document).ready(function() { 
         $.get('torrentwatch.php', { get_client: 1 }, function(client) {
             window.client = client
+            changeClient(client);
         })
         setTimeout(function() {
             setInterval(function() {

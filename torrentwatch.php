@@ -420,17 +420,18 @@ function check_files() {
 }
 
 function version_check($tw_version) {
-    $get = curl_init();
-    $getOptions[CURLOPT_URL] = 'http://tw-version.vandalon.net/VERSION';
-    get_curl_defaults(&$getOptions);
-    curl_setopt_array($get, $getOptions);
-    $latest = curl_exec($get);
-    curl_close($get);
-    if($latest && $latest > $tw_version && !isset($_COOKIE['VERSION-CHECK'])) {
-        echo "<div id=\"newVersion\" class=\"dialog_window\" style=\"display: block\">TorrentWatch-X $latest is available.
-              Click <a href=\"https://code.google.com/p/torrentwatch-x/\">here</a> for more information.</div>";
+    if(!isset($_COOKIE['VERSION-CHECK']) {
+        $get = curl_init();
+        $getOptions[CURLOPT_URL] = 'http://tw-version.vandalon.net/VERSION';
+        get_curl_defaults(&$getOptions);
+        curl_setopt_array($get, $getOptions);
+        $latest = curl_exec($get);
+        curl_close($get);
+        if($latest && $latest > $tw_version) {
+            echo "<div id=\"newVersion\" class=\"dialog_window\" style=\"display: block\">TorrentWatch-X $latest is available.
+                  Click <a href=\"https://code.google.com/p/torrentwatch-x/\">here</a> for more information.</div>";
+        }
     }
-    
 }
 
 //

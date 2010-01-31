@@ -46,11 +46,13 @@ if(!(function_exists(get_base_dir))) {
         return dirname(dirname(__FILE__));
     }
 }
-    
-function get_curl_defaults(&$curlopt) {
-    $curlopt[CURLOPT_CONNECTTIMEOUT] = 10;
-    $curlopt[CURLOPT_TIMEOUT] = 20;
-    $curlopt[CURLOPT_RETURNTRANSFER] = true;
+  
+if(!(function_exists(get_curl_defaults))) {    
+    function get_curl_defaults(&$curlopt) {
+        $curlopt[CURLOPT_CONNECTTIMEOUT] = 10;
+        $curlopt[CURLOPT_TIMEOUT] = 20;
+        $curlopt[CURLOPT_RETURNTRANSFER] = true;
+    }
 }
 
 if(!(function_exists(get_item_filter))) {

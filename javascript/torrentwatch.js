@@ -444,8 +444,7 @@ $(function() {
             setInterval(function() {
                 getClientData();
             },6000);            
-        },2000);
-        
+        },2000);        
     });
 
     // Ajax progress bar
@@ -509,18 +508,19 @@ $(function() {
                         $('#fav_error').hide();
                     }, 7000);
                 }
-                if($('#newVersion').length > 0) {
-                    $.cookie('VERSION-CHECK', '1', { expires: 1 });
-                    setTimeout(function() {
-                        $('#newVersion').hide();
-                    }, 15000);
-                }
                 setInterval(function() {
                     if(window.client && clientCheck == 1) {
                         setTimeout(getClientData, 500);
                         clientCheck = null;
                     }
                 }, 100);
+                $.get('torrentwatch.php', { version_check: 1 }, function(data) {
+                    $('#dynamicdata').append(data);
+                    setTimeout(function() {
+                        $('#newVersion').remove();
+                    }, 15000);
+                    $.cookie('VERSION-CHECK', '1', { expires: 1 });
+                })
             },
             100);
         },

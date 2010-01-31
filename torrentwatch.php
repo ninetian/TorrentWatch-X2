@@ -420,7 +420,7 @@ function check_files() {
 }
 
 function version_check($tw_version) {
-    if(!isset($_COOKIE['VERSION-CHECK']) {
+    if(!isset($_COOKIE['VERSION-CHECK'])) {
         $get = curl_init();
         $getOptions[CURLOPT_URL] = 'http://tw-version.vandalon.net/VERSION';
         get_curl_defaults(&$getOptions);

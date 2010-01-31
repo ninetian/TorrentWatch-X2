@@ -481,6 +481,9 @@ $(function() {
                         $('#torrentlist_container').height($(window).height() - $('#torrentlist_container').attr('offsetTop'));
                     });
                 }
+                $.get('torrentwatch.php', { show_footer: 1 }, function(footer) {
+                    $('#torrentlist_container').append(footer);
+                })
             },
             50);
             var filter = $.cookie('TWFILTER');

@@ -191,6 +191,12 @@ function parse_options() {
         case 'version_check':
             echo version_check();
             exit;
+        case 'show_footer':
+            global $tw_version;
+            $footer = "<div id=\"footer\">TorrentWatch-X version $tw_version[0]";
+            if($tw_version[1]) $footer.= " build $tw_version[1]</div>";
+            echo $footer;
+            exit;
         case 'get_dialog_data':
             switch($_GET['get_dialog_data']) {
                 case '#favorites':

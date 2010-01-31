@@ -394,6 +394,12 @@ span.hide_item img {
     border: 1px solid #b0b0b0;
 }    
 
+div#footer {
+    background-color: #DDD;
+    font-size: 0.9em;
+    text-align: center;
+}
+
 /*--------------------------
  *
  * D I A L O G S

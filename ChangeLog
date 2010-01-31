@@ -102,3 +102,4 @@ current:
     -- Fixed bug that caused matching to go wrong in some cases.
     -- Fixed bug that made favourites -appear- to revert to 'all feeds' but didn't when after removing 1 ore more feeds. (Thanks Habbie)
     -- Fixed download dir bug when items where read from the watch folder.
+    -- Moved INSTALL, README and LICENSE to docs dir.

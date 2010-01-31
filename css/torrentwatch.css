@@ -528,6 +528,18 @@ div#checkFiles {
     
 }
 
+div#newVersion {
+    top: 20px;
+    color: green;
+    text-align: center;
+    width: 450px;
+    margin-left: -225px;
+}
+
+div#newVersion a {
+    color: green;
+}
+
 div#fav_error {
     top: 20px;
     color: red;

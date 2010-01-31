@@ -509,6 +509,12 @@ $(function() {
                         $('#fav_error').hide();
                     }, 7000);
                 }
+                if($('#newVersion').length > 0) {
+                    $.cookie('VERSION-CHECK', '1', { expires: 1 });
+                    setTimeout(function() {
+                        $('#newVersion').hide();
+                    }, 15000);
+                }
                 setInterval(function() {
                     if(window.client && clientCheck == 1) {
                         setTimeout(getClientData, 500);

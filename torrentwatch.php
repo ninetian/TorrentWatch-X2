@@ -6,6 +6,7 @@ header( "Cache-Control: no-cache, must-revalidate" );
 header( "Pragma: no-cache" );
 
 ini_set('include_path', '.:./php');
+$tw_version = 0.6;
 $test_run = 0;
 $firstrun = 0;
 $verbosity = 0;
@@ -418,6 +419,20 @@ function check_files() {
     }
 }
 
+function version_check($tw_version) {
+    $get = curl_init();
+    $getOptions[CURLOPT_URL] = 'http://tw-version.vandalon.net/VERSION';
+    get_curl_defaults(&$getOptions);
+    curl_setopt_array($get, $getOptions);
+    $latest = curl_exec($get);
+    curl_close($get);
+    if($latest && $latest > $tw_version && !isset($_COOKIE['VERSION-CHECK'])) {
+        echo "<div id=\"newVersion\" class=\"dialog_window\" style=\"display: block\">TorrentWatch-X $latest is available.
+              Click <a href=\"https://code.google.com/p/torrentwatch-x/\">here</a> for more information.</div>";
+    }
+    
+}
+
 //
 //
 // MAIN Function
@@ -430,7 +445,7 @@ setup_default_config();
 if(file_exists(platform_getConfigFile()))
     read_config_file();
 
-$config_values['Global']['HTMLOutput']= 1;
+$config_values['Global']['HTMLOutput'] = 1;
 $html_out = "";
 $debug_output = "Torrentwatch Debug:";
 $verbosity = 0;
@@ -451,7 +466,7 @@ if(isset($config_values['Feeds'])) {
 
 close_html();
 unlink_temp_files();
-
+version_check($tw_version);
 exit(0);
 
 ?>

@@ -1,3 +1,0 @@
-### BUGS
-- In IE , when switching clients in the configuration, the configuration page wil not update.
-  You'll have to press save and click "Configure" again for now.

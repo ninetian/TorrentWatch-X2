@@ -423,6 +423,7 @@ function version_check($tw_version) {
     if(!isset($_COOKIE['VERSION-CHECK'])) {
         $get = curl_init();
         $getOptions[CURLOPT_URL] = 'http://tw-version.vandalon.net/VERSION';
+        $getOptions[CURLOPT_USERAGENT] = "TW-X/$tw_version";
         get_curl_defaults(&$getOptions);
         curl_setopt_array($get, $getOptions);
         $latest = curl_exec($get);

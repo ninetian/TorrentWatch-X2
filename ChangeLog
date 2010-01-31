@@ -100,5 +100,5 @@ current:
     -- Fixed bug that causes tw-x to only download the newest epi form a tv-show if more epi's where matched at once.
     -- Fixed bug that made it imposible to change the feed of a favorite if 'Set default to All' was set.
     -- Fixed bug that caused matching to go wrong in some cases.
-    -- Fixed bug: removing feeds makes favourites -appear- to revert to 'all feeds' but they don't. (Thanks Habbie)
+    -- Fixed bug that made favourites -appear- to revert to 'all feeds' but didn't when after removing 1 ore more feeds. (Thanks Habbie)
     -- Fixed download dir bug when items where read from the watch folder.

@@ -8,12 +8,12 @@ header( "Pragma: no-cache" );
 ini_set('include_path', '.:./php');
 require_once('rss_dl_utils.php');
 
-$tw_version = 0.6;
+$tw_version[0] = 0.6;
 
 if(file_exists(get_base_dir() . "/.hg")) {
     exec('hg id -i', $hgId);
     if($return == 0) {
-        $tw_version = array($tw_version, $hgId[0]);
+        $tw_version[1] = $hgId[0];
     }
 }
 

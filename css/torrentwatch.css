@@ -395,8 +395,9 @@ span.hide_item img {
 }    
 
 div#footer {
+    padding: 2px;
     background-color: #DDD;
-    font-size: 0.9em;
+    font-size: 0.8em;
     text-align: center;
 }
 

@@ -12,7 +12,6 @@ $tw_version[0] = 0.5;
 
 if(file_exists(get_base_dir() . "/.hg")) {
     exec('hg id -i', $hgId, $return);
-    _debug("Bla: $hgId[0] $return \n"); 
     if($return == 0) {
         $tw_version[1] = $hgId[0];
     } else {

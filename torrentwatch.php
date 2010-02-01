@@ -11,9 +11,12 @@ require_once('rss_dl_utils.php');
 $tw_version[0] = 0.5;
 
 if(file_exists(get_base_dir() . "/.hg")) {
-    exec('hg id -i', $hgId);
+    exec('hg id -i', $hgId, $return);
+    _debug("Bla: $hgId[0] $return \n"); 
     if($return == 0) {
         $tw_version[1] = $hgId[0];
+    } else {
+        $tw_version[1] = "unknown";
     }
 }
 
@@ -39,7 +42,7 @@ if (get_magic_quotes_gpc()) {
 
 if(!(file_exists('php/config.php'))) {
     $config = getcwd() . '/php/config.php';
-        echo "<div id=\"checkFiles\" class=\"dialog_window\" style=\"display: block\">Please copy $config.dist to $config and edit it to match your environment. Then click your browsers refresh button.</div>";
+        echo "<div id=\"errorDialog\" class=\"dialog_window\" style=\"display: block\">Please copy $config.dist to $config and edit it to match your environment. Then click your browsers refresh button.</div>";
     return;
 }
 
@@ -197,6 +200,11 @@ function parse_options() {
             if($tw_version[1]) $footer.= " build $tw_version[1]</div>";
             echo $footer;
             exit;
+        case 'post_bug':
+            global $tw_version;
+            $response = post_bug($_POST['Summary'], $_POST['Name'], $_POST['Email'], $_POST['Priority'], $_POST['Description']);
+            echo $response;
+            exit;
         case 'get_dialog_data':
             switch($_GET['get_dialog_data']) {
                 case '#favorites':
@@ -214,8 +222,11 @@ function parse_options() {
                 case '#history': 
                     display_history();
                     exit;
-                case '#legend':
+                case '#show_legend':
                     display_legend();
+                    exit;
+                case '#report_bug':
+                    report_bug();
                     exit;
                 case '#clear_cache':
                     display_clearCache();
@@ -372,6 +383,15 @@ function display_legend() {
     ob_end_clean();
 }
 
+function report_bug() {
+    global $html_out;
+
+    ob_start();
+    require('templates/report_bug.tpl');
+    return ob_get_contents();
+    ob_end_clean();
+}
+
 function display_clearCache() {
     global $html_out;
 
@@ -389,12 +409,12 @@ function close_html() {
 
 function check_requirements() {
     if(!(function_exists('json_encode'))) {
-        echo "<div id=\"checkFiles\" class=\"dialog_window\" style=\"display: block\">
+        echo "<div id=\"errorDialog\" class=\"dialog_window\" style=\"display: block\">
             No json support found. Please make sure php is compiled with json support.<br> In some cases there is a package like php5-json that has to be installed.</div>";
         return 1;
     }
     if(!(function_exists('curl_init'))) {
-        echo "<div id=\"checkFiles\" class=\"dialog_window\" style=\"display: block\">
+        echo "<div id=\"errorDialog\" class=\"dialog_window\" style=\"display: block\">
             No curl support found. Please make sure php5-curl is installed.</div>";
         return 1;
     }
@@ -406,11 +426,11 @@ function check_files() {
     $myuid = posix_getuid();
     $configDir = platform_getConfigDir() . '/';
     if(!is_writable($configDir)) {
-    echo "<div id=\"checkFiles\" class=\"dialog_window\" style=\"display: block\">Please create the directory $configDir and make sure it's readable and writeable for the user running the webserver (uid: $myuid). </div>";
+    echo "<div id=\"errorDialog\" class=\"dialog_window\" style=\"display: block\">Please create the directory $configDir and make sure it's readable and writeable for the user running the webserver (uid: $myuid). </div>";
     }
     $cwd = getcwd();
     if(!(get_base_dir() == $cwd)) {
-        echo "<div id=\"checkFiles\" class=\"dialog_window\" style=\"display: block\">Please edit the config.php file and set the basedir to:<br /> \"$cwd\".<br />Then click your browsers refresh button.</div>";
+        echo "<div id=\"errorDialog\" class=\"dialog_window\" style=\"display: block\">Please edit the config.php file and set the basedir to:<br /> \"$cwd\".<br />Then click your browsers refresh button.</div>";
     return;
     }
     
@@ -432,7 +452,7 @@ function check_files() {
     }
     
     if($error) {
-        echo "<div id=\"checkFiles\" class=\"dialog_window\" style=\"display: block\">$error</div>";
+        echo "<div id=\"errorDialog\" class=\"dialog_window\" style=\"display: block\">$error</div>";
     }
 }
 
@@ -451,6 +471,23 @@ function version_check() {
                    Click <a href=\"https://code.google.com/p/torrentwatch-x/\">here</a> for more information.</div>";
         }
     }
+}
+
+function post_bug($Summary, $Name, $Email, $Priority, $Description) {
+    global $tw_version;
+    $Version = "TW-X/$tw_version[0] ($tw_version[1])";
+    
+    $post = curl_init();
+    $postOptions[CURLOPT_URL] = "http://tw-issues.vandalon.net/";
+    $postOptions[CURLOPT_USERAGENT] = "TW-X/$tw_version[0] ($tw_version[1])";
+    $postOptions[CURLOPT_POSTFIELDS] = "Summary=$Summary&Name=$Name&Email=$Email&Priority=$Priority&Description=$Description&Version=$Version";
+    get_curl_defaults(&$postOptions);
+    curl_setopt_array($post, $postOptions);
+    $response = curl_exec($post);
+    _debug("$response");
+    curl_close($post);
+    return "<div id=\"errorDialog\" class=\"dialog_window\" style=\"display: block\">$response</div>";
+    
 }
 
 //

@@ -135,7 +135,8 @@ $(function() {
         window.input_change = 0;
         e.stopImmediatePropagation();
         $.submitForm(this);
-        $('div#' + this.parentNode.id).hide();
+        if(this.parentNode.id) 
+            $('div#' + this.parentNode.id).hide();
     });
     // Clear History ajax submit
     $("a#clearhistory").live('click',
@@ -444,7 +445,7 @@ $(function() {
             setInterval(function() {
                 getClientData();
             },6000);            
-        },2000);        
+        },2000); 
     });
 
     // Ajax progress bar
@@ -472,7 +473,7 @@ $(function() {
             .find("form").initForm().end().initConfigDialog().appendTo("body");
             setTimeout(function() {
                 var container = $("#torrentlist_container");
-                if (container.length === 0 && $("#checkFiles").length === 0) {
+                if (container.length === 0 && $("#errorDialog").length === 0) {
                     current_dialog = '#welcome1';
                     $(current_dialog).show();
                 } else {
@@ -543,7 +544,11 @@ $(function() {
         } else {
             form = $(button).closest("form");
         }
-        $.get(form.get(0).action, form.buildDataString(button), $.loadDynamicData, 'html');
+        if($(button)[0].id == 'Submit Bug') {
+            $.submitBug();
+        } else {
+            $.get(form.get(0).action, form.buildDataString(button), $.loadDynamicData, 'html');
+        }
     };
 
     $.fn.toggleDialog = function() {
@@ -750,6 +755,28 @@ $(function() {
     
     $.hideItem = function(title) {
         $.get('torrentwatch.php?hide=' + title, '', $.loadDynamicData, 'html');
+    }
+    
+    $.submitBug = function() {
+        var Summary = $("input#Summary").val();
+        var Name = $("input#Name").val();
+        var Email = $("input#Email").val();
+        var Priority = $("select#Priority").val();
+        var Description = $("textarea#Description").val();
+        if(Summary && Name && Email && Description) {
+            $.post('torrentwatch.php?post_bug', $("#report_form").serialize(),
+                function(data) {
+                    if(data.match(/Error/)) {
+                        $(document.body).append(data);
+                    } else {
+                        $('.dialog_window').remove();
+                        alert("Thank you for this bug report. You will be contacted by mail.");
+                    }
+                });
+        } else {
+            alert('Please fill in all fields');
+        }
+        return;
     }
     
     $.noEnter = function(evt) { 

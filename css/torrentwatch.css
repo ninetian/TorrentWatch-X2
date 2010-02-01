@@ -93,12 +93,16 @@ ul.mainoptions li {
 
 ul.mainoptions li#legend {
     float: right;
-    }
+}
+
+ul.mainoptions li#report {
+    float: right;
+}
 
 ul.mainoptions li#webui {
     display: none;
     float: right;
-    }
+}
 
 ul.mainoptions li a {
     color: #030303;
@@ -106,30 +110,34 @@ ul.mainoptions li a {
     text-decoration: none;
     padding: 33px 0.7em 0 0.7em;
     display: block;
-    }
+}
 
 ul.mainoptions li#favoritesMenu a {
     background: url(../images/nuvola_bookmark.png) no-repeat center 0;
-    }
+}
 ul.mainoptions li#config a {
     background: url(../images/nuvola_configure.png) no-repeat center 0;
-    }
+}
 
 ul.mainoptions li#view a {
     background: url(../images/nuvola_history.png) no-repeat center 0;
-    }
+}
 
 ul.mainoptions li#empty a {
     background: url(../images/remove.png) no-repeat center 0;
-    }
+}
 
 ul.mainoptions li#webui a {
     background: url(../images/webui.png) no-repeat center 0;
-    }
+}
 
 ul.mainoptions li#legend a {
-    background: url('../images/info.png') no-repeat center 0;
-    }
+    background: url(../images/info.png) no-repeat center 0;
+}
+
+ul.mainoptions li#report a {
+    background: url(../images/report_bug.png) no-repeat center 0;
+}
 
 ul.mainoptions li.divider {
         width: 0;
@@ -526,7 +534,7 @@ div#clientError h2 {
     margin-bottom: 4px;
 }
 
-div#checkFiles {
+div#errorDialog {
     top: 5px;
     color: red;
     text-align: center;
@@ -689,7 +697,7 @@ div.config_form {
 
 form#config_form div {
     min-height: 22px;
-    }
+}
 
 div.dialog_window#feeds {
     border: 2px solid grey;
@@ -926,6 +934,36 @@ ul.hidelist li:hover {
 
 ul.hidelist input[type=checkbox] {
     margin: 0 5px 0 0;
+}
+
+/**********************************
+ *
+ * B U G  R E P O R T   D I A L O G
+ *
+ **********************************/
+ 
+div#report_bug {
+    width: 420px;
+}
+
+form#report_form div {
+    min-height: 22px;
+}
+
+div#report_bug textarea {
+    resize: vertical;
+    float: right;
+    width: 300px;
+}
+
+div#report_bug select,
+div#report_bug input[type=text] {
+    float: right;
+    width: 300px;
+}
+
+div#report_bug input[type=submit] {
+    height: 25px;
 }
 
 /******************************

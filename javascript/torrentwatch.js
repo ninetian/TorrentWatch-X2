@@ -492,7 +492,7 @@ $(function() {
                 filter = 'all';
             }
             if($('#torrentlist div.header').length == 0) {
-                $('#torrentlist>li').tsort('p.torrent_pubDate', {order: 'desc'});
+                $('#torrentlist>li').tsort('#unixTime', {order: 'desc'});
             }
             setTimeout(function() {
                 if ($('#transmission_data').length > 0) {

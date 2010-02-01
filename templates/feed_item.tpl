@@ -1,6 +1,9 @@
 <?php
 if($item['description']) $description = $item['description'];
-if($item['pubDate']) $pubDate = $item['pubDate'];
+if($item['pubDate']) {
+    $pubDate = $item['pubDate'];
+    $unixTime = strtotime($item['pubDate']);
+}
 if(!($torHash)) $torHash = '###torHash###';
 
 if($config_values['Settings']['Combine Feeds'] == 1) {
@@ -74,6 +77,7 @@ $hideSpan
 $infoDiv
 </td><td class='feed_info'>
 <p class='torrent_pubDate'>$pubDate</p>
+<span class='hidden' id=unixTime>$unixTime</span>
 $feedItem
 </td></tr></table></li>
 

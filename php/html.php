@@ -22,7 +22,6 @@ function show_transmission_div() {
 function show_torrent_html($item, $feed, $feedName, $alt, $torHash, $matched, $id) {
   global $html_out, $test_run, $config_values;
   $guess = guess_match($item['title']);
-  //if(!$guess) return;
   
   if(!$config_values['Settings']['Disable Hide List']) {
       if($config_values['Hidden'][ucwords(trim(strtr($guess['key'], "._", "  ")))]) return;
@@ -58,6 +57,11 @@ function show_feed_html($idx) {
   if($config_values['Settings']['Combine Feeds'] == 0) {
       $html_out .= "<div class=\"header\">".$config_values['Feeds'][$idx]['Name']."</div>\n";
   }
+}
+
+function show_down_feed($idx) {
+    global $html_out, $config_values;
+    $html_out .= "<div class=\"errorHeader\">".$config_values['Feeds'][$idx]['Name']." is not available.</div>\n";
 }
 
 // Closing the div which contains all the feed items

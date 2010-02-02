@@ -234,8 +234,10 @@ function get_torHash($cache_file) {
 
 function rss_perform_matching($rs, $idx, $feedName, $feedLink) {
   global $config_values, $matched;
-  if(count($rs['items']) == 0)
+  if(count($rs['items']) == 0) {
+    show_down_feed($idx);
     return;
+  }
 
   $percPerFeed = 80/count($config_values['Feeds']);
   $percPerItem = $percPerFeed/count($rs['items']);

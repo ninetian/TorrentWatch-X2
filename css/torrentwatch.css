@@ -263,6 +263,15 @@ div#torrentlist_container {
     right: 0;
     }
 
+div#torrentlist_container div.errorHeader {
+    border-bottom: 1px solid #ccc;
+    font-size: 1.0em;
+    height: 1.2em;
+    text-align: center;
+    background: #FBBFBF;
+    color: #777;
+}
+
 div#torrentlist_container div.header,
 div.transmission div.header {
     border-bottom: 1px solid #ccc;

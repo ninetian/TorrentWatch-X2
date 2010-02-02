@@ -523,7 +523,7 @@ $(function() {
                     setTimeout(function() {
                         $('#newVersion').remove();
                     }, 15000);
-                    $.cookie('VERSION-CHECK', '1', { expires: 1 });
+                    if($.cookie('VERSION-CHECK').length == 0) $.cookie('VERSION-CHECK', '1', { expires: 1 });
                 })
             },
             100);

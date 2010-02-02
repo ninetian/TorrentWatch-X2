@@ -766,7 +766,7 @@ $(function() {
         if(Summary && Name && Email && Description) {
             $.post('torrentwatch.php?post_bug', $("#report_form").serialize(),
                 function(data) {
-                    if(data.match(/Error/)) {
+                    if(data.match(/\bError:/)) {
                         $(document.body).append(data);
                     } else {
                         $('.dialog_window').remove();

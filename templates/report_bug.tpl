@@ -1,5 +1,5 @@
 <div class="dialog_window" id="report_bug">
-    <form action="#/" id="report_form">
+    <form action="#" id="report_form">
     <div><label class="item">Summary:
         <input id='Summary' type='text' class='text' name='Summary'?>
     </label></div>
@@ -29,7 +29,7 @@
         <textarea id='Description' type='text' rows=10 class='text description' name='Description'/>
     </div>
     <div class="buttonContainer">
-        <a class="submitForm button" id="Submit Bug" href="#">Submit</a> 
+        <a class="button" id="Submit Bug" href="#" onclick="$.submitBug()">Submit</a> 
         <a class='toggleDialog button' href='#'>Close</a> 
     </div>
     </form>

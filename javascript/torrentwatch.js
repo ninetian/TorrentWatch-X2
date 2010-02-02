@@ -757,11 +757,13 @@ $(function() {
         $.post('torrentwatch.php?post_bug', $("#report_form").serialize(),
             function(data) {
                 if(data.match(/\bError:/)) {
-		    ('div#errorDialog').remove();
+		    $('div#errorDialog').remove();
                     $(document.body).append(data);
+		    setTimeout(function() { $('div#errorDialog').remove(); }, 15000);
                 } else {
                     $('.dialog_window').remove();
-                    alert("Thank you for this bug report. You will be contacted by mail.");
+		    $(document.body).append('<div id="successDialog" class="dialog_window" style="display: block;">Success: Thank you for this bug report. You will be contacted by mail.</div>');
+		    setTimeout(function() { $('div#successDialog').remove(); }, 10000);
                 }
             });
         return;

@@ -540,7 +540,14 @@ div#errorDialog {
     text-align: center;
     width: 600px;
     margin-left: -310px;
-    
+}
+
+div#successDialog {
+    top: 5px;
+    color: green;
+    text-align: center;
+    width: 600px;
+    margin-left: -310px;
 }
 
 div#newVersion {

@@ -106,5 +106,7 @@ IMPORTANT: If you are updating from a previous version. Please copy php/config.p
     -- Moved INSTALL, README and LICENSE to docs dir.
 
 current:
+    -- Added notification if a feed is down.
     -- Fixed some small bug reporting bugs.
     -- Fixed sorting bug when feeds were combined.
+    -- Fixed version-checking bug.

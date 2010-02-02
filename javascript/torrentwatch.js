@@ -524,7 +524,7 @@ $(function() {
                         $('#newVersion').remove();
                     }, 15000);
 		    var versionCheck = $.cookie('VERSION-CHECK');
-                    if(versionCheck !== 1) $.cookie('VERSION-CHECK', '1', { expires: 1 });
+                    if(versionCheck != 1) $.cookie('VERSION-CHECK', '1', { expires: 1 });
                 })
             },
             100);

@@ -110,3 +110,4 @@ current:
     -- Fixed some small bug reporting bugs.
     -- Fixed sorting bug when feeds were combined.
     -- Fixed version-checking bug.
+    -- Fixed bug that caused tw-x to always use the 'all' filter instead of the one last used.

@@ -7,7 +7,7 @@ $(function() {
     // Vary the font-size
     changeFontSize = function(fontSize) {
         var f = fontSize;
-        $.cookie('twFontSize', f);
+        $.cookie('twFontSize', f, { expires: 30 });
         switch (f) {
         case 'Small':
             $("body").css('font-size', '75%');
@@ -22,7 +22,7 @@ $(function() {
     };
 
     displayFilter = function(filter) {
-        $.cookie('TWFILTER', filter);
+        $.cookie('TWFILTER', filter, { expires: 30 });
         var tor = $("li.torrent").show();
         if (filter == 'all') {
             if ($('.transmission').is(":visible")) {
@@ -523,7 +523,8 @@ $(function() {
                     setTimeout(function() {
                         $('#newVersion').remove();
                     }, 15000);
-                    if($.cookie('VERSION-CHECK').length == 0) $.cookie('VERSION-CHECK', '1', { expires: 1 });
+		    var versionCheck = $.cookie('VERSION-CHECK');
+                    if(versionCheck !== 1) $.cookie('VERSION-CHECK', '1', { expires: 1 });
                 })
             },
             100);

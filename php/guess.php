@@ -55,10 +55,10 @@ function guess_match($title, $normalize = FALSE) {
     
     if(preg_match($epi, $title, $match)) {
         $episode_guess = $match[1];
-        $key_guess = preg_replace("/([^-\(\.]+)[\. ]*(?:[_.\s]-[_.\s].+)?(:?[_.\s]\(.+)?" . $episode_guess. "(.*$)/", '\1', $title);
+        $key_guess = preg_replace("/([^-\(\.]+)[\. ]*(?:[_.\s]-[_.\s].*)?(:?[_.\s]\(.+)?" . $episode_guess. "(.*$)/", '\1', $title);
     } elseif(preg_match($quality, $title, $match)) {
         $quality_guess = $match[1];
-        $key_guess = preg_replace("/([^-\(\.]+)[\. ]*(?:[_.\s]-[_.\s].+)?(:?[_.\s]\(.+)?" . $quality_guess. "(.*$)/", '\1', $title);
+        $key_guess = preg_replace("/([^-\(\.]+)[\. ]*(?:[_.\s]-[_.\s].*)?(:?[_.\s]\(.+)?" . $quality_guess. "(.*$)/", '\1', $title);
         $episode_guess = "noShow";
     } else {
         return False;

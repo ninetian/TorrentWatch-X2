@@ -203,6 +203,10 @@ ul#filterbar_container li.selected a {
     height: 16px;
 }
 
+ul#filterbar_container li#rates {
+    float: right;
+}
+
 ul#filterbar_container li#filter_bytext:hover,
 ul#filterbar_container li#filter_bytext {
     background: none;

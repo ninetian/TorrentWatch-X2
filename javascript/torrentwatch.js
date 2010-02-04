@@ -339,6 +339,8 @@ $(function() {
         var clientData;
         var clientItem;
         var torListHtml = "";
+	var upSpeed = 0;
+	var downSpeed = 0;
         
         if(!(window.oldStatus)) window.oldStatus = [];
         if(!(window.oldClientData)) window.oldClientData = [];
@@ -423,9 +425,14 @@ $(function() {
                 $('li.' + item.hashString).addClass('clientId_' + item.id);
             }
             
+	    upSpeed = upSpeed + rateUpload;
+	    downSpeed = downSpeed + rateDownload;
+
             window.oldClientData[item.id] = clientData;
             window.oldStatus[item.id] = item.id + '_' + item.status;
         });
+
+	$('li#rates').html(downSpeed + ' - ' + upSpeed);
         
         if(recent === 0 && torListHtml) {
             $('#transmission_list').append(torListHtml);

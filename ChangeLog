@@ -107,6 +107,7 @@ IMPORTANT: If you are updating from a previous version. Please copy php/config.p
 
 current:
     -- Added notification if a feed is down.
+    -- Improved guessing routine.
     -- Fixed some small bug reporting bugs.
     -- Fixed sorting bug when feeds were combined.
     -- Fixed version-checking bug.

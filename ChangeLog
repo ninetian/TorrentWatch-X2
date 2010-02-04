@@ -106,6 +106,7 @@ IMPORTANT: If you are updating from a previous version. Please copy php/config.p
     -- Moved INSTALL, README and LICENSE to docs dir.
 
 current:
+    -- Added global speed (up/down) information.
     -- Added notification if a feed is down.
     -- Improved guessing routine.
     -- Fixed some small bug reporting bugs.

@@ -467,7 +467,6 @@ function version_check() {
         curl_close($get);
 	$version = (int)str_replace('.', '', $tw_version[0]);
 	$tmplatest = (int)str_replace('.', '', $latest);
-	_debug("bla: $version - $tmplatest");
         if($tmplatest && $tmplatest > $version) {
             return "<div id=\"newVersion\" class=\"dialog_window\" style=\"display: block\">TorrentWatch-X $latest is available.
                    Click <a href=\"https://code.google.com/p/torrentwatch-x/\">here</a> for more information.</div>";

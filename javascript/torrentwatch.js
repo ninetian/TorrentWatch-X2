@@ -425,8 +425,8 @@ $(function() {
                 $('li.' + item.hashString).addClass('clientId_' + item.id);
             }
             
-	    upSpeed = upSpeed + rateUpload;
-	    downSpeed = downSpeed + rateDownload;
+	    upSpeed = upSpeed + item.rateUpload;
+	    downSpeed = downSpeed + item.rateDownload;
 
             window.oldClientData[item.id] = clientData;
             window.oldStatus[item.id] = item.id + '_' + item.status;

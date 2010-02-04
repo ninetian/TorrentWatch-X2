@@ -184,7 +184,7 @@ $(function() {
             // The file is less than one KB
         } else {
             size = bytes;
-            unit = ' bytes';
+            unit = ' B';
         }
 
         // Single-digit numbers have greater precision
@@ -433,7 +433,7 @@ $(function() {
         });
 
 	if(!isNaN(downSpeed) && !isNaN(upSpeed)) {
-		$('li#rates').html(Math.formatBytes(downSpeed) + '/s - ' + Math.formatBytes(upSpeed) + '/s');
+		$('li#rates').html('D: ' + Math.formatBytes(downSpeed) + '/s<br />' + 'U: ' + Math.formatBytes(upSpeed) + '/s');
 	}
         
         if(recent === 0 && torListHtml) {

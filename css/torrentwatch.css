@@ -204,7 +204,10 @@ ul#filterbar_container li.selected a {
 }
 
 ul#filterbar_container li#rates {
+    padding: 0;
+    margin: 0;
     float: right;
+    font-size: 9px;
 }
 
 ul#filterbar_container li#filter_bytext:hover,

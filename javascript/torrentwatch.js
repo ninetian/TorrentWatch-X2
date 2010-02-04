@@ -432,7 +432,10 @@ $(function() {
             window.oldStatus[item.id] = item.id + '_' + item.status;
         });
 
-	$('li#rates').html(downSpeed + ' - ' + upSpeed);
+	console.log(downSpeed);
+	if(!isNaN(downSpeed) && !isNaN(upSpeed)) {
+		$('li#rates').html(Math.formatBytes(downSpeed) + '/s - ' + Math.formatBytes(upSpeed) + '/s');
+	}
         
         if(recent === 0 && torListHtml) {
             $('#transmission_list').append(torListHtml);

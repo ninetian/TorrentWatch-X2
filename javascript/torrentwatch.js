@@ -432,7 +432,6 @@ $(function() {
             window.oldStatus[item.id] = item.id + '_' + item.status;
         });
 
-	console.log(downSpeed);
 	if(!isNaN(downSpeed) && !isNaN(upSpeed)) {
 		$('li#rates').html(Math.formatBytes(downSpeed) + '/s - ' + Math.formatBytes(upSpeed) + '/s');
 	}

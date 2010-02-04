@@ -134,7 +134,7 @@ function getClientData($recent) {
             } else {
               $request = array('arguments' => array('fields' => array('id', 'name', 'status', 'errorString', 'hashString',
                'leftUntilDone', 'downloadDir','totalSize', 'uploadedEver', 'downloadedEver', 'addedDate', 'status',
-               'peersSendingToUs', 'peersGettingFromUs', 'peersConnected', 'seedRatioLimit', 'recheckProgress')),
+               'peersSendingToUs', 'peersGettingFromUs', 'peersConnected', 'seedRatioLimit', 'recheckProgress', 'rateDownload', 'rateUpload')),
                'method' => 'torrent-get');
             }
             $response = transmission_rpc($request);

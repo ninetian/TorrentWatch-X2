@@ -8,7 +8,7 @@ header( "Pragma: no-cache" );
 ini_set('include_path', '.:./php');
 require_once('rss_dl_utils.php');
 
-$tw_version[0] = 0.6;
+$tw_version[0] = "0.6.1";
 
 if(file_exists(get_base_dir() . "/.hg")) {
     exec('hg id -i', $hgId, $return);
@@ -465,7 +465,9 @@ function version_check() {
         curl_setopt_array($get, $getOptions);
         $latest = curl_exec($get);
         curl_close($get);
-        if($latest && $latest > $tw_version[0]) {
+	$version = str_replace('.', '', $tw_version[0]);
+	$latest = str_replace('.', '', $latest);
+        if($latest && $latest > $version) {
             return "<div id=\"newVersion\" class=\"dialog_window\" style=\"display: block\">TorrentWatch-X $latest is available.
                    Click <a href=\"https://code.google.com/p/torrentwatch-x/\">here</a> for more information.</div>";
         }

@@ -665,7 +665,7 @@ $(function() {
     $.dlTorrent = function(url, id) {
         $.get(url,
         function(torHash) {
-            if(!(torHash.match(/\w+/))) {
+            if(!(torHash.match(/\w+/)) && window.client != 'folder') {
                 alert('Something went wrong while adding this torrent, torrent not added');
                 return;
             }
@@ -677,9 +677,10 @@ $(function() {
             }
 
             $('li#' + id + ' p.dlTorrent').hide();
+            $('li#' + id + ' p.torStop').show();
+	    if(window.client == 'folder') return;
             $('li#' + id + ' p.trash').show();
             $('li#' + id + ' p.delete').show();
-            $('li#' + id + ' p.torStop').show();
 
             $('li#' + id).removeClass('###torHash###').addClass(torHash);
 

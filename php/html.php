@@ -22,11 +22,11 @@ function show_transmission_div() {
 function show_torrent_html($item, $feed, $feedName, $alt, $torHash, $matched, $id) {
   global $html_out, $test_run, $config_values;
   $guess = guess_match($item['title']);
-  
+
   if(!$config_values['Settings']['Disable Hide List']) {
       if($config_values['Hidden'][ucwords(trim(strtr($guess['key'], "._", "  ")))]) return;
   }
-  
+ 
   if(($matched == "cachehit" || $matched == "downloaded" || $matched == "match")
      && $config_values['Settings']['Client'] != 'folder') {
     $torInfo = torInfo($torHash); 

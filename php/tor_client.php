@@ -8,6 +8,11 @@
 function transmission_sessionId() {
   global $config_values;
   $sessionIdFile = get_tr_sessionIdFile();
+  if(file_exists($sessionIdFile) && !is_writable($sessionIdFile)) {
+      $myuid = posix_getuid();
+      echo "<div id=\"errorDialog\" class=\"dialog_window\" style=\"display: block\">$sessionIdFile is not writable for uid: $myuid</div>";
+      return;
+  }
 
   if(file_exists($sessionIdFile)) {
       if(filesize($sessionIdFile) > 0) {
@@ -52,6 +57,11 @@ function transmission_sessionId() {
 function transmission_rpc($request) {
   global $config_values;
   $sessionIdFile = get_tr_sessionIdFile();  
+  if(file_exists($sessionIdFile) && !is_writable($sessionIdFile)) {
+      $myuid = posix_getuid();
+      echo "<div id=\"errorDialog\" class=\"dialog_window\" style=\"display: block\">$sessionIdFile is not writable for uid: $myuid</div>";
+      return;
+  }
 
   $tr_user = $config_values['Settings']['Transmission Login'];
   $tr_pass = get_client_passwd();

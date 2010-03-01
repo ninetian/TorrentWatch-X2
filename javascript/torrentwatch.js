@@ -422,6 +422,7 @@ $(function() {
                 
             } else {
                 torListHtml += getClientItem(item, clientData, liClass);
+                $('#transmission_list').empty();
                 $('li.' + item.hashString).addClass('clientId_' + item.id);
             }
             

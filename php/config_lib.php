@@ -120,6 +120,11 @@ function read_config_file() {
     $config_values['Hidden'] = array();
   if(!isset($config_values['Feeds']))
     $config_values['Feeds'] = array();
+    
+  if(isset($config_values['Settings']['TimeZone'])) {
+    date_default_timezone_set($config_values['Settings']['TimeZone']);
+  }
+    
   return true;
 }
 

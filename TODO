@@ -1,4 +1,3 @@
-- check perms on transmission session-ID cache file
 - sqlite for caching + migration script.
 - Movie support 
 - Remove torrents which are done. (paused and met ratio requirements)

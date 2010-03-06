@@ -105,7 +105,7 @@ IMPORTANT: If you are updating from a previous version. Please copy php/config.p
     -- Fixed download dir bug when items where read from the watch folder.
     -- Moved INSTALL, README and LICENSE to docs dir.
 
-current:
+0.6.1:
     -- Added global speed (up/down) information.
     -- Added notification if a feed is down.
     -- Improved guessing routine.
@@ -113,3 +113,9 @@ current:
     -- Fixed sorting bug when feeds were combined.
     -- Fixed version-checking bug.
     -- Fixed bug that caused tw-x to always use the 'all' filter instead of the one last used.
+    
+0.6.2
+    -- Added config file option for custom rss cache times.
+    -- Added TimeZone support in config file. see FAQ for more info.
+    -- Added writable checks for Transmission SessionID cache file.
+    -- Fixed bug that caused transmission list to show duplicates.

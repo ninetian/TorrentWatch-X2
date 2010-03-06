@@ -8,7 +8,7 @@ header( "Pragma: no-cache" );
 ini_set('include_path', '.:./php');
 require_once('rss_dl_utils.php');
 
-$tw_version[0] = "0.6.1";
+$tw_version[0] = "0.6.2";
 
 if(file_exists(get_base_dir() . "/.hg")) {
     exec('hg id -i', $hgId, $return);

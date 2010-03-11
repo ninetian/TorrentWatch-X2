@@ -16,7 +16,7 @@ function transmission_sessionId() {
 
   if(file_exists($sessionIdFile)) {
       if(filesize($sessionIdFile) > 0) {
-        $handle = fopen($sessionIdFile, r);
+        $handle = fopen($sessionIdFile, 'r');
         $sessionId = trim(fread($handle, filesize($sessionIdFile)));
     } else {
         unlink($sessionIdFile);

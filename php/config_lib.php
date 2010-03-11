@@ -41,13 +41,13 @@ function setup_default_config() {
   _default('Email Notifications', '');
 }
 
-if(!(function_exists(get_base_dir))) {
+if(!(function_exists('get_base_dir'))) {
     function get_base_dir() {
         return dirname(dirname(__FILE__));
     }
 }
   
-if(!(function_exists(get_curl_defaults))) {    
+if(!(function_exists('get_curl_defaults'))) {    
     function get_curl_defaults(&$curlopt) {
         $curlopt[CURLOPT_CONNECTTIMEOUT] = 5;
         $curlopt[CURLOPT_TIMEOUT] = 10;
@@ -55,7 +55,7 @@ if(!(function_exists(get_curl_defaults))) {
     }
 }
 
-if(!(function_exists(get_item_filter))) {
+if(!(function_exists('get_item_filter'))) {
     function get_item_filter() {
         return '/[\[\]{}<>:;,]/';
     }

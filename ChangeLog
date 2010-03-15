@@ -119,3 +119,8 @@ IMPORTANT: If you are updating from a previous version. Please copy php/config.p
     -- Added TimeZone support in config file. see FAQ for more info.
     -- Added writable checks for Transmission SessionID cache file.
     -- Fixed bug that caused transmission list to show duplicates.
+
+current
+    -- Added support for TvTorrents.com
+    -- Updated jquery to version 1.4.2
+    -- Updated jquery.tinysort to 1.0.4

@@ -598,7 +598,8 @@ $(function() {
             $('#favorite_new a#Update').addClass('disabled').removeClass('submitForm');
         },
         300);
-        return this.not(":first").tsort("a").end().click(function() {
+	this.not(":first").tsort('a');
+        return this.not(":first").end().click(function() {
             $(this).find("a").toggleFavorite();
         });
     };

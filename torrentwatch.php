@@ -169,7 +169,6 @@ function parse_options() {
             $r = client_add_torrent(trim($_GET['link']),
                 $downloadDir, $_GET['title'], $_GET['feed']);
             if($r) { 
-		sleep(1);
                 $torHash = get_torHash(add_cache($_GET['title'])); 
             }
             echo $torHash;

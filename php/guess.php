@@ -13,7 +13,7 @@ function guess_match($title, $normalize = FALSE) {
     $epi.='Part[_.\s]?\d+[_.\s][^r][^a][^r]'.'|';
     $epi.='EP?(?:PS[_.\s]?)?\d+(?:-\d+)?'.'|'; // E137 or EP137 or EPS1-23
     $epi.='\d{1,2}[-.]\d{1,2}[-.]\d{2,4}[_.\s]'.'|'; // 23-8-2007 or 07.23.2008 or 07-23-09
-    $epi.='\d{4}[-.]\d{1,2}[-.]\d{1,2}[_.\s]'.'|'; // 2007-8-23 or 2008.23.7
+    $epi.='\d{4}[-.x]\d{1,2}[-.x]\d{1,2}[_.\s]'.'|'; // 2007-8-23, 2010x03.12 or 2008.23.7
     $epi.='\d{8}[_.\s])/i';   // 20082306 etc
 
     // Quality
@@ -72,22 +72,34 @@ function guess_match($title, $normalize = FALSE) {
     
     if($normalize == TRUE) {
     // Convert . and _ to spaces, and trim result
-    $from = "._";
-    $to = "  ";
+    //$from = "._";
+    //$to = "  ";
     $key_guess = trim(strtr($key_guess, $from, $to));
     $data_guess = trim(strtr($data_guess, $from, $to));
     $episode_guess = trim(strtr($episode_guess, $from, $to));
+    
     // Standardize episode output to SSxEE, strip leading 0
-    // This is (b|c|d) from earlier.  If it is style e there will be no replacement, only strip leading 0
-    $episode_guess = preg_replace('/(\b(?:S(\d+))?[_.\s]?EP? ?(\d+)(?:-EP? ?\d+)?\b|\b(\d+)x(\d+)|(\d+)[. ?]of[_.\s]?(\d+)\b|\bseason[_.\s]?(\d+),?[_.\s]?episode[_.\s]?(\d+)\b|\b0?(\d)(\d\d)\b|\bEps[_.\s]?(\d+)-\d+\b|\bPart[_.\s]?(\d+)\b)/i',
-        '\2\4\6\8\10x\3\5\7\9\11\12\13', $episode_guess);
-    if(preg_match('/^x\d+/', $episode_guess)) {
-        $episode_guess = preg_replace('/(^x)(\d+)/', '1x\2', $episode_guess);
+    $epiGuess = array(  '/\b(?:S(\d+))?[_.\s]?EP? ?(\d+)(?:-EP? ?\d+)?\b/i',
+                        '/\b(\d+)x(\d+)/i',
+                        '/(\d+)[_.\s]?of[_.\s]?(\d+)\b/i',
+                        '/\bseason[_.\s]?(\d+),?[_.\s]?episode[_.\s]?(\d+)\b/i',
+                        '/\b0?(\d)(\d\d)\b/i',
+                        '/\bEps[_.\s]?(\d+)-\d+\b/i',
+                        '/\bPart[_.\s]?(\d+)\b/i');
+                        
+    $dateGuess = '/(\d\d\d\d)[-.x](\d\d)[-.x](\d\d).?/i';
+    
+    foreach($epiGuess as $guess) {
+        $episode_guess = preg_replace($guess, '\1x\2', $episode_guess, -1, $replaceCount);
+        if($replaceCount > 0) {
+            $episode_guess = preg_replace('/^(\d+)x$/', '1x\1', $episode_guess); //Match shows with EPI nr only.
+            break;
+        } else {
+            $episode_guess = preg_replace($dateGuess, '\1\2\3', $episode_guess);
+        }
     }
     $episode_guess = preg_replace('/0*(\d+)x0*(\d+)/', '\1x\2', $episode_guess);
-    if(preg_match('/^(\d\d\d\d \d\d \d\d)$/', $episode_guess)) {
-        $episode_guess = preg_replace('/ /', '', $episode_guess);
-    }
+    
     if(preg_match('/[_.\s]PROPER[_.\s]|[_.\s]REPACK[_.\s]|[_.\s]RERIP[_.\s]/i', $title)) {
         $episode_guess .= "p";
     } 

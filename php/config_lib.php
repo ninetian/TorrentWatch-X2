@@ -49,8 +49,8 @@ if(!(function_exists('get_base_dir'))) {
   
 if(!(function_exists('get_curl_defaults'))) {    
     function get_curl_defaults(&$curlopt) {
-        $curlopt[CURLOPT_CONNECTTIMEOUT] = 5;
-        $curlopt[CURLOPT_TIMEOUT] = 10;
+        $curlopt[CURLOPT_CONNECTTIMEOUT] = 10;
+        $curlopt[CURLOPT_TIMEOUT] = 15;
         $curlopt[CURLOPT_RETURNTRANSFER] = true;
     }
 }

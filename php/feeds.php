@@ -264,7 +264,7 @@ function rss_perform_matching($rs, $idx, $feedName, $feedLink) {
                  array('Obj' => $item, 'URL' => $rs['URL']));
     }
     $client = $config_values['Settings']['Client'];
-    $cache_file = $config_values['Settings']['Cache Dir'].'rss_dl_'.filename_encode($item['title']);
+    $cache_file = $config_values['Settings']['Cache Dir'].'/rss_dl_'.filename_encode($item['title']);
     if(file_exists($cache_file)) {
       $torHash = get_torHash($cache_file);
       if($matched != "match" && $matched != 'cachehit' && file_exists($cache_file)) {
@@ -326,7 +326,7 @@ function atom_perform_matching($atom, $idx, $feedName, $feedLink) {
     array_walk($config_values['Favorites'], 'check_for_torrent', 
                array('Obj' =>$item, 'URL' => $feedLink));
     $client = $config_values['Settings']['Client'];
-    $cache_file = $config_values['Settings']['Cache Dir'].'rss_dl_'.filename_encode($item['title']);
+    $cache_file = $config_values['Settings']['Cache Dir'].'/rss_dl_'.filename_encode($item['title']);
     if(file_exists($cache_file)) {
       $torHash = get_torHash($cache_file);
       if($matched != "match" && $matched != 'cachehit' && file_exists($cache_file)) {

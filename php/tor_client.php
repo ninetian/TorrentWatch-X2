@@ -169,6 +169,7 @@ function transmission_add_torrent($tor, $dest, $title, $seedRatio) {
   if(isset($response['result']) AND ($response['result'] == 'success' or $response['result'] == 'duplicate torrent')) {
     $cache = $config_values['Settings']['Cache Dir'] . "/rss_dl_" . filename_encode($title);
     if($torHash) {
+      sleep(2);
       $handle = fopen("$cache", "w");
       fwrite($handle, $torHash);
       fclose($handle);

@@ -5,12 +5,12 @@ function guess_match($title, $normalize = FALSE) {
     $epi ='/[_.\s\(]';  //Start with _ , . or space
     $epi.='(S\d+[_.\s]?EP? ?\d+(?:-EP? ?\d+)?'.'|';  // S12E1 or S12EP1-EP2 
     $epi.='S\d\d?'.'|'; // Full season S03
-    $epi.='\d{1,2}x\d+(?:-\d+)?' .'|';  // 1x23 or 1x23-24
+    $epi.='\d{1,2}x\d+(?:-\d+)?'.'|';  // 1x23 or 1x23-24
     $epi.='\d+[_.\s]?of[_.\s]?\d+'.'|';  // 03of18
     $epi.='Season[_.\s]?\d+,?[_.\s]?Episode[_.\s]?\d+'.'|'; // Season 4, episode 15
     $epi.='Season[_.\s]?\d\d?'.'|'; // Full Season: Season1 or Season 02
     $epi.='0?\d{3}[_.\s]'.'|'; // 306
-    $epi.='Part[_.\s]?\d+[_.\s][^r][^a][^r]'.'|';
+    $epi.='Pa?r?t[_.\s]?\d+[_.\s]'.'|';
     $epi.='EP?(?:PS[_.\s]?)?\d+(?:-\d+)?'.'|'; // E137 or EP137 or EPS1-23
     $epi.='\d{1,2}[-.]\d{1,2}[-.]\d{2,4}[_.\s]'.'|'; // 23-8-2007 or 07.23.2008 or 07-23-09
     $epi.='\d{4}[-.x]\d{1,2}[-.x]\d{1,2}[_.\s]'.'|'; // 2007-8-23, 2010x03.12 or 2008.23.7
@@ -54,11 +54,13 @@ function guess_match($title, $normalize = FALSE) {
     }
     
     if(preg_match($epi, $title, $match)) {
-        $episode_guess = $match[1];
-        $key_guess = preg_replace("/([^-\(\.]+)[\. ]*(?:[_.\s]-[_.\s].*)?(:?[_.\s]\(.+)?" . $episode_guess. "(.*$)/", '\1', $title);
+        $episode_guess = trim($match[1], ' .');
+        $key_guess = trim(preg_replace("/([^-\(\.]+)[\. ]*(?:[_.\s]-[_.\s].*)?(:?[_.\s]\(.+)?" . 
+            $episode_guess. "(.*$)/", '\1', $title), ' .');
     } elseif(preg_match($quality, $title, $match)) {
-        $quality_guess = $match[1];
-        $key_guess = preg_replace("/([^-\(\.]+)[\. ]*(?:[_.\s]-[_.\s].*)?(:?[_.\s]\(.+)?" . $quality_guess. "(.*$)/", '\1', $title);
+        $quality_guess = trim($match[1], ' .');
+        $key_guess = trim(preg_replace("/([^-\(\.]+)[\. ]*(?:[_.\s]-[_.\s].*)?(:?[_.\s]\(.+)?" . 
+            $quality_guess. "(.*$)/", '\1', $title), ' .');
         $episode_guess = "noShow";
     } else {
         return False;
@@ -72,8 +74,8 @@ function guess_match($title, $normalize = FALSE) {
     
     if($normalize == TRUE) {
     // Convert . and _ to spaces, and trim result
-    //$from = "._";
-    //$to = "  ";
+    $from = "._";
+    $to = "  ";
     $key_guess = trim(strtr($key_guess, $from, $to));
     $data_guess = trim(strtr($data_guess, $from, $to));
     $episode_guess = trim(strtr($episode_guess, $from, $to));
@@ -85,9 +87,9 @@ function guess_match($title, $normalize = FALSE) {
                         '/\bseason[_.\s]?(\d+),?[_.\s]?episode[_.\s]?(\d+)\b/i',
                         '/\b0?(\d)(\d\d)\b/i',
                         '/\bEps[_.\s]?(\d+)-\d+\b/i',
-                        '/\bPart[_.\s]?(\d+)\b/i');
+                        '/\bPa?r?t[_.\s]?(\d+)\b/i');
                         
-    $dateGuess = '/(\d\d\d\d)[-.x](\d\d)[-.x](\d\d).?/i';
+    $dateGuess = '/(\d\d\d\d)[\sx](\d\d)[\sx](\d\d).?/i';
     
     foreach($epiGuess as $guess) {
         $episode_guess = preg_replace($guess, '\1x\2', $episode_guess, -1, $replaceCount);

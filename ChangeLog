@@ -121,6 +121,7 @@ IMPORTANT: If you are updating from a previous version. Please copy php/config.p
     -- Fixed bug that caused transmission list to show duplicates.
 
 current
-    -- Added support for TvTorrents.com
+    -- Added support for TvTorrents.com.
+    -- Progressbar is now shown when opening dialogs.
     -- Updated jquery to version 1.4.2
     -- Updated jquery.tinysort to 1.0.4

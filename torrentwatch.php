@@ -171,7 +171,6 @@ function parse_options() {
             if($r) { 
                 $torHash = get_torHash(add_cache($_GET['title'])); 
             }
-            _debug("\nTorhash: $torHash\n");
             echo $torHash;
             exit(0);
             break;

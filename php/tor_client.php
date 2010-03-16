@@ -152,6 +152,7 @@ function transmission_add_torrent($tor, $dest, $title, $seedRatio) {
   _debug("\r\n",0);
 
   $torHash = $response['arguments']['torrent-added']['hashString'];
+  _debug("\nTorhash: $torHash\n");
 
   if($seedRatio >= 0 && ($torHash)) {
     $request = array('method' => 'torrent-set',

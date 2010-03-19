@@ -166,7 +166,7 @@ function transmission_add_torrent($tor, $dest, $title, $seedRatio) {
   } 
 
 
-  if(isset($response['result']) AND ($response['result'] == 'success' or $response['result'] == 'duplicate torrent')) {
+  if(isset($response['result']) AND ($response['result'] == 'success')) {
     $cache = $config_values['Settings']['Cache Dir'] . "/rss_dl_" . filename_encode($title);
     if($torHash) {
       sleep(2);
@@ -175,6 +175,8 @@ function transmission_add_torrent($tor, $dest, $title, $seedRatio) {
       fclose($handle);
     }
     return 0;
+  } else if ($response['result'] == 'duplicate torrent') {
+      return "Duplicate Torrent";
   } else {
     if(!isset($response['result']))
       return "Failure connecting to Transmission";

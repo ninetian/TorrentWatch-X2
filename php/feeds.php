@@ -172,6 +172,7 @@ function check_for_torrent(&$item, $key, $opts) {
       if($link = get_torrent_link($rs)) {
         if(client_add_torrent($link, NULL, $rs['title'], $opts['URL'], $item)) {
             add_cache($rs['title']);
+            sleep(1);
         } else {
             _debug("Failed adding torrent $link\n", -1);
             return FALSE;

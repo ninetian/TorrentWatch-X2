@@ -1,8 +1,13 @@
 <?php
+global $config_values, $platform;
+
 require_once("tools.php");
 require_once("atomparser.php");
 require_once("cache.php");
 require_once("class.bdecode.php"); 
+if($platform == 'NMT' && !function_exists('curl_init')) {
+    require_once("curl.php");
+}
 require_once("config.php");
 require_once("feeds.php");
 require_once("html.php");
@@ -12,7 +17,6 @@ require_once("platform.php");
 require_once("guess.php");
 
 
-global $config_values;
 $config_values['Global'] = array();
 $time = 0;
 

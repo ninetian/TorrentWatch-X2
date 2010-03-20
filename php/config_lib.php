@@ -1,7 +1,7 @@
 <?php
 
 function setup_default_config() {
-  global $config_values;
+  global $config_values, $platform;
   function _default($a, $b) {
     global $config_values;
     if(!isset($config_values['Settings'][$a])) {
@@ -19,7 +19,11 @@ function setup_default_config() {
   _default('Transmission Port', '9091');
   _default('Transmission URI', '/transmission/rpc');
   _default('Watch Dir', '');
-  _default('Download Dir', '/mnt/Media/Downloads');
+  if($platform == 'NMT') {
+      _default('Download Dir', '/share/Download');
+  } else {
+      _default('Download Dir', '/mnt/Media/Downloads');
+  }
   _default('Cache Dir', $basedir."/rss_cache/");
   _default('Save Torrents', "0");
   _default('Run Torrentwatch', "True");
@@ -188,7 +192,11 @@ function write_config_file() {
     }
   }
   file_put_contents($config_file, $config_out);
-  chmod($config_file, 0600);
+  if($platform == 'NMT') {
+      chmod($config_file, 0666);
+  } else {
+      chmod($config_file, 0600);
+  }
   unset($config_out);
 }
 

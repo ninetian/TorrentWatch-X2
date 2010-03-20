@@ -6,7 +6,7 @@
 
 
 function transmission_sessionId() {
-  global $config_values;
+  global $config_values, $platform;
   $sessionIdFile = get_tr_sessionIdFile();
   if(file_exists($sessionIdFile) && !is_writable($sessionIdFile)) {
       $myuid = posix_getuid();
@@ -47,7 +47,7 @@ function transmission_sessionId() {
     $handle = fopen($sessionIdFile, "w");
     fwrite($handle, $ID[1]);
     fclose($handle);
-  
+    if($platform == 'NMT') chmod($sessionIdFile, 0666);
     $sessionId = $ID[1];
   }
 

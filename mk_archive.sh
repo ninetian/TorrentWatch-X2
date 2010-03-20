@@ -13,7 +13,7 @@ gzip /var/www/torrentwatch-x/releases/torrentwatch-$1.tar
 #NMT Package
 
 echo "Building NMT-Package..."
-hg archive -r $1 -X '.hg*' -X 'mk_archive.sh' -X 'robots.txt' -X 'php/config.php' -X 'wiki' -X 'NMT' -p TorrentWatchX -t tar /var/www/torrentwatch-x/releases/TorrentWatchX-NMT.tar
+hg archive -r $1 -X '.hg*' -X 'mk_archive.sh' -X 'robots.txt' -X 'php/config.php' -X 'wiki' -X 'NMT' -p . -t tar /var/www/torrentwatch-x/releases/TorrentWatchX.tar
 mkdir -p TorrentWatchX/docs
 
 cat <<EOF> TorrentWatchX/appinfo.json
@@ -29,9 +29,11 @@ EOF
 
 for i in wiki/*.wiki ; do cp $i TorrentWatchX/docs/ ; done
 cp -r NMT/* TorrentWatchX/
-tar uf /var/www/torrentwatch-x/releases/TorrentWatchX-NMT.tar TorrentWatchX/
+cd TorrentWatchX/
+tar uf /var/www/torrentwatch-x/releases/TorrentWatchX.tar .
+cd ..
 rm -rf TorrentWatchX/
 cd releases
-zip TorrentWatchX-NMT-$1.zip TorrentWatchX-NMT.tar
-rm TorrentWatchX-NMT.tar
+zip TorrentWatchX-NMT-$1.zip TorrentWatchX.tar
+rm TorrentWatchX.tar
 

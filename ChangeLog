@@ -121,6 +121,7 @@ IMPORTANT: If you are updating from a previous version. Please copy php/config.p
     -- Fixed bug that caused transmission list to show duplicates.
 
 current
+    -- Added support for NMT devices. Thanks to Ian Harris.
     -- Added support for TvTorrents.com.
     -- Progressbar is now shown when opening dialogs.
     -- Updated jquery to version 1.4.2

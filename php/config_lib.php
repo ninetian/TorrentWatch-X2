@@ -51,9 +51,10 @@ if(!(function_exists('get_base_dir'))) {
     }
 }
   
-if(!(function_exists('get_curl_defaults'))) {    
+if(!(function_exists('get_curl_defaults'))) {  
+    global $platform;  
     function get_curl_defaults(&$curlopt) {
-        $curlopt[CURLOPT_CONNECTTIMEOUT] = 10;
+        if(extension_loaded("curl")) $curlopt[CURLOPT_CONNECTTIMEOUT] = 10;
         $curlopt[CURLOPT_TIMEOUT] = 15;
         $curlopt[CURLOPT_RETURNTRANSFER] = true;
     }

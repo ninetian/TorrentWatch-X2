@@ -5,7 +5,7 @@ require_once("tools.php");
 require_once("atomparser.php");
 require_once("cache.php");
 require_once("class.bdecode.php"); 
-if($platform == 'NMT' && !function_exists('curl_init')) {
+if (!extension_loaded("curl")) {
     require_once("curl.php");
 }
 require_once("config.php");

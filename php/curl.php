@@ -12,7 +12,7 @@ define ("CURLOPT_NOBODY",9);
 define ("CURLOPT_USERAGENT",10);
 
 
-function curl_init() {
+function curl_init() {    
 global $curl_stuff;
 	$id=time().rand(100,100000);
 	$curl_stuff[$id]=array();
@@ -26,6 +26,7 @@ global $curl_stuff;
 
 function curl_exec ($sess) {
 global $curl_stuff;
+
 	$url=$curl_stuff[$sess][CURLOPT_URL];
 
 	$header="";
@@ -38,11 +39,11 @@ global $curl_stuff;
 	}
 
 	if (is_array($curl_stuff[$sess][CURLOPT_HTTPHEADER])) {
-             foreach ($curl_stuff[$sess][CURLOPT_HTTPHEADER] as $value) {
-		if (!preg_match("/POST/", $value) && !preg_match("/Content-Length:/", $value) && !preg_match("/Python/", $value)) {	
-                      $header.="$value\r\n";
+     foreach ($curl_stuff[$sess][CURLOPT_HTTPHEADER] as $value) {
+		  if (!preg_match("/POST/", $value) && !preg_match("/Content-Length:/", $value) && !preg_match("/Python/", $value)) {	
+            $header.="$value\r\n";
 		  }	
-              }
+      }
 	}
 	if ($curl_stuff[$sess][CURLOPT_USERPWD] == ":") {
 		$curl_stuff[$sess][CURLOPT_USERPWD]="";
@@ -52,11 +53,18 @@ global $curl_stuff;
 		$header.='Authorization: Basic '.base64_encode($curl_stuff[$sess][CURLOPT_USERPWD])."\r\n";
 	}
 	
+	if($curl_stuff[$sess][CURLOPT_COOKIE]) {
+	    $header .= 'Cookie: ' . $curl_stuff[$sess][CURLOPT_COOKIE] . "\r\n";
+    }
+
 	if ($header || $content) {
 		$http=array('method' => $method);
 		if ($header) {
 			$http['header']=$header;
 		}
+		if($curl_stuff[$sess][CURLOPT_USERAGENT]) {
+		    $http['user_agent'] = $curl_stuff[$sess][CURLOPT_USERAGENT];
+	    }
 		if ($content) {
 			$http['content']=$content;
 		}

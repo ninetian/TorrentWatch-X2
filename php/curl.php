@@ -62,12 +62,16 @@ global $curl_stuff;
 		if ($header) {
 			$http['header']=$header;
 		}
-		if($curl_stuff[$sess][CURLOPT_USERAGENT]) {
+	    if($curl_stuff[$sess][CURLOPT_USERAGENT]) {
 		    $http['user_agent'] = $curl_stuff[$sess][CURLOPT_USERAGENT];
 	    }
 		if ($content) {
 			$http['content']=$content;
 		}
+		if($curl_stuff[$sess][CURLOPT_TIMEOUT]) {
+    		$http['timeout'] = $curl_stuff[$sess][CURLOPT_TIMEOUT];
+	    }
+		
 		$params= array('http' => $http);
 		$context=stream_context_create($params);
 		if (!$result=file_get_contents($url,false,$context)) {

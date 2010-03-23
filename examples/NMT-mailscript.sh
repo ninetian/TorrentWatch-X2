@@ -9,11 +9,11 @@
 # e.g aspmx2.googlemail.com should work for gmail for domains addresses.
 # gmail-smtp-in.l.google.com.for all @gmail.com addresses
 #
-# You also need to edit Apps/Torrentwatchx/etc/torrentwatchx.config and change the line:
+# You also need to edit Apps/Torrentwatchx/etc/Torrentwatchx.config and change the line:
 #
 # Script = 
 # to
-# Script = /share/Apps/torrentwatchx/mailscript.sh
+# Script = /share/Apps/Torrentwatchx/mailscript.sh
 #
 MAILSERVER=""
 FROM=""

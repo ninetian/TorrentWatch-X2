@@ -21,7 +21,12 @@ function platform_getConfigDir() {
 
 //Transmission session-id cache file
 function get_tr_sessionIdFile() {
-    return '/tmp/.Transmission-Session-Id';
+    global $platform;
+    if($platform == 'NMT') {
+        return '/share/Apps/Torrentwatchx/tmp/.Transmission-Session-Id';
+    } else {
+        return '/tmp/.Transmission-Session-Id';
+    }
 }
 
 ?>

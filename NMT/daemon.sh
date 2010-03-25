@@ -8,6 +8,7 @@ install()
 		if [ ! -f /share/Apps/Torrentwatchx/etc/torrentwatch.config ] ; then 
 			cp /share/Apps/Torrentwatchx/etc/torrentwatch.config.dist /share/Apps/Torrentwatchx/etc/torrentwatch.config
 		fi
+                chmod 777 /share/Apps/Torrentwatchx/tmp
                 chmod 777 /share/Apps/Torrentwatchx/etc
                 chmod 666 /share/Apps/Torrentwatchx/etc/torrentwatch.config
                 chmod 777 /share/Apps/Torrentwatchx/rss_cache

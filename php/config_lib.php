@@ -404,6 +404,7 @@ function updateFavoriteEpisode(&$fav, $title) {
 
 function add_feed($link) {
   global $config_values;
+  $link = preg_replace('/ /', '%20', $link);
   _debug('adding feed: ' . $link);
   
   if(isset($link) AND ($tmp = guess_feedtype($link)) != 'Unknown') {
@@ -432,7 +433,7 @@ function update_feedData() {
     if(isset($_GET['idx']) AND isset($config_values['Feeds'][$_GET['idx']])) {
         if(!($_GET['feed_name']) || !($_GET['feed_link'])) return;
         $config_values['Feeds'][$_GET['idx']]['Name'] = $_GET['feed_name'];
-        $config_values['Feeds'][$_GET['idx']]['Link'] = $_GET['feed_link'];
+        $config_values['Feeds'][$_GET['idx']]['Link'] = preg_replace('/ /', '%20', $_GET['feed_link']);
         $config_values['Feeds'][$_GET['idx']]['seedRatio'] = $_GET['seed_ratio'];
     }
 }

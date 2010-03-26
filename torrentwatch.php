@@ -7,6 +7,7 @@ header( "Pragma: no-cache" );
 
 ini_set('include_path', '.:./php');
 require_once('rss_dl_utils.php');
+global $platform;
 
 $tw_version[0] = "0.6.2";
 
@@ -14,6 +15,8 @@ if(file_exists(get_base_dir() . "/.hg")) {
     exec('hg id -i', $hgId, $return);
     if($return == 0) {
         $tw_version[1] = $hgId[0];
+    } else if($platform = 'NMT') {
+        $tw_version[1] = 'NMT';
     } else {
         $tw_version[1] = "unknown";
     }

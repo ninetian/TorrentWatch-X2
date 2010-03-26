@@ -15,11 +15,12 @@ if(file_exists(get_base_dir() . "/.hg")) {
     exec('hg id -i', $hgId, $return);
     if($return == 0) {
         $tw_version[1] = $hgId[0];
-    } else if($platform = 'NMT') {
-        $tw_version[1] = 'NMT';
     } else {
         $tw_version[1] = "unknown";
     }
+} else if($platform = 'NMT') {
+    $tw_version[1] = 'NMT';
+    
 }
 
 $test_run = 0;
@@ -468,8 +469,8 @@ function version_check() {
         curl_setopt_array($get, $getOptions);
         $latest = curl_exec($get);
         curl_close($get);
-	$version = (int)str_replace('.', '', $tw_version[0]);
-	$tmplatest = (int)str_replace('.', '', $latest);
+    	$version = (int)str_replace('.', '', $tw_version[0]);
+    	$tmplatest = (int)str_replace('.', '', $latest);
         if($tmplatest && $tmplatest > $version) {
             return "<div id=\"newVersion\" class=\"dialog_window\" style=\"display: block\">TorrentWatch-X $latest is available.
                    Click <a href=\"https://code.google.com/p/torrentwatch-x/\">here</a> for more information.</div>";

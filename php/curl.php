@@ -11,7 +11,6 @@ define ("CURLOPT_COOKIE",8);
 define ("CURLOPT_NOBODY",9);
 define ("CURLOPT_USERAGENT",10);
 
-
 function curl_init() {    
 global $curl_stuff;
 	$id=time().rand(100,100000);
@@ -57,39 +56,41 @@ global $curl_stuff;
 	    $header .= 'Cookie: ' . $curl_stuff[$sess][CURLOPT_COOKIE] . "\r\n";
     }
 
+    if($curl_stuff[$sess][CURLOPT_USERAGENT]) {
+	    $http['user_agent'] = $curl_stuff[$sess][CURLOPT_USERAGENT];
+    }
+
+	if($curl_stuff[$sess][CURLOPT_TIMEOUT]) {
+		$http['timeout'] = $curl_stuff[$sess][CURLOPT_TIMEOUT];
+    }
+
+
 	if ($header || $content) {
 		$http=array('method' => $method);
 		if ($header) {
 			$http['header']=$header;
 		}
-	    if($curl_stuff[$sess][CURLOPT_USERAGENT]) {
-		    $http['user_agent'] = $curl_stuff[$sess][CURLOPT_USERAGENT];
-	    }
 		if ($content) {
-			$http['content']=$content;
-		}
-		if($curl_stuff[$sess][CURLOPT_TIMEOUT]) {
-    		$http['timeout'] = $curl_stuff[$sess][CURLOPT_TIMEOUT];
-	    }
-		
-		$params= array('http' => $http);
+    		$http['content']=$content;
+    	}
+		$params=array('http' => $http);
 		$context=stream_context_create($params);
 		if (!$result=file_get_contents($url,false,$context)) {
 			$result=$http_response_header[0];
-			$result=preg_replace("/409 Conflict/","409: Conflict",$result);
 		}
 	} else {
-                if (!$result=file_get_contents($url)) {
-                        $result=$http_response_header[0];
-                        $result=preg_replace("/409 Conflict/","409: Conflict",$result);
-                }
+	    $params=array('http' => $http);
+		$context=stream_context_create($params);
+        if (!$result=file_get_contents($url,false,$context)) {
+                $result=$http_response_header[0];
+        }
 	}
-        if ($curl_stuff[$sess][CURLOPT_HEADER] === TRUE) {			
-              foreach ($http_response_header as $value) {
-                      $data.="$value\r\n";
-              }
-              $result=$data;
-       }
+    if ($curl_stuff[$sess][CURLOPT_HEADER] === TRUE) {			
+          foreach ($http_response_header as $value) {
+                  $data.="$value\r\n";
+          }
+          $result=$data;
+   }
 	$out.=$url."\n".$header."\n".$content."\n".$method."\n".$result."\n";;
 	return ($result);
 }

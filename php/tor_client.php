@@ -95,7 +95,7 @@ function transmission_rpc($request) {
     $raw = curl_exec($post);
     curl_close($post);
 
-    if(preg_match('/409: Conflict/', $raw)) {
+    if(preg_match('/409:? Conflict/', $raw)) {
         if(file_exists($sessionIdFile)) {
             unlink($sessionIdFile);
         }

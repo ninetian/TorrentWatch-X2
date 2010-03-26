@@ -29,9 +29,9 @@ cat <<EOF> Torrentwatchx/appinfo.json
 EOF
 
 for i in wiki/*.wiki ; do cp $i Torrentwatchx/docs/ ; done
-cp -r NMT/* Torrentwatchx/
+cp -pr NMT/* Torrentwatchx/
 cd Torrentwatchx/
-tar uf /var/www/torrentwatch-x/releases/Torrentwatchx.tar .
+sudo tar upf /var/www/torrentwatch-x/releases/Torrentwatchx.tar .
 cd ..
 rm -rf Torrentwatchx/
 cd releases

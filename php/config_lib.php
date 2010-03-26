@@ -139,7 +139,7 @@ function get_client_passwd() {
 }
 
 function write_config_file() {
-  global $config_values, $config_out;
+  global $config_values, $config_out $platform;
   $config_file = platform_getConfigFile();
 
   _debug("Preparing to write config file to $config_file\n");

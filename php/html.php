@@ -41,9 +41,8 @@ function show_torrent_html($item, $feed, $feedName, $alt, $torHash, $matched, $i
   if(($pos = strpos($feed, ':COOKIE:')) !== False) {
     $ulink .= substr($feed, $pos);
   }
-  $ulink = preg_replace('/ /', '%20', $ulink);
-  $feed = preg_replace('/ /', '%20', $feed);
-//  $feed = urlencode($feed);
+  $ulink = urlencode($ulink);
+  $feed = urlencode($feed);
 
   ob_start();
   require('templates/feed_item.tpl');

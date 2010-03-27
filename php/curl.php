@@ -64,7 +64,6 @@ global $curl_stuff;
 		$http['timeout'] = $curl_stuff[$sess][CURLOPT_TIMEOUT];
     }
 
-
 	if ($header || $content) {
 		$http=array('method' => $method);
 		if ($header) {

@@ -180,7 +180,6 @@ function check_for_torrent(&$item, $key, $opts) {
         _debug("Unable to find URL for ".$rs['title']."\n", -1);
         $matched = "nourl";
       }
-//      sleep(1);
     }
   }
 }

@@ -126,3 +126,7 @@ IMPORTANT: If you are updating from a previous version. Please copy php/config.p
     -- Progressbar is now shown when opening dialogs.
     -- Updated jquery to version 1.4.2
     -- Updated jquery.tinysort to 1.0.4
+    -- Better guessing routine.
+
+current:
+    -- Fixed issues that caused checking for a download dir even if the transmission host was remote.

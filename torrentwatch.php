@@ -9,7 +9,7 @@ ini_set('include_path', '.:./php');
 require_once('rss_dl_utils.php');
 global $platform;
 
-$tw_version[0] = "0.6.2";
+$tw_version[0] = "0.6.3";
 
 if(file_exists(get_base_dir() . "/.hg")) {
     exec('hg id -i', $hgId, $return);

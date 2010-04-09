@@ -120,7 +120,7 @@ IMPORTANT: If you are updating from a previous version. Please copy php/config.p
     -- Added writable checks for Transmission SessionID cache file.
     -- Fixed bug that caused transmission list to show duplicates.
 
-current
+0.6.3
     -- Added support for NMT devices. Thanks to Ian Harris.
     -- Added support for TvTorrents.com.
     -- Progressbar is now shown when opening dialogs.

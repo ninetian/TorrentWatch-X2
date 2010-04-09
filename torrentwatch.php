@@ -444,7 +444,7 @@ function check_files() {
     if(strtolower($config_values['Settings']['Transmission Host']) != 'localhost' ||
          $config_values['Settings']['Transmission Host'] != '127.0.0.1' ||
          strtolower($config_values['Settings']['Transmission Host']) != strtolower(gethostname()) ||
-         strtolower($config_values['Settings']['Transmission Host']) != strtolower(gethostbyname(gethostname()))) {
+         $config_values['Settings']['Transmission Host'] != gethostbyname(gethostname())) {
             $toCheck['download_dir'] = $config_values['Settings']['Download Dir'];
     }
     

@@ -41,7 +41,7 @@ class lastRSS {
     // -------------------------------------------------------------------
     var $default_cp = 'UTF-8';
     var $CDATA = 'nochange';
-    var $cp = '';
+    var $cp = 'UTF-8';
     var $items_limit = 0;
     var $stripHTML = False;
     var $date_format = '';

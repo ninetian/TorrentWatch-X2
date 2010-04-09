@@ -441,10 +441,10 @@ function check_files() {
     if($config_values['Settings']['FirstRun']) return 0;
 
     $toCheck['cache_dir'] = $config_values['Settings']['Cache Dir'];
-    if($config_values['Settings']['Transmission Host'] != 'localhost' ||
+    if(strtolower($config_values['Settings']['Transmission Host']) != 'localhost' ||
          $config_values['Settings']['Transmission Host'] != '127.0.0.1' ||
-         $config_values['Settings']['Transmission Host'] != gethostname() ||
-         $config_values['Settings']['Transmission Host'] != gethostbyname(gethostname())) {
+         strtolower($config_values['Settings']['Transmission Host']) != strtolower(gethostname()) ||
+         strtolower($config_values['Settings']['Transmission Host']) != strtolower(gethostbyname(gethostname()))) {
             $toCheck['download_dir'] = $config_values['Settings']['Download Dir'];
     }
     

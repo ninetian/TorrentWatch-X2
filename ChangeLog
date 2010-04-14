@@ -92,7 +92,7 @@ IMPORTANT: If you are updating from a previous version. Please copy php/config.p
     -- Added bug reporting option.
     -- Added configure option to match only shows with episode info.
     -- Added Full season recognition. 
-    -- Added script hook (read docs/script.txt for more info).
+    -- Added script hook (read docs/script.wiki for more info).
     -- Added version checking.
     -- Changed dialog behaviour so that data is pulled on request instead of on page load.
     -- Better Episode guessing.

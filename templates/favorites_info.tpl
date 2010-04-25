@@ -11,7 +11,8 @@
   </div>
   <div class="favorite_not">
     <label class="item" title="Regexp Not Filter">Not:</label>
-    <input type="text" class="text" name="not" value="<?php echo $item['Not']; ?>">
+    <input type="text" class="text" name="not" value="<?php echo $item['Not']; ?>"
+        title="Don't match titles with these words. You can add more the 1 word, seperated by spaces">
   </div>
   <div class="favorite_savein" id="favorite_savein">
     <label class="item" title="Save Directory or Default">Save In:</label>
@@ -32,7 +33,8 @@
     <input type="text" class="text" name="quality" value="<?php echo $item['Quality']; ?>">
   </div>
   <div class="favorite_seed_and_episode">
-    <input type="text" class="seedratio text" name="seedratio" value="<?php echo _isset($item, 'seedRatio'); ?>">
+    <input type="text" class="seedratio text" name="seedratio" value="<?php echo _isset($item, 'seedRatio'); ?>"
+        title="Set seedratio where you want your client to stop downloading. (-1 is unlimted)">
     <label class="seedratio item" title="Maximum seeding ratio, set to -1 to disable">Seed Ratio:</label>
      <label class="lastSeason item"> Last Downloaded Episode:</label>
     <?php if(!preg_match('/^(\d{8})$/', $item['Episode'])) { ?>

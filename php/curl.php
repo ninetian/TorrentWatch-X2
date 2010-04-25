@@ -74,13 +74,13 @@ global $curl_stuff;
     	}
 		$params=array('http' => $http);
 		$context=stream_context_create($params);
-		if (!$result=file_get_contents($url,false,$context)) {
+		if (!$result=@file_get_contents($url,false,$context)) {
 			$result=$http_response_header[0];
 		}
 	} else {
 	    $params=array('http' => $http);
 		$context=stream_context_create($params);
-        if (!$result=file_get_contents($url,false,$context)) {
+        if (!$result=@file_get_contents($url,false,$context)) {
                 $result=$http_response_header[0];
         }
 	}

@@ -50,7 +50,6 @@ function transmission_sessionId() {
     if($platform == 'NMT') chmod($sessionIdFile, 0666);
     $sessionId = $ID[1];
   }
-
   return $sessionId;
 }
 
@@ -94,7 +93,6 @@ function transmission_rpc($request) {
 
     $raw = curl_exec($post);
     curl_close($post);
-
     if(preg_match('/409:? Conflict/', $raw)) {
         if(file_exists($sessionIdFile)) {
             unlink($sessionIdFile);

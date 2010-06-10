@@ -62,7 +62,7 @@ if(!(function_exists('get_curl_defaults'))) {
 
 if(!(function_exists('get_item_filter'))) {
     function get_item_filter() {
-        return '/[\[\]{}<>:;,]/';
+        return '/[\[\]{}<>,]/';
     }
 }
 
@@ -192,6 +192,7 @@ function write_config_file() {
       return FALSE;
     }
   }
+  $config_out = html_entity_decode($config_out);
   file_put_contents($config_file, $config_out);
   if($platform == 'NMT') {
       chmod($config_file, 0666);

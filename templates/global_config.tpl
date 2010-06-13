@@ -258,7 +258,6 @@
             </div>
             <div id='linkButtons' class="buttonContainer">
                 <a class='toggleDialog button' href='#'>Close</a> 
-                <a class='toggleDialog button' href='#feeds'>Feeds</a>
                 <a class='toggleDialog button' href='#welcome1'>Wizard</a>
             </div>
         </div>

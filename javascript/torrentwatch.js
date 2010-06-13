@@ -571,6 +571,7 @@ $(function() {
                     var id = button.href.match(/#favorite_(.)/)[1];
                     $("#favorite_" + id).remove();
                     $("#fav_" + id).remove();
+                    $("#favorite_new").show();
                 }
                 console.log("#" + id);
             }

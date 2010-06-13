@@ -38,8 +38,11 @@ body {
 
 input, select {
     margin-left: 2em;
+}
+
+select {
     border: 1px solid #787878;
-    }
+}
 
 input[type=text] {
     border: 1px solid #787878;
@@ -53,13 +56,16 @@ input[type=password] {
 
 input[type=hidden] {
     display: none;
-    }
+}
+    
+input[type=checkbox] {
+    margin-top: 2px;
+}
 
 label {
     display: inline;
     font-size: 0.9em;
     margin-left: 1em;
-    vertical-align: middle;
     }
 
 label.category {
@@ -72,6 +78,7 @@ label.category {
 .hidden {
     display: none;
     }
+    
 /*-----------------
  *
  * T O P   M E N U
@@ -502,11 +509,24 @@ h2.dialog_heading {
     }
 
 div.buttonContainer {
-    width: 100%;
     margin-top: 2px;
     float: right;
     }
 
+a.toggleConfigTab {
+    vertical-align: bottom;
+    margin-top: 5px;
+    padding: 1px 2px 1px 2px;
+    background-color: #EEE;
+    border: 1px solid #787878;   /* if needed */
+    -webkit-border-radius: 4px;    /* for Safari */
+    -moz-border-radius: 4px;       /* for Firefox */
+    font-size: 0.8em;
+    color: #323232;
+    text-decoration: none;
+    cursor: pointer;
+}
+    
 a.button,
 input[type=submit] {
     float: right;
@@ -653,151 +673,158 @@ div#welcome5 input.form_email[type=text] {
  * C O N F I G   D I A L O G 
  *
  ****************************/
-div.dialog_window#configuration div.left {
-    margin-top: 10px;
-    float: left;
-    width: 372px;
-}
-
-div.dialog_window#configuration div.right {
-    margin-top: 10px;
-    float: left;
-    width: 322px;
-    border-left: 1px solid grey;
-    border-style:dotted;
-}
-
-div.dialog_window#configuration div.category {
-    width: 698px;
-    height: 32px;
-    float: left;
+ 
+div#configTabs {
+    margin-top: 5px;
     text-align: center;
-    border-bottom: 1px solid grey;
-    border-style:dotted;
+    height: 25px;
 }
 
-div.dialog_window#configuration div.left input.text,
-div.dialog_window#configuration div.left input.password,
-div.dialog_window#configuration div.left input[type=text],
-div.dialog_window#configuration div.left input[type=password] {
+div#configTabs .selTab {
+    background-color: #787878;
+    color: #FFFFFF;
+}
+
+div.dialog_window#configuration {
+    margin-top: 90px;
+    margin-left: -225px;
+    float: left;
+    width: 450px;
+}
+
+div.dialog_window#configuration div.config_form input.text,
+div.dialog_window#configuration div.config_form input.password,
+div.dialog_window#configuration div.config_form input[type=text],
+div.dialog_window#configuration div.config_form input[type=password] {
     position: absolute;
-    left: 120px;
-    width: 225px;
+    left: 148px;
+    width: 275px;
     padding-left: 3px;
 }
 
-div.dialog_window#configuration div.right input.text,
-div.dialog_window#configuration div.right input.password,
-div.dialog_window#configuration div.right input[type=text],
-div.dialog_window#configuration div.right input[type=password] {
+div.dialog_window#configuration div.config_form select {
     position: absolute;
-    right: 15px;
-    width: 225px;
-    padding-left: 3px;
+    left: 148px;
+    width: 277px;
 }
 
-div.dialog_window#configuration div.left select {
+div.dialog_window#configuration div.config_form input[type=checkbox] {
     position: absolute;
-    left: 120px;
-    width: 227px;
+    left: 148px;
 }
-
-div.dialog_window#configuration div.right select {
-    position: absolute;
-    right: 15px;
-    width: 227px;
-}
-
-div.dialog_window#configuration input[type=checkbox] {
-    margin: 2px 2px 0 0px;
-    border: 1px solid grey;
-    }
 
 div.config_form {
     border: 1px solid grey;
-    padding: 0 0 5px 0;
-    margin: 5px 0 0 0 ;
-    height: 485px;
+    padding: 10px 0 5px 0;
+    margin: 10px 0 0 0 ;
 }
 
 form#config_form div {
     min-height: 22px;
 }
 
-div.dialog_window#feeds {
-    border: 2px solid grey;
+div#config_feeds {
+    border: 1px solid grey;
+    margin-top: 10px;
+    padding: 5px 0 5px 0;
 }
 
-div.feeditem {
+div#addFeed {
+    border-bottom: 1px solid grey;
+    padding-bottom: 5px;
+}
+
+div#feedItemTitles {
+    margin: 3px 0 5px;
+}
+
+div#feedNameUrl {
+    margin-left: 0;
+    float: left;
+    width: 315px;
+}
+
+div#addFeed input.feed_link[type=text] {
+    width: 300px;
+    margin: 0 0;
+    padding: 3px;
+    left: 87px;
+}
+
+div#addFeed a.button {
+    margin: 0 10px 0 0;
+    padding: 3px 0 3px 0;
+}
+
+
+div#config_feeds div.feeditem {
     height: 35px;
 }
 
-
-div.feeditem.add {
-    border-bottom: 1px solid grey;
-    margin-bottom: 10px;
-}
-
-div#feeds div.buttonContainer {
-    margin-top: 10px;
-    border-top: 1px solid grey;
-}
-
-div.feeditem label.item {
+div#config_feeds div.feeditem label.item {
     position: relative;
     white-space: nowrap;
     overflow: hidden;
     width: auto;
-    top: 5px;
     padding: 5px;
 }
 
-div.feeditem label.item  a:link,
-div.feeditem label.item  a:visited,
-div.feeditem label.item  a:hover,
-div.feeditem label.item  a:active {
-    color: black;
-    }
-
-div#feeds div#feedNameUrl {
-    margin-left: 0;
-    float: left;
-    width: 275px;
-}
-
-div.feeditem input[type=text] {
-    position: relative;
-    top: 6px;
-    width: 260px;
+div#config_feeds div.feeditem input[type=text] {
+    width: 300px;
     margin: 3px 0;
     padding: 3px;
+    left: 0px;
 }
 
-div.feeditem input.feed_url[type=text],
-div.feeditem input.feed_name[type=text] {
+div#config_feeds div.feeditem input.feed_url[type=text],
+div#config_feeds div.feeditem input.feed_name[type=text] {
     margin: 3px 0 0 10px;
 }
 
-div.feeditem input.feed_link[type=text] {
-    width: 280px;
-}
-
-div.feeditem input.seed_ratio[type=text] {
+div#config_feeds div.feeditem input.seed_ratio[type=text] {
     width: 2em;
     margin-left: 6px;
 }
 
-div.feeditem a.button {
-    margin-top: 9px;
+div#config_feeds div.feeditem a.button {
+    width: 30px;
+    margin: 3px 10px 0 0;
     padding: 3px 0 3px 0;
 }
 
-div#feeds input#showURL[type=checkbox] {
-    margin: 7px 5px 0 10px;
+div#config_feeds div.feeditem a.button#Update {
+    margin-right: 5px;
 }
 
-div#feeds div.buttonContainer {
+div#showURL {
     font-size: 0.9em;
+}
+
+div#showURL input[type=checkbox] {
+    margin-left: 5px;
+}
+
+div#config_hideList ul.hidelist {
+    border: 1px solid grey;
+    max-height: 300px;
+    overflow: auto;
+    padding-bottom: 5px;
+}
+
+div#config_hideList ul.hidelist li {
+     overflow: hidden;
+}
+
+div#config_hideList ul.hidelist li:hover {
+     background-color: #3879D7;
+}
+
+div#config_hideList ul.hidelist input[type=checkbox] {
+    margin: 0 5px 0 0;
+}
+
+div#linkButtons  {
+    float: right;
 }
 
 /***********************************
@@ -938,28 +965,6 @@ div.favinfo div.buttonContainer {
  *
  ********************************/
 
-div#hidelist {
-    margin-left: -150px;
-    width: 300px;
-}
-
-ul.hidelist {
-    border: 1px solid grey;
-    max-height: 300px;
-    overflow: auto;
-}
-
-ul.hidelist li {
-     overflow: hidden;
-}
-
-ul.hidelist li:hover {
-     background-color: #3879D7;
-}
-
-ul.hidelist input[type=checkbox] {
-    margin: 0 5px 0 0;
-}
 
 /**********************************
  *

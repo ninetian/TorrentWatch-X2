@@ -4,6 +4,7 @@ $(function() {
     function() {
         $(this).toggleDialog();
     });
+    
     // Vary the font-size
     changeFontSize = function(fontSize) {
         var f = fontSize;
@@ -20,7 +21,7 @@ $(function() {
             break;
         }
     };
-
+    
     displayFilter = function(filter) {
         $.cookie('TWFILTER', filter, { expires: 30 });
         var tor = $("li.torrent").show();
@@ -450,6 +451,8 @@ $(function() {
         $.get('torrentwatch.php', { get_client: 1 }, function(client) {
             window.client = client
             changeClient(client);
+            fontSize = $.cookie('twFontSize');
+            changeFontSize(fontSize);
         })
         setTimeout(function() {
             setInterval(function() {
@@ -555,7 +558,25 @@ $(function() {
         } else {
             form = $(button).closest("form");
         }
-    	$.get(form.get(0).action, form.buildDataString(button), $.loadDynamicData, 'html');
+        console.log(button);
+        if ((button.id == "Delete") || (button.id == "Update")) {
+            $.get(form.get(0).action, form.buildDataString(button));
+            if (button.id == "Delete") {
+                if(button.href.match(/#feedItem/)) {
+                    var id = button.href.match(/#feedItem_(.)/)[1];
+                    $("#feedItem_" + id).remove();
+                    $("#feed_" + id).remove();
+                }
+                if(button.href.match(/#favorite/)) {
+                    var id = button.href.match(/#favorite_(.)/)[1];
+                    $("#favorite_" + id).remove();
+                    $("#fav_" + id).remove();
+                }
+                console.log("#" + id);
+            }
+        } else {
+        	$.get(form.get(0).action, form.buildDataString(button), $.loadDynamicData, 'html');
+    	}
     };
 
     $.fn.toggleDialog = function() {
@@ -589,6 +610,7 @@ $(function() {
         });
         return this;
     };
+        
     $.fn.initFavorites = function() {
         var selector = this.selector;
         setTimeout(function() {
@@ -778,6 +800,18 @@ $(function() {
                 }
             });
         return;
+    }
+    
+    $.toggleConfigTab = function(tab, button) {
+        $(".toggleConfigTab").removeClass("selTab");
+        $(button).addClass("selTab");
+        $(".configTab").hide();
+        if ((tab == "#config_feeds") || (tab == "#config_hideList")) {
+            $("#config_form").hide();
+        } else {
+            $("#config_form").show();
+        }
+        $(tab).toggle()
     }
     
     $.noEnter = function(evt) { 

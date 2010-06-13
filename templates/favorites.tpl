@@ -4,7 +4,7 @@
     <li><a href="#favorite_new">New Favorite</a></li>
     <?php if(isset($config_values['Favorites'])): ?>
       <?php foreach($config_values['Favorites'] as $key => $item): ?>
-        <li><a href="#favorite_<?php echo $key; ?>"><?php echo $item['Name']; ?></a></li>
+        <li id="fav_<?php echo $key ?>"><a href="#favorite_<?php echo $key; ?>"><?php echo $item['Name']; ?></a></li>
       <?php endforeach; ?>
     <?php endif; ?>
    </ul> 

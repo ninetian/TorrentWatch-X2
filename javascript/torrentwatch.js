@@ -563,12 +563,12 @@ $(function() {
             $.get(form.get(0).action, form.buildDataString(button));
             if (button.id == "Delete") {
                 if(button.href.match(/#feedItem/)) {
-                    var id = button.href.match(/#feedItem_(.)/)[1];
+                    var id = button.href.match(/#feedItem_(\d+)/)[1];
                     $("#feedItem_" + id).remove();
                     $("#feed_" + id).remove();
                 }
                 if(button.href.match(/#favorite/)) {
-                    var id = button.href.match(/#favorite_(.)/)[1];
+                    var id = button.href.match(/#favorite_(\d+)/)[1];
                     $("#favorite_" + id).remove();
                     $("#fav_" + id).remove();
                     $("#favorite_new").show();

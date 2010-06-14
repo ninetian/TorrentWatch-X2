@@ -19,9 +19,9 @@
                                      'Quality' => 'All'), "new"); ?>
   <?php if(isset($config_values['Favorites']))
           array_walk($config_values['Favorites'], 'display_favorites_info'); ?>
-  </div>
-  <div id="favClose" class="buttonContainer">
-      <a class="toggleDialog button" id="Close" href="#">Close</a>
+      <div id="favClose" class="buttonContainer">
+          <a class="toggleDialog button" id="Close" href="#">Close</a>
+      </div>
   </div>
 </div>
 

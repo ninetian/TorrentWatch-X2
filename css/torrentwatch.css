@@ -953,16 +953,13 @@ form.favinfo input.lastEpisode[type=text] {
 
 div.favinfo div.buttonContainer {
     position: absolute;
-    float; right;
-    bottom: 20px;
+    top: 210px;
     right: 75px;
-    width: 250px;
 }
 
 div#favClose {
     position: absolute;
-    float; right;
-    bottom: 14px;
+    top: 210px;
     right: 3px;
 }
 

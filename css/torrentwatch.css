@@ -955,8 +955,15 @@ div.favinfo div.buttonContainer {
     position: absolute;
     float; right;
     bottom: 20px;
-    right: 5px;
+    right: 75px;
     width: 250px;
+}
+
+div#favClose {
+    position: absolute;
+    float; right;
+    bottom: 14px;
+    right: 3px;
 }
 
 /********************************

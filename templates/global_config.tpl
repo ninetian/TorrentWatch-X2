@@ -252,7 +252,7 @@
                             <li><h2 style='color: red; text-align: center'>You did not hide any shows.</h2></li>
                         <?php endif; ?>
                     </ul>
-                    <a class="submitForm button" id="Delete" href="#">Unhide</a>
+                    <a class="submitForm button" id="Unhide" href="#">Unhide</a>
                     <a class='toggleDialog button' href='#'>Close</a> 
                     </form>
             </div>

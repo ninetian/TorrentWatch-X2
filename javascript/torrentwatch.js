@@ -558,7 +558,6 @@ $(function() {
         } else {
             form = $(button).closest("form");
         }
-        console.log(button);
         if ((button.id == "Delete") || (button.id == "Update")) {
             $.get(form.get(0).action, form.buildDataString(button));
             if (button.id == "Delete") {
@@ -569,11 +568,11 @@ $(function() {
                 }
                 if(button.href.match(/#favorite/)) {
                     var id = button.href.match(/#favorite_(\d+)/)[1];
+                    $("#favorite_" + id).toggleFavorite();
                     $("#favorite_" + id).remove();
                     $("#fav_" + id).remove();
-                    $("#favorite_new").show();
+                    window.dialog = 1;
                 }
-                console.log("#" + id);
             }
         } else {
         	$.get(form.get(0).action, form.buildDataString(button), $.loadDynamicData, 'html');
@@ -619,7 +618,7 @@ $(function() {
             $('#favorite_new a#Update').addClass('disabled').removeClass('submitForm');
         },
         300);
-	this.not(":first").tsort('a');
+    	this.not(":first").tsort('a');
         return this.not(":first").end().click(function() {
             $(this).find("a").toggleFavorite();
         });

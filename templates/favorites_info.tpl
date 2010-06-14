@@ -50,6 +50,5 @@
   <div class="buttonContainer">
     <a class="submitForm button" id="Update" href="#">Update</a>
     <a class="submitForm button" id="Delete" href="#favorite_<?php echo $key ?>">Delete</a>
-    <a class="toggleDialog button" id="Close" href="#">Close</a>
   </div>
 </form>

@@ -544,6 +544,8 @@ a.button {
     width: 50px;
     text-align: center;
     text-decoration: none;
+    -webkit-border-radius: 8px;    /* for Safari */
+    -moz-border-radius: 8px;       /* for Firefox */
     }
 
 a.disabled {
@@ -958,17 +960,8 @@ div.favinfo div.buttonContainer {
 }
 
 div#favClose {
-    position: absolute;
-    top: 210px;
     right: 3px;
 }
-
-/********************************
- *
- * H I D E L I S T   D I A L O G
- *
- ********************************/
-
 
 /**********************************
  *
@@ -1006,7 +999,7 @@ div#report_bug input[type=submit] {
  *
  *****************************/
 div#history {
-    height: 250px;
+    height: 257px;
     }
 
 ul#historyItems {

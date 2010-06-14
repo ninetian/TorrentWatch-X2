@@ -4,6 +4,8 @@
       <li><?php echo $item['Date'].' - '.$item['Title']; ?></li>
     <?php endforeach; ?>
   </ul>
-  <a class="button toggleDialog" href="#">Close</a>
-  <a class="button" id="clearhistory" href="torrentwatch.php?clearHistory=1">Clear</a>
+  <div class="buttonContainer">
+      <a class="button toggleDialog" href="#">Close</a>
+      <a class="button" id="clearhistory" href="torrentwatch.php?clearHistory=1">Clear</a>
+  </div>
 </div>

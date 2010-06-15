@@ -29,8 +29,7 @@ $(function() {
         if (filter == 'all') {
             if ($('.transmission').is(":visible")) {
                 $('.feed').show();
-                $('.transmission').hide();
-                $('.hide_item').show();
+                $('.transmission').hide();                
             }
             tor.markAlt().closest(".feed div.feed");
         } else if (filter == 'matching') {

@@ -73,6 +73,7 @@ $(function() {
             case 'filter_all':
                 displayFilter('all');
                 $('.hide_item').show();
+                $.checkHiddenFeeds();
                 break;
             case 'filter_matching':
                 displayFilter('matching');
@@ -546,11 +547,6 @@ $(function() {
         		    var versionCheck = $.cookie('VERSION-CHECK');
                     if(versionCheck != 1) $.cookie('VERSION-CHECK', '1', { expires: 1 });
                 })
-                $.each($('#torrentlist_container .feed'), function() {
-                    if($.cookie(this.id)) { 
-                        $.hideFeed(this.id.match(/feed_(\d)/)[1], 1);
-                    }
-                });
             },
             100);
         },
@@ -839,6 +835,14 @@ $(function() {
             $("#config_form").show();
         }
         $(tab).toggle()
+    }
+    
+    $.checkHiddenFeeds = function() {
+        $.each($('#torrentlist_container .feed'), function() {
+            if($.cookie(this.id)) { 
+                $.hideFeed(this.id.match(/feed_(\d)/)[1], 1);
+            }
+        });
     }
     
     $.noEnter = function(evt) { 

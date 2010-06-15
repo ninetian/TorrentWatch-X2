@@ -25,10 +25,12 @@ $(function() {
     displayFilter = function(filter) {
         $.cookie('TWFILTER', filter, { expires: 666 });
         var tor = $("li.torrent").show();
+        $('.hide_item').hide();
         if (filter == 'all') {
             if ($('.transmission').is(":visible")) {
                 $('.feed').show();
                 $('.transmission').hide();
+                $('.hide_item').show();
             }
             tor.markAlt().closest(".feed div.feed");
         } else if (filter == 'matching') {
@@ -70,18 +72,23 @@ $(function() {
             switch (filter) {
             case 'filter_all':
                 displayFilter('all');
+                $('.hide_item').show();
                 break;
             case 'filter_matching':
                 displayFilter('matching');
+                $('.hide_item').hide();
                 break;
             case 'filter_downloading':
                 displayFilter('downloading');
+                $('.hide_item').hide();
                 break;
             case 'filter_downloaded':
                 displayFilter('downloaded');
+                $('.hide_item').hide();
                 break;
             case 'filter_transmission':
                 displayFilter('transmission');
+                $('.hide_item').hide();
                 break;
             }
         });

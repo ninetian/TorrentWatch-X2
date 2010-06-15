@@ -25,11 +25,11 @@ $(function() {
     displayFilter = function(filter, empty) {
         if(empty == 1) {
             $.fn.hideMe = function() {
-                this.hide();
+                $(this).hide();
             }
         } else {
             $.fn.hideMe = function() {
-                this.slideUp();
+                $(this).slideUp();
             }
         }
         $.cookie('TWFILTER', filter, { expires: 666 });
@@ -874,7 +874,7 @@ $(function() {
         } else {
             $("#config_form").show();
         }
-        $(tab).toggle()
+	$(tab).animate({opacity: 'toggle'}, 500);
     }
     
     $.noEnter = function(evt) { 

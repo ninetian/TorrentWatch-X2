@@ -8,7 +8,7 @@ $(function() {
     // Vary the font-size
     changeFontSize = function(fontSize) {
         var f = fontSize;
-        $.cookie('twFontSize', f, { expires: 30 });
+        $.cookie('twFontSize', f, { expires: 666 });
         switch (f) {
         case 'Small':
             $("body").css('font-size', '75%');
@@ -23,7 +23,7 @@ $(function() {
     };
     
     displayFilter = function(filter) {
-        $.cookie('TWFILTER', filter, { expires: 30 });
+        $.cookie('TWFILTER', filter, { expires: 666 });
         var tor = $("li.torrent").show();
         if (filter == 'all') {
             if ($('.transmission').is(":visible")) {
@@ -800,9 +800,9 @@ $(function() {
             $("#feed_" + feed + " .header").toggleClass("header_hidden");
         }
         if($('#feed_' + feed + ' .header_hidden').length === 0) {
-            $.cookie('feed_' + feed , null);
+            $.cookie('feed_' + feed , null, { expires: 666 });
         } else {
-            $.cookie('feed_' + feed , 1);
+            $.cookie('feed_' + feed , 1, { expires: 666 });
         }
 }
     

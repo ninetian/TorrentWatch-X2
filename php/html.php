@@ -58,7 +58,7 @@ function show_feed_html($idx) {
       $html_out .= "<div class=\"header\">\n";
       $html_out .= "<table width=\"100%\" cellspacing=\"0\"><tr><td class='hide_feed'>\n";
       $html_out .= "<span class=\"hide_item\">\n";
-      $html_out .= "<a href=\"#\" title=\"Hide this feed\" onclick=\"$.hideFeed(".$idx.", 0)\">\n";
+      $html_out .= "<a href=\"#\" title=\"Hide this feed\" onclick=\"$.toggleFeed(".$idx.", 0)\">\n";
       $html_out .= "<img height='12' src=\"images/hide.png\"></a></span></td>\n";
       $html_out .= "<td class='feed_title'>".$config_values['Feeds'][$idx]['Name']."</td></tr></table></div>\n";
   }

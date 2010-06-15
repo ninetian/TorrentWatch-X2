@@ -22,44 +22,66 @@ $(function() {
         }
     };
     
-    displayFilter = function(filter) {
+    displayFilter = function(filter, empty) {
+        if(empty == 1) {
+            $.fn.hideMe = function() {
+                this.hide();
+            }
+        } else {
+            $.fn.hideMe = function() {
+                this.slideUp();
+            }
+        }
         $.cookie('TWFILTER', filter, { expires: 666 });
-        var tor = $("li.torrent").show();
-        $('.hide_item').hide();
         if (filter == 'all') {
             if ($('.transmission').is(":visible")) {
-                $('.feed').show();
-                $('.transmission').hide();
-                $('.hide_item').show();
-                $.checkHiddenFeeds();
+                $('.transmission').hideMe();
+                $('.feed .header').slideDown();
             }
+            var tor = $(".feed li.torrent").not(".hiddenFeed");
+            tor.slideDown();
+            $('.hide_item').fadeIn();
             tor.markAlt().closest(".feed div.feed");
+            $.checkHiddenFeeds(1);
         } else if (filter == 'matching') {
             if ($('.transmission').is(":visible")) {
-                $('.feed').show();
-                $('.transmission').hide();
+                $('.transmission').hideMe();
+                $('.feed .header').slideDown();
             }
-            tor.filter(".match_nomatch").hide();
+            var tor = $(".feed li.torrent").filter(".match_nomatch");
+            tor.hideMe();
+            $('.hide_item').fadeOut();
+            tor = $(".feed li.torrent").not(".match_nomatch");
+            tor.slideDown();
             tor.markAlt().closest(".feed div.feed");
         } else if (filter == 'downloading') {
             if ($('.transmission').is(":visible")) {
-                $('.feed').show();
-                $('.transmission').hide();
+                $('.transmission').hideMe();
+                $('.feed .header').slideDown();
             }
-            tor.not('.match_downloading, .match_match').hide();
+            var tor = $(".feed li.torrent").not('.match_downloading, .match_match');
+            tor.hideMe();
+            $('.hide_item').fadeOut();
+            tor = $(".feed  li.torrent").filter('.match_downloading, .match_match');
+            tor.slideDown();
             tor.markAlt().closest(".feed div.feed");
         } else if (filter == 'downloaded') {
             if ($('.transmission').is(":visible")) {
-                $('.feed').show();
-                $('.transmission').hide();
+                $('.transmission').hideMe();
+                $('.feed .header').slideDown();
             }
-            tor.not('.match_cachehit, .match_downloaded').hide();
+            var tor = $(".feed li.torrent").not('.match_cachehit, .match_downloaded');
+            tor.hideMe();
+            $('.hide_item').fadeOut();
+            tor = $(".feed li.torrent").filter('.match_cachehit, .match_downloaded');
+            tor.slideDown();
             tor.markAlt().closest(".feed div.feed");
         } else if (filter == 'transmission') {
             if ($('.feed').is(':visible')) {
-                $('.transmission').show();
-                $('.feed').hide();
+                $('.feed .header').hideMe();
+                $('.feed li.torrent').hideMe();
             }
+            $('.transmission').slideDown();
         }
         $('#filter_' + filter).addClass('selected').siblings().removeClass("selected");
     };
@@ -73,24 +95,19 @@ $(function() {
             switch (filter) {
             case 'filter_all':
                 displayFilter('all');
-                $('.hide_item').show();
-                $.checkHiddenFeeds();
+                $.checkHiddenFeeds(1);
                 break;
             case 'filter_matching':
                 displayFilter('matching');
-                $('.hide_item').hide();
                 break;
             case 'filter_downloading':
                 displayFilter('downloading');
-                $('.hide_item').hide();
                 break;
             case 'filter_downloaded':
                 displayFilter('downloaded');
-                $('.hide_item').hide();
                 break;
             case 'filter_transmission':
                 displayFilter('transmission');
-                $('.hide_item').hide();
                 break;
             }
         });
@@ -527,7 +544,7 @@ $(function() {
                         filter = 'all';
                     }
                 }                
-                displayFilter(filter);
+                displayFilter(filter, 1);
                 var clientCheck = 1;
                 if($('#fav_error').length > 0) {
                     setTimeout(function() {
@@ -795,20 +812,42 @@ $(function() {
         $.get('torrentwatch.php?hide=' + title, '', $.loadDynamicData, 'html');
     }
     
-    $.hideFeed = function(feed, speed) {
+    $.toggleFeed = function(feed, speed) {
         if(speed == 1) {
-            $("#feed_" + feed + " li").hide();
-            $("#feed_" + feed + " .header").addClass("header_hidden");
+            if($.cookie('feed_' + feed) == 1) {
+                $("#feed_" + feed + " li").show().removeClass("hiddenFeed");
+                $("#feed_" + feed + " .header").removeClass("header_hidden");
+                $.cookie('feed_' + feed , null, { expires: 666 });
+            } else {
+                $("#feed_" + feed + " li").hide().addClass("hiddenFeed");
+                $("#feed_" + feed + " .header").addClass("header_hidden");    
+                $.cookie('feed_' + feed , 1, { expires: 666 });
+            }
         } else {
-            $("#feed_" + feed + " li").slideToggle();
-            $("#feed_" + feed + " .header").toggleClass("header_hidden");
+            if($.cookie('feed_' + feed) == 1) {
+                $("#feed_" + feed + " li").slideDown().removeClass("hiddenFeed");
+                $("#feed_" + feed + " .header").removeClass("header_hidden");
+                $.cookie('feed_' + feed , null, { expires: 666 });
+            } else {
+                $("#feed_" + feed + " li").slideUp().addClass("hiddenFeed");
+                $("#feed_" + feed + " .header").addClass("header_hidden");    
+                $.cookie('feed_' + feed , 1, { expires: 666 });
+            }
         }
-        if($('#feed_' + feed + ' .header_hidden').length === 0) {
-            $.cookie('feed_' + feed , null, { expires: 666 });
-        } else {
-            $.cookie('feed_' + feed , 1, { expires: 666 });
-        }
-}
+    }
+    
+    $.checkHiddenFeeds = function(speed) {
+        $.each($('#torrentlist_container .feed'), function() {
+            if($.cookie(this.id)) { 
+                if(speed == 1) {
+                    $("#feed_" + this.id.match(/feed_(\d)/)[1] + " li").hide().addClass("hiddenFeed");
+                } else {
+                    $("#feed_" + this.id.match(/feed_(\d)/)[1] + " li").slideUp().addClass("hiddenFeed");
+                }
+                $("#feed_" + this.id.match(/feed_(\d)/)[1] + " .header").addClass("header_hidden");    
+            }
+        });
+    }
     
     $.submitBug = function() {
         $.post('torrentwatch.php?post_bug', $("#report_form").serialize(),
@@ -836,14 +875,6 @@ $(function() {
             $("#config_form").show();
         }
         $(tab).toggle()
-    }
-    
-    $.checkHiddenFeeds = function() {
-        $.each($('#torrentlist_container .feed'), function() {
-            if($.cookie(this.id)) { 
-                $.hideFeed(this.id.match(/feed_(\d)/)[1], 1);
-            }
-        });
     }
     
     $.noEnter = function(evt) { 

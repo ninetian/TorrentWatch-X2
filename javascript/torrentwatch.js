@@ -543,7 +543,6 @@ $(function() {
                     if($.cookie(this.id)) { 
                         $.hideFeed(this.id.match(/feed_(\d)/)[1], 1);
                     }
-                    console.log(this.id.match(/feed_(\d)/));
                 });
             },
             100);
@@ -800,7 +799,6 @@ $(function() {
             $("#feed_" + feed + " li").slideToggle();
             $("#feed_" + feed + " .header").toggleClass("header_hidden");
         }
-        console.log($('#feed_' + feed + ' .header_hidden').length);
         if($('#feed_' + feed + ' .header_hidden').length === 0) {
             $.cookie('feed_' + feed , null);
         } else {

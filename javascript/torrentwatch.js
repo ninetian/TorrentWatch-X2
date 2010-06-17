@@ -584,7 +584,8 @@ $(function() {
         } else {
             form = $(button).closest("form");
         }
-        if ((button.id == "Delete") || (button.id == "Update")) {
+        //if ((button.id == "Delete") || (button.id == "Update")) {
+        if (button.id == "Delete") {
             $.get(form.get(0).action, form.buildDataString(button));
             if (button.id == "Delete") {
                 if(button.href.match(/#feedItem/)) {

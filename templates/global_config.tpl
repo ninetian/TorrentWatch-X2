@@ -19,12 +19,12 @@
                     onclick='javascript:$.toggleConfigTab("#config_tor", "#tabTor")'>Torrent</a>
                 <a id="tabFavs" class="toggleConfigTab" 
                     onclick='javascript:$.toggleConfigTab("#config_favorites", "#tabFavs")'>Favorites</a>
-                <a id="tabOthers" class="toggleConfigTab" 
-                    onclick='javascript:$.toggleConfigTab("#config_other", "#tabOthers")'>Other</a>
                 <a id="tabFeeds" class="toggleConfigTab" 
                     onclick='javascript:$.toggleConfigTab("#config_feeds", "#tabFeeds")'>Feeds</a>
                 <a id="tabFeeds" class="toggleConfigTab" 
                     onclick='javascript:$.toggleConfigTab("#config_hideList", "#tabHideList")'>Hide List</a>                    
+                <a id="tabOthers" class="toggleConfigTab" 
+                    onclick='javascript:$.toggleConfigTab("#config_other", "#tabOthers")'>Other</a>
             </div>  
             
             <form action="torrentwatch.php?setGlobals=1" id="config_form" name="config_form">
@@ -182,6 +182,11 @@
                                 <input type="text" name ="emailAddress" class="text" 
                                 title="Enter an email address here to send warnings and errors to."
                                 value="<?php echo $config_values['Settings']['Email Address']; ?>"/>
+                            </div>
+                            <div id="smtp_server">
+                                <label class="item">SMTP Server:</label>
+                                <input type="text" name ="smtpServer" class="text" 
+                                value="<?php echo $config_values['Settings']['SMTP Server']; ?>"/>
                             </div>
                             <div id="script">
                                 <label class="item">Script:</label>

@@ -43,6 +43,7 @@ function setup_default_config() {
   _default('Default Seed Ratio', '-1');
   _default('Script', '');
   _default('Email Notifications', '');
+  _default('SMTP Server', 'localhost');
 }
 
 if(!(function_exists('get_base_dir'))) {
@@ -205,6 +206,7 @@ function write_config_file() {
 function update_global_config() {
   global $config_values;
   $input = array('Email Address'      => 'emailAddress',
+                 'SMTP Server'	      => 'smtpServer',
                  'Email Notifications' => 'mailonhit',
                  'Transmission Login' => 'truser',
                  'Transmission Password' => 'trpass',

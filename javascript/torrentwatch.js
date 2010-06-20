@@ -600,7 +600,7 @@ $(function() {
                     $("#fav_" + id).remove();
                     window.dialog = 1;
                 }
-            }
+	     }
         } else {
         	$.get(form.get(0).action, form.buildDataString(button), $.loadDynamicData, 'html');
     	}

@@ -107,17 +107,30 @@ function transmission_rpc($request) {
 function get_deep_dir($dest, $tor_name) {
     global $config_values;
     switch($config_values['Settings']['Deep Directories']) {
-      case '0':
+    case '0':
         break;
-      case 'Title':
+    case 'Title_Season':
+          $guess = guess_match($tor_name, TRUE);
+          if(isset($guess['key']) && isset($guess['episode'])) {
+            if(preg_match('/^(\d{1,3})x\d+$/', $guess['episode'], $Season)) {
+                $dest = $dest."/".ucwords(strtolower($guess['key']))."/Season ".$Season[1];
+            } else if(preg_match('/^(\d{4})\d{4}$/', $guess['episode'], $Year)) {
+                $dest = $dest."/".ucwords(strtolower($guess['key']))."/".$Year[1];
+            } else {
+                $dest = $dest."/".ucwords(strtolower($guess['key']));
+            }
+            break;
+          }
+          _debug("Deep Directories: Couldn't match $tor_name Reverting to Full\n", 1);
+    case 'Title':
         $guess = guess_match($tor_name, TRUE);
         if(isset($guess['key'])) {
           $dest = $dest."/".ucwords(strtolower($guess['key']));
           break;
         }
         _debug("Deep Directories: Couldn't match $tor_name Reverting to Full\n", 1);
-      case 'Full':
-      default:
+    case 'Full':
+    default:
         $dest = $dest."/".ucwords(strtolower($tor_name));
         break;
     }

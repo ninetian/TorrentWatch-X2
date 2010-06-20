@@ -102,15 +102,10 @@
                             <div id="config_deepdir">
                                 <label class="item select" title="Save downloads in multi-directory structure">Deep Directories:</label>
                                  <select name="deepdir">
-                                    <option value="Full" <?php echo $deepfull; ?>>
-                                        Full Name
-                                    </option>
-                                    <option value="Title" <?php echo $deeptitle; ?>>
-                                        Show Title
-                                    </option>
-                                    <option value="0" <?php echo $deepoff; ?>>
-                                        Off
-                                    </option>
+                                    <option value="Full" <?php echo $deepfull; ?>>Full Name</option>
+                                    <option value="Title" <?php echo $deeptitle; ?>>Show Title</option>
+                                    <option value="Title_Season" <?php echo $deepTitleSeason; ?>>Show Title + Season</option>
+                                    <option value="0" <?php echo $deepoff; ?>>Off</option>
                                 </select>
                             </div>
                             <div id="default_ratio">

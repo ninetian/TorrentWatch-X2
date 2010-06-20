@@ -257,7 +257,7 @@ function display_global_config() {
     global $config_values, $html_out;
 
     $savetorrent=$transmission="";
-    $deepfull=$deeptitle=$deepoff=$verifyepisode="";
+    $deepfull=$deeptitle=$deepTitleSeason=$deepoff=$verifyepisode="";
     $matchregexp=$matchglob=$matchsimple=$dishidelist=$mailonhit="";
     $favdefaultall=$onlynewer=$folderclient=$combinefeeds=$require_epi_info="";
 
@@ -286,6 +286,7 @@ function display_global_config() {
     switch($config_values['Settings']['Deep Directories']) {
         case 'Full': $deepfull = 'selected="selected"';break;
         case 'Title': $deeptitle = 'selected="selected"'; break;
+        case 'Title_Season': $deepTitleSeason = 'selected="selected"'; break;
         default:$deepoff = 'selected="selected"';break;
     }
 

@@ -132,6 +132,7 @@ current:
     -- Fixed issues that caused checking for a download dir even if the transmission host was remote.
     -- Added option to hide feeds in UI.
     -- Added option so you can choose what smtp server to use for mail.
+    -- Added option to let tw-x create a directory structure like "<title>/<season>" (Deep Directories).
     -- Redesigned configure window.
     -- UI Improvements.
     -- Fixed bug that caused font settings not to be remembered.

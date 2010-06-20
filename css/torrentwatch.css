@@ -447,6 +447,11 @@ div#footer {
     text-align: center;
 }
 
+div#donate {
+    padding-top: 3px;
+    text-align: center;
+}
+
 /*--------------------------
  *
  * D I A L O G S

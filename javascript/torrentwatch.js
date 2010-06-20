@@ -524,6 +524,9 @@ $(function() {
                 $.get('torrentwatch.php', { show_footer: 1 }, function(footer) {
                     $('#torrentlist_container').append(footer);
                 })
+                $.get('torrentwatch.php', { show_donate: 1 }, function(donate) {
+                    $('#torrentlist_container').append(donate);
+                })
             },
             50);
             var filter = $.cookie('TWFILTER');

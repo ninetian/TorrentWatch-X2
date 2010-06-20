@@ -521,11 +521,11 @@ $(function() {
                         $('#torrentlist_container').height($(window).height() - $('#torrentlist_container').attr('offsetTop'));
                     });
                 }
-                $.get('torrentwatch.php', { show_footer: 1 }, function(footer) {
-                    $('#torrentlist_container').append(footer);
-                })
                 $.get('torrentwatch.php', { show_donate: 1 }, function(donate) {
                     $('#torrentlist_container').append(donate);
+                    $.get('torrentwatch.php', { show_footer: 1 }, function(footer) {
+                    $('#torrentlist_container').append(footer);
+                })
                 })
             },
             50);

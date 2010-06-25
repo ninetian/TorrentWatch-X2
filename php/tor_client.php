@@ -112,7 +112,7 @@ function get_deep_dir($dest, $tor_name) {
     case 'Title_Season':
           $guess = guess_match($tor_name, TRUE);
           if(isset($guess['key']) && isset($guess['episode'])) {
-            if(preg_match('/^(\d{1,3})x\d+$/', $guess['episode'], $Season)) {
+            if(preg_match('/^(\d{1,3})x\d+p?$/', $guess['episode'], $Season)) {
                 $dest = $dest."/".ucwords(strtolower($guess['key']))."/Season ".$Season[1];
             } else if(preg_match('/^(\d{4})\d{4}$/', $guess['episode'], $Year)) {
                 $dest = $dest."/".ucwords(strtolower($guess['key']))."/".$Year[1];

@@ -138,3 +138,6 @@ IMPORTANT: If you are updating from a previous version. Please copy php/config.p
     -- Fixed bug that caused font settings not to be remembered.
     -- Fixed some minor bugs.
     -- Added donation button (Baby on the way :))
+
+current:
+    -- Fixed issue with proper episodes not being saved in Season dir when using Title + Season deep directories.

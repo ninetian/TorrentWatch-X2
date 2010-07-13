@@ -6,6 +6,7 @@ header( "Cache-Control: no-cache, must-revalidate" );
 header( "Pragma: no-cache" );
 
 ini_set('include_path', '.:./php');
+error_reporting(E_ALL ^ E_DEPRECIATED);
 require_once('rss_dl_utils.php');
 global $platform;
 

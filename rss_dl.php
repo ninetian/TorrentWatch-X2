@@ -1,5 +1,8 @@
 #!/usr/bin/php-cgi -q
 <?php
+
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
+
 // rss_dl.php
 // This program is a command line interface to torrentwatch
 // 

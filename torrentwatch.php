@@ -19,7 +19,7 @@ if(file_exists(get_base_dir() . "/.hg")) {
     } else {
         $tw_version[1] = "unknown";
     }
-} else if($platform = 'NMT') {
+} else if($platform == 'NMT') {
     $tw_version[1] = 'NMT';
     
 }

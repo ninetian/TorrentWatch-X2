@@ -188,8 +188,8 @@ function parse_one_rss($feed) {
   global $config_values;
   $rss = new lastRSS;
   $rss->stripHTML = True;
-  $rss->CDATA = content; 
-  if((int)$config_values['Settings']['Cache Time']) { 
+  $rss->CDATA = 'content'; 
+  if((isset($config_values['Settings']['Cache Time'])) && ((int)$config_values['Settings']['Cache Time'])) { 
       $rss->cache_time = (int)$config_values['Settings']['Cache Time'];
   } else {
       $rss->cache_time = (15*60)-20;
@@ -263,7 +263,9 @@ function rss_perform_matching($rs, $idx, $feedName, $feedLink) {
                  array('Obj' => $item, 'URL' => $rs['URL']));
     }
     $client = $config_values['Settings']['Client'];
-    $cache_file = $config_values['Settings']['Cache Dir'].'/rss_dl_'.filename_encode($item['title']);
+    if(isset($config_values['Settings']['Cache Dir'])) {
+	$cache_file = $config_values['Settings']['Cache Dir'].'/rss_dl_'.filename_encode($item['title']);
+    }
     if(file_exists($cache_file)) {
       $torHash = get_torHash($cache_file);
       if($matched != "match" && $matched != 'cachehit' && file_exists($cache_file)) {

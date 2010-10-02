@@ -35,7 +35,7 @@ function transmission_sessionId() {
                     CURLOPT_NOBODY => true,
                     CURLOPT_USERPWD => "$tr_user:$tr_pass"
                   );
-    get_curl_defaults(&$curl_options);
+    get_curl_defaults($curl_options);
 
     curl_setopt_array($sid, $curl_options);
 
@@ -88,7 +88,7 @@ function transmission_rpc($request) {
                                                ),
                           CURLOPT_POSTFIELDS => "$request"
                        );
-    get_curl_defaults(&$curl_options);
+    get_curl_defaults($curl_options);
     curl_setopt_array($post, $curl_options);
 
     $raw = curl_exec($post);
@@ -215,7 +215,7 @@ function client_add_torrent($filename, $dest, $title, $feed = NULL, &$fav = NULL
   $getOptions[CURLOPT_URL] = $url;
   $getOptions[CURLOPT_COOKIE] = $cookies;
   $getOptions[CURLOPT_USERAGENT] = 'Python-urllib/1.17';  
-  get_curl_defaults(&$getOptions);
+  get_curl_defaults($getOptions);
   curl_setopt_array($get, $getOptions);
   $tor = curl_exec($get);
   curl_close($get);

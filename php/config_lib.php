@@ -91,8 +91,8 @@ function read_config_file() {
     
   while (!feof($fp)) {
     $line = trim(fgets($fp));
-    if ($line && !ereg("^$comment", $line)) {
-      if (ereg("^\[", $line) && ereg("\]$", $line)) {
+    if ($line && !preg_match("/^$comment/", $line)) {
+      if (preg_match("/^\[/", $line) && preg_match("/\]$/", $line)) {
         $line = trim($line,"[");
         $line = trim($line, "]");
         $group = trim($line);
@@ -102,7 +102,7 @@ function read_config_file() {
         $pieces[1] = trim($pieces[1] , "\"");
         $option = trim($pieces[0]);
         $value = trim($pieces[1]);
-        if(ereg("\[\]$", $option)) {
+        if(preg_match("/\[\]$/", $option)) {
           $option = substr($option, 0, strlen($option)-2);
           $pieces = explode("=>", $value, 2);
           if(isset($pieces[1])) {

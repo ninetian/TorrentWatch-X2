@@ -145,7 +145,7 @@ class lastRSS {
         if($response) $rss_url = $response['url'];
         $get = curl_init();
         $getOptions[CURLOPT_URL] = $rss_url;
-        get_curl_defaults(&$getOptions);
+        get_curl_defaults($getOptions);
         curl_setopt_array($get, $getOptions);
         $rss_content = curl_exec($get);
         curl_close($get);

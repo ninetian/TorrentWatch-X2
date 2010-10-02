@@ -119,7 +119,7 @@ function guess_feedtype($feedurl) {
   if($response) $feedurl = $response['url'];
   $get = curl_init();
   $getOptions[CURLOPT_URL] = $feedurl;
-  get_curl_defaults(&$getOptions);
+  get_curl_defaults($getOptions);
   curl_setopt_array($get, $getOptions);
   $content = explode('\n', curl_exec($get));
   curl_close($get);

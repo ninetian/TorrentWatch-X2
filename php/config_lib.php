@@ -435,6 +435,13 @@ function update_feedData() {
     _debug('updating feed: ' . $idx);
     if(isset($_GET['idx']) AND isset($config_values['Feeds'][$_GET['idx']])) {
         if(!($_GET['feed_name']) || !($_GET['feed_link'])) return;
+
+	$old_feedurl = $config_values['Feeds'][$_GET['idx']]['Link'];
+
+	foreach ($config_values['Favorites'] as &$favorite) {
+	  if ($favorite['Feed'] == $old_feedurl) $favorite['Feed'] = preg_replace('/ /', '%20', $_GET['feed_link']);
+	}
+
         $config_values['Feeds'][$_GET['idx']]['Name'] = $_GET['feed_name'];
         $config_values['Feeds'][$_GET['idx']]['Link'] = preg_replace('/ /', '%20', $_GET['feed_link']);
         $config_values['Feeds'][$_GET['idx']]['seedRatio'] = $_GET['seed_ratio'];

@@ -142,3 +142,5 @@ IMPORTANT: If you are updating from a previous version. Please copy php/config.p
 current:
     -- Fixed issue with proper episodes not being saved in Season dir when using Title + Season deep directories.
     -- Added mailserver field in wizard.
+    -- Really fixed php 5.3.x problems.
+    -- Fixed issue where Favorite feed URLs did not get updated when updating a feed link

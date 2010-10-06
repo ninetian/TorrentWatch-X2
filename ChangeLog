@@ -144,3 +144,4 @@ current:
     -- Added mailserver field in wizard.
     -- Really fixed php 5.3.x problems.
     -- Fixed issue where Favorite feed URLs did not get updated when updating a feed link
+    -- Fixed issue that caused bug reporting to fail.

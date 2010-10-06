@@ -507,7 +507,7 @@ function post_bug($Summary, $Name, $Email, $Priority, $Description) {
     $response = curl_exec($post);
     $http_code = curl_getinfo($post, CURLINFO_HTTP_CODE);
     curl_close($post);
-    if($http_code != 200) $response = "Error: $http_code <br> $response";
+    if($http_code && $http_code != 200) $response = "Error: $http_code <br> $response";
     return "<div id=\"errorDialog\" class=\"dialog_window\" style=\"display: block\">$response</div>";
     
 }

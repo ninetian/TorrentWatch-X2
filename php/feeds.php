@@ -12,13 +12,10 @@
 }
 
 function get_torrent_link($rs) {
-      _debug(print_r($rs, true));
   if ((isset($rs['enclosure'])) && ($rs['enclosure']['type']=='application/x-bittorrent')) {
       $link = $rs['enclosure']['url'];
-      _debug("Link1:  $link \n");
   } else if(isset($rs['link'])) {
       $link = $rs['link'];
-      _debug("Link2:  $link \n");
   } else if(isset($rs['id']) || stristr($rs['id'], 'http://')) { // Atom
     $link = $rs['id'];
   } else if(isset($rs['enclosure'])) { // RSS Enclosure

@@ -73,7 +73,7 @@ class lastRSS {
                 _debug(date(DATE_RFC822) . " - lastRSS: feed cache is old, loading fresh: $rss_url", 0);
                 // cached file is too old, create new
                 $result = $this->Parse($rss_url);
-                if($result['items_count'] > 0) {
+                if($result['items_count'] >= 0) {
                     $serialized = serialize($result);
                     if ($f = @fopen($cache_file, 'w')) {
                         fwrite ($f, $serialized, strlen($serialized));

@@ -145,3 +145,4 @@ current:
     -- Really fixed php 5.3.x problems.
     -- Fixed issue where Favorite feed URLs did not get updated when updating a feed link
     -- Fixed issue that caused bug reporting to fail.
+    -- Fixed issue with feeds that had to links in the feed, where the 2nd link was the torrent which would not be picked up by tw-x. (Thanks Allan Mørk Christensen)

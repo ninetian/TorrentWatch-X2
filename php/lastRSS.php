@@ -209,7 +209,7 @@ class lastRSS {
                          */
                         $temp2 = trim($this->my_preg_match("'<$itemtag\s*([^>]*)/?'si", $rss_item));
                         if ($temp2 != '') {
-                            preg_match_all( '/([^\s"=]+)="([^"]*?)"/' , $temp2, $attr, PREG_SET_ORDER);
+                            preg_match_all( '/([^\s"=]+)=["\']([^\'"]*?)["\']/' , $temp2, $attr, PREG_SET_ORDER);
                             $result['items'][$i][$itemtag] = array();
                             if ($temp != '') $result['items'][$i][$itemtag]['value'] = $temp;
                                 foreach($attr as $a) { 

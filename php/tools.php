@@ -2,28 +2,26 @@
 function sendmail($msg, $subject) {
     global $config_values;
 
-    $email = new PHPMailer();
     $emailAddress = $config_values['Settings']['Email Address'];
 
-    $email->From     = "$emailAddress";
-    $email->FromName = "TorrentWatch-X";
-    $email->AddAddress("$emailAddress");
-    $email->Subject  = $subject;
+	if(!empty($emailAddress)) {
+		$email = new PHPMailer();
+		
+		$email->From     = "$emailAddress";
+		$email->FromName = "TorrentWatch-X";
+		$email->AddAddress("$emailAddress");
+		$email->Subject  = $subject;
 
-    $email->Host     = $config_values['Settings']['SMTP Server'];
-    $email->Mailer   = "smtp";
-
-    if($emailAddress) {
-        $mail = <<<END
-Hi,
-
-This is an automated message from TorrentWatch-X.
-
-$msg
-END;
-	
-	$email->Body = $mail;
-	$email->Send();
+		$email->Host     = $config_values['Settings']['SMTP Server'];
+		$email->Mailer   = "smtp";
+		
+		$mail = @file_get_contents("templates/email.tpl");
+		$mail = str_replace("[MSG]", $msg, $mail);
+		if (empty($mail)) {
+			$mail = $msg;
+		}
+		$email->Body = $mail;
+		$email->Send();
     }
 }
 

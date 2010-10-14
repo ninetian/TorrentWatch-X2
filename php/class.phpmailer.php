@@ -584,6 +584,7 @@ class PHPMailer {
         throw $e;
       }
       echo $e->getMessage()."\n";
+      _debug($e->getMessage()."\n",-1);
       return false;
     }
   }

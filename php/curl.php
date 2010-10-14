@@ -11,20 +11,22 @@ define ("CURLOPT_COOKIE",8);
 define ("CURLOPT_NOBODY",9);
 define ("CURLOPT_USERAGENT",10);
 
+define ("CURLINFO_CONTENT_TYPE", "content-type");
+
 function curl_init() {    
-global $curl_stuff;
+	global $curl_stuff;
 	$id=time().rand(100,100000);
 	$curl_stuff[$id]=array();
 	return($id);
 }
 
 function curl_setopt_array($sess, $options) {
-global $curl_stuff;
+	global $curl_stuff;
 	$curl_stuff[$sess]=$options;
 }
 
 function curl_exec ($sess) {
-global $curl_stuff;
+	global $curl_stuff;
 
 	$url=$curl_stuff[$sess][CURLOPT_URL];
 
@@ -84,18 +86,34 @@ global $curl_stuff;
                 $result=$http_response_header[0];
         }
 	}
+	$curl_stuff[$sess]['headers'] = $http_response_header;
+	
     if ($curl_stuff[$sess][CURLOPT_HEADER] === TRUE) {			
           foreach ($http_response_header as $value) {
                   $data.="$value\r\n";
           }
           $result=$data;
    }
-	$out.=$url."\n".$header."\n".$content."\n".$method."\n".$result."\n";;
+	//$out.=$url."\n".$header."\n".$content."\n".$method."\n".$result."\n";;
 	return ($result);
 }
 
+function curl_getinfo($sess, $ch) {
+	global $curl_stuff;
+	$value = null;
+	foreach ($curl_stuff[$sess]['headers'] as $header) {
+		$split = explode(":", $header);
+		if (count($split)==2 && strtolower($split[0])==$ch) {
+			$value = strtolower(trim($split[1]));
+			break;
+		}
+	}
+	return $value;
+}
+
 function curl_close($sess) {
-	$curl_stuff[$sess]="";
+	global $curl_stuff;
+	$curl_stuff[$sess]=array();
 }
 
 ?>

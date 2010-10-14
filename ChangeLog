@@ -148,3 +148,4 @@ current:
     -- Fixed issue with feeds that had to links in the feed, where the 2nd link was the torrent which would not be picked up by tw-x. (Thanks Allan Mørk Christensen)
     -- Added curl_getinfo support in curl.php. (Thanks Allan Mørk Christensen)
     -- Fixed issue that caused an error while trying to mail while no email address was filled in. Also moved the default email msg to a template file. (Thanks Allan Mørk Christensen)
+    -- Added negative caching for feeds that are down. This can mean that it takes up to 15 minutes, after thee feed comes back up, for the feed to be working again.

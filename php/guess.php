@@ -90,7 +90,7 @@ function guess_match($title, $normalize = FALSE) {
                         '/\bEps[_.\s]?(\d+)-\d+\b/i',
                         '/\bPa?r?t[_.\s]?(\d+)\b/i');
                         
-    $dateGuess = '/(\d\d\d\d)[\sx](\d\d)[\sx](\d\d).?/i';
+    $dateGuess = '/(\d\d\d\d)[\sx-](\d\d)[\sx-](\d\d).?/i';
     
     foreach($epiGuess as $guess) {
         $episode_guess = preg_replace($guess, '\1x\2', $episode_guess, -1, $replaceCount);

@@ -16,7 +16,7 @@ function sendmail($msg, $subject) {
 		$email->Mailer   = "smtp";
 		
 		$mail = @file_get_contents("templates/email.tpl");
-		$mail = str_replace("[MSG]", $msg, $mail);
+		$mail = str_replace('[MSG]', $msg, $mail);
 		if (empty($mail)) {
 			$mail = $msg;
 		}

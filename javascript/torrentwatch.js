@@ -42,7 +42,6 @@ $(function() {
             tor.slideDown();
             $('.hide_item').fadeIn();
             tor.markAlt().closest(".feed div.feed");
-            $.checkHiddenFeeds(1);
         } else if (filter == 'matching') {
             if ($('.transmission').is(":visible")) {
                 $('.transmission').hideMe();
@@ -83,6 +82,7 @@ $(function() {
             }
             $('.transmission').slideDown();
         }
+        $.checkHiddenFeeds(1);
         $('#filter_' + filter).addClass('selected').siblings().removeClass("selected");
     };
     // Filter Bar - Buttons

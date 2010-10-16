@@ -5,7 +5,7 @@ function guess_match($title, $normalize = FALSE) {
     $epi ='/[_.\s\(]';  //Start with _ , . or space
     $epi.='(S\d+[_.\s]?EP? ?\d+(?:-EP? ?\d+)?'.'|';  // S12E1 or S12EP1-EP2 
     $epi.='S\d\d?'.'|'; // Full season S03
-    $epi.='\d{1,2}x\d+(?:-\d+)?'.'|';  // 1x23 or 1x23-24
+    $epi.='\d{1,2}x#?(\d+|special)(?:-\d+)?'.'|';  // 1x23 or 1x23-24
     $epi.='\d+[_.\s]?of[_.\s]?\d+'.'|';  // 03of18
     $epi.='Season[_.\s]?\d+,?[_.\s]?Episode[_.\s]?\d+'.'|'; // Season 4, episode 15
     $epi.='Season[_.\s]?\d\d?'.'|'; // Full Season: Season1 or Season 02
@@ -83,7 +83,7 @@ function guess_match($title, $normalize = FALSE) {
     
     // Standardize episode output to SSxEE, strip leading 0
     $epiGuess = array(  '/\b(?:S(\d+))?[_.\s]?EP? ?(\d+)(?:-EP? ?\d+)?\b/i',
-                        '/\b(\d+)x(\d+)/i',
+                        '/\b(\d+)x#?(\d+)/i',
                         '/(\d+)[_.\s]?of[_.\s]?(\d+)\b/i',
                         '/\bseason[_.\s]?(\d+),?[_.\s]?episode[_.\s]?(\d+)\b/i',
                         '/\b0?(\d)(\d\d)\b/i',
@@ -108,7 +108,10 @@ function guess_match($title, $normalize = FALSE) {
     } 
     if(preg_match('/^(S\d\d?|Season[_.\s]?\d\d?)$/i', $episode_guess)) {
         $episode_guess = 'fullSeason';
-    }            
+    }
+    if(preg_match('/^(\d{1,2}xspecial)$/i', $episode_guess)) {
+        $episode_guess = 'Special';
+    }
   }  
   return array("key" => $key_guess, "data" => $data_guess, "episode" => $episode_guess);
 }

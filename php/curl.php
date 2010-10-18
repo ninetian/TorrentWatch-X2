@@ -10,6 +10,7 @@ define ("CURLOPT_RETURNTRANSFER",7);
 define ("CURLOPT_COOKIE",8);
 define ("CURLOPT_NOBODY",9);
 define ("CURLOPT_USERAGENT",10);
+define ("CURLOPT_HEADER",11);
 
 define ("CURLINFO_CONTENT_TYPE", "content-type");
 
@@ -32,7 +33,7 @@ function curl_exec ($sess) {
 
 	$header="";
 
-	if ($curl_stuff[$sess][CURLOPT_POSTFIELDS]) {
+	if (isset($curl_stuff[$sess][CURLOPT_POSTFIELDS])) {
 		$method="POST";
 		$content=$curl_stuff[$sess][CURLOPT_POSTFIELDS];
 	} else {
@@ -40,38 +41,38 @@ function curl_exec ($sess) {
 	}
 
 	if (is_array($curl_stuff[$sess][CURLOPT_HTTPHEADER])) {
-     foreach ($curl_stuff[$sess][CURLOPT_HTTPHEADER] as $value) {
-		  if (!preg_match("/POST/", $value) && !preg_match("/Content-Length:/", $value) && !preg_match("/Python/", $value)) {	
-            $header.="$value\r\n";
-		  }	
-      }
+     	    foreach ($curl_stuff[$sess][CURLOPT_HTTPHEADER] as $value) {
+		if (!preg_match("/POST/", $value) && !preg_match("/Content-Length:/", $value) && !preg_match("/Python/", $value)) {	
+            	    $header.="$value\r\n";
+		}	
+      	    }
 	}
 	if ($curl_stuff[$sess][CURLOPT_USERPWD] == ":") {
 		$curl_stuff[$sess][CURLOPT_USERPWD]="";
 	}
 
-	if ($curl_stuff[$sess][CURLOPT_USERPWD]) {
+	if (isset($curl_stuff[$sess][CURLOPT_USERPWD])) {
 		$header.='Authorization: Basic '.base64_encode($curl_stuff[$sess][CURLOPT_USERPWD])."\r\n";
 	}
 	
-	if($curl_stuff[$sess][CURLOPT_COOKIE]) {
+	if(isset($curl_stuff[$sess][CURLOPT_COOKIE])) {
 	    $header .= 'Cookie: ' . $curl_stuff[$sess][CURLOPT_COOKIE] . "\r\n";
-    }
+	}
 
-    if($curl_stuff[$sess][CURLOPT_USERAGENT]) {
+        if(isset($curl_stuff[$sess][CURLOPT_USERAGENT])) {
 	    $http['user_agent'] = $curl_stuff[$sess][CURLOPT_USERAGENT];
-    }
+        }
 
-	if($curl_stuff[$sess][CURLOPT_TIMEOUT]) {
+	if(isset($curl_stuff[$sess][CURLOPT_TIMEOUT])) {
 		$http['timeout'] = $curl_stuff[$sess][CURLOPT_TIMEOUT];
-    }
+    	}
 
-	if ($header || $content) {
+	if(isset($header) || isset($content)) {
 		$http=array('method' => $method);
-		if ($header) {
+		if (isset($header)) {
 			$http['header']=$header;
 		}
-		if ($content) {
+		if (isset($content)) {
     		$http['content']=$content;
     	}
 		$params=array('http' => $http);
@@ -82,18 +83,18 @@ function curl_exec ($sess) {
 	} else {
 	    $params=array('http' => $http);
 		$context=stream_context_create($params);
-        if (!$result=@file_get_contents($url,false,$context)) {
+            if (!$result=@file_get_contents($url,false,$context)) {
                 $result=$http_response_header[0];
-        }
+            }
 	}
 	$curl_stuff[$sess]['headers'] = $http_response_header;
 	
-    if ($curl_stuff[$sess][CURLOPT_HEADER] === TRUE) {			
+	if (isset($curl_stuff[$sess][CURLOPT_HEADER])) {
           foreach ($http_response_header as $value) {
                   $data.="$value\r\n";
           }
           $result=$data;
-   }
+   	}
 	//$out.=$url."\n".$header."\n".$content."\n".$method."\n".$result."\n";;
 	return ($result);
 }

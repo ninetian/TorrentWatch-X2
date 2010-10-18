@@ -10,7 +10,7 @@ if($config_values['Settings']['Combine Feeds'] == 1) {
     $feedItem = "<p class=\"feed_name\">$feedName</p>";
 }
 
-if($torInfo) {
+if(isset($torInfo)) {
   $stats = $torInfo['stats'];
   $clientId = $torInfo['clientId'];
   $infoDiv = "<div id='tor_$id' class='torInfo tor_$torHash'>$stats</div>";
@@ -37,6 +37,10 @@ if($matched == "downloading" || $matched == "downloaded" || $matched == "cachehi
   $torStart = "torStart hidden";
   $torStop = "torStop hidden";
 } 
+
+if(!isset($infoDiv)) $infoDiv = '';
+if(!isset($feedItem)) $feedItem = '';
+if(!isset($torInfo)) $torInfo = '';
 
 print <<< EOH
 

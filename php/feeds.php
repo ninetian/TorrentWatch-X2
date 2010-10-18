@@ -271,7 +271,7 @@ function rss_perform_matching($rs, $idx, $feedName, $feedLink) {
       }
     }
     if(isset($config_values['Global']['HTMLOutput'])) {
-      if(!($rsnr)) { $rsnr = 1; } else { $rsnr ++; };
+      if(!isset($rsnr)) { $rsnr = 1; } else { $rsnr++; };
       if(strlen($rsnr) <= 1) $rsnr = 0 . $rsnr;
       $id = $idx . $rsnr;
       $htmlItems = array( 'item' => $item,
@@ -292,7 +292,7 @@ function rss_perform_matching($rs, $idx, $feedName, $feedLink) {
   }
   $htmlList = array_reverse($htmlList, true); 
   foreach($htmlList as $item) {
-      show_torrent_html($item[item], $item[URL], $item[feedName], $item[alt], $item[torHash], $item[matched], $item[id]);
+      show_torrent_html($item['item'], $item['URL'], $item['feedName'], $item['alt'], $item['torHash'], $item['matched'], $item['id']);
   }
       
   if(isset($config_values['Global']['HTMLOutput']) && $config_values['Settings']['Combine Feeds'] == 0) {

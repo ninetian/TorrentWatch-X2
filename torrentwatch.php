@@ -481,7 +481,7 @@ function version_check() {
         $get = curl_init();
         $getOptions[CURLOPT_URL] = 'http://tw-version.vandalon.net/VERSION';
         $getOptions[CURLOPT_USERAGENT] = "TW-X/$tw_version[0] ($tw_version[1])";
-        get_curl_defaults(&$getOptions);
+        get_curl_defaults($getOptions);
         curl_setopt_array($get, $getOptions);
         $latest = curl_exec($get);
         curl_close($get);
@@ -502,7 +502,7 @@ function post_bug($Summary, $Name, $Email, $Priority, $Description) {
     $postOptions[CURLOPT_URL] = "http://tw-issues.vandalon.net/";
     $postOptions[CURLOPT_USERAGENT] = "TW-X/$tw_version[0] ($tw_version[1])";
     $postOptions[CURLOPT_POSTFIELDS] = "Summary=$Summary&Name=$Name&Email=$Email&Priority=$Priority&Description=$Description&Version=$Version";
-    get_curl_defaults(&$postOptions);
+    get_curl_defaults($postOptions);
     curl_setopt_array($post, $postOptions);
     $response = curl_exec($post);
     $http_code = curl_getinfo($post, CURLINFO_HTTP_CODE);
@@ -535,7 +535,8 @@ check_files();
 
 echo $html_out;
 $html_out = "";
-ob_flush();flush();
+// ob_flush();
+flush();
 
 // Feeds
 if(isset($config_values['Feeds'])) {

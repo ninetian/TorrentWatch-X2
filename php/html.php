@@ -24,7 +24,7 @@ function show_torrent_html($item, $feed, $feedName, $alt, $torHash, $matched, $i
   $guess = guess_match($item['title']);
 
   if(!$config_values['Settings']['Disable Hide List']) {
-      if($config_values['Hidden'][ucwords(trim(strtr($guess['key'], "._", "  ")))]) return;
+      if(isset($config_values['Hidden'][ucwords(trim(strtr($guess['key'], "._", "  ")))])) return;
   }
  
   if(($matched == "cachehit" || $matched == "downloaded" || $matched == "match")

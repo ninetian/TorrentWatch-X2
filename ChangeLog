@@ -139,7 +139,7 @@ IMPORTANT: If you are updating from a previous version. Please copy php/config.p
     -- Fixed some minor bugs.
     -- Added donation button (Baby on the way :))
 
-current:
+0.6.5:
     -- Fixed issue with proper episodes not being saved in Season dir when using Title + Season deep directories.
     -- Added mailserver field in wizard.
     -- Really fixed php 5.3.x problems.

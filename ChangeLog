@@ -152,3 +152,4 @@ current:
     -- Fixed date matching issue where the format "Y-M-D" was not matched correctly.
     -- Updated guessing routine for even better episode guessing :)
     -- Fixed ui bug that caused hidden feeds the be shown in some cases.
+    -- Fixed an issue where Deep Directories did not work when using custom directories for favorites.

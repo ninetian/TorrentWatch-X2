@@ -103,14 +103,18 @@ function curl_exec ($sess) {
 function curl_getinfo($sess, $ch) {
 	global $curl_stuff;
 	$value = null;
-	foreach ($curl_stuff[$sess]['headers'] as $header) {
+	if($ch === 12 ) {
+	    $values = split(" ", $curl_stuff[$sess]['headers']['0']);
+	    $value = $values[1];
+	} else {
+	    foreach ($curl_stuff[$sess]['headers'] as $header) {
 		$split = explode(":", $header);
 		if (count($split)==2 && strtolower($split[0])==$ch) {
 			$value = strtolower(trim($split[1]));
 			break;
 		}
+	    }
 	}
-	_debug("bla: $value");
 	return $value;
 }
 

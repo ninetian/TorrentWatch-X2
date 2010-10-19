@@ -11,6 +11,7 @@ define ("CURLOPT_COOKIE",8);
 define ("CURLOPT_NOBODY",9);
 define ("CURLOPT_USERAGENT",10);
 define ("CURLOPT_HEADER",11);
+define ("CURLINFO_HTTP_CODE",12);
 
 define ("CURLINFO_CONTENT_TYPE", "content-type");
 
@@ -109,6 +110,7 @@ function curl_getinfo($sess, $ch) {
 			break;
 		}
 	}
+	_debug("bla: $value");
 	return $value;
 }
 

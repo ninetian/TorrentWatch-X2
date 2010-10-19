@@ -30,7 +30,7 @@ function show_torrent_html($item, $feed, $feedName, $alt, $torHash, $matched, $i
   if(($matched == "cachehit" || $matched == "downloaded" || $matched == "match")
      && $config_values['Settings']['Client'] != 'folder') {
     $torInfo = torInfo($torHash); 
-    if($torInfo['dlStatus']) { $matched = $torInfo['dlStatus']; }
+    if(isset($torInfo['dlStatus'])) { $matched = $torInfo['dlStatus']; }
   }
   // add word-breaking flags after each period
   $title = preg_replace('/\./', '.&shy;', $item['title']);

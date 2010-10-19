@@ -28,7 +28,8 @@ function get_torrent_link($rs) {
 function episode_filter($item, $filter) {
   $filter = preg_replace('/\s/', '', $filter);
 
-  list($itemS, $itemE) = explode('x', $item['episode']);
+  if(isset($itemS) && isset($itemE))
+	  list($itemS, $itemE) = explode('x', $item['episode']);
 
   if(preg_match('/^S\d*/i', $filter)) {
     $filter = preg_replace('/S/i', '', $filter);

@@ -41,6 +41,9 @@ if($matched == "downloading" || $matched == "downloaded" || $matched == "cachehi
 if(!isset($infoDiv)) $infoDiv = '';
 if(!isset($feedItem)) $feedItem = '';
 if(!isset($torInfo)) $torInfo = '';
+if(!isset($unixTime)) $unixTime = '';
+if(!isset($pubDate)) $pubDate = '';
+if(!isset($hideSpan)) $hideSpan = '';
 
 print <<< EOH
 

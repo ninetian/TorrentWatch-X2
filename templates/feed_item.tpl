@@ -3,6 +3,8 @@ if($item['description']) $description = $item['description'];
 if(isset($item['pubDate'])) {
     $pubDate = $item['pubDate'];
     $unixTime = strtotime($item['pubDate']);
+} else {
+    $pubDate = '';
 }
 if(!($torHash)) $torHash = '###torHash###';
 

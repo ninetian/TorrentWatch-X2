@@ -153,3 +153,4 @@ IMPORTANT: If you are updating from a previous version. Please copy php/config.p
     -- Updated guessing routine for even better episode guessing :)
     -- Fixed ui bug that caused hidden feeds the be shown in some cases.
     -- Fixed an issue where Deep Directories did not work when using custom directories for favorites.
+    -- Fixed issue where bug reporting would always give a possitive message even if sending the report failed.

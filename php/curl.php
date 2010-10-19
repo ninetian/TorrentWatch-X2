@@ -104,7 +104,7 @@ function curl_getinfo($sess, $ch) {
 	global $curl_stuff;
 	$value = null;
 	if($ch === 12 ) {
-	    $values = split(" ", $curl_stuff[$sess]['headers']['0']);
+	    $values = explode(" ", $curl_stuff[$sess]['headers']['0']);
 	    $value = $values[1];
 	} else {
 	    foreach ($curl_stuff[$sess]['headers'] as $header) {

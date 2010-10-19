@@ -37,7 +37,8 @@ function episode_filter($item, $filter) {
     }
   }
   // Split the filter(ex. 3x4-4x15 into 3,3 4,15).  @ to suppress error when no seccond item
-  list($start, $stop) = explode('-',  $filter, 2);
+  if(isset($start) && isset($stop))
+	 list($start, $stop) = explode('-',  $filter, 2);
   @list($startSeason,$startEpisode) = explode('x', $start, 2);
   if(!($stop)) { $stop = "9999x9999"; }
   @list($stopSeason,$stopEpisode) = explode('x', $stop, 2);

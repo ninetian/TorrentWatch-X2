@@ -1,6 +1,6 @@
 <?php
 if($item['description']) $description = $item['description'];
-if($item['pubDate']) {
+if(isset($item['pubDate'])) {
     $pubDate = $item['pubDate'];
     $unixTime = strtotime($item['pubDate']);
 }
@@ -42,7 +42,6 @@ if(!isset($infoDiv)) $infoDiv = '';
 if(!isset($feedItem)) $feedItem = '';
 if(!isset($torInfo)) $torInfo = '';
 if(!isset($unixTime)) $unixTime = '';
-if(!isset($pubDate)) $pubDate = '';
 if(!isset($hideSpan)) $hideSpan = '';
 
 print <<< EOH

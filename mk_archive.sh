@@ -7,7 +7,7 @@ hg archive -r $1 -X '.hg*' -X 'mk_archive.sh' -X 'robots.txt' -X 'php/config.php
 mkdir -p TorrentWatchX-$1/docs
 for i in wiki/*.wiki ; do cp $i TorrentWatchX-$1/docs/ ; done
 tar uf /var/www/torrentwatch-x/releases/TorrentWatchX-$1.tar TorrentWatchX-$1/docs/
-rm -rf TorrentWAtchX-$1/
+rm -rf TorrentWAtchX-$1/ Torrentwatchx/
 gzip /var/www/torrentwatch-x/releases/TorrentWatchX-$1.tar
 
 #NMT Package

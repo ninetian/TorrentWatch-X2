@@ -24,8 +24,8 @@
     </Application>
     <Application>
       <Name>TorrentWatch-X</Name>
-      <Version>0.6.49 (Beta)</Version>
-      <DownloadURL>http://torrentwatch-x.googlecode.com/files/TorrentWatchX-NMT-0.6.5-beta.zip</DownloadURL>
+      <Version>0.6.5b2 (Beta2)</Version>
+      <DownloadURL>http://torrentwatch-x.googlecode.com/files/TorrentWatchX-NMT-0.6.5-beta2.zip</DownloadURL>
       <Author>Wiebel</Author>
       <Maintainer>Wiebel</Maintainer>
       <Description>TorrentWatch-X is a web based tool to automate downloads of tv shows via torrents and rss. Based on the torrentwatch project (now known as NMTDVR).</Description>
@@ -55,6 +55,7 @@
 	    -- Updated guessing routine for even better episode guessing :)
 	    -- Fixed ui bug that caused hidden feeds the be shown in some cases.
 	    -- Fixed an issue where Deep Directories did not work when using custom directories for favorites.
+	   -- Fixed issue where bug reporting would always give a possitive message even if sending the report failed.
       </Changelog>
     </Application>
     </Applications>

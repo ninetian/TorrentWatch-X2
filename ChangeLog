@@ -156,4 +156,5 @@ IMPORTANT: If you are updating from a previous version. Please copy php/config.p
     -- Fixed issue where bug reporting would always give a possitive message even if sending the report failed.
     -- Added feature to guess for best link when multiple links are available in the feed. (Thanks Allan Mørk Christensen)
     -- Added feature to detect when a link is not a torrent-file, but e.g. (x)html, and then look for a torrent link in that content. (Thanks Allan Mørk Christensen)
+    -- Better hidelist matching. 
 

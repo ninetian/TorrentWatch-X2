@@ -41,14 +41,14 @@ function curl_exec ($sess) {
 		$method="GET";
 	}
 
-	if (is_array($curl_stuff[$sess][CURLOPT_HTTPHEADER])) {
+	if (isset($curl_stuff[$sess][CURLOPT_HTTPHEADER]) && (is_array($curl_stuff[$sess][CURLOPT_HTTPHEADER]))) {
      	    foreach ($curl_stuff[$sess][CURLOPT_HTTPHEADER] as $value) {
 		if (!preg_match("/POST/", $value) && !preg_match("/Content-Length:/", $value) && !preg_match("/Python/", $value)) {	
             	    $header.="$value\r\n";
 		}	
       	    }
 	}
-	if ($curl_stuff[$sess][CURLOPT_USERPWD] == ":") {
+	if (isset($curl_stuff[$sess][CURLOPT_USERPWD]) && ($curl_stuff[$sess][CURLOPT_USERPWD] == ":")) {
 		$curl_stuff[$sess][CURLOPT_USERPWD]="";
 	}
 

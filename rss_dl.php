@@ -90,7 +90,7 @@ function parse_args() {
     _debug(date("F j, Y, g:i a")."\n",0);
 
     if(isset($config_values['Feeds'])) {
-        load_feeds($config_values['Feeds']);
+        load_feeds($config_values['Feeds'], 1);
         feeds_perform_matching($config_values['Feeds']);
     }
 

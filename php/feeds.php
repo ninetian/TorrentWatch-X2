@@ -234,13 +234,15 @@ function check_for_torrent(&$item, $key, $opts) {
   }
 }
 
-function parse_one_rss($feed) {
+function parse_one_rss($feed, $update=NULL) {
   global $config_values;
   $rss = new lastRSS;
   $rss->stripHTML = True;
   $rss->CDATA = 'content'; 
   if((isset($config_values['Settings']['Cache Time'])) && ((int)$config_values['Settings']['Cache Time'])) { 
       $rss->cache_time = (int)$config_values['Settings']['Cache Time'];
+  } else if(!isset($update)) {
+      $rss->cache_time = 86400;
   } else {
       $rss->cache_time = (15*60)-20;
   }
@@ -459,13 +461,13 @@ function feeds_perform_matching($feeds) {
   }
 }
 
-function load_feeds($feeds) {
+function load_feeds($feeds, $update=NULL) {
   global $config_values;
   $count = count($feeds);
   foreach($feeds as $feed) {
     switch($feed['Type']){
       case 'RSS':
-        parse_one_rss($feed);
+        parse_one_rss($feed, $update);
         break;
       case 'Atom':
         parse_one_atom($feed);

@@ -156,7 +156,7 @@ function parse_options() {
             if($response) echo "<div id=\"fav_error\" class=\"dialog_window\" style=\"display: block\">$response</div>";
             break;
         case 'hide':
-            $response = add_hidden($_GET['hide']);
+            $response = add_hidden(ucwords($_GET['hide']));
             if($response) echo "<div id=\"fav_error\" class=\"dialog_window\" style=\"display: block\">$response</div>";
             break;
         case 'delHidden':

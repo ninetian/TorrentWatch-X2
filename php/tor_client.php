@@ -195,7 +195,7 @@ function transmission_add_torrent($tor, $dest, $title, $seedRatio) {
   }
 }
 
-function client_add_torrent($filename, $dest, $title, $feed = NULL, &$fav = NULL) {
+function client_add_torrent($filename, $dest, $title, $feed = NULL, &$fav = NULL, $retried=false) {
   global $config_values, $hit;
   $hit = 1;
   $filename = htmlspecialchars_decode($filename);
@@ -218,9 +218,16 @@ function client_add_torrent($filename, $dest, $title, $feed = NULL, &$fav = NULL
   get_curl_defaults($getOptions);
   curl_setopt_array($get, $getOptions);
   $tor = curl_exec($get);
+  $http_content_type = curl_getinfo($get, CURLINFO_CONTENT_TYPE);		
   curl_close($get);
-
-  if(!($tor)) {
+  if (!$retried && ($http_content_type != 'application/x-bittorrent')) {
+	//This was not a torrent-file, so it's poroperly some kind og xml / html.
+	//Try to retrieve a .torrent link from the content.
+	$link = find_torrent_link($url, $tor);
+	return client_add_torrent($link, $dest, $title, $feed, $fav, true);
+  }
+  
+  if(!$tor) {
   print '<pre>'.print_r($_GET, TRUE).'</pre>';
     _debug("Couldn't open torrent: $filename \n",-1);
     return FALSE;
@@ -299,4 +306,27 @@ function client_add_torrent($filename, $dest, $title, $feed = NULL, &$fav = NULL
   }
   return ($return === 0);
 }
+
+
+function find_torrent_link($url_old, $content) {
+	$ret = preg_match('/["\']([^\'"]*?\.torrent[^\'"]*?)["\']/', $content, $matches);
+	$url = "";
+	if ($ret) {
+		$url = $matches[1];
+		if (!preg_match('/^https?:\/\//', $url)) {
+			if (preg_match('^/', $url)) {
+				$url = dirname($url_old) . $url;
+			} else {
+				$url = dirname($url_old) . '/' . $url;
+			}
+		}
+	/* NOT TESTED YET
+	} else {
+		preg_match('/["\'](magnet:[^\'"]*?)["\']/', $content, $matches);
+		$url = $matches[1];
+	*/
+	}
+	return $url;
+}
+
 ?>

@@ -12,17 +12,68 @@
 }
 
 function get_torrent_link($rs) {
+  $links = array();
+  $link = "";
   if ((isset($rs['enclosure'])) && ($rs['enclosure']['type']=='application/x-bittorrent')) {
-      $link = $rs['enclosure']['url'];
-  } else if(isset($rs['link'])) {
-      $link = $rs['link'];
-  } else if(isset($rs['id']) || stristr($rs['id'], 'http://')) { // Atom
-    $link = $rs['id'];
-  } else if(isset($rs['enclosure'])) { // RSS Enclosure
-    $link = $rs['enclosure']['url'];
-  } 
+     $links[] = $rs['enclosure']['url'];
+  } else {
+     if(isset($rs['link'])) {
+        $links[] = $rs['link'];
+     }
+     if(isset($rs['id']) && stristr($rs['id'], 'http://')) { // Atom
+        $links[] = $rs['id'];
+     }
+	 if(isset($rs['enclosure'])) { // RSS Enclosure
+        $links[] = $rs['enclosure']['url'];
+     }
+  }
 
+  if (count($links)==1) {
+	$link = $links[0];
+  } else if (count($links) > 0) {
+	$link = choose_torrent_link($links);
+  }
+  
   return html_entity_decode($link);
+}
+
+function choose_torrent_link($links) {
+	$link_best = "";
+	$word_matches = 0;
+	if (count($links) == 0) {
+		return "";
+	}
+	//Check how many links has ".torrent" in them
+	foreach ($links as $link) {
+		if (preg_match("/\.torrent/", $link)) {
+			$link_best = $link;
+			$word_matches++;
+		}
+	}
+	//If only one had ".torrent", use that, else check http content-type for each,
+	//and use the first that returns the proper torrent type
+	if ($word_matches > 1) {
+		foreach ($links as $link) {
+			$get = curl_init();
+			$options[CURLOPT_URL] = $link;
+			$options[CURLOPT_NOBODY] = true;
+			get_curl_defaults($options);
+			curl_setopt_array($get, $options);
+			$response = curl_exec($get);
+			$http_code = curl_getinfo($get, CURLINFO_HTTP_CODE);
+			$http_content_type = curl_getinfo($get, CURLINFO_CONTENT_TYPE);
+			curl_close($get);
+			if (($http_code == 200) && ($http_content_type == 'application/x-bittorrent')) {
+				$link_best = $link;
+				break;
+			}
+		}
+	}
+	//If still no match has been made, just select the first, and hope the html torrent parser can find it
+	if (empty($link_best)) {
+		$link_best = $links[0];
+	}
+	return $link_best;
 }
 
 function episode_filter($item, $filter) {

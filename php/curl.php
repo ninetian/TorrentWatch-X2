@@ -40,6 +40,9 @@ function curl_exec ($sess) {
 	} else {
 		$method="GET";
 	}
+	if (isset($curl_stuff[$sess][CURLOPT_NOBODY]) && $curl_stuff[$sess][CURLOPT_NOBODY]) {
+		$method = "HEAD";
+	}
 
 	if (isset($curl_stuff[$sess][CURLOPT_HTTPHEADER]) && (is_array($curl_stuff[$sess][CURLOPT_HTTPHEADER]))) {
      	    foreach ($curl_stuff[$sess][CURLOPT_HTTPHEADER] as $value) {
@@ -68,29 +71,23 @@ function curl_exec ($sess) {
 		$http['timeout'] = $curl_stuff[$sess][CURLOPT_TIMEOUT];
     	}
 
-	if(isset($header) || isset($content)) {
-		$http=array('method' => $method);
-		if (isset($header)) {
-			$http['header']=$header;
-		}
-		if (isset($content)) {
-    		$http['content']=$content;
-    	}
-		$params=array('http' => $http);
-		$context=stream_context_create($params);
-		if (!$result=@file_get_contents($url,false,$context)) {
-			$result=$http_response_header[0];
-		}
-	} else {
-	    $params=array('http' => $http);
-		$context=stream_context_create($params);
-            if (!$result=@file_get_contents($url,false,$context)) {
-                $result=$http_response_header[0];
-            }
+	$http=array('method' => $method);
+	if (isset($header)) {
+		$http['header']=$header;
 	}
+	if (isset($content)) {
+		$http['content']=$content;
+	}
+	$params=array('http' => $http);
+	$context=stream_context_create($params);
+	if (!$result=@file_get_contents($url,false,$context)) {
+		$result=$http_response_header[0];
+	}
+	
 	$curl_stuff[$sess]['headers'] = $http_response_header;
 	
 	if (isset($curl_stuff[$sess][CURLOPT_HEADER])) {
+		  $data = '';
           foreach ($http_response_header as $value) {
                   $data.="$value\r\n";
           }
@@ -104,7 +101,7 @@ function curl_getinfo($sess, $ch) {
 	global $curl_stuff;
 	$value = null;
 	if($ch === 12 ) {
-	    $values = explode(" ", $curl_stuff[$sess]['headers']['0']);
+	    $values = explode(" ", $curl_stuff[$sess]['headers'][0]);
 	    $value = $values[1];
 	} else {
 	    foreach ($curl_stuff[$sess]['headers'] as $header) {

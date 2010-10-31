@@ -1,5 +1,6 @@
 Name: TorrentWatch-X
 Developer: Joris Vandalon
+Committers: Martijn Bakker & allanmc
 
 Description: TorrentWatch-X is a web based tool to automate downloads of tv shows via torrents and rss. This is a fork of the torrentwatch project, but more aimed at non-NMT devices. The goal is to make it run on linux and OSX with different torrent clients and to make it work in all browsers.
 

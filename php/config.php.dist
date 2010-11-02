@@ -6,11 +6,10 @@ require_once("config_lib.php");
 //Config File Loaction.
 function platform_getConfigDir() {
   global $platform;
-  $basedir = get_base_dir() . "/etc";
   if($platform == 'NMT') {
-        return $basedir;
+	return get_base_dir() . "/etc";
   } else {
-      return "/etc/torrentwatch";
+	return "/etc/torrentwatch";
   }
 }
 

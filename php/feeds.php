@@ -184,15 +184,15 @@ function check_for_torrent(&$item, $key, $opts) {
     if(check_cache($rs['title'])) {
       if(_isset($config_values['Settings'], 'Only Newer') == 1) {
         if(!empty($guess['episode']) && preg_match('/^(\d+)x(\d+)p?$|^(\d{8})p?$/i',$guess['episode'],$regs)) {
-          if(preg_match('/^(\d{8})$/', $regs[3]) && $item['Episode'] >= $regs[3]) {
+          if(preg_match('/^(\d{8})$/', $regs[3]) && $item['Episode'] >= $regs[3] && isset($regs[3])) {
             _debug($item['Name'] . ": " . $item['Episode'] .' >= '.$regs[3] . "\r\n", 1);
             $matched = "old";
             return FALSE;
-          } else if(preg_match('/^(\d{1,3})$/', $regs[1]) && $item['Season'] > $regs[1]) {
+          } else if(preg_match('/^(\d{1,3})$/', $regs[1]) && $item['Season'] > $regs[1] && isset($regs[1])) {
             _debug($item['Name'] . ": " . $item['Season'] .' > '.$regs[1] . "\r\n", 1);
             $matched = "old";
             return FALSE;
-          } else if(preg_match('/^(\d{1,3})$/', $regs[1]) && $item['Season'] == $regs[1] && $item['Episode'] >= $regs[2]) {
+          } else if(preg_match('/^(\d{1,3})$/', $regs[1]) && $item['Season'] == $regs[1] && $item['Episode'] >= $regs[2] && isset($regs[2])) {
             if(!preg_match('/proper|repack|rerip/i', $rs['title'])) {
                 _debug($item['Name'] . ": " . $item['Episode'] .' >= '.$regs[2] . "\r\n", 1);
                 $matched = "old";
@@ -428,7 +428,7 @@ function feeds_perform_matching($feeds) {
   }
   
   if(isset($config_values['Global']['HTMLOutput']) && $config_values['Settings']['Combine Feeds'] == 1) {
-    show_feed_html($rs, combined);
+    show_feed_html(0);
   }
   
   cache_setup();

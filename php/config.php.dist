@@ -6,8 +6,9 @@ require_once("config_lib.php");
 //Config File Loaction.
 function platform_getConfigDir() {
   global $platform;
+  $basedir = get_base_dir() . "/etc";
   if($platform == 'NMT') {
-        return "/share/Apps/Torrentwatchx/etc";
+        return $basedir;
   } else {
       return "/etc/torrentwatch";
   }

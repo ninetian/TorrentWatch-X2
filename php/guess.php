@@ -5,7 +5,7 @@ function guess_match($title, $normalize = FALSE) {
     $epi ='/[_.\s\(]';  //Start with _ , . or space
     $epi.='(S\d+[_.\s]?EP? ?\d+(?:-EP? ?\d+)?'.'|';  // S12E1 or S12EP1-EP2 
     $epi.='S\d\d?'.'|'; // Full season S03
-    $epi.='\d{1,2}x#?(\d+|special)(?:-\d+)?'.'|';  // 1x23 or 1x23-24
+    $epi.='\d{1,2}x#?S?(\d+|special)(?:-\d+)?'.'|';  // 1x23 or 1x23-24
     $epi.='\d+[_.\s]?of[_.\s]?\d+'.'|';  // 03of18
     $epi.='Season[_.\s]?\d+,?[_.\s]?Episode[_.\s]?\d+'.'|'; // Season 4, episode 15
     $epi.='Season[_.\s]?\d\d?'.'|'; // Full Season: Season1 or Season 02
@@ -14,6 +14,7 @@ function guess_match($title, $normalize = FALSE) {
     $epi.='EP?(?:PS[_.\s]?)?\d+(?:-\d+)?'.'|'; // E137 or EP137 or EPS1-23
     $epi.='\d{1,2}[-.]\d{1,2}[-.]\d{2,4}[_.\s]'.'|'; // 23-8-2007 or 07.23.2008 or 07-23-09
     $epi.='\d{4}[-.x]\d{1,2}[-.x]\d{1,2}[_.\s]'.'|'; // 2007-8-23, 2010x03.12 or 2008.23.7
+    $epi.='\d{4}[-.x]\d{1,2}'.'|'; // 2007-8, 2010x03 or 2008.23
     $epi.='\d{8}[_.\s])/i';   // 20082306 etc
 
     // Quality
@@ -83,7 +84,7 @@ function guess_match($title, $normalize = FALSE) {
     
     // Standardize episode output to SSxEE, strip leading 0
     $epiGuess = array(  '/\b(?:S(\d+))?[_.\s]?EP? ?(\d+)(?:-EP? ?\d+)?\b/i',
-                        '/\b(\d+)x#?(\d+)/i',
+                        '/\b(\d+)x#?S?(\d+)/i',
                         '/(\d+)[_.\s]?of[_.\s]?(\d+)\b/i',
                         '/\bseason[_.\s]?(\d+),?[_.\s]?episode[_.\s]?(\d+)\b/i',
                         '/\b0?(\d)(\d\d)\b/i',

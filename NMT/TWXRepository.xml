@@ -24,8 +24,8 @@
     </Application>
     <Application>
       <Name>TorrentWatch-X</Name>
-      <Version>0.6.5b2 (Beta2)</Version>
-      <DownloadURL>http://torrentwatch-x.googlecode.com/files/TorrentWatchX-NMT-0.6.5-beta2.zip</DownloadURL>
+      <Version>0.6.5rc1 (RC1)</Version>
+      <DownloadURL>http://torrentwatch-x.googlecode.com/files/TorrentWatchX-NMT-0.6.5-rc1.zip</DownloadURL>
       <Author>Wiebel</Author>
       <Maintainer>Wiebel</Maintainer>
       <Description>TorrentWatch-X is a web based tool to automate downloads of tv shows via torrents and rss. Based on the torrentwatch project (now known as NMTDVR).</Description>
@@ -56,6 +56,10 @@
 	    -- Fixed ui bug that caused hidden feeds the be shown in some cases.
 	    -- Fixed an issue where Deep Directories did not work when using custom directories for favorites.
 	   -- Fixed issue where bug reporting would always give a possitive message even if sending the report failed.
+	    -- Added feature to guess for best link when multiple links are available in the feed. (Thanks Allan Mørk Christensen)
+	    -- Added feature to detect when a link is not a torrent-file, but e.g. (x)html, and then look for a torrent link in that content. (Thanks Allan Mørk Christensen)
+	    -- Better hidelist matching. 
+	    -- WebUI will update rss cache if cache is older then 24 hours. The crontab script updates if cache is older then 15 minutes. This ensures the WebUI won't slow down when feeds are down or slow.
       </Changelog>
     </Application>
     </Applications>

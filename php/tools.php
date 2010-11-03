@@ -98,7 +98,8 @@ function torInfo($torHash) {
                 $totalSize = human_readable($totalSize);
                 $clientId = $response['arguments']['torrents']['0']['id'];
                 $status = $response['arguments']['torrents']['0']['status'];
-                $seedRatioLimit = round($response['arguments']['torrents']['0']['seedRatioLimit'],2);
+                if(isset($response['arguments']['torrents']['0']['seedRatioLimit']))
+		  $seedRatioLimit = round($response['arguments']['torrents']['0']['seedRatioLimit'],2);
                 $peersSendingToUs = $response['arguments']['torrents']['0']['peersSendingToUs'];
                 $peersGettingFromUs = $response['arguments']['torrents']['0']['peersGettingFromUs'];
                 $peersConnected = $response['arguments']['torrents']['0']['peersConnected'];

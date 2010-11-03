@@ -302,6 +302,7 @@ function rss_perform_matching($rs, $idx, $feedName, $feedLink) {
   $items = array_reverse($rs['items']);
   $htmlList = array();
   foreach($items as $item) {
+    if(!isset($item['title'])) $item['title'] = '';
     if($filter = get_item_filter()) $item['title'] = preg_replace($filter, '', $item['title']);
     if(preg_match('/\b(720p|1080p|1080i)\b/i', $item['title'])) {
         $item['title'] = preg_replace('/( -)?[_. ]HDTV/', '', $item['title']);

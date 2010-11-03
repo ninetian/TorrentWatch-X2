@@ -1,5 +1,9 @@
 <?php
-if($item['description']) $description = $item['description'];
+if(isset($item['description'])) {
+    $description = $item['description'];
+} else {
+    $description = '';
+}
 if(isset($item['pubDate'])) {
     $pubDate = $item['pubDate'];
     $unixTime = strtotime($item['pubDate']);

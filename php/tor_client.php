@@ -215,16 +215,21 @@ function client_add_torrent($filename, $dest, $title, $feed = NULL, &$fav = NULL
   $getOptions[CURLOPT_URL] = $url;
   $getOptions[CURLOPT_COOKIE] = $cookies;
   $getOptions[CURLOPT_USERAGENT] = 'Python-urllib/1.17';  
+  $getOptions[CURLOPT_FOLLOWLOCATION] = true;
   get_curl_defaults($getOptions);
   curl_setopt_array($get, $getOptions);
   $tor = curl_exec($get);
-  $http_content_type = curl_getinfo($get, CURLINFO_CONTENT_TYPE);		
   curl_close($get);
-  if (!$retried && ($http_content_type != 'application/x-bittorrent')) {
+  if (strncasecmp($tor, 'd8:announce', 11) != 0) { // Check for torrent magic-entry
 	//This was not a torrent-file, so it's poroperly some kind og xml / html.
-	//Try to retrieve a .torrent link from the content.
-	$link = find_torrent_link($url, $tor);
-	return client_add_torrent($link, $dest, $title, $feed, $fav, true);
+	if(!$retried) {
+	    //Try to retrieve a .torrent link from the content.
+	    $link = find_torrent_link($url, $tor);
+	    return client_add_torrent($link, $dest, $title, $feed, $fav, true);
+	} else {
+	    _debug("No torrent file found. Exitting.\n");
+	    return FALSE;
+	}
   }
   
   if(!$tor) {
@@ -309,9 +314,9 @@ function client_add_torrent($filename, $dest, $title, $feed = NULL, &$fav = NULL
 
 
 function find_torrent_link($url_old, $content) {
-	$ret = preg_match('/["\']([^\'"]*?\.torrent[^\'"]*?)["\']/', $content, $matches);
 	$url = "";
-	if ($ret) {
+	if($ret = preg_match('/["\']([^\'"]*?\.torrent[^\'"]*?)["\']/', $content, $matches)) {
+	    if (isset($ret)) {
 		$url = $matches[1];
 		if (!preg_match('/^https?:\/\//', $url)) {
 			if (preg_match('^/', $url)) {
@@ -320,11 +325,31 @@ function find_torrent_link($url_old, $content) {
 				$url = dirname($url_old) . '/' . $url;
 			}
 		}
-	/* NOT TESTED YET
-	} else {
-		preg_match('/["\'](magnet:[^\'"]*?)["\']/', $content, $matches);
-		$url = $matches[1];
-	*/
+	    }
+	} else  {
+	    $ret = preg_match_all('/href=["\']([^#].+?)["\']/', $content, $matches);
+	    if ($ret) {
+		foreach($matches[1] as $match) {
+		    if (!preg_match('/^https?:\/\//', $match)) {
+			if (preg_match('^/', $match)) {
+			    $match = dirname($url_old) . $match;
+			} else {
+			    $match = dirname($url_old) . '/' . $match;
+			}
+		    }
+		    if (preg_match('/w3.org/i', $match)) {
+			break;
+		    }
+		    $headers = get_headers($match, 1);
+		    if((isset($headers['Content-Disposition']) && 
+		      preg_match('/filename=.+\.torrent/i', $headers['Content-Disposition'])) ||
+		      (isset($headers['Content-Type']) &&
+		      $headers['Content-Type'] == 'application/x-bittorrent' )) {
+			    _debug("Bla: $match\n");
+			    $url = $match;
+		    }
+		}
+	    }
 	}
 	return $url;
 }

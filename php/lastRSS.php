@@ -145,6 +145,9 @@ class lastRSS {
         if($response) $rss_url = $response['url'];
         $get = curl_init();
         $getOptions[CURLOPT_URL] = $rss_url;
+	if(isset($response['cookies'])) {
+	    $getOptions[CURLOPT_COOKIE] = $response['cookies'];
+	}
         get_curl_defaults($getOptions);
         curl_setopt_array($get, $getOptions);
         $rss_content = curl_exec($get);

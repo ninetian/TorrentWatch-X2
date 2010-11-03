@@ -32,6 +32,7 @@ function guess_match($title, $normalize = FALSE) {
     $quality.='TELESYNC'.'|';
     $quality.='HR.HDTV' .'|';
     $quality.='HDTV'    .'|';
+    $quality.='x264'    .'|';
     $quality.='HR.PDTV' .'|';
     $quality.='PDTV'    .'|';
     $quality.='SatRip'  .'|';
@@ -120,7 +121,7 @@ function guess_match($title, $normalize = FALSE) {
 function guess_feedtype($feedurl) {
   global $config_values;
   $response = check_for_cookies($feedurl);
-  if($response) $feedurl = $response['url'];
+  if(isset($response)) $feedurl = $response['url'];
   $get = curl_init();
   $getOptions[CURLOPT_URL] = $feedurl;
   get_curl_defaults($getOptions);
@@ -136,7 +137,7 @@ function guess_feedtype($feedurl) {
     else if (preg_match('/<rss/', $content[$i], $regs))
       return 'RSS';
   }
-  return "Unknown";
+  return "RSS";
 }
 
 

@@ -12,7 +12,7 @@ define ("CURLOPT_NOBODY",9);
 define ("CURLOPT_USERAGENT",10);
 define ("CURLOPT_HEADER",11);
 define ("CURLINFO_HTTP_CODE",12);
-
+define ("CURLOPT_FOLLOWLOCATION",13);
 define ("CURLINFO_CONTENT_TYPE", "content-type");
 
 function curl_init() {    
@@ -93,6 +93,7 @@ function curl_exec ($sess) {
           }
           $result=$data;
    	}
+	//_debug("BLA: " . $header . "\n");
 	//$out.=$url."\n".$header."\n".$content."\n".$method."\n".$result."\n";;
 	return ($result);
 }

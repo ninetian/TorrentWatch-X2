@@ -159,11 +159,8 @@ function transmission_add_torrent($tor, $dest, $title, $seedRatio) {
                                        )
                                );
   $response = transmission_rpc($request);
-  _debug(json_encode($response),0);
-  _debug("\r\n",0);
 
   $torHash = $response['arguments']['torrent-added']['hashString'];
-  _debug("\nTorhash: $torHash\n");
 
   if($seedRatio >= 0 && ($torHash)) {
     $request = array('method' => 'torrent-set',
@@ -172,8 +169,6 @@ function transmission_add_torrent($tor, $dest, $title, $seedRatio) {
              'seedRatioMode' => 1)
             );
     $response = transmission_rpc($request);
-    _debug(json_encode($response),0);
-    _debug("\r\n",0);
   } 
 
 
@@ -220,18 +215,20 @@ function client_add_torrent($filename, $dest, $title, $feed = NULL, &$fav = NULL
   curl_setopt_array($get, $getOptions);
   $tor = curl_exec($get);
   curl_close($get);
+  _debug("Trying $url - " . substr($tor, 0 , 11) . "\n");
   if (strncasecmp($tor, 'd8:announce', 11) != 0) { // Check for torrent magic-entry
 	//This was not a torrent-file, so it's poroperly some kind og xml / html.
 	if(!$retried) {
 	    //Try to retrieve a .torrent link from the content.
+	    _debug("Trying to retrieve a .torrent link from the content on $url\n");
 	    $link = find_torrent_link($url, $tor);
 	    return client_add_torrent($link, $dest, $title, $feed, $fav, true);
 	} else {
-	    _debug("No torrent file found. Exitting.\n");
+	    _debug("No torrent file found on $url. Exitting.\n");
 	    return FALSE;
 	}
   }
-  
+  _debug("Found torrent on $url. \n"); 
   if(!$tor) {
   print '<pre>'.print_r($_GET, TRUE).'</pre>';
     _debug("Couldn't open torrent: $filename \n",-1);
@@ -325,6 +322,7 @@ function find_torrent_link($url_old, $content) {
 				$url = dirname($url_old) . '/' . $url;
 			}
 		}
+		_debug("Found link ending with .torrent on $url\n");
 	    }
 	} else  {
 	    $ret = preg_match_all('/href=["\']([^#].+?)["\']/', $content, $matches);
@@ -340,13 +338,17 @@ function find_torrent_link($url_old, $content) {
 		    if (preg_match('/w3.org/i', $match)) {
 			break;
 		    }
+		    $opts = array('http' =>
+			array('timeout'=>10)
+		    );
+		    stream_context_get_default($opts);
 		    $headers = get_headers($match, 1);
 		    if((isset($headers['Content-Disposition']) && 
 		      preg_match('/filename=.+\.torrent/i', $headers['Content-Disposition'])) ||
 		      (isset($headers['Content-Type']) &&
 		      $headers['Content-Type'] == 'application/x-bittorrent' )) {
-			    _debug("Bla: $match\n");
 			    $url = $match;
+			    _debug("Found link containing torrent on $url\n");
 		    }
 		}
 	    }

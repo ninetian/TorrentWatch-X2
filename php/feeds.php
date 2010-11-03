@@ -26,14 +26,13 @@ function get_torrent_link($rs) {
 	 if(isset($rs['enclosure'])) { // RSS Enclosure
         $links[] = $rs['enclosure']['url'];
      }
- }
+  }
 
   if (count($links)==1) {
 	$link = $links[0];
   } else if (count($links) > 0) {
 	$link = choose_torrent_link($links);
   }
-  
   return html_entity_decode($link);
 }
 
@@ -54,6 +53,10 @@ function choose_torrent_link($links) {
 	//and use the first that returns the proper torrent type
 	if ($word_matches != 1) {
 	    foreach ($links as $link) {
+                $opts = array('http' =>
+                    array('timeout'=>10)
+                );
+		stream_context_get_default($opts);
                 $headers = get_headers($link, 1);
                 if((isset($headers['Content-Disposition']) &&
                   preg_match('/filename=.+\.torrent/i', $headers['Content-Disposition'])) ||
@@ -317,7 +320,7 @@ function rss_perform_matching($rs, $idx, $feedName, $feedLink) {
       $torHash = get_torHash($cache_file);
       if($matched != "match" && $matched != 'cachehit' && file_exists($cache_file)) {
           $matched = 'downloaded';
-          _debug("matched: " . $item . "\n", 1);
+          _debug("matched: " . $item['title'] . "\n", 1);
       }
     }
     if(isset($config_values['Global']['HTMLOutput'])) {
@@ -379,7 +382,7 @@ function atom_perform_matching($atom, $idx, $feedName, $feedLink) {
       $torHash = get_torHash($cache_file);
       if($matched != "match" && $matched != 'cachehit' && file_exists($cache_file)) {
           $matched = 'downloaded';
-          _debug("matched: " . $item . "\n", 1);
+          _debug("matched: " . $item['title'] . "\n", 1);
       }
     }
     if(isset($config_values['Global']['HTMLOutput'])) {

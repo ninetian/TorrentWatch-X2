@@ -26,9 +26,8 @@ function get_torrent_link($rs) {
 	 if(isset($rs['enclosure'])) { // RSS Enclosure
         $links[] = $rs['enclosure']['url'];
      }
-  }
+ }
 
-  _debug("BLA2: " . count($links) . "\n");
   if (count($links)==1) {
 	$link = $links[0];
   } else if (count($links) > 0) {
@@ -39,7 +38,6 @@ function get_torrent_link($rs) {
 }
 
 function choose_torrent_link($links) {
-	_debug("BLA\n");
 	$link_best = "";
 	$word_matches = 0;
 	if (count($links) == 0) {

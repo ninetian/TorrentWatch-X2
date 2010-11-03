@@ -13,7 +13,11 @@ define ("CURLOPT_USERAGENT",10);
 define ("CURLOPT_HEADER",11);
 define ("CURLINFO_HTTP_CODE",12);
 define ("CURLOPT_FOLLOWLOCATION",13);
+define ("CURLOPT_MAXREDIRS",14);
+
 define ("CURLINFO_CONTENT_TYPE", "content-type");
+
+global $headers_raw;
 
 function curl_init() {    
 	global $curl_stuff;
@@ -29,7 +33,7 @@ function curl_setopt_array($sess, $options) {
 
 function curl_exec ($sess) {
 	global $curl_stuff;
-
+	global $headers_raw;
 	$url=$curl_stuff[$sess][CURLOPT_URL];
 
 	$header="";
@@ -71,6 +75,14 @@ function curl_exec ($sess) {
 		$http['timeout'] = $curl_stuff[$sess][CURLOPT_TIMEOUT];
     	}
 
+	if(!isset($curl_stuff[$sess][CURLOPT_FOLLOWLOCATION])) {
+		$curl_stuff[$sess][CURLOPT_FOLLOWLOCATION] = false;
+    }
+	
+	if(!isset($curl_stuff[$sess][CURLOPT_MAXREDIRS])) {
+		$curl_stuff[$sess][CURLOPT_MAXREDIRS] = 99;
+    }	
+	
 	$http=array('method' => $method);
 	if (isset($header)) {
 		$http['header']=$header;
@@ -80,22 +92,56 @@ function curl_exec ($sess) {
 	}
 	$params=array('http' => $http);
 	$context=stream_context_create($params);
-	if (!$result=@file_get_contents($url,false,$context)) {
-		$result=$http_response_header[0];
+	if (!$result=file_get_contents_follow($url,false,$context, $curl_stuff[$sess][CURLOPT_FOLLOWLOCATION], $curl_stuff[$sess][CURLOPT_MAXREDIRS])) {
+		if (isset($headers_raw[0])) {
+			$result=$headers_raw[0];
+		}
 	}
 	
-	$curl_stuff[$sess]['headers'] = $http_response_header;
+	$curl_stuff[$sess]['headers'] = $headers_raw;
 	
 	if (isset($curl_stuff[$sess][CURLOPT_HEADER])) {
 		  $data = '';
-          foreach ($http_response_header as $value) {
+          foreach ($headers_raw as $value) {
                   $data.="$value\r\n";
           }
           $result=$data;
    	}
 	//_debug("BLA: " . $header . "\n");
 	//$out.=$url."\n".$header."\n".$content."\n".$method."\n".$result."\n";;
-	return ($result);
+	return $result;
+}
+
+function file_get_contents_follow($filename, $use_include_path = false, $context = null, $follow = false , $maxredirs = 99 ) {
+	global $headers_raw;
+	$content = @file_get_contents($filename, $use_include_path, $context);
+
+	$headers_raw = $http_response_header;
+	
+	//Shouldwe follow header redirects?
+	if ($follow && $maxredirs>0) {
+		$headers = array();
+		//Translate raw headers to associative array of header key/calue pairs
+		foreach ($headers_raw as $header) {
+			$temp = split(':', $header, 2);
+			if (count($temp)==2) {
+				$headers[trim($temp[0])] = trim($temp[1]);
+			}
+		}
+		//Any header redirects left?
+		if (isset($headers['Location'])) {
+			$url = $headers['Location'];
+			if (!preg_match('/^https?:\/\//i', $url)) {
+				if (substr ($url, 0, 1) != '/') {
+					$url = '/' . $url;
+				}
+				preg_match('/^(https?:\/\/[^\/]+)/i', $filename, $match);
+				$url = $match[1] . $url;
+			}
+			$content = file_get_contents_follow($filename, $use_include_path, $context, true, $maxredirs--);
+		}
+	}
+	return $content;
 }
 
 function curl_getinfo($sess, $ch) {

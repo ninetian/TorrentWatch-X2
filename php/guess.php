@@ -95,7 +95,11 @@ function guess_match($title, $normalize = FALSE) {
     $dateGuess = '/(\d\d\d\d)[\sx-](\d\d)[\sx-](\d\d).?/i';
     
     foreach($epiGuess as $guess) {
-        $episode_guess = preg_replace($guess, '\1x\2', $episode_guess, -1, $replaceCount);
+	if(preg_match('/\d+of\d+/', $episode_guess)) {
+		$episode_guess = preg_replace($guess, '1x\1', $episode_guess, -1, $replaceCount);
+	} else {
+		$episode_guess = preg_replace($guess, '\1x\2', $episode_guess, -1, $replaceCount);
+	}
         if($replaceCount > 0) {
             $episode_guess = preg_replace('/^(\d+)x$/', '1x\1', $episode_guess); //Match shows with EPI nr only.
             break;

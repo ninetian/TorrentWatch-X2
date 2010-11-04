@@ -150,7 +150,7 @@ IMPORTANT: If you are updating from a previous version. Please copy php/config.p
     -- Fixed issue that caused an error while trying to mail while no email address was filled in. Also moved the default email msg to a template file. (Thanks Allan Mørk Christensen)
     -- Added negative caching for feeds that are down. This can mean that it takes up to 15 minutes, after thee feed comes back up, for the feed to be working again.
     -- Fixed date matching issue where the format "Y-M-D" was not matched correctly.
-    -- Updated guessing routine for even better episode guessing :)
+    -- Updated guessing routine for even better episode guessing.
     -- Fixed ui bug that caused hidden feeds the be shown in some cases.
     -- Fixed an issue where Deep Directories did not work when using custom directories for favorites.
     -- Fixed issue where bug reporting would always give a possitive message even if sending the report failed.

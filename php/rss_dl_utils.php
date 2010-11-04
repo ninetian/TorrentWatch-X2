@@ -9,7 +9,6 @@ require_once("class.phpmailer.php");
 if (!extension_loaded("curl")) {
     require_once("curl.php");
 }
-require_once("AkCharset.php");
 require_once("config.php");
 require_once("feeds.php");
 require_once("html.php");

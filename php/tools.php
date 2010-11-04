@@ -75,7 +75,7 @@ function torInfo($torHash) {
                     'peersGettingFromUs', 'peersConnected', 'recheckProgress'),
                     'ids' => $torHash), 'method' => 'torrent-get');
                 $response = transmission_rpc($request);
-		if (!isset($response['arguments']['torrents']['0'])) {
+		if (!isset($response['arguments']['torrents'])) {
 		    return array(
 		    'stats' => '',
 		    'clientId' => '',

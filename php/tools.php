@@ -70,7 +70,14 @@ function torInfo($torHash) {
 
     switch($config_values['Settings']['Client']) {
         case 'Transmission':
-            $request = array('arguments' => array('fields' => array('id', 'leftUntilDone', 'hashString',
+            if (!isset($response['arguments']['torrents']['0'])) {
+				return array(
+					'stats' => '',
+					'clientId' => '',
+					'status' => 0,
+					'bytesDone' => 0);
+			}
+			$request = array('arguments' => array('fields' => array('id', 'leftUntilDone', 'hashString',
                     'totalSize', 'uploadedEver', 'downloadedEver', 'status', 'peersSendingToUs',
                     'peersGettingFromUs', 'peersConnected', 'recheckProgress'),
                     'ids' => $torHash), 'method' => 'torrent-get');

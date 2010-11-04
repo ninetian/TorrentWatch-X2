@@ -158,3 +158,4 @@ IMPORTANT: If you are updating from a previous version. Please copy php/config.p
     -- Added feature to detect when a link is not a torrent-file, but e.g. (x)html, and then look for a torrent link in that content. (Thanks Allan Mørk Christensen)
     -- Better hidelist matching. 
     -- WebUI will update rss cache if cache is older then 24 hours. The crontab script updates if cache is older then 15 minutes. This ensures the WebUI won't slow down when feeds are down or slow.
+    -- Added TimeZone option in the Configure menu (Configure -> other).

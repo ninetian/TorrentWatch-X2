@@ -19,7 +19,7 @@ mkdir -p Torrentwatchx/docs
 cat <<EOF> Torrentwatchx/appinfo.json
 {   
     appinfo_format="1",
-    name="Torrentwatchx",
+    name="TorrentWatch-X",
     version="NMT-$1",
     enabled="1",
     daemon_script="daemon.sh",

@@ -112,7 +112,8 @@ class lastRSS {
             // If code page is set convert character encoding to required
             if ($this->cp != '')
 		if (function_exists('iconv')) {
-                    $out[1] = iconv($this->rsscp, $this->cp.'//TRANSLIT', $out[1]);		}
+                    $out[1] = iconv($this->rsscp, $this->cp.'//TRANSLIT', $out[1]);
+		}
             // Return result
             return trim($out[1]);
         } else {

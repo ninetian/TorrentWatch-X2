@@ -215,12 +215,10 @@ function client_add_torrent($filename, $dest, $title, $feed = NULL, &$fav = NULL
   curl_setopt_array($get, $getOptions);
   $tor = curl_exec($get);
   curl_close($get);
-  _debug("Trying $url - " . substr($tor, 0 , 11) . "\n");
   if (strncasecmp($tor, 'd8:announce', 11) != 0) { // Check for torrent magic-entry
 	//This was not a torrent-file, so it's poroperly some kind og xml / html.
 	if(!$retried) {
 	    //Try to retrieve a .torrent link from the content.
-	    _debug("Trying to retrieve a .torrent link from the content on $url\n");
 	    $link = find_torrent_link($url, $tor);
 	    return client_add_torrent($link, $dest, $title, $feed, $fav, true);
 	} else {
@@ -228,7 +226,6 @@ function client_add_torrent($filename, $dest, $title, $feed = NULL, &$fav = NULL
 	    return FALSE;
 	}
   }
-  _debug("Found torrent on $url. \n"); 
   if(!$tor) {
   print '<pre>'.print_r($_GET, TRUE).'</pre>';
     _debug("Couldn't open torrent: $filename \n",-1);
@@ -322,7 +319,6 @@ function find_torrent_link($url_old, $content) {
 				$url = dirname($url_old) . '/' . $url;
 			}
 		}
-		_debug("Found link ending with .torrent on $url\n");
 	    }
 	} else  {
 	    $ret = preg_match_all('/href=["\']([^#].+?)["\']/', $content, $matches);
@@ -348,7 +344,6 @@ function find_torrent_link($url_old, $content) {
 		      (isset($headers['Content-Type']) &&
 		      $headers['Content-Type'] == 'application/x-bittorrent' )) {
 			    $url = $match;
-			    _debug("Found link containing torrent on $url\n");
 		    }
 		}
 	    }

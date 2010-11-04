@@ -129,6 +129,8 @@ function read_config_file() {
     
   if(isset($config_values['Settings']['TimeZone'])) {
     date_default_timezone_set($config_values['Settings']['TimeZone']);
+  } else {
+    date_default_timezone_set('UTC');
   }
     
   return true;

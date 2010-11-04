@@ -70,18 +70,19 @@ function torInfo($torHash) {
 
     switch($config_values['Settings']['Client']) {
         case 'Transmission':
-            if (!isset($response['arguments']['torrents']['0'])) {
-				return array(
-					'stats' => '',
-					'clientId' => '',
-					'status' => 0,
-					'bytesDone' => 0);
-			}
-			$request = array('arguments' => array('fields' => array('id', 'leftUntilDone', 'hashString',
+		$request = array('arguments' => array('fields' => array('id', 'leftUntilDone', 'hashString',
                     'totalSize', 'uploadedEver', 'downloadedEver', 'status', 'peersSendingToUs',
                     'peersGettingFromUs', 'peersConnected', 'recheckProgress'),
                     'ids' => $torHash), 'method' => 'torrent-get');
                 $response = transmission_rpc($request);
+		if (!isset($response['arguments']['torrents']['0'])) {
+		    return array(
+		    'stats' => '',
+		    'clientId' => '',
+		    'status' => 0,
+		    'bytesDone' => 0
+		    );
+		}
                 $totalSize = $response['arguments']['torrents']['0']['totalSize'];
                 $leftUntilDone = $response['arguments']['torrents']['0']['leftUntilDone'];
                 $Uploaded = $response['arguments']['torrents']['0']['uploadedEver'];

@@ -44,13 +44,16 @@ function transmission_sessionId() {
   
     preg_match("/X-Transmission-Session-Id:\s(\w+)/",$header,$ID);
 
-    $handle = fopen($sessionIdFile, "w");
-    fwrite($handle, $ID[1]);
-    fclose($handle);
-    if($platform == 'NMT') chmod($sessionIdFile, 0666);
-    $sessionId = $ID[1];
+    if(isset($ID[1])) {
+      $handle = fopen($sessionIdFile, "w");
+      fwrite($handle, $ID[1]);
+      fclose($handle);
+      if($platform == 'NMT') chmod($sessionIdFile, 0666);
+      $sessionId = $ID[1];
+    }
   }
-  return $sessionId;
+  if(isset($sessionId))
+    return $sessionId;
 }
 
 function transmission_rpc($request) {

@@ -44,6 +44,7 @@ function setup_default_config() {
   _default('Script', '');
   _default('Email Notifications', '');
   _default('SMTP Server', 'localhost');
+  _default('TimeZone', 'UTC');
 }
 
 if(!(function_exists('get_base_dir'))) {
@@ -209,6 +210,7 @@ function update_global_config() {
   global $config_values;
   $input = array('Email Address'      => 'emailAddress',
                  'SMTP Server'	      => 'smtpServer',
+		 'TimeZone'	      => 'TZ',
                  'Email Notifications' => 'mailonhit',
                  'Transmission Login' => 'truser',
                  'Transmission Password' => 'trpass',

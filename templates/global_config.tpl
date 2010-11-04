@@ -174,13 +174,13 @@
                             </div>
                             <div id="email_address">
                                 <label class="item">Email Address:</label>
-                                <input type="text" name ="emailAddress" class="text" 
+                                <input type="text" name="emailAddress" class="text" 
                                 title="Enter an email address here to send warnings and errors to."
                                 value="<?php echo $config_values['Settings']['Email Address']; ?>"/>
                             </div>
                             <div id="smtp_server">
                                 <label class="item">SMTP Server:</label>
-                                <input type="text" name ="smtpServer" class="text" 
+                                <input type="text" name="smtpServer" class="text" 
                                 value="<?php echo $config_values['Settings']['SMTP Server']; ?>"/>
                             </div>
                             <div id="script">
@@ -188,6 +188,12 @@
                                 <input type="text" class="text" readonly="readonly"
                                 title="Configured script to run on certain events. (Read doc/script.txt for more info)."
                                 value="<?php echo $config_values['Settings']['Script']; ?>"/>
+                            </div>
+                            <div id="tz">
+                                <label class="item">TimeZone:</label>
+                                <input type="text" name="TZ" class="text"
+                                title="Set your TimeZone (Default UTC). See http://nl2.php.net/manual/en/timezones.php for a list of supported timezones."
+                                value="<?php echo $config_values['Settings']['TimeZone']; ?>"/>
                             </div>
                         </div>
                     </div>

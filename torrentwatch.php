@@ -6,12 +6,12 @@ header( "Cache-Control: no-cache, must-revalidate" );
 header( "Pragma: no-cache" );
 
 ini_set('include_path', '.:./php');
-# error_reporting(E_ERROR | E_WARNING | E_PARSE);
-error_reporting(E_ALL);
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
+# error_reporting(E_ALL);
 require_once('rss_dl_utils.php');
 global $platform;
 
-$tw_version[0] = "0.6.49";
+$tw_version[0] = "0.6.5";
 
 if(file_exists(get_base_dir() . "/.hg")) {
     exec('hg id -i', $hgId, $return);

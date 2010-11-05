@@ -211,7 +211,7 @@ function client_add_torrent($filename, $dest, $title, $feed = NULL, &$fav = NULL
       $cookies = $response['cookies'];
   }
   $getOptions[CURLOPT_URL] = $url;
-  $getOptions[CURLOPT_COOKIE] = $cookies;
+  if(isset($cookies)) $getOptions[CURLOPT_COOKIE] = $cookies;
   $getOptions[CURLOPT_USERAGENT] = 'Python-urllib/1.17';  
   $getOptions[CURLOPT_FOLLOWLOCATION] = true;
   get_curl_defaults($getOptions);

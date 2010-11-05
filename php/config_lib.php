@@ -364,6 +364,8 @@ function updateFavoriteEpisode(&$fav, $title) {
   if(preg_match('/^((\d+x)?\d+)p$/', $guess['episode'])) { 
       $guess['episode'] = preg_replace('/^((?:\d+x)?\d+)p$/', '\1', $guess['episode']);
       $PROPER = "p";
+  } else {
+      $PROPER = '';
   }
   
   if(preg_match('/(^)(\d{8})$/', $guess['episode'], $regs)) {

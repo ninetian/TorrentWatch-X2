@@ -1,5 +1,5 @@
  <form action="torrentwatch.php?updateFavorite=1"  
- class="favinfo" id="favorite_<?php echo $key ?>" <?php echo $style; ?>>
+ class="favinfo" id="favorite_<?php echo $key ?>" <?php if(isset($style)) echo $style; ?>>
   <input type="hidden" name="idx" id="idx" value="<?php echo $key; ?>">
   <div class="favorite_name">
     <label class="item" title="Name of the Favorite">Name:</label>
@@ -37,12 +37,12 @@
         title="Set seedratio where you want your client to stop downloading. (-1 is unlimted)">
     <label class="seedratio item" title="Maximum seeding ratio, set to -1 to disable">Seed Ratio:</label>
      <label class="lastSeason item"> Last Downloaded Episode:</label>
-    <?php if(!preg_match('/^(\d{8})$/', $item['Episode'])) { ?>
+    <?php if(isset( $item['Episode']) && !preg_match('/^(\d{8})$/', $item['Episode'])) { ?>
      <input class='lastSeason text' type="text" name="season" value="<?php echo $item['Season']; ?>">
       <label class="lastEpisode item">x</label>
      <input class='lastEpisode text' type="text" name="episode" value="<?php echo $item['Episode']; ?>">
     <?php } else { ?> 
-     <input class='lastEpisode text' type="text" style="width: 55px" name="episode" value="<?php echo $item['Episode']; ?>">
+     <input class='lastEpisode text' type="text" style="width: 55px" name="episode" value="<?php if(isset($item['Episode'])) echo $item['Episode']; ?>">
     <?php } ?> 
   </div>
   

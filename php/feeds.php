@@ -211,7 +211,6 @@ function check_for_torrent(&$item, $key, $opts) {
             return FALSE;
         }
       }
-      _debug("PROPER: $PROPER\n");
       _debug('Match found for '.$rs['title']."\n");
       if($test_run) {
         $matched = 'test';

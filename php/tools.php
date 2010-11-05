@@ -75,14 +75,6 @@ function torInfo($torHash) {
                     'peersGettingFromUs', 'peersConnected', 'recheckProgress'),
                     'ids' => $torHash), 'method' => 'torrent-get');
                 $response = transmission_rpc($request);
-		if (!isset($response['arguments']['torrents'])) {
-		    return array(
-		    'stats' => '',
-		    'clientId' => '',
-		    'status' => 0,
-		    'bytesDone' => 0
-		    );
-		}
                 $totalSize = $response['arguments']['torrents']['0']['totalSize'];
                 $leftUntilDone = $response['arguments']['torrents']['0']['leftUntilDone'];
                 $Uploaded = $response['arguments']['torrents']['0']['uploadedEver'];
@@ -102,10 +94,11 @@ function torInfo($torHash) {
                     $ratio = round($ratio, 2);
                 }
                 $bytesDone = $totalSize-$leftUntilDone;
+		if(!$bytesDone) $bytesDone=0;
                 $sizeDone = human_readable($totalSize-$leftUntilDone);
                 $totalSize = human_readable($totalSize);
-                $clientId = $response['arguments']['torrents']['0']['id'];
-                $status = $response['arguments']['torrents']['0']['status'];
+                if(!$clientId = $response['arguments']['torrents']['0']['id']) $clientId = '';
+                if(!$status = $response['arguments']['torrents']['0']['status']) $status = 0;
                 if(isset($response['arguments']['torrents']['0']['seedRatioLimit']))
 		  $seedRatioLimit = round($response['arguments']['torrents']['0']['seedRatioLimit'],2);
                 $peersSendingToUs = $response['arguments']['torrents']['0']['peersSendingToUs'];
@@ -126,7 +119,9 @@ function torInfo($torHash) {
                     } else {
                         $stats = "Paused";
                     }
-                }
+                } else {
+		    $stats = '';
+		}
                 return array( 
                     'stats' => $stats,
                     'clientId' => $clientId,

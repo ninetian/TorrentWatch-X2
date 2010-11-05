@@ -33,7 +33,7 @@ function run_script($param, $torrent, $error = "") {
     if($script) {
         if(!is_file($script)) {
             $msg = "The configured script is not a single file. Parameters are not allowed because of security reasons.";
-            $subject = "TorrentWatch-X: security error";
+            $subject = "TW-X: security error";
             sendmail($msg, $subject);
             return;
         }
@@ -49,7 +49,7 @@ function run_script($param, $torrent, $error = "") {
             $msg.= "Please read 'https://code.google.com/p/torrentwatch-x/wiki/Script' for more info about how to make a compatible script."; 
             
             _debug("$msg\n");
-            $subject = "TorrentWatch-X: $script returned error.";
+            $subject = "TW-X: $script returned error.";
             sendmail($msg, $subject);
         }
     }

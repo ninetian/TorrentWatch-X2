@@ -159,3 +159,4 @@ IMPORTANT: If you are updating from a previous version. Please copy php/config.p
     -- Better hidelist matching. 
     -- WebUI will update rss cache if cache is older then 24 hours. The crontab script updates if cache is older then 15 minutes. This ensures the WebUI won't slow down when feeds are down or slow.
     -- Added TimeZone option in the Configure menu (Configure -> other).
+    -- Fixed a lot of PHP notices and warnings

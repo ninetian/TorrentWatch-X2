@@ -161,3 +161,6 @@ IMPORTANT: If you are updating from a previous version. Please copy php/config.p
     -- Added TimeZone option in the Configure menu (Configure -> other).
     -- Fixed a lot of PHP notices and warnings
     -- Upgraded jquery to 1.4.3
+
+current:
+    -- Fixed issue where Episode filtering stoped working in 0.6.5.

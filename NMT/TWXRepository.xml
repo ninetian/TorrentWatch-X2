@@ -3,29 +3,8 @@
     <Applications>
     <Application>
       <Name>TorrentWatch-X</Name>
-      <Version>0.6.4</Version>
-      <DownloadURL>http://torrentwatch-x.googlecode.com/files/TorrentWatchX-NMT-0.6.4.zip</DownloadURL>
-      <Author>Wiebel</Author>
-      <Maintainer>Wiebel</Maintainer>
-      <Description>TorrentWatch-X is a web based tool to automate downloads of tv shows via torrents and rss. Based on the torrentwatch project (now known as NMTDVR).</Description>
-      <Homepage>http://code.google.com/p/torrentwatch-x/</Homepage>
-      <InstallScript>Apps/AppInit/appinit.cgi?install&amp;Torrentwatchx.tar</InstallScript>
-      <WebInterfaceURL>http://[NMT_IP]:9999/Torrentwatchx_web/index.html</WebInterfaceURL>
-      <GayaInterfaceURL />
-      <Screenshots>
-	<URL>http://freshmeat.net/screenshots/f5/23/f523352759f85cef96ba4302ace66314_medium.png?1262102671</URL>
-	<URL>http://freshmeat.net/screenshots/80/23/8023a6e45554022c481793b8c40006ac_medium.png?1262102690</URL>
-	<URL>http://freshmeat.net/screenshots/fc/af/fcafa5fd7f089c6a5c9034871a7e4c9d_medium.png?1262102707</URL>
-	<URL>http://freshmeat.net/screenshots/94/7c/947c4409ffcec9c3f19f1ec6329ca400_medium.png?1262102848</URL>
-      </Screenshots>
-      <UsageInstructions />
-      <Forum />
-      <Changelog />
-    </Application>
-    <Application>
-      <Name>TorrentWatch-X</Name>
-      <Version>0.6.5rc3 (RC3)</Version>
-      <DownloadURL>http://torrentwatch-x.googlecode.com/files/TorrentWatchX-NMT-0.6.5-rc3.zip</DownloadURL>
+      <Version>0.6.5</Version>
+      <DownloadURL>http://torrentwatch-x.googlecode.com/files/TorrentWatchX-NMT-0.6.5.zip</DownloadURL>
       <Author>Wiebel</Author>
       <Maintainer>Wiebel</Maintainer>
       <Description>TorrentWatch-X is a web based tool to automate downloads of tv shows via torrents and rss. Based on the torrentwatch project (now known as NMTDVR).</Description>
@@ -61,6 +40,8 @@
 	    -- Better hidelist matching. 
 	    -- WebUI will update rss cache if cache is older then 24 hours. The crontab script updates if cache is older then 15 minutes. This ensures the WebUI won't slow down when feeds are down or slow.
 	    -- Added TimeZone option in the Configure menu (Configure -> other).
+	    -- Fixed a lot of PHP notices and warnings
+	    -- Upgraded jquery to 1.4.3
       </Changelog>
     </Application>
     </Applications>

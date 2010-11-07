@@ -85,8 +85,7 @@ label.category {
  *
  * ----------------*/
 ul.mainoptions {
-    background: #ddd;
-    border-top: 1px solid #979797;
+    background: #ccc;
     border-bottom: 1px solid #979797;
     width: 100%;
     height: 58px;
@@ -102,9 +101,13 @@ ul.mainoptions li {
 
 ul.mainoptions li:hover {
     background: #9DACC1;
-    padding: 5px 1px 5px 1px;
-    border-left: 1px dotted black;
-    border-right: 1px dotted black;
+    padding: 5px 2px 5px 2px;
+}
+
+ul.mainoptions li.selected {
+    background: #9DACC1;
+    padding: 4px 1px 5px 1px;
+    border: 1px solid black;
 }
 
 ul.mainoptions li#legend {
@@ -191,6 +194,7 @@ ul#filterbar_container li a {
 ul#filterbar_container li:hover {
     background: #9DACC1;
     height: 20px;
+    border
 }
 
 ul#filterbar_container li.selected {
@@ -263,7 +267,7 @@ div#torrentlist_container {
     position: absolute;
     overflow: auto;
     width: 100%;
-    top: 83px;
+    top: 82px;
     bottom: 0;
     left: 0;
     right: 0;
@@ -280,7 +284,6 @@ div#torrentlist_container div.errorHeader {
 
 div#torrentlist_container div.header,
 div.transmission div.header {
-    border-bottom: 1px solid #ccc;
     font-size: 1.4em;
     height: 1.2em;
     text-align: center;
@@ -305,14 +308,13 @@ ul.torrentlist li.torrent {
 }
 
 ul.torrentlist li.torrent.alt {
-    background-color: #EDF3FE;
+    background-color: #F6F7F9;
 }
 
 ul.torrentlist li.torrent:hover,
 ul.torrentlist li.torrent.alt:hover {
-    background: #9DACC1;
-    color: white;
-    opacity: .75;
+    background: #CCDEFF;
+    opacity: .80;
 }
 
 li.torrent.hidden_bytext {
@@ -410,12 +412,10 @@ span.torrent_name {
 }
 
 td.torrent_name {
-    border-bottom: 1px solid #ccc;
     vertical-align: middle;
 }
 
 td.feed_info {
-    border-bottom: 1px solid #ccc;
     text-align: right;
     vertical-align: middle;
     padding: 1px 2px 1px 0;

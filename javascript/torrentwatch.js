@@ -622,8 +622,10 @@ $(function() {
             if (last) {
                 $(last).fadeOut("normal");
                 $('#favorites, #configuration, #feeds, #history, #hidelist').remove();
+		$('ul#mainoptions li').removeClass('selected')
             }
             if (current_dialog && this.hash != '#') {
+		$("li#" + this.parentNode.id).addClass("selected");
                 $.get('torrentwatch.php', { get_dialog_data: this.hash }, function(data) {
                     $('#dynamicdata.dyndata').append(data);
                     $('#dynamicdata').find("ul.favorite > li").initFavorites().end().find("form").initForm().end().initConfigDialog();

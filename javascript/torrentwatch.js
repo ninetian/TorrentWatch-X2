@@ -728,6 +728,7 @@ $(function() {
                 .append('<div id=tor_' + id + ' class="torInfo tor_' + torHash.match(/\w+/) + '"></div>');
             }
 
+	    $('li#' + id + ' span.hide_item').hide();
             $('li#' + id + ' p.dlTorrent').hide();
             $('li#' + id + ' p.torStop').show();
 	    if(window.client == 'folder') return;

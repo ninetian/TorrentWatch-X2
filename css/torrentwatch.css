@@ -86,7 +86,8 @@ label.category {
  * ----------------*/
 ul.mainoptions {
     background: #ddd;
-    border: 1px solid #979797;
+    border-top: 1px solid #979797;
+    border-bottom: 1px solid #979797;
     width: 100%;
     height: 58px;
     z-index: 2;
@@ -101,6 +102,9 @@ ul.mainoptions li {
 
 ul.mainoptions li:hover {
     background: #9DACC1;
+    padding: 5px 1px 5px 1px;
+    border-left: 1px dotted black;
+    border-right: 1px dotted black;
 }
 
 ul.mainoptions li#legend {
@@ -298,15 +302,22 @@ div#torrentlist_container div.header td.feed_title {
 
 ul.torrentlist li.torrent {
     font-size: 0.9em;
-    }
-
-li.torrent.hidden_bytext {
-    display: none;
-    }
+}
 
 ul.torrentlist li.torrent.alt {
     background-color: #EDF3FE;
-    }
+}
+
+ul.torrentlist li.torrent:hover,
+ul.torrentlist li.torrent.alt:hover {
+    background: #9DACC1;
+    color: white;
+    opacity: .75;
+}
+
+li.torrent.hidden_bytext {
+    display: none;
+}
 
 ul.torrentlist li.torrent.paused {
     background-color: #FBBFBF;

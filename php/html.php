@@ -57,10 +57,15 @@ function show_feed_html($idx) {
   if($config_values['Settings']['Combine Feeds'] == 0) {
       $html_out .= "<div class=\"header\">\n";
       $html_out .= "<table width=\"100%\" cellspacing=\"0\"><tr><td class='hide_feed'>\n";
-      $html_out .= "<span class=\"hide_item\">\n";
+      $html_out .= "<span class=\"hide_feed_left\">\n";
       $html_out .= "<a href=\"#\" title=\"Hide this feed\" onclick=\"$.toggleFeed(".$idx.", 0)\">\n";
-      $html_out .= "<img height='12' src=\"images/hide.png\"></a></span></td>\n";
-      $html_out .= "<td class='feed_title'>".$config_values['Feeds'][$idx]['Name']."</td></tr></table></div>\n";
+      $html_out .= "<img height='14' src=\"images/blank.gif\"></a></span></td>\n";
+      $html_out .= "<td class='feed_title'>".$config_values['Feeds'][$idx]['Name']."</td>\n";
+      $html_out .= "<td class='hide_feed'>\n";
+      $html_out .= "<span class=\"hide_feed_right\">\n";
+      $html_out .= "<a href=\"#\" title=\"Hide this feed\" onclick=\"$.toggleFeed(".$idx.", 0)\">\n";
+      $html_out .= "<img height='14' src=\"images/blank.gif\"></a></span></td>\n";
+      $html_out .= "</tr></table></div>\n";
   }
 }
 

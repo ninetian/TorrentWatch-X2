@@ -285,7 +285,7 @@ div#torrentlist_container div.errorHeader {
 div#torrentlist_container div.header,
 div.transmission div.header {
     font-size: 1.4em;
-    height: 1.2em;
+    height: 1.2em ;
     text-align: center;
     background: #CCFFCC;
     border-bottom: 1px solid #ccc;
@@ -436,7 +436,21 @@ p.feed_name {
 
 span.hide_item img {
     border: 1px solid #b0b0b0;
-}    
+}
+
+div.header span.hide_feed_left,
+div.header span.hide_feed_right {
+    margin: 5px 0 5px 0;
+    background: url(../images/arrow.png) no-repeat left center;
+}
+
+div.header_hidden span.hide_feed_left {
+    background: url(../images/arrow-right.png) no-repeat left center;
+}
+
+div.header_hidden span.hide_feed_right {
+    background: url(../images/arrow-left.png) no-repeat left center;
+}
 
 div#footer {
     padding: 2px;

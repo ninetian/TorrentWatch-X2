@@ -282,16 +282,16 @@ function client_add_torrent($filename, $dest, $title, $feed = NULL, &$fav = NULL
     add_history($tor_name);
     _debug("Started: $tor_name in $dest\n",0);
     if(isset($fav)) {
-      run_script('favstart', $tor_name);
+      run_script('favstart', $title);
       if($config_values['Settings']['Email Notifications'] == 1) {
           $subject = "TW-X: $tor_name started downloading.";
           $msg = "TorrentWatch started downloading $tor_name";
           sendmail($msg, $subject);
       }
-      updateFavoriteEpisode($fav, $tor_name);
+      updateFavoriteEpisode($fav, $title);
       _debug("Updated Favorites");
     } else {
-        run_script('nonfavstart', $tor_name);
+        run_script('nonfavstart', $title);
     }
     if($config_values['Settings']['Save Torrents'])
       file_put_contents("$dest/$tor_name.torrent", $tor);

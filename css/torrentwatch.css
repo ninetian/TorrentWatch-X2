@@ -485,7 +485,7 @@ div.dialog_window {
     opacity: .95;
     border: 2px solid #B5B5B5;
     top: 100px;
-    width: 450px;
+    width: 460px;
     margin-left: -205px;
     padding: 5px;
     }
@@ -721,7 +721,7 @@ div.dialog_window#configuration {
     margin-top: 90px;
     margin-left: -225px;
     float: left;
-    width: 450px;
+    width: 460px;
 }
 
 div.dialog_window#configuration div.config_form input.text,
@@ -756,8 +756,10 @@ form#config_form div {
 }
 
 div#config_feeds {
+    overflow: auto;
     border: 1px solid grey;
     margin-top: 10px;
+    max-height: 250px;
     padding: 5px 0 5px 0;
 }
 

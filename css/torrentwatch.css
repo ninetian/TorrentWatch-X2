@@ -288,6 +288,7 @@ div.transmission div.header {
     height: 1.2em;
     text-align: center;
     background: #CCFFCC;
+    border-bottom: 1px solid #ccc;
 }
 
 div#torrentlist_container div.header_hidden {

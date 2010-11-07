@@ -504,6 +504,7 @@ $(function() {
     $.loadDynamicData = function(html) {
         window.gotAllData = 0;
         $("#dynamicdata").remove();
+	$('ul#mainoptions li').removeClass('selected')
         setTimeout(function() {
             var dynamic = $("<div id='dynamicdata' class='dyndata'/>");
             // Use innerHTML because some browsers choke with $(html) when html is many KB
@@ -625,7 +626,6 @@ $(function() {
 		$('ul#mainoptions li').removeClass('selected')
             }
             if (current_dialog && this.hash != '#') {
-		$("li#" + this.parentNode.id).addClass("selected");
                 $.get('torrentwatch.php', { get_dialog_data: this.hash }, function(data) {
                     $('#dynamicdata.dyndata').append(data);
                     $('#dynamicdata').find("ul.favorite > li").initFavorites().end().find("form").initForm().end().initConfigDialog();
@@ -638,6 +638,7 @@ $(function() {
                     window.dialog = 1;
                     $(current_dialog + ' a.submitForm').click(function() { window.dialog = 0 })
                 });
+	        $("li#" + this.parentNode.id).addClass("selected");
             }
         });
         return this;
@@ -865,6 +866,7 @@ $(function() {
 		    setTimeout(function() { $('div#errorDialog').remove(); }, 15000);
                 } else {
                     $('.dialog_window').remove();
+		    $('ul#mainoptions li').removeClass('selected')
 		    $(document.body).append('<div id="successDialog" class="dialog_window" style="display: block;">Success: Thank you for this bug report. You will be contacted by mail.</div>');
 		    setTimeout(function() { $('div#successDialog').remove(); }, 10000);
                 }

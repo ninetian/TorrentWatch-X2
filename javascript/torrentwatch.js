@@ -495,7 +495,7 @@ $(function() {
             $(this).show();
         }
     }).ajaxStop(function() {
- 	$(this).hide();
+ 	$(this).fadeOut();
     });
 });
 
@@ -891,9 +891,10 @@ $(function() {
     }
     
     $.toggleConfigTab = function(tab, button) {
+	console.dir(this.id);
         $(".toggleConfigTab").removeClass("selTab");
         $(button).addClass("selTab");
-        $(".configTab").hide();
+	$('.configTab').hide();
         if ((tab == "#config_feeds") || (tab == "#config_hideList")) {
             $("#config_form").hide();
         } else {

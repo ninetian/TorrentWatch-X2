@@ -1,21 +1,28 @@
       <div class="dialog">
         <div class="dialog_window" id="configuration">
-            <div id="configTabs">
-                <a id="tabInt" class="toggleConfigTab selTab"       
-                    onclick='javascript:$.toggleConfigTab("#config_interface", "#tabInt")'>Interface</a>
-                <a id="tabClient" class="toggleConfigTab" 
-                    onclick='javascript:$.toggleConfigTab("#config_torClient", "#tabClient")'>Client</a>
-                <a id="tabTor" class="toggleConfigTab" 
-                    onclick='javascript:$.toggleConfigTab("#config_tor", "#tabTor")'>Torrent</a>
-                <a id="tabFavs" class="toggleConfigTab" 
-                    onclick='javascript:$.toggleConfigTab("#config_favorites", "#tabFavs")'>Favorites</a>
-                <a id="tabFeeds" class="toggleConfigTab" 
-                    onclick='javascript:$.toggleConfigTab("#config_feeds", "#tabFeeds")'>Feeds</a>
-                <a id="tabFeeds" class="toggleConfigTab" 
-                    onclick='javascript:$.toggleConfigTab("#config_hideList", "#tabHideList")'>Hide List</a>                    
-                <a id="tabOthers" class="toggleConfigTab" 
-                    onclick='javascript:$.toggleConfigTab("#config_other", "#tabOthers")'>Other</a>
-            </div>  
+             <ul id="configTabs">
+              <li id="tabInt" class="toggleConfigTab left selTab">
+                <a onclick='javascript:$.toggleConfigTab("#config_interface", "#tabInt")'>Interface</a>
+	      </li>
+              <li id="tabClient" class="toggleConfigTab">
+                <a onclick='javascript:$.toggleConfigTab("#config_torClient", "#tabClient")'>Client</a>
+	      </li>
+              <li id="tabTor" class="toggleConfigTab">
+                <a onclick='javascript:$.toggleConfigTab("#config_tor", "#tabTor")'>Torrent</a>
+	      </li>
+              <li id="tabFavs" class="toggleConfigTab">
+                <a onclick='javascript:$.toggleConfigTab("#config_favorites", "#tabFavs")'>Favorites</a>
+	      </li>
+              <li id="tabFeeds" class="toggleConfigTab" 
+                <a onclick='javascript:$.toggleConfigTab("#config_feeds", "#tabFeeds")'>Feeds</a>
+	      </li>
+              <li id="tabHideList" class="toggleConfigTab" 
+                <a onclick='javascript:$.toggleConfigTab("#config_hideList", "#tabHideList")'>Hide List</a>                    
+	      </li>
+              <li id="tabOthers" class="toggleConfigTab right" 
+                <a onclick='javascript:$.toggleConfigTab("#config_other", "#tabOthers")'>Other</a>
+	      </li>
+	     </ul>
             
             <form action="torrentwatch.php?setGlobals=1" id="config_form" name="config_form">
                 <div class="config_form">

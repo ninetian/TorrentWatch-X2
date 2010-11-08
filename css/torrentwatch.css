@@ -1,17 +1,3 @@
-/*
-    Name: PCH Torrent RSS Config
-    Description: Stylistic update of the TorrentWatch (http://code.google.com/p/torrentwatch/) config interface.
-    Version: 1.0
-    Author: Keith Solomon
-    Author URI: http://reciprocity.be/
-    
-    License: GNU General Public License v2
-*/
-
-/* Modifications by Joris Vandalon
- * inspired by Clutch
- */
-
 /*---------------------
  * Some debugging info
  * --------------------*/
@@ -188,7 +174,7 @@ ul#filterbar_container li {
     height: 18px;
     text-align: center;
     font-size: 0.8em;
-    background: #9DACC1;
+    background: #ccc;
     color: #4E4E4F;
 }
 
@@ -211,19 +197,23 @@ ul#filterbar_container li a {
     padding-right: 0.5em;
     text-decoration: none;
     color: #333;
-    }
+}
 
+ul#filterbar_container li:hover a,
+ul#filterbar_container li.selected a {
+    color: #FFF;
+}
 
 ul#filterbar_container li:hover {
-    background: #CCFFCC;
-    //background: #eee;
+    background: #9DACC1;
+    opacity: .60;
     height: 18px;
 }
 
 ul#filterbar_container li.selected {
-    background: #CCFFCC;
-    //background: #ccc;
-    height: 19px;
+    background: #9DACC1;
+    height: 18px;
+    opacity: 1;
 }
 
 ul#filterbar_container li#rates:hover,
@@ -304,7 +294,6 @@ div#torrentlist_container div.errorHeader {
     text-align: center;
     padding: 0.2em 0 0.2em 0;
     background: #CCFFCC;
-    //background: #ccc;
     border-bottom: 1px solid #979797;
     border-right: 1px solid #979797;
     border-left: 1px solid #979797;
@@ -317,13 +306,11 @@ div.transmission div.header {
     padding: 0.2em 0 0.2em 0;
     text-align: center;
     background: #CCFFCC;
-    //background: #ccc;
     border-bottom: 1px solid #979797;
-    border-right: 1px solid #979797;
-    border-left: 1px solid #979797;
 }
 
 div#torrentlist_container div.header_hidden {
+    border-bottom: 0px;
     color: #999;
 }
 

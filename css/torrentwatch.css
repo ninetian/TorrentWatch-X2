@@ -739,6 +739,7 @@ div#welcome5 input.form_email[type=text] {
 
 #progressbar {
     background: #DBDBDB url('../images/ajaxload.gif') no-repeat center bottom;
+    border-top: 1px solid #979797;
     display: block;
     height: 30px;
     top: 150px;

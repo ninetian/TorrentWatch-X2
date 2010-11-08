@@ -36,7 +36,7 @@ $(function() {
         if (filter == 'all') {
             if ($('.transmission').is(":visible")) {
                 $('.transmission').hideMe();
-                $('.feed .header').slideDown();
+                $('.feed').slideDown();
             }
             var tor = $(".feed li.torrent").not(".hiddenFeed");
             tor.slideDown();
@@ -45,7 +45,7 @@ $(function() {
         } else if (filter == 'matching') {
             if ($('.transmission').is(":visible")) {
                 $('.transmission').hideMe();
-                $('.feed .header').slideDown();
+                $('.feed').slideDown();
             }
             var tor = $(".feed li.torrent").filter(".match_nomatch");
             tor.hideMe();
@@ -56,7 +56,7 @@ $(function() {
         } else if (filter == 'downloading') {
             if ($('.transmission').is(":visible")) {
                 $('.transmission').hideMe();
-                $('.feed .header').slideDown();
+                $('.feed').slideDown();
             }
             var tor = $(".feed li.torrent").not('.match_downloading, .match_match');
             tor.hideMe();
@@ -67,7 +67,7 @@ $(function() {
         } else if (filter == 'downloaded') {
             if ($('.transmission').is(":visible")) {
                 $('.transmission').hideMe();
-                $('.feed .header').slideDown();
+                $('.feed').slideDown();
             }
             var tor = $(".feed li.torrent").not('.match_cachehit, .match_downloaded');
             tor.hideMe();
@@ -78,7 +78,7 @@ $(function() {
         } else if (filter == 'transmission') {
  	    window.activeTab = 'torClient';
             if ($('.feed').is(':visible')) {
-                $('.feed .header').hideMe();
+                $('.feed').hideMe();
                 $('.feed li.torrent').hideMe();
             }
             $('.transmission').slideDown();
@@ -532,8 +532,8 @@ $(function() {
             if (!(filter)) {
                 filter = 'all';
             }
-            if($('#torrentlist div.header').length == 0) {
-                $('#torrentlist>li').tsort('#unixTime', {order: 'desc'});
+            if($('.torrentlist div.header').length == 0) {
+                $('.torrentlist>li').tsort('#unixTime', {order: 'desc'});
             }
             setTimeout(function() {
                 if ($('#transmission_data').length > 0) {

@@ -1,5 +1,16 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
       <div class="dialog">
         <div class="dialog_window" id="configuration">
+            <div id='confTitle'>
+                <h2 class="dialog_heading">
+                    Configuration
+                </h2>
+            </div>
             <div id="configTabs">
                 <a id="tabInt" class="toggleConfigTab selTab"       
                     onclick='javascript:$.toggleConfigTab("#config_interface", "#tabInt")'>Interface</a>
@@ -258,3 +269,5 @@
             </div>
         </div>
       </div>
+    </body>
+</html>

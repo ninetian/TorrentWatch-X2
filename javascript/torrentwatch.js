@@ -76,6 +76,7 @@ $(function() {
             tor.slideDown();
             tor.markAlt().closest(".feed div.feed");
         } else if (filter == 'transmission') {
+ 	    window.activeTab = 'torClient';
             if ($('.feed').is(':visible')) {
                 $('.feed .header').hideMe();
                 $('.feed li.torrent').hideMe();
@@ -145,7 +146,7 @@ $(function() {
                 } else {
                     target = 'http://' + uri.match(/\S+:\d+/) + '/transmission/web/';
                 }
-                $("#webui a").text(client)[0].href = target;
+                $("#webui a").html($("#webui a").html().replace(/Client UI/, 'Transmission'))[0].href = target;
                 $('li#webui').show();
             })
             window.client = 'Transmission';
@@ -217,11 +218,6 @@ $(function() {
         // Single-digit numbers have greater precision
         var precision = 2;
         size = Math.roundWithPrecision(size, precision);
-
-        // Add the decimal if this is an integer
-        if ((size % 1) === 0 && unit != ' bytes') {
-            size = size + '.0';
-        }
 
         return size + unit;
     };
@@ -302,8 +298,8 @@ $(function() {
 
     getClientData = function() {
         if(window.client == 'Transmission') {
-            var recent;
-            if(window.gotAllData) { recent = 1; } else { recent = 0; };
+            var recent = 1;
+            //if(window.gotAllData || window.activeTab != 'torClient') { recent = 1; } else { recent = 0; };
             
             window.hideProgressBar = recent;
             $.get('torrentwatch.php', {
@@ -461,7 +457,7 @@ $(function() {
         });
 
 	if(!isNaN(downSpeed) && !isNaN(upSpeed)) {
-		$('li#rates').html('D: ' + Math.formatBytes(downSpeed) + '/s<br />' + 'U: ' + Math.formatBytes(upSpeed) + '/s');
+		$('li#rates').html('D: ' + Math.formatBytes(downSpeed) + '/s</br>' + 'U: ' + Math.formatBytes(upSpeed) + '/s');
 	}
         
         if(recent === 0 && torListHtml) {
@@ -488,12 +484,12 @@ $(function() {
     });
 
     // Ajax progress bar
-    $("#progressbar").ajaxStart(function() {
+    $("#progress").ajaxStart(function() {
         if (!(window.hideProgressBar)) {
             $(this).show();
         }
     }).ajaxStop(function() {
-        $(this).hide();
+ 	$(this).hide();
     });
 });
 
@@ -504,7 +500,7 @@ $(function() {
     $.loadDynamicData = function(html) {
         window.gotAllData = 0;
         $("#dynamicdata").remove();
-	$('ul#mainoptions li').removeClass('selected')
+	$('ul#mainoptions li a').removeClass('selected')
         setTimeout(function() {
             var dynamic = $("<div id='dynamicdata' class='dyndata'/>");
             // Use innerHTML because some browsers choke with $(html) when html is many KB
@@ -522,12 +518,14 @@ $(function() {
                         $('#torrentlist_container').height($(window).height() - $('#torrentlist_container').attr('offsetTop'));
                     });
                 }
+		window.hideProgressBar = 1;
                 $.get('torrentwatch.php', { show_donate: 1 }, function(donate) {
                     $.get('torrentwatch.php', { show_footer: 1 }, function(footer) {
                     $('#torrentlist_container').append(footer);
                     $('#torrentlist_container').append(donate);
                 })
                 })
+		window.hideProgressBar = 0;
             },
             50);
             var filter = $.cookie('TWFILTER');
@@ -623,7 +621,8 @@ $(function() {
             if (last) {
                 $(last).fadeOut("normal");
                 $('#favorites, #configuration, #feeds, #history, #hidelist').remove();
-		$('ul#mainoptions li').removeClass('selected')
+		$('ul#mainoptions li a').removeClass('selected')
+                $('.dialog').remove();
             }
             if (current_dialog && this.hash != '#') {
                 $.get('torrentwatch.php', { get_dialog_data: this.hash }, function(data) {
@@ -638,7 +637,7 @@ $(function() {
                     window.dialog = 1;
                     $(current_dialog + ' a.submitForm').click(function() { window.dialog = 0 })
                 });
-	        $("li#" + this.parentNode.id).addClass("selected");
+	        $("li#" + this.parentNode.id + " a").addClass("selected");
             }
         });
         return this;
@@ -865,8 +864,8 @@ $(function() {
                     $(document.body).append(data);
 		    setTimeout(function() { $('div#errorDialog').remove(); }, 15000);
                 } else {
-                    $('.dialog_window').remove();
-		    $('ul#mainoptions li').removeClass('selected')
+                    $('.dialog').remove();
+		    $('ul#mainoptions li a').removeClass('selected')
 		    $(document.body).append('<div id="successDialog" class="dialog_window" style="display: block;">Success: Thank you for this bug report. You will be contacted by mail.</div>');
 		    setTimeout(function() { $('div#successDialog').remove(); }, 10000);
                 }

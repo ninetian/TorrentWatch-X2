@@ -4,6 +4,7 @@
         <title></title>
     </head>
     <body>
+      <div class="dialog">
         <div class="dialog_window" id="configuration">
             <div id='confTitle'>
                 <h2 class="dialog_heading">
@@ -265,8 +266,8 @@
             </div>
             <div id='linkButtons' class="buttonContainer">
                 <a class='toggleDialog button' href='#'>Close</a> 
-                <a class='toggleDialog button' href='#welcome1'>Wizard</a>
             </div>
         </div>
+      </div>
     </body>
 </html>

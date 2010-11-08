@@ -1,4 +1,5 @@
-<div class="dialog_window" id="report_bug">
+<div class="dialog">
+  <div class="dialog_window" id="report_bug">
     <form action="#" id="report_form">
     <div><label class="item">Summary:
         <input id='Summary' type='text' class='text' name='Summary'?>
@@ -33,4 +34,5 @@
         <a class='toggleDialog button' href='#'>Close</a> 
     </div>
     </form>
+  </div>
 </div>

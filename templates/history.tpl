@@ -1,4 +1,5 @@
-<div class="dialog_window" id="history">
+<div class="dialog">
+ <div class="dialog_window" id="history">
   <ul id="historyItems">
     <?php foreach($history as $item): ?>
       <li><?php echo $item['Date'].' - '.$item['Title']; ?></li>
@@ -8,4 +9,5 @@
       <a class="button toggleDialog" href="#">Close</a>
       <a class="button" id="clearhistory" href="torrentwatch.php?clearHistory=1">Clear</a>
   </div>
+ </div>
 </div>

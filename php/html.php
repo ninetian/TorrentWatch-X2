@@ -53,6 +53,9 @@ function show_torrent_html($item, $feed, $feedName, $alt, $torHash, $matched, $i
 // The opening of the div which contains all the feeditems(one div per feed)
 function show_feed_html($idx) {
   global $html_out, $config_values;
+  if($config_values['Settings']['Combine Feeds'] == 1) {
+      $html_out .= '<div class="header">Combined Feeds</div>';
+  }
   $html_out .= "<div class='feed' id='feed_$idx'><ul id='torrentlist' class='torrentlist'>";
   if($config_values['Settings']['Combine Feeds'] == 0) {
       $html_out .= "<div class=\"header\">\n";

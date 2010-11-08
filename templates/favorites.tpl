@@ -1,4 +1,5 @@
-<div class="dialog_window" id="favorites">
+<div class="dialog">
+ <div class="dialog_window" id="favorites">
   <div class="favorite">
    <ul class="favorite">
     <li><a href="#favorite_new">New Favorite</a></li>
@@ -23,5 +24,6 @@
           <a class="toggleDialog button" id="Close" href="#">Close</a>
       </div>
   </div>
+ </div>
 </div>
 

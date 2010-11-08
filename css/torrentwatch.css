@@ -71,10 +71,11 @@ label.category {
  *
  * ----------------*/
 ul.mainoptions {
+    position:		relative;
     background: #ddd;
     width: 100%;
     height: 30px;
-    z-index: 3;
+    z-index: 		3;
 }
 
 ul.mainoptions li {
@@ -151,7 +152,7 @@ ul.mainoptions li#webui a .icon{
 
 /*-----------------
  *
- * F I L T E R     B A R
+ * F I L T E R   B A R
  *
  * ---------------*/
 
@@ -207,6 +208,7 @@ ul#filterbar_container li.selected a {
 ul#filterbar_container li:hover {
     background: #9DACC1;
     opacity: .60;
+    filter: alpha(opacity = 60);
     height: 18px;
 }
 
@@ -306,7 +308,6 @@ div.transmission div.header {
     padding: 0.2em 0 0.2em 0;
     text-align: center;
     background: #CCFFCC;
-    border-bottom: 1px solid #979797;
 }
 
 div#torrentlist_container div.header_hidden {
@@ -507,6 +508,7 @@ div.dialog {
     cursor:		wait;
     padding-top:	60px;
     border-top:		1px solid #979797;
+    z-index		0;
 }
 
 div.dialog_window {

@@ -311,6 +311,7 @@ div.transmission div.header {
 }
 
 div#torrentlist_container div.header_hidden {
+    border-bottom: 0px;
     color: #999;
 }
 
@@ -324,8 +325,7 @@ div#torrentlist_container div.header td.feed_title {
 }
 
 div#torrentlist_container ul.torrentlist {
-    //border-bottom: 1px solid #979797;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #979797;
 }
 
 ul.torrentlist li.torrent {

@@ -76,7 +76,6 @@ $(function() {
             tor.slideDown();
             tor.markAlt().closest(".feed div.feed");
         } else if (filter == 'transmission') {
- 	    window.activeTab = 'torClient';
             if ($('.feed').is(':visible')) {
                 $('.feed').hideMe();
                 $('.feed li.torrent').hideMe();
@@ -298,10 +297,10 @@ $(function() {
 
     getClientData = function() {
         if(window.client == 'Transmission') {
-            var recent = 1;
-            //if(window.gotAllData || window.activeTab != 'torClient') { recent = 1; } else { recent = 0; };
+            var recent;
+            if(window.gotAllData) { recent = 1; } else { recent = 0; };
             
-            window.hideProgressBar = recent;
+            window.hideProgressBar = 1;
             $.get('torrentwatch.php', {
                 'getClientData': 1,
                 'recent': recent

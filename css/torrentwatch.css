@@ -719,19 +719,22 @@ div#welcome5 input.form_email[type=text] {
  *
  ***************************/
 
-#progress {
+.progress {
     position:           absolute;
     left:               0px;
     right:              0px;
     top:                0px;
     bottom:             0px;
+    cursor:             wait;
+    padding-top:        60px;
+}
+
+.progress_full { 
+    z-index:		99;
     background:transparent;
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000,endColorstr=#99000000);
     zoom: 1;
     background-color:   rgba(0, 0, 0, 0.7);
-    cursor:             wait;
-    padding-top:        60px;
-    z-index:		99;
 }
 
 #progressbar {

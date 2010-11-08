@@ -490,12 +490,17 @@ $(function() {
     });
 
     // Ajax progress bar
-    $("#progress").ajaxStart(function() {
+    $('#progress').ajaxStart(function() {
         if (!(window.hideProgressBar)) {
+	    if (!window.noProgressBG) {
+                $('#progress').addClass('progress_full');
+	    }
             $(this).show();
         }
     }).ajaxStop(function() {
  	$(this).fadeOut();
+	window.noProgressBG = 0;
+	$('#progress').removeClass('progress_full');
     });
 });
 
@@ -628,8 +633,8 @@ $(function() {
                 $(last).fadeOut("normal");
                 $('#favorites, #configuration, #feeds, #history, #hidelist').remove();
 		$('ul#mainoptions li a').removeClass('selected')
-                $('.dialog_window').remove();
-                $('.dialog').addClass('dialog_last');
+                $('#dynamicdata .dialog_window').remove();
+                $('#dynamicdata .dialog').addClass('dialog_last');
             }
             if (current_dialog && this.hash != '#') {
 		window.hideProgressBar=1;
@@ -644,7 +649,7 @@ $(function() {
 		    }
 		    $(current_dialog).fadeIn("normal");
                     setTimeout(function() {
-                        $(".dialog_window input, .dialog_window select").change(function() {
+                        $("#dynamicdata .dialog_window input, #dynamicdata .dialog_window select").change(function() {
                           window.input_change = 1;
                         });    
                     },500);
@@ -734,6 +739,7 @@ $(function() {
     };
 
     $.dlTorrent = function(url, id) {
+        window.noProgressBG = 1;
         $.get(url,
         function(torHash) {
             if(!(torHash.match(/\w+/)) && window.client != 'folder') {
@@ -776,6 +782,7 @@ $(function() {
         }
         
         if(sure) {
+            window.noProgressBG = 1;
             $.getJSON('torrentwatch.php', {
                 'delTorrent': torHash,
                 'trash': trash
@@ -801,6 +808,7 @@ $(function() {
                 'startTorrent': torHash
             };
         }
+        window.noProgressBG = 1;
         $.getJSON('torrentwatch.php', param,
         function(json) {
             if (json.result == "success") {
@@ -816,6 +824,7 @@ $(function() {
     $.moveTorrent = function(torHash) {
         var path = $('input#moveTo' + torHash)[0].value;
         
+        window.noProgressBG = 1;
         $.getJSON('torrentwatch.php', {
             'moveTo': path,
             'torHash': torHash
@@ -833,6 +842,7 @@ $(function() {
     }
     
     $.hideItem = function(title) {
+        window.noProgressBG = 1;
         $.get('torrentwatch.php?hide=' + title, '', $.loadDynamicData, 'html');
     }
     

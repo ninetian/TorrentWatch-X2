@@ -902,7 +902,6 @@ $(function() {
     }
     
     $.toggleConfigTab = function(tab, button) {
-	console.dir(this.id);
         $(".toggleConfigTab").removeClass("selTab");
         $(button).addClass("selTab");
 	$('.configTab').hide();

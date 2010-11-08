@@ -496,15 +496,15 @@ div#donate {
  * ---------------------*/
 
 div.dialog {
+    display:		none;
     position:		absolute;
     left:		0px;
     right:		0px;
     top:		30px;
     bottom:		0px;
-    bottom:		0px;
-    background:transparent;
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000,endColorstr=#99000000);
-    zoom: 1;
+    background:		transparent;
+    filter:		progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000,endColorstr=#99000000);
+    zoom: 		1;
     background-color:	rgba(0, 0, 0, 0.7);
     cursor:		wait;
     padding-top:	60px;
@@ -737,7 +737,7 @@ div#welcome5 input.form_email[type=text] {
     background-color:   rgba(0, 0, 0, 0.7);
     cursor:             wait;
     padding-top:        60px;
-    z-index:		2;
+    z-index:		99;
 }
 
 #progressbar {

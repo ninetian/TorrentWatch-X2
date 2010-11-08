@@ -735,6 +735,7 @@ $(function() {
     };
 
     $.addFavorite = function(url) {
+        window.noProgressBG = 1;
         $.get(url, '', $.loadDynamicData, 'html');
     };
 

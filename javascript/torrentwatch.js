@@ -643,7 +643,7 @@ $(function() {
                 $('#dynamicdata .dialog').addClass('dialog_last');
             }
             if (current_dialog && this.hash != '#') {
-		window.hideProgressBar=1;
+		window.noProgressBG=1;
                 $.get('torrentwatch.php', { get_dialog_data: this.hash }, function(data) {
                     $('#dynamicdata.dyndata').append(data);
                     $('#dynamicdata').find("ul.favorite > li").initFavorites().end().find("form").initForm().end().initConfigDialog();
@@ -663,6 +663,7 @@ $(function() {
                     $(current_dialog + ' a.submitForm').click(function() { window.dialog = 0 })
                 });
 	        $("li#" + this.parentNode.id + " a").addClass("selected");
+	        window.noProgressBG=0;
             } else {
 		$('#dynamicdata .dialog').fadeOut()
 		setTimeout(function() { $('#dynamicdata .dialog').remove(); }, 400);

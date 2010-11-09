@@ -310,6 +310,10 @@ div.transmission div.header {
     background: #CCFFCC;
 }
 
+div.transmission #waiting {
+    //display: none;
+    text-align: center;
+}
 div#torrentlist_container div.header_hidden {
     border-bottom: 0px;
     color: #999;

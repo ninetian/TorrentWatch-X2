@@ -16,7 +16,7 @@ function show_transmission_div() {
   global $html_out;
   $html_out .= '<div id="transmission_data" class="transmission">';
   $html_out .= '<div class="header">Transmission<img id="headerImg" src="../images/ajax-loader-small.gif"></div>';
-  $html_out .= '<div id="waiting" style="text-align: center"><img src="../images/ajax-loader.gif"></div>';
+  $html_out .= '<div id="waiting"><img src="../images/ajax-loader.gif"></div>';
   $html_out .= '<ul id="transmission_list" class="torrentlist">';
 }
 

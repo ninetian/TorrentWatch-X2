@@ -313,6 +313,8 @@ $(function() {
                 'recent': recent
             },
                 function(json) {
+		if(!recent) { $('div#waiting').show(); };
+		$('#headerImg').show();
                 var check = json.match(/\S+/);
                 if(check == 'null') {
                     showClientError('Got no data from ' + window.client);
@@ -325,10 +327,9 @@ $(function() {
                     return;
                 }
                 
-		$('div#waiting').remove();
                 if(recent === 0 && json.result == 'success') window.gotAllData = 1;
-		$('#headerImg').show();
                 processClientData(json, recent);
+		$('div#waiting').hide();
 		$('#headerImg').hide();
                 
                 if(json && recent) {                    

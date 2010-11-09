@@ -327,7 +327,7 @@ div#torrentlist_container div.header td.feed_title {
 }
 
 div#torrentlist_container ul.torrentlist {
-    //border-bottom: 1px solid #979797;
+    border-bottom: 1px solid #DDDDDD;
 }
 
 ul.torrentlist li.torrent {

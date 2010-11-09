@@ -526,7 +526,7 @@ div.dialog_window {
     margin-left: -230px;
     padding: 5px;
     cursor: default;
-    z-index: 3;
+    z-index: 5;
 }
 
 div#clear_cache {
@@ -752,16 +752,17 @@ div#welcome5 input.form_email[type=text] {
     height: 30px;
     top: 150px;
     overflow: hidden;
-    z-index: 5;
     width: 300px;
     margin: -0.2em auto 0 -150px;
-    }
+    z-index: 3;
+}
 
 #progressbar span {
     text-align: center;
     font-size: 1.2em;
     padding-left: 125px;
-    }
+    color: #4F5D70;
+}
 
 /*****************************
  *

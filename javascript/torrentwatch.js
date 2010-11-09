@@ -325,8 +325,11 @@ $(function() {
                     return;
                 }
                 
+		$('div#waiting').remove();
                 if(recent === 0 && json.result == 'success') window.gotAllData = 1;
+		$('#headerImg').show();
                 processClientData(json, recent);
+		$('#headerImg').hide();
                 
                 if(json && recent) {                    
                     $.each(json['arguments']['removed'],

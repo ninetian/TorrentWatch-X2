@@ -12,9 +12,9 @@ function guess_match($title, $normalize = FALSE) {
     $epi.='0?\d{3}[_.\s]'.'|'; // 306
     $epi.='Pa?r?t[_.\s]?\d+[_.\s]'.'|';
     $epi.='EP?(?:PS[_.\s]?)?\d+(?:-\d+)?'.'|'; // E137 or EP137 or EPS1-23
-    $epi.='\d{1,2}[-.]\d{1,2}[-.]\d{2,4}[_.\s]'.'|'; // 23-8-2007 or 07.23.2008 or 07-23-09
+    $epi.='\d{1,2}[-.]\d{1,2}[-.x]\d{2,4}[_.\s]'.'|'; // 23-8-2007 or 07.23.2008 or 07-23-09
     $epi.='\d{4}[-.x]\d{1,2}[-.x]\d{1,2}[_.\s]'.'|'; // 2007-8-23, 2010x03.12 or 2008.23.7
-    $epi.='\d{4}[-.x]\d{1,2}'.'|'; // 2007-8, 2010x03 or 2008.23
+    $epi.='\d{4}[-.x]\d{1,2}([.-x]All)?'.'|'; // 2007-8, 2010x03 or 2008.23
     $epi.='\d{8}[_.\s])/i';   // 20082306 etc
 
     // Quality
@@ -84,13 +84,13 @@ function guess_match($title, $normalize = FALSE) {
     $episode_guess = trim(strtr($episode_guess, $from, $to));
     
     // Standardize episode output to SSxEE, strip leading 0
-    $epiGuess = array(  '/\b(?:S(\d+))?[_.\s]?EP? ?(\d+)(?:-EP? ?\d+)?\b/i',
+    $epiGuess = array(  '/\b(?:S(\d+))?[\s]?EP? ?(\d+)(?:-EP? ?\d+)?\b/i',
                         '/\b(\d+)x#?S?(\d+)/i',
-                        '/(\d+)[_.\s]?of[_.\s]?\d+\b/i',
-                        '/\bseason[_.\s]?(\d+),?[_.\s]?episode[_.\s]?(\d+)\b/i',
+                        '/(\d+)[\s]?of[\s]?\d+\b/i',
+                        '/\bseason[\s]?(\d+),?[\s]?episode[\s]?(\d+)\b/i',
                         '/\b0?(\d)(\d\d)\b/i',
-                        '/\bEps[_.\s]?(\d+)-\d+\b/i',
-                        '/\bPa?r?t[_.\s]?(\d+)\b/i');
+                        '/\bEps[\s]?(\d+)-\d+\b/i',
+                        '/\bPa?r?t[\s]?(\d+)\b/i');
                         
     $dateGuess = '/(\d\d\d\d)[\sx-](\d\d)[\sx-](\d\d).?/i';
     
@@ -105,12 +105,12 @@ function guess_match($title, $normalize = FALSE) {
     }
     $episode_guess = preg_replace('/0*(\d+)x0*(\d+)/', '\1x\2', $episode_guess);
     
-    if(preg_match('/[_.\s]PROPER[_.\s]|[_.\s]REPACK[_.\s]|[_.\s]RERIP[_.\s]/i', $title)) {
-        $episode_guess .= "p";
-    } 
-    if(preg_match('/^(S\d\d?|Season[_.\s]?\d\d?)$/i', $episode_guess)) {
+    if(preg_match('/^(S\d\d?|Season[_\s]?\d\d?|\d{2,4}[\sx-]\d{1,2}[\sx-]All)$/i', $episode_guess)) {
         $episode_guess = 'fullSeason';
     }
+    if(preg_match('/[\s]PROPER[\s]|[\s]REPACK[\s]|[\s]RERIP[\s]/i', $title)) {
+        $episode_guess .= "p";
+    } 
     if(preg_match('/^(\d{1,2}xspecial)$/i', $episode_guess)) {
         $episode_guess = 'Special';
     }

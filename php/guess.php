@@ -31,6 +31,7 @@ function guess_match($title, $normalize = FALSE) {
     $quality.='BDRip'   .'|';
     $quality.='TELESYNC'.'|';
     $quality.='HR.HDTV' .'|';
+    $quality.='iTunes'  .'|';
     $quality.='HDTV'    .'|';
     $quality.='x264'    .'|';
     $quality.='HR.PDTV' .'|';

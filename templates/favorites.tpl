@@ -21,7 +21,7 @@
   <?php if(isset($config_values['Favorites']))
           array_walk($config_values['Favorites'], 'display_favorites_info'); ?>
       <div id="favClose" class="buttonContainer">
-          <a class="toggleDialog button" id="Close" href="#">Close</a>
+          <a class="toggleDialog button close" id="Close" href="#">Close</a>
       </div>
   </div>
  </div>

@@ -510,7 +510,7 @@ div.dialog {
     cursor:		wait;
     padding-top:	60px;
     border-top:		1px solid #979797;
-    z-index		0;
+    z-index:		2;
 }
 
 div.dialog_window {
@@ -528,7 +528,8 @@ div.dialog_window {
     margin-left: -230px;
     padding: 5px;
     cursor: default;
-    }
+    z-index: 3;
+}
 
 div#clear_cache {
    position: fixed;
@@ -618,18 +619,19 @@ a.disabled:hover {
 input[type=submit] {
     width: 62px;
     height: 28px;
-    }
+}
 
 div.legend input {
     clear: left;
-    }
+}
     
 div#clientError {
     top: 55px;
     text-align: center;
     width: 450px;
     margin-left: -225px;
-    
+    border: 1px solid red;
+    z-index: 1; 
 }
 
 div#clientError h2 {
@@ -639,30 +641,33 @@ div#clientError h2 {
 }
 
 div#errorDialog {
-    top: 55px;
+    top: 54px;
+    border: 1px solid red;
     color: red;
     text-align: center;
     width: 600px;
     margin-left: -310px;
-    z-index: 100;
+    z-index: 1; 
 }
 
 div#successDialog {
     top: 55px;
     color: green;
+    border: 1px solid green;
     text-align: center;
     width: 600px;
     margin-left: -310px;
-    z-index: 100;
+    z-index: 1; 
 }
 
 div#newVersion {
     top: 55px;
     color: green;
+    border: 1px solid green;
     text-align: center;
     width: 450px;
     margin-left: -225px;
-    z-index: 100;
+    z-index: 1; 
 }
 
 div#newVersion a {
@@ -672,8 +677,9 @@ div#newVersion a {
 div#fav_error {
     top: 55px;
     color: red;
+    border: 1px solid red;
     text-align: center;
-    z-index: 100;
+    z-index: 1; 
 }
 
 /********************************
@@ -930,13 +936,16 @@ div#showURL input[type=checkbox] {
     margin-left: 5px;
 }
 
-div#config_hideList ul.hidelist {
+div#config_hideList {
+    max-height: 300px;
+    margin-top: 20px;
+}
+
+div#config_hideList ul {
     background-color: #eee;
     border: 1px solid grey;
-    max-height: 300px;
     overflow: auto;
     padding-bottom: 0;
-    margin-top: 20px;
 }
 
 div#config_hideList ul.hidelist li {
@@ -953,7 +962,7 @@ div#config_hideList ul.hidelist input[type=checkbox] {
 }
 
 div#linkButtons  {
-    float: right;
+    float: right; 
 }
 
 /***********************************

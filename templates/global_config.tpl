@@ -239,8 +239,8 @@
                     </input>
                 </div>
             </div>
-            <div id="config_hideList" class="configTab hidden">
-                    <form action="torrentwatch.php?delHidden=1" id="hidelist_form" name="hidelist_form">
+	    <form action="torrentwatch.php?delHidden=1" id="hidelist_form" name="hidelist_form">
+		    <div id="config_hideList" class="configTab hidden">
                         <ul class="hidelist">
                         <?php if($config_values['Hidden']): ?>
                         <?php ksort($config_values['Hidden'], SORT_STRING); ?>
@@ -254,14 +254,14 @@
                         <?php else: ?>
                             <li><h2 style='color: red; text-align: center'>You did not hide any shows.</h2></li>
                         <?php endif; ?>
-                    </ul>
-                    <div class="buttonContainer">
-                        <a class="submitForm button" id="Unhide" href="#">Unhide</a>
-                    </div>
-                    </form>
-            </div>
-            <div id='linkButtons' class="buttonContainer">
-                <a class='toggleDialog button' href='#'>Close</a> 
-            </div>
+                        </ul>
+		</div>
+                        <div class="buttonContainer">
+                            <a class="submitForm button" id="Unhide" href="#">Unhide</a>
+                        </div>
+	    </form>
+	    <div id='linkButtons' class="buttonContainer">
+		<a class='toggleDialog button close' href='#'>Close</a> 
+	    </div>
         </div>
       </div>

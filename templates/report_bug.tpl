@@ -31,7 +31,7 @@
     </div>
     <div class="buttonContainer">
         <a class="button" id="Submit Bug" href="#" onclick="$.submitBug()">Submit</a> 
-        <a class='toggleDialog button' href='#'>Close</a> 
+        <a class='toggleDialog button close' href='#'>Close</a> 
     </div>
     </form>
   </div>

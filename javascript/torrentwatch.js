@@ -489,6 +489,12 @@ $(function() {
         },2000); 
     });
 
+    $(document).keyup(function(e) {
+	if (e.keyCode == '27') {
+		$('.dialog_window .close').click();
+        }
+    });
+
     // Ajax progress bar
     $('#progress').ajaxStart(function() {
         if (!(window.hideProgressBar)) {
@@ -633,7 +639,7 @@ $(function() {
                 $(last).fadeOut("normal");
                 $('#favorites, #configuration, #feeds, #history, #hidelist').remove();
 		$('ul#mainoptions li a').removeClass('selected')
-                $('#dynamicdata .dialog_window').remove();
+                $('#dynamicdata .dialog .dialog_window').remove();
                 $('#dynamicdata .dialog').addClass('dialog_last');
             }
             if (current_dialog && this.hash != '#') {
@@ -641,7 +647,7 @@ $(function() {
                 $.get('torrentwatch.php', { get_dialog_data: this.hash }, function(data) {
                     $('#dynamicdata.dyndata').append(data);
                     $('#dynamicdata').find("ul.favorite > li").initFavorites().end().find("form").initForm().end().initConfigDialog();
-		    $('.dialog_last').remove();
+		    $('#dynamicdata .dialog_last').remove();
 	    	    if (navigator.appName == 'Microsoft Internet Explorer' || last) {
                         $('.dialog').show();
 		    } else {
@@ -658,8 +664,8 @@ $(function() {
                 });
 	        $("li#" + this.parentNode.id + " a").addClass("selected");
             } else {
-		$('.dialog').fadeOut()
-		setTimeout(function() { $('.dialog').remove(); }, 400);
+		$('#dynamicdata .dialog').fadeOut()
+		setTimeout(function() { $('#dynamicdata .dialog').remove(); }, 400);
 	    }
         });
         return this;

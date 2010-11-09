@@ -892,6 +892,7 @@ $(function() {
     }
     
     $.submitBug = function() {
+	window.noProgressBG = 1;
         $.post('torrentwatch.php?post_bug', $("#report_form").serialize(),
             function(data) {
                 if(data.match(/\bError:/)) {
@@ -905,6 +906,7 @@ $(function() {
 		    setTimeout(function() { $('div#successDialog').remove(); }, 10000);
                 }
             });
+	window.noProgressBG = 0;
         return;
     }
     

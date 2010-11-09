@@ -282,7 +282,7 @@ function add_hidden($name) {
     $guess = guess_match($name);
     if($guess) {
         $name = ucwords(trim(strtr($guess['key'], "._", "  ")));
-    
+
         foreach($config_values['Favorites'] as $fav) {
             if($name == ucwords($fav['Name'])) return("$name exists in favorites. Not adding to hide list.");
         }

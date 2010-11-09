@@ -941,11 +941,7 @@ div#config_hideList {
     margin-top: 20px;
     overflow: auto;
     border: 1px solid grey;
-}
-
-div#config_hideList ul {
     background-color: #eee;
-    overflow: auto;
     padding-bottom: 0;
 }
 

@@ -17,11 +17,11 @@ if($config_values['Settings']['Combine Feeds'] == 1) {
 }
 
 if(isset($torInfo)) {
-  $stats = $torInfo['stats'];
-  $clientId = $torInfo['clientId'];
-  $infoDiv = "<div id='tor_$id' class='torInfo tor_$torHash'>$stats</div>";
-  if($torInfo['status'] == 4) $matched = "downloading";
-} else if(!$config_values['Settings']['Disable Hide List']) {
+    $stats = $torInfo['stats'];
+    $clientId = $torInfo['clientId'];
+    $infoDiv = "<div id='tor_$id' class='torInfo tor_$torHash'>$stats</div>";
+    if($torInfo['status'] == 4) $matched = "downloading";
+} else if((!$config_values['Settings']['Disable Hide List']) && ($matched == "nomatch"))  {
     $hideSpan = "<span class=\"hide_item\"><a href=\"#\" 
     title=\"Hide this show from the list\" onclick='$.hideItem(\"$utitle\")'>
     <img src=\"images/hide.png\" /></a></span>";

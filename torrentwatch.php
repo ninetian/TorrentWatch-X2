@@ -177,10 +177,14 @@ function parse_options() {
 	    }
             $r = client_add_torrent(preg_replace('/ /', '%20', trim($_GET['link'])),
                 $downloadDir, $_GET['title'], $_GET['feed']);
-            if($r) { 
+            if($r == "Success") { 
                 $torHash = get_torHash(add_cache($_GET['title'])); 
             }
-            echo $torHash;
+            if(isset($torHash)) {
+		echo $torHash;
+	    } else {
+		echo $r;
+	    }
             exit(0);
             break;
         case 'clearHistory':

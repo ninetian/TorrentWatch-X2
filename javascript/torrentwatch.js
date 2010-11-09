@@ -743,8 +743,8 @@ $(function() {
         window.noProgressBG = 1;
         $.get(url,
         function(torHash) {
-            if(!(torHash.match(/\w+/)) && window.client != 'folder') {
-                alert('Something went wrong while adding this torrent, torrent not added');
+            if(torHash.match(/Error:\s\w+/) && window.client != 'folder') {
+                alert('Something went wrong while adding this torrent. ' + torHash);
                 return;
             }
             $('li#' + id).removeClass('match_nomatch').addClass('match_downloading');
@@ -754,7 +754,7 @@ $(function() {
                 .append('<div id=tor_' + id + ' class="torInfo tor_' + torHash.match(/\w+/) + '"></div>');
             }
 
-	    $('li#' + id + ' span.hide_item').hide();
+	    $('li#' + id + ' span.hide_item').remove();
             $('li#' + id + ' p.dlTorrent').hide();
             $('li#' + id + ' p.torStop').show();
 	    if(window.client == 'folder') return;

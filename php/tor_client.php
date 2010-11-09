@@ -203,7 +203,6 @@ function client_add_torrent($filename, $dest, $title, $feed = NULL, &$fav = NULL
   if($feed && preg_match('/:COOKIE:/', $feed) && (!(preg_match('/:COOKIE:/', $url)))) {
     $url .= stristr($feed, ':COOKIE:');    
   }
-  
   $get = curl_init();
   $response = check_for_cookies($url);
   if($response) {
@@ -223,16 +222,17 @@ function client_add_torrent($filename, $dest, $title, $feed = NULL, &$fav = NULL
 	if(!$retried) {
 	    //Try to retrieve a .torrent link from the content.
 	    $link = find_torrent_link($url, $tor);
-	    return client_add_torrent($link, $dest, $title, $feed, $fav, true);
+	    return client_add_torrent($link, $dest, $title, $feed, $fav, $url);
 	} else {
 	    _debug("No torrent file found on $url. Exitting.\n");
-	    return FALSE;
+	    if(isset($retried)) $url = $retried;
+	    return "Error: No torrent file found on $url.";
 	}
   }
   if(!$tor) {
   print '<pre>'.print_r($_GET, TRUE).'</pre>';
     _debug("Couldn't open torrent: $filename \n",-1);
-    return FALSE;
+    return "Error: Couldn't open torrent: $filename";
   }
   
   $tor_info = new BDecode("", $tor);
@@ -295,6 +295,7 @@ function client_add_torrent($filename, $dest, $title, $feed = NULL, &$fav = NULL
     }
     if($config_values['Settings']['Save Torrents'])
       file_put_contents("$dest/$tor_name.torrent", $tor);
+    return "Success";
   } else {
     _debug("Failed Starting: $tor_name  Error: $return\n",-1);
 
@@ -304,8 +305,8 @@ function client_add_torrent($filename, $dest, $title, $feed = NULL, &$fav = NULL
     $subject = "TW-X: Error while trying to start $tor_name.";
     sendmail($msg, $subject);
     run_script('error', $title, $msg);
+    return "Error: $return";
   }
-  return ($return === 0);
 }
 
 

@@ -327,7 +327,7 @@ div#torrentlist_container div.header td.feed_title {
 }
 
 div#torrentlist_container ul.torrentlist {
-    border-bottom: 1px solid #979797;
+    //border-bottom: 1px solid #979797;
 }
 
 ul.torrentlist li.torrent {
@@ -625,7 +625,7 @@ div.legend input {
     }
     
 div#clientError {
-    top: 5px;
+    top: 55px;
     text-align: center;
     width: 450px;
     margin-left: -225px;
@@ -639,27 +639,30 @@ div#clientError h2 {
 }
 
 div#errorDialog {
-    top: 5px;
+    top: 55px;
     color: red;
     text-align: center;
     width: 600px;
     margin-left: -310px;
+    z-index: 100;
 }
 
 div#successDialog {
-    top: 5px;
+    top: 55px;
     color: green;
     text-align: center;
     width: 600px;
     margin-left: -310px;
+    z-index: 100;
 }
 
 div#newVersion {
-    top: 20px;
+    top: 55px;
     color: green;
     text-align: center;
     width: 450px;
     margin-left: -225px;
+    z-index: 100;
 }
 
 div#newVersion a {
@@ -667,9 +670,10 @@ div#newVersion a {
 }
 
 div#fav_error {
-    top: 20px;
+    top: 55px;
     color: red;
     text-align: center;
+    z-index: 100;
 }
 
 /********************************

@@ -298,9 +298,6 @@ div#torrentlist_container div.errorHeader {
     text-align: center;
     padding: 0.2em 0 0.2em 0;
     background: #CCFFCC;
-    border-bottom: 1px solid #979797;
-    border-right: 1px solid #979797;
-    border-left: 1px solid #979797;
     color: #D6001A;
 }
 

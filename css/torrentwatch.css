@@ -939,6 +939,7 @@ div#showURL input[type=checkbox] {
 div#config_hideList {
     max-height: 300px;
     margin-top: 20px;
+    overflow: auto;
 }
 
 div#config_hideList ul {

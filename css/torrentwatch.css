@@ -299,6 +299,7 @@ div#torrentlist_container div.errorHeader {
     padding: 0.2em 0 0.2em 0;
     background: #CCFFCC;
     color: #D6001A;
+    border-bottom: 1px solid #ddd;
 }
 
 div#torrentlist_container div.header,

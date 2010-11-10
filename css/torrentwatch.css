@@ -982,9 +982,9 @@ div#feedNameUrl {
 }
 
 div#addFeed input.feed_link[type=text] {
-    width: 300px;
+    width: 310px;
     margin: 0 0;
-    padding: 3px;
+    padding: 1px 3px;
     left: 87px;
 }
 
@@ -1009,13 +1009,14 @@ div#config_feeds div.feeditem label.item {
 div#config_feeds div.feeditem input[type=text] {
     width: 300px;
     margin: 3px 0;
-    padding: 3px;
+    padding: 1px 3px 1px 3px;
     left: 0px;
+    font-size 0.9em;
 }
 
 div#config_feeds div.feeditem input.feed_url[type=text],
 div#config_feeds div.feeditem input.feed_name[type=text] {
-    margin: 3px 0 0 10px;
+    margin: 1px 3px 1px 10px;
 }
 
 div#config_feeds div.feeditem input.seed_ratio[type=text] {

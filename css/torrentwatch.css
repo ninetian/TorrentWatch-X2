@@ -97,7 +97,7 @@ ul.mainoptions li {
     display:		block;
     float: 		left;
     padding-top: 	5px;
-    margin-right: 	10px;
+    margin-right: 	0px;
 }
 
 ul.mainoptions li a {
@@ -124,6 +124,7 @@ ul.mainoptions li#report {
 ul.mainoptions li#webui {
     display: none;
     float: right;
+    margin-right: 10px;
 }
 
 ul.mainoptions li a {
@@ -365,6 +366,7 @@ div#torrentlist_container ul.torrentlist {
 
 ul.torrentlist li.torrent {
     font-size: 0.9em;
+    border-bottom: 1px solid #CCC;
 }
 
 ul.torrentlist li.torrent.alt {

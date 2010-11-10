@@ -467,7 +467,7 @@ $(function() {
         });
 
 	if(!isNaN(downSpeed) && !isNaN(upSpeed)) {
-		$('li#rates').html('D: ' + Math.formatBytes(downSpeed) + '/s</br>' + 'U: ' + Math.formatBytes(upSpeed) + '/s');
+		$('li#rates').html('D: ' + Math.formatBytes(downSpeed) + '/s&nbsp;</br>' + 'U: ' + Math.formatBytes(upSpeed) + '/s');
 	}
         
         if(recent === 0 && torListHtml) {

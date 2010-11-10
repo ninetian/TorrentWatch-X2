@@ -10,6 +10,7 @@
 - sqlite for caching + migration script.
 - Install/Setup script.
 - Movie support 
+- torrent rewriting
 - rtorrent support
 - nzb support
 

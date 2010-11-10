@@ -126,7 +126,7 @@ ul.mainoptions li a:hover {
 }
 
 ul.mainoptions li a.selected {
-   background-color: 	#fff;
+   background-color: 	#eee;
    border:		1px solid #ccc;
 }
 

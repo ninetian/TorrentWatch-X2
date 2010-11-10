@@ -412,6 +412,7 @@ function updateFavoriteEpisode(&$fav, $title) {
 function add_feed($link) {
   global $config_values;
   $link = preg_replace('/ /', '%20', $link);
+  $link = preg_replace('/^%20|%20$/', '', $link);
   _debug('adding feed: ' . $link);
   
   if(isset($link) AND ($tmp = guess_feedtype($link)) != 'Unknown') {

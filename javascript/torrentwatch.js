@@ -152,7 +152,7 @@ $(function() {
                 } else {
                     target = 'http://' + uri.match(/\S+:\d+/) + '/transmission/web/';
                 }
-                $("#webui a").html($("#webui a").html().replace(/Client UI/, 'Transmission'))[0].href = target;
+                $("#webui a").html($("#webui a").html())[0].href = target;
                 $('li#webui').show();
             })
             window.client = 'Transmission';

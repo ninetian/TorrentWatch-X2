@@ -31,7 +31,8 @@
     </script>
 </head>
 <body>
-<ul class="mainoptions" id="mainoptions">
+<div id="topmenu">
+ <ul class="mainoptions" id="mainoptions">
   <li id="favoritesMenu">
    <a class="toggleDialog" href="#favorites">
    <span class="icon"></span>
@@ -52,11 +53,6 @@
    <span class="icon"></span>
    Empty Cache</a>
   </li>
-  <li id='webui'>
-   <a href='#' class="greybox">
-   <span class="icon"></span>
-   Client UI</a>
-  </li>
   <li id="legend">
    <a class='toggleDialog' href='#show_legend'>
    <span class="icon"></span>
@@ -67,7 +63,12 @@
    <span class="icon"></span>
    Report Bug</a>
   </li>
-</ul>
+  <li id='webui'>
+   <a href='#' class="greybox">
+   <span class="icon">.</span></a>
+  </li>
+ </ul>
+</div>
 <ul id="filterbar_container">
   <li id="filter_all" class="tab"><a href="#">All</a></li>
   <li id="filter_matching" class="tab"><a href="#">Matching</a></li>

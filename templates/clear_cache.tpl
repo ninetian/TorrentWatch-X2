@@ -1,6 +1,6 @@
 <div id="cacheDialog" class="dialog">
  <div class="title">
-         History
+         Clear Cache
  </div>
   <div class="dialog_window" id="clear_cache">
     <a class="toggleDialog button close" href="#">Close</a>

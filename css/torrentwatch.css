@@ -809,7 +809,7 @@ div#welcome5 input.form_email[type=text] {
     overflow: hidden;
     width: 300px;
     margin: -0.2em auto 0 -150px;
-    z-index: 30;
+    z-index: 5;
 }
 
 #progressbar span {

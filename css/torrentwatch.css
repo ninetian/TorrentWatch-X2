@@ -175,7 +175,8 @@ ul#filterbar_container li {
     height: 18px;
     text-align: center;
     font-size: 0.8em;
-    background: #ccc;
+    background:                 -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#aaa));
+    background: 		-moz-linear-gradient(top, #ccc, #aaa);
     color: #4E4E4F;
 }
 
@@ -206,14 +207,16 @@ ul#filterbar_container li.selected a {
 }
 
 ul#filterbar_container li:hover {
-    background: #9DACC1;
+    background:                 -webkit-gradient(linear, left top, left bottom, from(#59616E), to(#9DACC1));
+    background: 		-moz-linear-gradient(top, #ccc, #aaa);
     opacity: .60;
     filter: alpha(opacity = 60);
     height: 18px;
 }
 
 ul#filterbar_container li.selected {
-    background: #9DACC1;
+    background:                 -webkit-gradient(linear, left top, left bottom, from(#59616E), to(#9DACC1));
+    background: 		-moz-linear-gradient(top, #ccc, #aaa);
     height: 18px;
     opacity: 1;
 }
@@ -319,7 +322,6 @@ div.transmission div.header {
 }
 
 div.transmission #waiting {
-    //display: none;
     text-align: center;
 }
 div#torrentlist_container div.header_hidden {
@@ -654,8 +656,8 @@ a.button {
 }
 
 a.button:hover{
-    background:                 -webkit-gradient(linear, left top, left bottom, from(#aaa), to(#ccc));
-    background: 		-moz-linear-gradient(top, #aaa, #ccc);
+    background:                 -webkit-gradient(linear, left top, left bottom, from(#59616E), to(#9DACC1));
+    background: 		-moz-linear-gradient(top, #ccc, #aaa);
     color: #fff;
 }
 
@@ -832,13 +834,15 @@ ul#configTabs {
 }
 
 ul#configTabs li:hover {
-    background-color: #9DACC1;
+    background:                 -webkit-gradient(linear, left top, left bottom, from(#59616E), to(#9DACC1));
+    background: 		-moz-linear-gradient(top, #ccc, #aaa);
     color: #FFFFFF;
     opacity: .60;
 }
 
 ul#configTabs li.selTab {
-    background-color: #9DACC1;
+    background:                 -webkit-gradient(linear, left top, left bottom, from(#59616E), to(#9DACC1));
+    background: 		-moz-linear-gradient(top, #ccc, #aaa);
     color: #FFFFFF;
     opacity: 1;
 }
@@ -848,7 +852,8 @@ ul#configTabs .toggleConfigTab {
     width: 50px;
     margin: 5px 0 0 0;
     padding: 1px 3px 2px 5px;
-    background-color: #eee;
+    background:                 -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#aaa));
+    background: 		-moz-linear-gradient(top, #ccc, #aaa);
     border-left: 1px solid #979797;
     border-top: 1px solid #979797;
     font-size: 0.8em;

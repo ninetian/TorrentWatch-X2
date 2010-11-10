@@ -1,16 +1,20 @@
-- sqlite for caching + migration script.
-- Movie support 
-- Remove torrents which are done. (paused and met ratio requirements)
-- Add list of TV Shows to choose from.
+0.8
+- More modulair code
+- New interface
 - Delete old episodes from transmission which are replaces by REPACK or PROPER episodes.
-- New version notification.
+- Remove torrents which are done. (paused and met ratio requirements)
+- Option for download everything from a feed
+- Make torrent settings per show/feed/global
+
+0.9
+- sqlite for caching + migration script.
 - Install/Setup script.
+- Movie support 
+- rtorrent support
+- nzb support
+
+1.0
 - OSX Installer.
 - Windows Installer.
-
-
-- Torrent client support:
-    - utorrent support
-    - rtorrent support
-    - vuze support
+- utorrent support
 

@@ -360,7 +360,10 @@ div#torrentlist_container div.header td.feed_title {
     text-align: center;
 }
 
-div#torrentlist_container ul.torrentlist {
+div#torrentlist_container ul.paused,
+div#torrentlist_container ul.waiting,
+div#torrentlist_container ul.verifying,
+div#torrentlist_container ul.downloading {
     border-bottom: 1px solid #DDDDDD;
 }
 

@@ -1,4 +1,7 @@
-<div class="dialog">
+<div id="historyDialog" class="dialog">
+<div class="title">
+        History
+</div>
  <div class="dialog_window" id="history">
   <ul id="historyItems">
     <?php foreach($history as $item): ?>

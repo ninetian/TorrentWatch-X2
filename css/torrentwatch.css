@@ -267,6 +267,14 @@ input#filter_text_input.blur {
  *
  *------------*/
 
+div#legendDialog .title {
+    width: 470px;
+}
+
+div#show_legend {
+    padding-top: 5px;
+}
+
 ul.show_legend {
     border: 1px solid grey;
 }
@@ -516,7 +524,6 @@ div.dialog {
 }
 
 div.dialog_window {
-    display: none;
     position: fixed; 
     margin-right: auto;
     left: 50%;
@@ -525,18 +532,54 @@ div.dialog_window {
     border-left: 1px solid #979797;
     border-right: 1px solid #979797;
     border-bottom: 1px solid #979797;
-    top: 32px;
+    border-bottom-left-radius:     5px;
+    -moz-border-radius-bottomleft: 5px;
+    border-bottom-right-radius:    5px;
+    -moz-border-radius-bottomright: 5px;
+    top: 140px;
     width: 460px;
     margin-left: -230px;
-    padding: 5px;
+    padding: 0 5px 5px 5px;
     cursor: default;
     z-index: 5;
 }
 
+div.welcome,
+#clientError,
+#welcome_form {
+    display: none;
+}
+
+div.dialog .title {
+    position: 			fixed; 
+    font-size:                  8pt;
+    padding:                    0 0 2px 0;
+    text-align:                 center;
+    margin-left: -230px;
+    background-color:		#aaa;
+    background:                 -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#aaa));
+    background: -moz-linear-gradient(top, #ccc, #aaa);
+    border:              	1px solid #979797;
+    border-top-left-radius:     5px;
+    -moz-border-radius-topleft: 5px;
+    border-top-right-radius:    5px;
+    -moz-border-radius-topright: 5px;
+    color:                      #000;
+    text-shadow:                #eee 0px 1px 0px;
+    top: 			120px;
+    height:			15px;
+    left: 			50%;
+}
+
 div#clear_cache {
-   position: fixed;
-   width: 300px;
-   margin-left: -150px;
+    position: fixed;
+    width: 300px;
+    margin-left: -150px;
+}
+
+div#cacheDialog .title {
+    margin-left: -150px;
+    width: 310px;
 }
 
 div.move_data {
@@ -752,13 +795,17 @@ div#welcome5 input.form_email[type=text] {
 #progressbar {
     background: #DBDBDB url('../images/ajaxload.gif') no-repeat center bottom;
     border-top: 1px solid #979797;
+    border-top-left-radius:     5px;
+    -moz-border-radius-topleft: 5px;
+    border-top-right-radius:    5px;
+    -moz-border-radius-topright: 5px;
     display: block;
     height: 30px;
     top: 150px;
     overflow: hidden;
     width: 300px;
     margin: -0.2em auto 0 -150px;
-    z-index: 3;
+    z-index: 30;
 }
 
 #progressbar span {
@@ -816,30 +863,35 @@ ul#configTabs .right {
     border-top-right-radius: 	5px;
     -moz-border-radius-topright: 5px;
 }
-    
-div.dialog_window#configuration {
+
+div#configDialog .title {
+    margin-left: -225px;
+    width: 470px;
+}
+
+div#configuration {
     margin-left: -225px;
     float: left;
     width: 460px;
 }
 
-div.dialog_window#configuration div.config_form input.text,
-div.dialog_window#configuration div.config_form input.password,
-div.dialog_window#configuration div.config_form input[type=text],
-div.dialog_window#configuration div.config_form input[type=password] {
+div#configuration div.config_form input.text,
+div#configuration div.config_form input.password,
+div#configuration div.config_form input[type=text],
+div#configuration div.config_form input[type=password] {
     position: absolute;
     left: 148px;
     width: 275px;
     padding-left: 3px;
 }
 
-div.dialog_window#configuration div.config_form select {
+div#configuration div.config_form select {
     position: absolute;
     left: 148px;
     width: 277px;
 }
 
-div.dialog_window#configuration div.config_form input[type=checkbox] {
+div#configuration div.config_form input[type=checkbox] {
     position: absolute;
     left: 148px;
 }
@@ -970,10 +1022,17 @@ div#linkButtons  {
  * F A V O R I T E S   D I A L O G
  *
  **********************************/
-div.dialog_window#favorites {
+
+div#favorites {
     width: 590px;
     margin-left: -287px;
     height: 247px;
+    padding-top: 5px;
+}
+
+div#favDialog .title {
+    width: 600px;
+    margin-left: -287px;
 }
 
 div.favorite {
@@ -1113,6 +1172,11 @@ div#favClose {
  
 div#report_bug {
     width: 420px;
+    padding-top: 5px;
+}
+
+div#bugDialog .title {
+    width: 430px;
 }
 
 form#report_form div {
@@ -1141,8 +1205,14 @@ div#report_bug input[type=submit] {
  *
  *****************************/
 div#history {
+    padding: 5px;
     height: 257px;
-    }
+}
+
+div#historyDialog .title {
+    width: 593px;
+    margin-left: -288px;
+}
 
 ul#historyItems {
     top: 0;
@@ -1153,26 +1223,26 @@ ul#historyItems {
     overflow: auto;
     border-bottom: 1px solid #979797;
     padding: 2px 0 0 10px;
-    }
+}
 
 div#history ul li{
     white-space: nowrap;
     overflow: hidden;
     font-size: 0.9em
-    }
+}
 
 
 div#history a {
     bottom: 0.2em;
-    }
+}
 
 div#history a#clearhistory {
     right: 0;
-    }
+}
 
 div#history a.toggleDialog {
     right: 6.5em;
-    }
+}
 
 /*-----------------
  *

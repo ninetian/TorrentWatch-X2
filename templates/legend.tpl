@@ -1,4 +1,7 @@
-<div class="dialog">
+<div id="legendDialog" class="dialog">
+ <div class="title">
+         Report Bug
+ </div>
   <div class="dialog_window" id="show_legend">
     <ul id='torrentlist' class='show_legend'>
       <li class='legend match_nomatch'>

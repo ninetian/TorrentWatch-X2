@@ -1,4 +1,7 @@
-      <div class="dialog">
+      <div id="configDialog" class="dialog">
+        <div class="title">
+                Configure
+        </div>
         <div class="dialog_window" id="configuration">
              <ul id="configTabs">
               <li id="tabInt" class="toggleConfigTab left selTab">
@@ -239,8 +242,8 @@
                     </input>
                 </div>
             </div>
-	    <form action="torrentwatch.php?delHidden=1" id="hidelist_form" name="hidelist_form">
-		    <div id="config_hideList" class="configTab hidden">
+	    <form action="torrentwatch.php?delHidden=1" id="hidelist_form" name="hidelist_form" class="hidden">
+	            <div id="config_hideList" class="hidden configTab">
                         <ul class="hidelist">
                         <?php if($config_values['Hidden']): ?>
                         <?php ksort($config_values['Hidden'], SORT_STRING); ?>
@@ -255,10 +258,10 @@
                             <li><h2 style='color: red; text-align: center'>You did not hide any shows.</h2></li>
                         <?php endif; ?>
                         </ul>
-		</div>
-                        <div class="buttonContainer">
-                            <a class="submitForm button" id="Unhide" href="#">Unhide</a>
-                        </div>
+		    </div>
+                    <div class="buttonContainer">
+                        <a class="submitForm button" id="Unhide" href="#">Unhide</a>
+                    </div>
 	    </form>
 	    <div id='linkButtons' class="buttonContainer">
 		<a class='toggleDialog button close' href='#'>Close</a> 

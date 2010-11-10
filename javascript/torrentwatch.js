@@ -532,7 +532,8 @@ $(function() {
                 var container = $("#torrentlist_container");
                 if (container.length === 0 && $("#errorDialog").length === 0) {
                     current_dialog = '#welcome1';
-                    $(current_dialog).show();
+                    $("#welcome_form").show();
+		    $(current_dialog).show();
                 } else {
                     container.slideDown(400,
                     function() {
@@ -643,8 +644,8 @@ $(function() {
                 $(last).fadeOut("normal");
                 $('#favorites, #configuration, #feeds, #history, #hidelist').remove();
 		$('ul#mainoptions li a').removeClass('selected')
-                $('#dynamicdata .dialog .dialog_window').remove();
-                $('#dynamicdata .dialog').addClass('dialog_last');
+		$('#dynamicdata .dialog .dialog_window, .title').remove();
+		$('#dynamicdata .dialog').addClass('dialog_last');
             }
             if (current_dialog && this.hash != '#') {
 		window.noProgressBG=1;
@@ -918,11 +919,14 @@ $(function() {
         $(".toggleConfigTab").removeClass("selTab");
         $(button).addClass("selTab");
 	$('.configTab').hide();
-        if ((tab == "#config_feeds") || (tab == "#config_hideList")) {
-            $("#config_form").hide();
-        } else {
-            $("#config_form").show();
-        }
+	$('#configuration form').hide()
+        if (tab == "#config_feeds") {
+	    $("#configuration .feedform").show();
+        } else if(tab == "#config_hideList") {
+	    $("#hidelist_form").show();
+	} else {
+	    $('#config_form').show();
+	}
 	$(tab).animate({opacity: 'toggle'}, 500);
     }
     

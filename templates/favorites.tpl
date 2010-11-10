@@ -1,4 +1,7 @@
-<div class="dialog">
+<div id="favDialog" class="dialog">
+<div class="title">
+	Favorites
+</div>
  <div class="dialog_window" id="favorites">
   <div class="favorite">
    <ul class="favorite">

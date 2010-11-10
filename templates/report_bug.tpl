@@ -1,4 +1,7 @@
-<div class="dialog">
+<div id="bugDialog" class="dialog">
+ <div class="title">
+         Report Bug
+ </div>
   <div class="dialog_window" id="report_bug">
     <form action="#" id="report_form">
     <div><label class="item">Summary:

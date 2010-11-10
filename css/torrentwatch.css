@@ -605,6 +605,7 @@ div#clear_cache {
     position: fixed;
     width: 320px;
     margin-left: -160px;
+    text-align: center;
 }
 
 div#cacheDialog .title {
@@ -1284,6 +1285,9 @@ div#history a#clearhistory {
     right: 0;
 }
 
+div#clear_cache a.toggleDialog {
+   margin-right: 20px;
+}
 div#history a.toggleDialog {
     right: 6.5em;
 }

@@ -471,12 +471,12 @@ $(function() {
         
         if(recent === 0 && torListHtml) {
             $('#transmission_list').append(torListHtml);
-	    $('#transmission_list li.torrent').markAlt().closest(".transmission div.transmission");
         } 
         
         if(!$('.move_data').is(':visible')) {
             $('#transmission_list>li').tsort('span.dateAdded', { order: 'desc' });
         }
+        $('#transmission_list li.torrent').markAlt();
     };
 
     $(document).ready(function() { 
@@ -511,6 +511,9 @@ $(function() {
  	$(this).fadeOut();
 	window.noProgressBG = 0;
 	$('#progress').removeClass('progress_full');
+	setTimeout(function() {
+	    $('#transmission_list li.torrent').markAlt();
+	},500);
     });
 });
 

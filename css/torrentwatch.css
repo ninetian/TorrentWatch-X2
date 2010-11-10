@@ -366,6 +366,9 @@ div#torrentlist_container ul.torrentlist {
 
 ul.torrentlist li.torrent {
     font-size: 0.9em;
+}
+
+ul#transmission_list li.torrent {
     border-bottom: 1px solid #CCC;
 }
 

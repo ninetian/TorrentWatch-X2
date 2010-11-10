@@ -558,7 +558,7 @@ div.dialog .title {
     margin-left: -230px;
     background-color:		#aaa;
     background:                 -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#aaa));
-    background: -moz-linear-gradient(top, #ccc, #aaa);
+    background: 		-moz-linear-gradient(top, #ccc, #aaa);
     border:              	1px solid #979797;
     border-top-left-radius:     5px;
     -moz-border-radius-topleft: 5px;
@@ -633,8 +633,8 @@ div.buttonContainer {
 a.button,
 input[type=submit] {
     float: right;
-    margin: .5em 1em 0 0;
-    padding: .5em;
+    margin: 5px 1em 0 0;
+    padding: 0.5em;
     background-color: #EEE;
     border: 1px solid #787878;
     font-size: 0.8em;
@@ -649,16 +649,20 @@ a.button {
     text-decoration: none;
     -webkit-border-radius: 8px;    /* for Safari */
     -moz-border-radius: 8px;       /* for Firefox */
+    background:                 -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#aaa));
+    background: 		-moz-linear-gradient(top, #ccc, #aaa);
 }
 
 a.button:hover{
-    background-color: #9DACC1;
+    background:                 -webkit-gradient(linear, left top, left bottom, from(#aaa), to(#ccc));
+    background: 		-moz-linear-gradient(top, #aaa, #ccc);
     color: #fff;
 }
 
 a.disabled,
 a.disabled:hover {
-    background-color: #EEE;
+    background:                 -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#aaa));
+    background: 		-moz-linear-gradient(top, #ccc, #aaa);
     color: #CCCCCC;
 }
 input[type=submit] {

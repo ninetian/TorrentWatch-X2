@@ -360,10 +360,7 @@ div#torrentlist_container div.header td.feed_title {
     text-align: center;
 }
 
-div#torrentlist_container ul.paused,
-div#torrentlist_container ul.waiting,
-div#torrentlist_container ul.verifying,
-div#torrentlist_container ul.downloading {
+div#torrentlist_container ul.torrentlist {	
     border-bottom: 1px solid #DDDDDD;
 }
 
@@ -371,7 +368,10 @@ ul.torrentlist li.torrent {
     font-size: 0.9em;
 }
 
-ul#transmission_list li.torrent {
+ul#transmission_list ul.paused,
+ul#transmission_list ul.waiting,
+ul#transmission_list ul.verifying,
+ul#transmission_list ul.downloading {
     border-bottom: 1px solid #CCC;
 }
 

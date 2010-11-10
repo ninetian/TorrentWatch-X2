@@ -410,7 +410,6 @@ $(function() {
             } else if (item.status == 8) {
                 clientData = 'Seeding to ' + item.peersGettingFromUs + ' of ' +
                 item.peersConnected + ' peers  -  Ratio: ' + Ratio;
-                liClass = 'alt';
             } else if (item.status == 16) {
                 if(Ratio >= item.seedRatioLimit && Percentage == 100) {
                     clientData = "Downloaded and seed ratio met. This torrent can be removed.";
@@ -420,7 +419,7 @@ $(function() {
                 liClass = 'paused';
             }
             
-            if(recent == 1) {
+	    if(recent == 1) {
                 clientItem = getClientItem(item, clientData, liClass);
                 
                 if ($('#transmission_list li#clientId_' + item.id).length === 0) {
@@ -472,6 +471,7 @@ $(function() {
         
         if(recent === 0 && torListHtml) {
             $('#transmission_list').append(torListHtml);
+	    $('#transmission_list li.torrent').markAlt().closest(".transmission div.transmission");
         } 
         
         if(!$('.move_data').is(':visible')) {

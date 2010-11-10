@@ -61,7 +61,7 @@ div.right {
 
 div.left {
 	text-align: right;
-	width: 160px;
+	width: 167px;
 }
 
 div.right {
@@ -603,13 +603,13 @@ div.dialog .title {
 
 div#clear_cache {
     position: fixed;
-    width: 300px;
-    margin-left: -150px;
+    width: 320px;
+    margin-left: -160px;
 }
 
 div#cacheDialog .title {
-    margin-left: -150px;
-    width: 310px;
+    margin-left: -160px;
+    width: 330px;
 }
 
 div.move_data {
@@ -888,7 +888,7 @@ ul#configTabs li.selTab {
 
 ul#configTabs .toggleConfigTab {
     float: left;
-    width: 50px;
+    width: 57px;
     margin: 5px 0 0 0;
     padding: 1px 3px 2px 5px;
     background: #ccc;
@@ -897,6 +897,7 @@ ul#configTabs .toggleConfigTab {
     background:	-moz-linear-gradient(top, #ccc, #aaa);
     border-left: 1px solid #979797;
     border-top: 1px solid #979797;
+    height: 15px;
     font-size: 0.8em;
     color: #000;
     text-decoration: none;
@@ -915,35 +916,30 @@ ul#configTabs .right {
 }
 
 div#configDialog .title {
-    margin-left: -225px;
-    width: 470px;
+    margin-left: -231px;
+    width: 473px;
 }
 
 div#configuration {
-    margin-left: -225px;
+    margin-left: -231px;
     float: left;
-    width: 460px;
+    width: 463px;
 }
 
 div#configuration div.config_form input.text,
 div#configuration div.config_form input.password,
 div#configuration div.config_form input[type=text],
 div#configuration div.config_form input[type=password] {
-    //position: absolute;
-    left: 148px;
     width: 275px;
     padding-left: 3px;
 }
 
 div#configuration div.config_form select {
-    //position: absolute;
-    left: 148px;
     width: 277px;
 }
 
 div#configuration div.config_form input[type=checkbox] {
-    //position: absolute;
-    left: 148px;
+    left: 150px;
 }
 
 div.config_form {
@@ -960,7 +956,7 @@ form#config_form div {
 div#config_feeds {
     overflow: auto;
     border: 1px solid grey;
-    margin-top: 20px;
+    margin-top: 22px;
     max-height: 300px;
     padding: 5px 0 5px 0;
     background-color: #eee;
@@ -1040,7 +1036,8 @@ div#showURL input[type=checkbox] {
 
 div#config_hideList {
     max-height: 300px;
-    margin-top: 20px;
+    margin-top: 22px;
+    width: 461px;
     overflow: auto;
     border: 1px solid grey;
     background-color: #eee;
@@ -1148,15 +1145,15 @@ form.favinfo input#idx {
 
 form.favinfo select {
     position: absolute;
-    right: 25px;
-    width: 262px;
+    right: 15px;
+    width: 272px;
 }
 
 form.favinfo input.text,
 form.favinfo input[type=text] {
     position: absolute;
-    right: 25px;
-    width: 260px;
+    right: 15px;
+    width: 270px;
 }
 
 form.favinfo div.favorite_seed_and_episode {
@@ -1168,14 +1165,14 @@ form.favinfo div.favorite_seed_and_episode {
 
 form.favinfo label.lastSeason {
     position: absolute;
-    right: 70px;
+    right: 55px;
     top: 2px;
     margin-left: 0;
 }
 
 form.favinfo label.lastEpisode{
     position: absolute;
-    right: 30px;
+    right: 20px;
     top: 2px;
     margin-left: 0;
 }
@@ -1189,14 +1186,14 @@ form.favinfo input.seedratio[type=text] {
 
 form.favinfo input.lastSeason[type=text] {
     position: absolute;
-    right: 40px;
+    right: 30px;
     width: 20px;
     text-align: center;
 }
 
 form.favinfo input.lastEpisode[type=text] {
     position: absolute;
-    right: 0;
+    right: -10px;
     width: 25px;
     text-align: center;
 }
@@ -1266,7 +1263,7 @@ ul#historyItems {
     bottom: 35px;
     left: 0;
     right: 0;
-    height: 222px;
+    height: 217px;
     overflow: auto;
     border-bottom: 1px solid #979797;
     padding: 2px 0 0 10px;

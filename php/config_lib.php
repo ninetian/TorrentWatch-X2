@@ -449,6 +449,7 @@ function update_feedData() {
 	
         $config_values['Feeds'][$_GET['idx']]['Name'] = $_GET['feed_name'];
         $config_values['Feeds'][$_GET['idx']]['Link'] = preg_replace('/ /', '%20', $_GET['feed_link']);
+        $config_values['Feeds'][$_GET['idx']]['Link'] = preg_replace('/^%20|%20$/', '', $_GET['feed_link']);
         $config_values['Feeds'][$_GET['idx']]['seedRatio'] = $_GET['seed_ratio'];
     }
 }

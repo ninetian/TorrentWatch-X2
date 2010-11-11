@@ -623,6 +623,7 @@ div.welcome,
     filter:			progid:DXImageTransform.Microsoft.gradient(startColorstr=#AAAAAA,endColorstr=#777777);
     background:                 -webkit-gradient(linear, left top, left bottom, from(#aaa), to(#777));
     background: 		-moz-linear-gradient(top, #aaa, #777);
+    cursor: 			default;
 }
 
 div.dialog .title {
@@ -630,7 +631,7 @@ div.dialog .title {
     font-size:                  8pt;
     padding:                    0 0 2px 0;
     text-align:                 center;
-    margin-left: -230px;
+    margin-left:		-230px;
     background-color:		#aaa;
     filter:			progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCCCCC,endColorstr=#AAAAAA);
     background:                 -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#aaa));
@@ -645,6 +646,7 @@ div.dialog .title {
     top: 			120px;
     height:			15px;
     left: 			50%;
+    cursor: 			default;
 }
 
 div#clear_cache {

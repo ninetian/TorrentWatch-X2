@@ -175,7 +175,7 @@ ul#filterbar_container {
     position: fixed;
     background: #ddd;
     border-bottom: 1px solid #979797;
-    height: 22px;
+    height: 25px;
     right: 0;
     left: 0;
     padding-left: 10px;
@@ -183,8 +183,8 @@ ul#filterbar_container {
 
 ul#filterbar_container li {
     float: left;
+    margin-top: 3px;
     padding: 0.3em 1em 0 1em;
-    vertical-align: middle;
     border-top: 1px solid #979797;
     border-right: 1px solid #979797;
     height: 18px;
@@ -260,7 +260,7 @@ ul#filterbar_container li#filter_bytext {
     filter: 0;
     background: none;
     float: right;
-    margin: 0;
+    margin: 3px 0 0 0;
     padding: 2px 10px 0 0;
     border: 0;
     font-size: 0.8em;
@@ -351,7 +351,7 @@ div#torrentlist_container {
     position: absolute;
     overflow: auto;
     width: 100%;
-    top: 53px;
+    top: 56px;
     bottom: 0;
     left: 0;
     right: 0;
@@ -894,7 +894,7 @@ div#welcome5 input.form_email[type=text] {
     overflow: hidden;
     width: 300px;
     margin: -0.2em auto 0 -150px;
-    z-index: 5;
+    z-index: 99;
 }
 
 #progressbar span {
@@ -902,6 +902,7 @@ div#welcome5 input.form_email[type=text] {
     font-size: 1.2em;
     padding-left: 125px;
     color: #4F5D70;
+    z-index: 99;
 }
 
 /*****************************

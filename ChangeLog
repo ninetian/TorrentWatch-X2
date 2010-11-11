@@ -164,6 +164,8 @@ IMPORTANT: If you are updating from a previous version. Please copy php/config.p
 
 current:
     -- New fresh look!
+    -- Fixed a lot of small UI bugs.
+    -- Replaced greybox with own code.
     -- Added meaningfull error messages.
     -- Update guessing routine.
     -- Fixed issue where Episode filtering stoped working in 0.6.5.

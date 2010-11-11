@@ -1,6 +1,7 @@
 <div id="historyDialog" class="dialog">
 <div class="title">
-        History
+    <a class="toggleDialog button titleClose" href="#"></a>
+    History
 </div>
  <div class="dialog_window" id="history">
   <ul id="historyItems">

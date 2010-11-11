@@ -1,29 +1,30 @@
       <div id="configDialog" class="dialog">
         <div class="title">
-                Configure
+    		<a class="toggleDialog button titleClose" href="#"></a>
+            Configure
         </div>
         <div class="dialog_window" id="configuration">
              <ul id="configTabs">
-              <li id="tabInt" class="toggleConfigTab left selTab">
-                <a onclick='javascript:$.toggleConfigTab("#config_interface", "#tabInt")'>Interface</a>
+              <li id="tabInt" class="toggleConfigTab left selTab"
+                onclick='javascript:$.toggleConfigTab("#config_interface", "#tabInt")'>Interface
 	      </li>
-              <li id="tabClient" class="toggleConfigTab">
-                <a onclick='javascript:$.toggleConfigTab("#config_torClient", "#tabClient")'>Client</a>
+              <li id="tabClient" class="toggleConfigTab"
+                onclick='javascript:$.toggleConfigTab("#config_torClient", "#tabClient")'>Client
 	      </li>
-              <li id="tabTor" class="toggleConfigTab">
-                <a onclick='javascript:$.toggleConfigTab("#config_tor", "#tabTor")'>Torrent</a>
+              <li id="tabTor" class="toggleConfigTab"
+                onclick='javascript:$.toggleConfigTab("#config_tor", "#tabTor")'>Torrent
 	      </li>
-              <li id="tabFavs" class="toggleConfigTab">
-                <a onclick='javascript:$.toggleConfigTab("#config_favorites", "#tabFavs")'>Favorites</a>
+              <li id="tabFavs" class="toggleConfigTab"
+                onclick='javascript:$.toggleConfigTab("#config_favorites", "#tabFavs")'>Favorites
 	      </li>
               <li id="tabFeeds" class="toggleConfigTab" 
-                <a onclick='javascript:$.toggleConfigTab("#config_feeds", "#tabFeeds")'>Feeds</a>
+                onclick='javascript:$.toggleConfigTab("#config_feeds", "#tabFeeds")'>Feeds
 	      </li>
               <li id="tabHideList" class="toggleConfigTab" 
-                <a onclick='javascript:$.toggleConfigTab("#config_hideList", "#tabHideList")'>Hide List</a>                    
+                onclick='javascript:$.toggleConfigTab("#config_hideList", "#tabHideList")'>Hide List
 	      </li>
               <li id="tabOthers" class="toggleConfigTab right" 
-                <a onclick='javascript:$.toggleConfigTab("#config_other", "#tabOthers")'>Other</a>
+                onclick='javascript:$.toggleConfigTab("#config_other", "#tabOthers")'>Other
 	      </li>
 	     </ul>
             

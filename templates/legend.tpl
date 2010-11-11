@@ -1,6 +1,7 @@
 <div id="legendDialog" class="dialog">
  <div class="title">
-         Report Bug
+    <a class="toggleDialog button titleClose" href="#"></a>
+    Report Bug
  </div>
   <div class="dialog_window" id="show_legend">
     <ul id='torrentlist' class='show_legend'>

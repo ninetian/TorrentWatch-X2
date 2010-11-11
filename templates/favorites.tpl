@@ -1,5 +1,6 @@
 <div id="favDialog" class="dialog">
 <div class="title">
+    <a class="toggleDialog button titleClose" href="#"></a>
 	Favorites
 </div>
  <div class="dialog_window" id="favorites">

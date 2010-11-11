@@ -487,7 +487,7 @@ $(function() {
 
     $(document).keyup(function(e) {
 	if (e.keyCode == '27') {
-		$('.dialog_window .close').click();
+		$('.dialog .close').click();
         }
     });
 
@@ -666,7 +666,17 @@ $(function() {
 	        window.noProgressBG=0;
             } else {
 		$('#dynamicdata .dialog').fadeOut()
-		setTimeout(function() { $('#dynamicdata .dialog').remove(); }, 400);
+		setTimeout(function() {
+		    $('#dynamicdata .dialog').remove(); 
+		}, 400);
+	    }
+	    if(last == '#configuration') {
+		window.noProgressBG = 1;
+	        $.get('torrentwatch.php', { get_client: 1 }, function(client) {
+		    window.client = client
+		    changeClient(client);
+		})
+		window.noProgressBG = 0;
 	    }
         });
         return this;

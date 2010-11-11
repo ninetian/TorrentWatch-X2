@@ -87,16 +87,17 @@ label.category {
 
 div#topmenu {
     background: #ddd;
-    height: 30px;
-    z-index: 		3;
-	text-align: right;
+    height: 28px;
+    text-align: right;
+    border: 1px solid #aaa;
+    z-index: 3;
 }
 
 ul.mainoptions li {
     list-style:		none inside none;
     display:		block;
     float: 		left;
-    padding-top: 	5px;
+    padding-top: 	3px;
     margin-right: 	0px;
 }
 
@@ -108,17 +109,9 @@ ul.mainoptions li a {
 	text-decoration:	none;
 	color:		#000;
 	font-size:	8pt;
-	border:		1px solid #ddd;
+	border:		1px solid #D2D2D2;
 	border-radius:	5px;
         -moz-border-radius: 5px;
-}
-
-ul.mainoptions li#legend {
-    //float: right;
-}
-
-ul.mainoptions li#report {
-    //float: right;
 }
 
 ul.mainoptions li#webui {
@@ -155,7 +148,9 @@ ul.mainoptions li a .icon {
 	float:				left;
 }
 
-ul.mainoptions li#favoritesMenu a .icon { background-position: 0px 0px; }
+ul.mainoptions li#favoritesMenu a .icon {
+    background: url(../images/favorites.png) no-repeat left center;
+}
 ul.mainoptions li#config a .icon { background-position: 0px -16px; }
 ul.mainoptions li#view a .icon { background-position: 0px -32px; }
 ul.mainoptions li#empty a .icon { background-position: 0px -48px; }
@@ -173,9 +168,9 @@ ul.mainoptions li#webui a .icon{
 
 ul#filterbar_container {
     position: fixed;
-    background: #ddd;
+    background: #ccc;
     border-bottom: 1px solid #979797;
-    height: 25px;
+    height: 29px;
     right: 0;
     left: 0;
     padding-left: 10px;
@@ -185,8 +180,8 @@ ul#filterbar_container li {
     float: left;
     margin-top: 3px;
     padding: 0.3em 1em 0 1em;
-    border-top: 1px solid #979797;
-    border-right: 1px solid #979797;
+    border: 1px solid #979797;
+    border-left: 0;
     height: 18px;
     text-align: center;
     font-size: 0.8em;
@@ -205,11 +200,15 @@ ul#filterbar_container li#filter_all {
     border-left:		1px solid #979797;
     border-top-left-radius: 	5px;
     -moz-border-radius-topleft: 5px;
+    border-bottom-left-radius: 	5px;
+    -moz-border-radius-bottomleft: 5px;
 }
  
 ul#filterbar_container li#filter_transmission {
     border-top-right-radius:	5px;
     -moz-border-radius-topright: 5px;
+    border-bottom-right-radius:	5px;
+    -moz-border-radius-bottomright: 5px;
 }
 
 ul#filterbar_container li a {
@@ -268,7 +267,7 @@ ul#filterbar_container li#filter_bytext {
 }
 
 input#filter_text_input {
-    height: 13px; 
+    height: 16px; 
     width: 8em; 
     border: 1px solid #5D80A1; 
     padding: 0px 5px 2px 15px;
@@ -351,7 +350,7 @@ div#torrentlist_container {
     position: absolute;
     overflow: auto;
     width: 100%;
-    top: 56px;
+    top: 60px;
     bottom: 0;
     left: 0;
     right: 0;
@@ -1135,7 +1134,7 @@ div.favorite {
     float: left;
     clear: left;
     border: 1px solid grey;
-    padding: 0 0 0 5px;
+    padding: 0;
     background-color: #eee;
 }
 
@@ -1147,7 +1146,7 @@ ul.favorite {
 
 div.favinfo {
     height: 245px;
-    float: right; 
+    float: right;
     clear: right;
     border: 1px solid grey;
     padding: 0px 0 0px 5px;
@@ -1156,9 +1155,14 @@ div.favinfo {
 }
 
 ul.favorite li {
+    margin-bottom: 2px;
+    padding-left: 26px;
     overflow: hidden;
     cursor: pointer;
-    }
+    background: url(../images/favorites.png) no-repeat left center;
+    background-position: 5px;
+    height: 20px;
+}
 
 ul.favorite li a {
     vertical-align: top;
@@ -1166,7 +1170,7 @@ ul.favorite li a {
     text-decoration: none;
     color: #000000;
     overflow: hidden;
-    }
+}
 
 ul.favorite li:hover {
     background-color: #9DACC1;
@@ -1301,6 +1305,8 @@ div#report_bug input[type=submit] {
 div#history {
     padding: 5px;
     height: 257px;
+    width: 583px;
+    margin-left: -288px;
 }
 
 div#historyDialog .title {
@@ -1340,35 +1346,3 @@ div#clear_cache a.toggleDialog {
 div#history a.toggleDialog {
     right: 6.5em;
 }
-
-/*-----------------
- *
- * O L D   C S S   S T U F F
- *
- * ----------------*/
-
-
-.clear { clear: both; }
-
-div.dialog_window#history {
-    width: 583px;
-    margin-left: -288px;
-}
-
-div.timer {
-    font-size: 8pt;
-    text-align: right;
-    margin-right: 5px;
-    bottom: 0;
-    right: 0;
-}
-
-
-.favorite li {
-    background: url(../images/favorites.png) no-repeat left center;
-    height: 20px;
-    margin-bottom: 5px;
-    padding-left: 24px;
-    overflow: hidden;
-}
-

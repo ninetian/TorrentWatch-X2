@@ -30,13 +30,13 @@ function GB_show(caption, url, height, width) {
   GB_position();
 
   if(GB_ANIMATION)
-    $("#GB_window").slideDown("slow");
+    $("#GB_window").fadeIn("normal");
   else
     $("#GB_window").show();
 }
 
 function GB_hide() {
-  $("#GB_window,#GB_overlay").hide();
+  $("#GB_window,#GB_overlay").fadeOut();
 }
 
 function GB_position() {

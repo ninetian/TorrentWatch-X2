@@ -257,6 +257,7 @@ ul#filterbar_container li#rates {
 
 ul#filterbar_container li#filter_bytext:hover,
 ul#filterbar_container li#filter_bytext {
+    filter: 0;
     background: none;
     float: right;
     margin: 0;
@@ -308,6 +309,36 @@ ul.show_legend li {
     padding: 5px 5px 5px 5px;
     font-size: 12px;
 }
+
+/*-----------------------------
+ *
+ * T O R R E N T   C L I E N T
+ *
+ * ----------------------------*/
+
+div#transmissionDialog {
+	display: inline;
+}
+	
+div#transmissionDialog .title {
+	top: 50px;
+	width: 800px;
+	margin-left: -400px;
+}
+
+div#transmissionWindow {
+	width: 800px;
+	height: 550px;
+	top: 70px;
+	margin-left: -400px;
+	padding: 0;
+}
+
+#transmissionFrame {
+	width: 800px;
+	height: 550px;
+}
+	
 
 /*-------------------------
  *

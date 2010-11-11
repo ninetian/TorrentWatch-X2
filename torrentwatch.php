@@ -195,10 +195,6 @@ function parse_options() {
             close_html();
             exit(0);
             break;
-        case 'get_tr_location':
-            global $config_values;
-            echo $config_values['Settings']['Transmission Host'] . ':' . $config_values['Settings']['Transmission Port'];
-            exit;
         case 'get_client':
             global $config_values;
             echo $config_values['Settings']['Client'];
@@ -252,6 +248,9 @@ function parse_options() {
                     exit;
                 case '#clear_cache':
                     display_clearCache();
+                    exit;
+                case '#show_transmission':
+                    display_transmission();
                     exit;
                 default:
                     exit;
@@ -406,6 +405,17 @@ function display_legend() {
     ob_end_clean();
 }
 
+function display_transmission() {
+    global $html_out;
+
+    $host = get_tr_location();
+
+    ob_start();
+    require('templates/transmission.tpl');
+    return ob_get_contents();
+    ob_end_clean();
+}
+
 function report_bug() {
     global $html_out;
 
@@ -516,6 +526,13 @@ function post_bug($Summary, $Name, $Email, $Priority, $Description) {
     if($http_code && $http_code != 200) $response = "Error: $http_code <br> $response";
     return "<div id=\"errorDialog\" class=\"dialog_window\" style=\"display: block\">$response</div>";
     
+}
+
+function get_tr_location() {
+    global $config_values;
+    $host = $config_values['Settings']['Transmission Host'] . ':' . $config_values['Settings']['Transmission Port'];
+    $host = preg_replace('/(localhost|127.0.0.1)/', $_SERVER['HTTP_HOST'], $host);
+    return $host;
 }
 
 //

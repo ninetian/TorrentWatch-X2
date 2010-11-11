@@ -146,15 +146,7 @@ $(function() {
         case 'Transmission':
             $(".config_form .tor_settings, div.category tor_settings, #config_tr_user, #config_tr_password, #config_tr_host, #config_tr_port, #config_downloaddir, div.favorite_seedratio, div.favorite_savein").css("display", "block");
             $("ul.favorite").css("height", 245);
-            $.get('torrentwatch.php', { get_tr_location: 1 }, function(uri) {
-                if(uri.match(/localhost/) || uri.match(/127.0.0.1/)) { 
-                    target = 'http://' + location.hostname + uri.match(/:\d+/) + '/transmission/web/';
-                } else {
-                    target = 'http://' + uri.match(/\S+:\d+/) + '/transmission/web/';
-                }
-                $("#webui a").html($("#webui a").html())[0].href = target;
-                $('li#webui').show();
-            })
+	    $("li#webui").show();
             window.client = 'Transmission';
             break;
         }
@@ -932,7 +924,7 @@ $(function() {
 	}
 	$(tab).animate({opacity: 'toggle'}, 500);
     }
-    
+
     $.noEnter = function(evt) { 
       var evt = (evt) ? evt : ((event) ? event : null); 
       var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null); 

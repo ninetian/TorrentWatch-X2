@@ -8,7 +8,6 @@
   <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
   <link rel="Stylesheet" type="text/css" href="css/reset.css" />
   <link rel="Stylesheet" type="text/css" href="css/torrentwatch.css" />
-  <link rel="stylesheet" type="text/css" href="css/greybox.css" media="all" />
   <!--[if IE]>
     <link rel="Stylesheet" type="text/css" href="css/ie.css"></link>
   <![endif]-->
@@ -19,16 +18,6 @@
   <script type="text/javascript" src="javascript/json2.js"></script>
   <script type="text/javascript" src="javascript/greybox.js"></script>
   <script type="text/javascript" src="javascript/torrentwatch.js"></script>
-    <script type="text/javascript">
-      var GB_ANIMATION = true;
-      $(document).ready(function(){
-        $("a.greybox").click(function(){
-          var t = this.title || $(this).text() || this.href;
-          GB_show(t,this.href,600,960);
-          return false;
-        });
-      });
-    </script>
 </head>
 <body>
 <div id="topmenu">
@@ -63,9 +52,10 @@
    <span class="icon"></span>
    Report Bug</a>
   </li>
-  <li id='webui'>
-   <a href='#' class="greybox">
-   <span class="icon">.</span></a>
+  <li id="webui">
+   <a class='toggleDialog' href='#show_transmission'>
+   <span class="icon"></span>
+   </a>
   </li>
  </ul>
 </div>

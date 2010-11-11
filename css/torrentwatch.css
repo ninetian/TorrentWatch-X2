@@ -245,7 +245,7 @@ ul#filterbar_container li#rates:hover,
 ul#filterbar_container li#rates {
     filter: 0;
     background: none;
-    margin-left: 5px;
+    margin-left: 10px;
     padding: 0;
     border: 0;
     float: left;

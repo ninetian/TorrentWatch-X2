@@ -151,11 +151,17 @@ ul.mainoptions li a .icon {
 ul.mainoptions li#favoritesMenu a .icon {
     background: url(../images/favorites.png) no-repeat left center;
 }
-ul.mainoptions li#config a .icon { background-position: 0px -16px; }
+ul.mainoptions li#config a .icon {
+    background: url(../images/config.png) no-repeat left center;
+}
 ul.mainoptions li#view a .icon { background-position: 0px -32px; }
-ul.mainoptions li#empty a .icon { background-position: 0px -48px; }
-ul.mainoptions li#report a .icon { background-position: 0px -64px; }
+ul.mainoptions li#empty a .icon { 
+    background: url(../images/cleanup.png) no-repeat left center;
+}
 ul.mainoptions li#legend a .icon { background-position: 0px -80px; }
+ul.mainoptions li#report a .icon {
+    background: url(../images/report-bug.png) no-repeat left center;
+}
 ul.mainoptions li#webui a .icon{
 	 background-image: url(../images/webui.png);
 }
@@ -360,7 +366,7 @@ div#torrentlist_container div.errorHeader {
     font-size: 1.0em;
     text-align: center;
     padding: 0.2em 0 0.2em 0;
-    background: #CCFFCC;
+    background: #C1E0C1;
     color: #D6001A;
     border-bottom: 1px solid #ddd;
 }
@@ -370,7 +376,7 @@ div.transmission div.header {
     font-size: 1em;
     padding: 0.2em 0 0.2em 0;
     text-align: center;
-    background: #CCFFCC;
+    background: #C1E0C1;
 }
 
 div.transmission #waiting {
@@ -411,7 +417,7 @@ ul.torrentlist li.torrent.alt {
 
 ul.torrentlist li.torrent:hover,
 ul.torrentlist li.torrent.alt:hover {
-    background-color: #CCDEFF;
+    background-color: #DAE3F2;
     opacity: .80;
     filter: alpha(opacity = 80);
 }
@@ -441,7 +447,6 @@ ul.torrentlist p {
 }
 
 ul.torrentlist td.buttons {
-    border-bottom: 1px dotted #ccc;
     text-align: center;
     vertical-align: top;
     padding-top: 3px;
@@ -451,12 +456,12 @@ ul.torrentlist td.buttons {
 
 div#show_legend li.legend.match_nomatch,
 ul.torrentlist td.buttons.match_nomatch {
-    background-color: #fbbfbf;
+    background-color: #D6ABAB;
 }
 
 div#show_legend li.legend.match_season,
 ul.torrentlist td.buttons.match_season {
-    background-color: #66cdaa;
+    background-color: #99CCBB;
 }
 
 div#show_legend li.legend.match_old_download,
@@ -466,18 +471,18 @@ ul.torrentlist td.buttons.match_old_download {
 
 div#show_legend li.legend.match_match,
 ul.torrentlist td.buttons.match_match {
-    background-color: #FFCC66;
+    background-color: #FFEFCF;
 }
 
 ul.torrentlist td.buttons.match_duplicate,
 div#show_legend li.legend.match_old,
 ul.torrentlist td.buttons.match_old {
-    background-color: #CCCCFF;
+    background-color: #C5C5EB;
 }
 
 div#show_legend li.legend.match_test,
 ul.torrentlist td.buttons.match_test {
-    background-color: #FFCCFF;
+    background-color: #E0C3E0;
 }
 
 div#show_legend li.legend.match_cachehit,
@@ -485,7 +490,7 @@ ul.torrentlist td.buttons.match_cachehit,
 ul.torrentlist td.buttons.match_downloaded,
 ul.torrentlist td.buttons.match_downloading,
 ul.torrentlist td.buttons.match_transmission {
-    background-color: #CCFFCC;
+    background-color: #C1E0C1;
 }
 
 ul.torrentlist td.buttons.left {

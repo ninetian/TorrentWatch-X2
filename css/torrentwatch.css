@@ -60,12 +60,11 @@ div.right {
 }
 
 div.left {
-	text-align: right;
-	width: 167px;
+    text-align: right;
 }
 
 div.right {
-	text-align: left;
+    text-align: left;
 }
 
 label.category {
@@ -1012,6 +1011,10 @@ div.config_form {
     background-color: #eee;
 }
 
+div.config_form .left {
+    width: 167px;
+}
+
 form#config_form div {
     min-height: 22px;
 }
@@ -1166,6 +1169,10 @@ div.favinfo {
     padding: 0px 0 0px 5px;
     width: 380px;
     background-color: #eee;
+}
+
+div.favinfo .right {
+    vertical-align: top;
 }
 
 div.favinfo .left {

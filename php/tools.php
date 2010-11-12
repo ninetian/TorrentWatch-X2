@@ -155,6 +155,18 @@ function getClientData($recent) {
     }
 }
 
+function getClientActiveTorrents() {
+    global $config_values;
+
+    switch($config_values['Settings']['Client']) {  
+        case 'Transmission':
+            $request = array('method' => 'session-stats');
+            $response = transmission_rpc($request);
+            return json_encode($response);
+        break;
+    }
+}
+
 function delTorrent($torHash, $trash) {
     global $config_values;
 

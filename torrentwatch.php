@@ -81,6 +81,9 @@ function parse_options() {
             }
             echo $response;
             exit;
+        case 'getClientActiveTorrents':
+	    echo getClientActiveTorrents();
+	    exit;
         case 'getHash':
             $response = torInfo($_REQUEST['getHash']);
             echo json_encode($response);

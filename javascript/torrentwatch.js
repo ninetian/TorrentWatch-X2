@@ -47,7 +47,7 @@ $(function() {
             }
             var tor = $(".feed li.torrent").not(".hiddenFeed");
             doShow(tor);
-            $('.hide_item').fadeIn();
+            //$('.hide_feed').fadeIn();
             tor.markAlt().closest(".feed div.feed");
         } else if (filter == 'matching') {
             if ($('.transmission').is(":visible")) {
@@ -56,7 +56,7 @@ $(function() {
             }
             var tor = $(".feed li.torrent").filter(".match_nomatch");
             tor.hideMe();
-            $('.hide_item').fadeOut();
+            //$('.hide_feed').fadeOut();
             tor = $(".feed li.torrent").not(".match_nomatch");
             doShow(tor);
             tor.markAlt().closest(".feed div.feed");
@@ -67,7 +67,7 @@ $(function() {
             }
             var tor = $(".feed li.torrent").not('.match_downloading, .match_match');
             tor.hideMe();
-            $('.hide_item').fadeOut();
+            //$('.hide_feed').fadeOut();
             tor = $(".feed  li.torrent").filter('.match_downloading, .match_match');
             doShow(tor);
             tor.markAlt().closest(".feed div.feed");
@@ -78,7 +78,7 @@ $(function() {
             }
             var tor = $(".feed li.torrent").not('.match_cachehit, .match_downloaded');
             tor.hideMe();
-            $('.hide_item').fadeOut();
+            //$('.hide_feed').fadeOut();
             tor = $(".feed li.torrent").filter('.match_cachehit, .match_downloaded');
             doShow(tor);
             tor.markAlt().closest(".feed div.feed");
@@ -870,6 +870,8 @@ $(function() {
                 $("#feed_" + feed + " li").show().removeClass("hiddenFeed");
                 $("#feed_" + feed + " .header").removeClass("header_hidden");
                 $.cookie('feed_' + feed , null, { expires: 666 });
+		var filter = $.cookie('TWFILTER');
+		displayFilter(filter, 1);
             } else {
                 $("#feed_" + feed + " li").hide().addClass("hiddenFeed");
                 $("#feed_" + feed + " .header").addClass("header_hidden");    
@@ -880,6 +882,8 @@ $(function() {
                 $("#feed_" + feed + " li").slideDown().removeClass("hiddenFeed");
                 $("#feed_" + feed + " .header").removeClass("header_hidden");
                 $.cookie('feed_' + feed , null, { expires: 666 });
+		var filter = $.cookie('TWFILTER');
+		displayFilter(filter, 1);
             } else {
                 $("#feed_" + feed + " li").slideUp().addClass("hiddenFeed");
                 $("#feed_" + feed + " .header").addClass("header_hidden");    

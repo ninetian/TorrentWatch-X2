@@ -143,7 +143,6 @@ ul.mainoptions li a .icon {
 	height:				16px;
 	width:				16px;
 	margin-right:			2px;
-	background-image:		url(../images/buttons_16x16.png);
 	background-repeat:		no-repeat;
 	float:				left;
 }
@@ -154,11 +153,15 @@ ul.mainoptions li#favoritesMenu a .icon {
 ul.mainoptions li#config a .icon {
     background: url(../images/config.png) no-repeat left center;
 }
-ul.mainoptions li#view a .icon { background-position: 0px -32px; }
+ul.mainoptions li#view a .icon {
+    background: url(../images/history.png) no-repeat left center;
+}
 ul.mainoptions li#empty a .icon { 
     background: url(../images/cleanup.png) no-repeat left center;
 }
-ul.mainoptions li#legend a .icon { background-position: 0px -80px; }
+ul.mainoptions li#legend a .icon {
+    background: url(../images/legend.png) no-repeat left center;
+}
 ul.mainoptions li#report a .icon {
     background: url(../images/report-bug.png) no-repeat left center;
 }

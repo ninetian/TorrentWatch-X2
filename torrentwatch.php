@@ -209,14 +209,17 @@ function parse_options() {
             echo $footer;
             exit;
         case 'show_donate':
-            echo '<div id="donate">
+	    global $config_values;
+	    if (!$config_values['Settings']['Hide Donate Button']) {
+              echo '<div id="donate">
 		<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 		<input type="hidden" name="cmd" value="_s-xclick">
 		<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
 		">
-		<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+		<input type="image" src="../images/paypal-icon.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
 		</form>
-            </div>';
+              </div>';
+	    }
             exit;
         case 'post_bug':
             global $tw_version;
@@ -276,7 +279,7 @@ function display_global_config() {
 
     $savetorrent=$transmission="";
     $deepfull=$deeptitle=$deepTitleSeason=$deepoff=$verifyepisode="";
-    $matchregexp=$matchglob=$matchsimple=$dishidelist=$mailonhit="";
+    $matchregexp=$matchglob=$matchsimple=$dishidelist=$hdiedonate==$mailonhit="";
     $favdefaultall=$onlynewer=$folderclient=$combinefeeds=$require_epi_info="";
 
     switch($config_values['Settings']['Client']) {
@@ -296,6 +299,8 @@ function display_global_config() {
         $require_epi_info = 'checked=1';
     if($config_values['Settings']['Disable Hide List'] == 1)
         $dishidelist = 'checked=1';    
+    if($config_values['Settings']['Hide Donate Button'] == 1)
+        $hidedonate = 'checked=1';    
     if($config_values['Settings']['Save Torrents'] == 1)
         $savetorrent = 'checked=1';
     if($config_values['Settings']['Email Notifications'] == 1)

@@ -54,10 +54,18 @@
                             </div>
                             <div id="config_disable_hidelist">
 								<div class="left">
-                                	<label class="item checkbox" title="Disable the hide list.">Disable hide list:</label>
+                                	<label class="item checkbox">Disable Hide List:</label>
 								</div>
 								<div class="right">
                                 	<input type="checkbox" name="dishidelist" value="1" <?php echo $dishidelist; ?>/>
+								</div>
+                            </div>
+                            <div id="config_hide_donate">
+								<div class="left">
+                                	<label class="item checkbox" title="I have already donated.">Hide Donate Button:</label>
+								</div>
+								<div class="right">
+                                	<input type="checkbox" name="hidedonate" value="1" <?php echo $hidedonate; ?>/>
 								</div>
                             </div>
                         </div>

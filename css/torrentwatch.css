@@ -227,7 +227,7 @@ ul#filterbar_container li a {
 
 ul#filterbar_container li:hover,
 ul#filterbar_container li:hover a,
-ul#filterbar_container li:selected,
+ul#filterbar_container li.selected,
 ul#filterbar_container li.selected a {
     color: #FFF;
 }

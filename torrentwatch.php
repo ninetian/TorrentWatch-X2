@@ -279,7 +279,7 @@ function display_global_config() {
 
     $savetorrent=$transmission="";
     $deepfull=$deeptitle=$deepTitleSeason=$deepoff=$verifyepisode="";
-    $matchregexp=$matchglob=$matchsimple=$dishidelist=$hdiedonate==$mailonhit="";
+    $matchregexp=$matchglob=$matchsimple=$dishidelist=$hdiedonate=$mailonhit="";
     $favdefaultall=$onlynewer=$folderclient=$combinefeeds=$require_epi_info="";
 
     switch($config_values['Settings']['Client']) {

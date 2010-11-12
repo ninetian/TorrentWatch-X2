@@ -168,5 +168,6 @@ current:
     -- Replaced greybox with own code.
     -- Added meaningfull error messages.
     -- Update guessing routine.
+    -- Added option to hide donate button.
     -- Fixed issue where Episode filtering stoped working in 0.6.5.
     -- Fixed an issue where in some cases Last epi info would not be updated.

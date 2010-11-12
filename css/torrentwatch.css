@@ -1181,8 +1181,8 @@ div.favinfo .left {
 }
 
 ul.favorite li {
-    margin-bottom: 2px;
     padding-left: 26px;
+    padding-bottom: 4px;
     overflow: hidden;
     cursor: pointer;
     background: url(../images/favorites.png) no-repeat left center;
@@ -1191,7 +1191,7 @@ ul.favorite li {
 }
 
 ul.favorite li a {
-    vertical-align: top;
+    vertical-align: middle;
     font-size: 0.8em;
     text-decoration: none;
     color: #000000;

@@ -5,6 +5,8 @@
 - Remove torrents which are done. (paused and met ratio requirements)
 - Option for download everything from a feed
 - Make torrent settings per show/feed/global
+- tvDB support.
+- In-app update option.
 
 0.9
 - sqlite for caching + migration script.

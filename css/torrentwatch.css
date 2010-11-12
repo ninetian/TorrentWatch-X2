@@ -89,6 +89,9 @@ div#topmenu {
     height: 28px;
     text-align: right;
     border: 1px solid #aaa;
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#EEEEEE,endColorstr=#AAAAAA);
+	background: 	-webkit-gradient(linear, left top, left bottom, from(#eee), to(#aaa));
+	background:	-moz-linear-gradient(top, #eee, #aaa);
     z-index: 3;
 }
 
@@ -103,12 +106,16 @@ ul.mainoptions li {
 ul.mainoptions li a {
 	display:	block;
 	margin:		0px 0px 0px 10px;
-	padding:	3px 3px 3px 3px;
+    	padding: 	2px 5px 2px 5px;
 	height:		16px;
 	text-decoration:	none;
-	color:		#000;
+    	color: 		#030303;
 	font-size:	8pt;
-	border:		1px solid #D2D2D2;
+        border:		1px solid #999;
+        background: #ccc;
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#EEEEEE,endColorstr=#AAAAAA);
+	background: 	-webkit-gradient(linear, left top, left bottom, from(#eee), to(#aaa));
+	background:	-moz-linear-gradient(top, #eee, #aaa);
 	border-radius:	5px;
         -moz-border-radius: 5px;
 }
@@ -120,21 +127,22 @@ ul.mainoptions li#webui {
 }
 
 ul.mainoptions li a {
-    color: #030303;
-    font-size: 0.8em;
-    text-decoration: none;
-    padding: 2px 5px;
-    display: block;
 }
-
+ 
 ul.mainoptions li a:hover {
-   background-color: 	#eee;
-   border:		1px solid #ccc;
+   border:	1px solid #999;
+   background: 	#ddd;
+   filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#FFFFFF,endColorstr=#BBBBBB);
+   background: 	-webkit-gradient(linear, left top, left bottom, from(#fff), to(#bbb));
+   background:	-moz-linear-gradient(top, #fff, #bbb);
 }
 
 ul.mainoptions li a.selected {
-   background-color: 	#eee;
-   border:		1px solid #ccc;
+   border:	1px solid #999;
+   background: 	#bbb;
+   filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#FFFFFF,endColorstr=#CCCCCC);
+   background: 	-webkit-gradient(linear, left top, left bottom, from(#fff), to(#ccc));
+   background:	-moz-linear-gradient(top, #fff, #ccc);
 }
 
 ul.mainoptions li a .icon {

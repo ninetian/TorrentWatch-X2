@@ -1168,6 +1168,11 @@ div.favinfo {
     background-color: #eee;
 }
 
+div.favinfo .left {
+    width: 90px;
+    vertical-align: top;
+}
+
 ul.favorite li {
     margin-bottom: 2px;
     padding-left: 26px;
@@ -1287,18 +1292,28 @@ div#report_bug {
     padding-top: 5px;
 }
 
-div#bugDialog .title {
-    width: 430px;
+div#report_bug .bugItem {
+    min-height: 22px;
 }
 
-form#report_form div {
-    min-height: 22px;
+div#report_bug .right {
+    vertical-align: top;
+}
+
+div#report_bug .left {
+    vertical-align: top;
+    width: 100px;
+}
+
+div#bugDialog .title {
+    width: 430px;
 }
 
 div#report_bug textarea {
     resize: vertical;
     float: right;
     width: 300px;
+    margin-left: 3px;
 }
 
 div#report_bug select,

@@ -366,7 +366,6 @@ $(function() {
         var torListHtml = "";
 	var upSpeed = 0;
 	var downSpeed = 0;
-        var torrentCount = 0;
         
         if(!(window.oldStatus)) window.oldStatus = [];
         if(!(window.oldClientData)) window.oldClientData = [];
@@ -377,7 +376,7 @@ $(function() {
                 showClientError(json);
                 return;
 	    }
-	    torrentCount = stats['arguments'].torrentCount;
+	    var torrentCount = stats['arguments'].torrentCount;
  	    $('#activeTorrents').html("("+torrentCount+")");
 	})
 

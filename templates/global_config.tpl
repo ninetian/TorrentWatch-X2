@@ -291,13 +291,14 @@
                 </div>
             </form>
             <div id="config_feeds" class="configTab hidden">
-                <div id="addFeed">
-                    <form action="torrentwatch.php?updateFeed=1" class="feedform">
-                    <a class="submitForm button" id="Add" href="#">Add</a>
-                    <label class="item">Add feed:</label>
-                    <input type="text" class="feed_link" name="link">
-                    </form>
-                </div>
+              <div id="addFeed">
+                  <form action="torrentwatch.php?updateFeed=1" class="feedform">
+                  <a class="submitForm button" id="Add" href="#">Add</a>
+                  <label class="item">Add feed:</label>
+                  <input type="text" class="feed_link" name="link">
+                  </form>
+              </div>
+              <div id="feedItems">
                 <div id="feedItemTitles">
                     <div id="feedNameUrl">
                         <label class="item">Name</label>
@@ -322,15 +323,17 @@
                         </div>
                     <?php endforeach; ?>
                 <?php endif; ?>
-                <div id="showURL">
-                    <input id="showURL" type="checkbox" onClick="$.toggleFeedNameUrl(<?php echo $key; ?>)"
-                        title="Toggle between name and link input fields">
-                    </input>
-                    <label id="showURLlabel" class="item">Show feed link</label>
-                </div>
+              </div>
+              <div id="showURL">
+                  <input id="showURL" type="checkbox" onClick="$.toggleFeedNameUrl(<?php echo $key; ?>)"
+                      title="Toggle between name and link input fields">
+                  </input>
+                  <label id="showURLlabel" class="item">Show feed link</label>
+	      </div>
             </div>
 	    <form action="torrentwatch.php?delHidden=1" id="hidelist_form" name="hidelist_form" class="hidden">
 	            <div id="config_hideList" class="hidden configTab">
+		      <div id="hideListContainer">
                         <ul class="hidelist">
                         <?php if($config_values['Hidden']): ?>
                         <?php ksort($config_values['Hidden'], SORT_STRING); ?>
@@ -345,6 +348,7 @@
                             <li><h2 style='color: red; text-align: center'>You did not hide any shows.</h2></li>
                         <?php endif; ?>
                         </ul>
+		      </div>
 		    </div>
                     <div class="buttonContainer">
                         <a class="submitForm button" id="Unhide" href="#">Unhide</a>

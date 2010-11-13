@@ -648,7 +648,6 @@ div.dialog .title {
     background-color:		#aaa;
     filter:			progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCCCCC,endColorstr=#AAAAAA);
     background:                 -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#aaa));
-    //background:                 -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#aaa));
     background: 		-moz-linear-gradient(top, #ccc, #aaa);
     border:              	1px solid #979797;
     border-top-left-radius:     5px;
@@ -953,7 +952,7 @@ div#configTabs li.selTab {
     border-top-right-radius: 	5px;
     -moz-border-radius-topright: 5px;
     border-right: 1px solid #979797;
-    border-bottom: 1px solid #eee;
+    height: 16px;
     margin-left: -5px;
     margin-right: -5px;
     color: #030303;

@@ -16,11 +16,6 @@ div#history {
 }
 
 ul#configTabs li {
-    width: 100%;
-}
-
-ul#configTabs li {
-    float: right;
     border-bottom: 1px solid #979797;
 }
 

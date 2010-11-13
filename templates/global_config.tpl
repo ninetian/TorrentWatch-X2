@@ -4,7 +4,8 @@
             Configure
         </div>
         <div class="dialog_window" id="configuration">
-             <ul id="configTabs">
+	  <div id="configTabs">
+             <ul>
               <li id="tabInt" class="toggleConfigTab left selTab"
                 onclick='javascript:$.toggleConfigTab("#config_interface", "#tabInt")'>Interface
 	      </li>
@@ -27,7 +28,7 @@
                 onclick='javascript:$.toggleConfigTab("#config_other", "#tabOthers")'>Other
 	      </li>
 	     </ul>
-            
+            </div> 
             <form action="torrentwatch.php?setGlobals=1" id="config_form" name="config_form">
                 <div class="config_form">
                     <div id="config_interface" class="configTab">

@@ -33,12 +33,12 @@ select {
 input[type=text] {
     border: 1px solid #787878;
     margin-left: 5px;
-    }
+}
 
 input[type=password] {
     border: 1px solid #787878;
     margin-left: 5px;
-    }
+}
 
 input[type=hidden] {
     display: none;
@@ -127,9 +127,6 @@ ul.mainoptions li#webui {
     margin-right: 10px;
 }
 
-ul.mainoptions li a {
-}
- 
 ul.mainoptions li a:hover {
    border:	1px solid #999;
    background: 	#ddd;
@@ -927,14 +924,18 @@ div#welcome5 input.form_email[type=text] {
  * C O N F I G   D I A L O G 
  *
  ****************************/
- 
-ul#configTabs {
+
+div#configTabs {
+    height: 26px;
+    border-bottom: 1px solid #979797;
+} 
+div#configTabs ul {
     margin: 0 0 0 0;
     padding: 2px 0px 2px 0px;
     text-align: center;
 }
 
-ul#configTabs li:hover {
+div#configTabs li:hover {
     background: #9DACC1;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#DDDDDD,endColorstr=#BBBBBB);
     background: -webkit-gradient(linear, left top, left bottom, from(#DDD), to(#BBB));
@@ -942,7 +943,7 @@ ul#configTabs li:hover {
     color: #030303;
 }
 
-ul#configTabs li.selTab {
+div#configTabs li.selTab {
     background: #9DACC1;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#C8C8C8,endColorstr=#EEEEEE);
     background: -webkit-gradient(linear, left top, left bottom, from(#C8C8C8), to(#EEE));
@@ -959,15 +960,15 @@ ul#configTabs li.selTab {
     z-index: 3;
 }
 
-ul#configTabs #tabInt {
+div#configTabs #tabInt {
     margin-left: 0;
 }
 
-ul#configTabs #tabOthers {
+div#configTabs #tabOthers {
     margin-right: 0;
 }
 
-ul#configTabs .toggleConfigTab {
+div#configTabs .toggleConfigTab {
     position: relative;
     float: left;
     width: 57px;
@@ -987,12 +988,12 @@ ul#configTabs .toggleConfigTab {
     cursor: pointer;
 }
 
-ul#configTabs .left {
+div#configTabs .left {
     border-top-left-radius: 	5px;
     -moz-border-radius-topleft: 5px;
 }
 
-ul#configTabs .right {
+div#configTabs .right {
     border-right: 1px solid #979797;
     border-top-right-radius: 	5px;
     -moz-border-radius-topright: 5px;
@@ -1027,8 +1028,9 @@ div#configuration div.config_form input[type=checkbox] {
 
 div.config_form {
     border: 1px solid #979797;
+    border-top: 0;
     padding: 10px 0 5px 0;
-    margin: 22px 0 0 0 ;
+    margin: 0 0 0 0 ;
     background-color: #eee;
 }
 
@@ -1043,7 +1045,8 @@ form#config_form div {
 div#config_feeds {
     width: 460px;
     border: 1px solid #979797;
-    margin: 22px 0 0 0 ;
+    border-top: 0;
+    margin: 0 0 0 0 ;
     padding: 5px 0 5px 0;
     background-color: #eee;
 }
@@ -1131,9 +1134,9 @@ div#showURL input[type=checkbox] {
 }
 
 div#config_hideList {
-    margin-top: 22px;
     width: 460px;
     border: 1px solid #979797;
+    border-top: 0;
     background-color: #eee;
     padding-bottom: 0;
 }

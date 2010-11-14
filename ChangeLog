@@ -167,6 +167,7 @@ current:
     -- Fixed a lot of small UI bugs.
     -- Replaced greybox with own code.
     -- Added meaningfull error messages.
+    -- Added search option in hide list.
     -- Update guessing routine.
     -- Added option to hide donate button.
     -- Fixed issue where Episode filtering stoped working in 0.6.5.

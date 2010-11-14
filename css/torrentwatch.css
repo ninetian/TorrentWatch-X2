@@ -1398,7 +1398,7 @@ div#report_bug input[type=submit] {
  *
  *****************************/
 div#history {
-    padding: 5px;
+    padding: 0 5px 5px 5px;
     height: 257px;
     width: 583px;
     margin-left: -288px;

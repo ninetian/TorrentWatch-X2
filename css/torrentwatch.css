@@ -1148,7 +1148,7 @@ div#showURL input[type=checkbox] {
 }
 
 div#config_hideList {
-    width: 460px;
+    width: 461px;
     border: 1px solid #979797;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCCCCC,endColorstr=#F8F8F8);
     background: -webkit-gradient(linear, left top, left bottom, from(#CCC), to(#F8F8F8));
@@ -1156,6 +1156,24 @@ div#config_hideList {
     border-top: 0;
     background-color: #eee;
     padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+div#hideSearch input {
+    margin: 0;
+    padding: 0;
+}
+
+div#hideSearch input {
+   border: 1px solid #979797;
+   border-top: 0;
+   width: 438px;
+   height: 18px;
+   margin: 0;
+   padding: 1px 3px 0 20px;
+   background: #FFF url('../images/filter_icon.png') top left no-repeat;
+   font-size: 0.8em;
+   //background: #EEE;
 }
 
 div#config_hideList #hideListContainer {

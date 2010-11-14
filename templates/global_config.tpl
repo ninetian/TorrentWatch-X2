@@ -1,3 +1,4 @@
+  <script type="text/javascript" src="javascript/configure.js"></script>
       <div id="configDialog" class="dialog">
         <div class="title">
     		<a class="toggleDialog button titleClose" href="#"></a>
@@ -342,7 +343,7 @@
                             <li>
                                 <label class="item checkbox">
                                 <input type="checkbox" name="unhide[]" value="<?=$key?>"/>
-                                <?php echo $key; ?></label>
+                                <span class="hiddenItem"><?php echo $key; ?></span></label>
                             </li>
                         <?php endforeach; ?>
                         <?php else: ?>
@@ -350,6 +351,9 @@
                         <?php endif; ?>
                         </ul>
 		      </div>
+		    </div>
+		    <div id="hideSearch">
+                        <input type="text" id="hideSearchText" name="hideSearch"></input>
 		    </div>
                     <div class="buttonContainer">
                         <a class="submitForm button" id="Unhide" href="#">Unhide</a>

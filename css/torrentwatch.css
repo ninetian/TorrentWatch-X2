@@ -313,6 +313,10 @@ div#legendDialog .title {
 
 div#show_legend {
     padding-top: 5px;
+    border-top: 1px solid #979797;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCCCCC,endColorstr=#F8F8F8);
+    background: -webkit-gradient(linear, left top, left bottom, from(#CCC), to(#F8F8F8));
+    background:	-moz-linear-gradient(top, #CCC, #F8F8F8);
 }
 
 ul.show_legend {
@@ -343,9 +347,10 @@ div#transmissionDialog .title {
 div#transmissionWindow {
 	width: 800px;
 	height: 550px;
-	top: 70px;
+	top: 71px;
 	margin-left: -400px;
 	padding: 0;
+        border: 1px solid #979797;
 }
 
 #transmissionFrame {
@@ -587,7 +592,7 @@ div.dialog {
     position:		absolute;
     left:		0;
     right:		0;
-    top:		28px;
+    top:		29px;
     bottom:		0px;
     background:		transparent;
     filter:		progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000,endColorstr=#99000000);
@@ -667,6 +672,10 @@ div#clear_cache {
     width: 320px;
     margin-left: -160px;
     text-align: center;
+    border-top: 1px solid #979797;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCCCCC,endColorstr=#F8F8F8);
+    background: -webkit-gradient(linear, left top, left bottom, from(#CCC), to(#F8F8F8));
+    background:	-moz-linear-gradient(top, #CCC, #F8F8F8);
 }
 
 div#cacheDialog .title {
@@ -944,9 +953,9 @@ div#configTabs li:hover {
 
 div#configTabs li.selTab {
     background: #9DACC1;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#C8C8C8,endColorstr=#EEEEEE);
-    background: -webkit-gradient(linear, left top, left bottom, from(#C8C8C8), to(#EEE));
-    background:	-moz-linear-gradient(top, #C8C8C8, #EEE);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#C8C8C8,endColorstr=#CCCCCC);
+    background: -webkit-gradient(linear, left top, left bottom, from(#C8C8C8), to(#CCC));
+    background:	-moz-linear-gradient(top, #C8C8C8, #CCC);
     border-top-left-radius: 	5px;
     -moz-border-radius-topleft: 5px;
     border-top-right-radius: 	5px;
@@ -1028,6 +1037,9 @@ div#configuration div.config_form input[type=checkbox] {
 div.config_form {
     border: 1px solid #979797;
     border-top: 0;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCCCCC,endColorstr=#F8F8F8);
+    background: -webkit-gradient(linear, left top, left bottom, from(#CCC), to(#F8F8F8));
+    background:	-moz-linear-gradient(top, #CCC, #F8F8F8);
     padding: 10px 0 5px 0;
     margin: 0 0 0 0 ;
     background-color: #eee;
@@ -1044,6 +1056,9 @@ form#config_form div {
 div#config_feeds {
     width: 460px;
     border: 1px solid #979797;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCCCCC,endColorstr=#F8F8F8);
+    background: -webkit-gradient(linear, left top, left bottom, from(#CCC), to(#F8F8F8));
+    background:	-moz-linear-gradient(top, #CCC, #F8F8F8);
     border-top: 0;
     margin: 0 0 0 0 ;
     padding: 5px 0 5px 0;
@@ -1135,6 +1150,9 @@ div#showURL input[type=checkbox] {
 div#config_hideList {
     width: 460px;
     border: 1px solid #979797;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCCCCC,endColorstr=#F8F8F8);
+    background: -webkit-gradient(linear, left top, left bottom, from(#CCC), to(#F8F8F8));
+    background:	-moz-linear-gradient(top, #CCC, #F8F8F8);
     border-top: 0;
     background-color: #eee;
     padding-bottom: 0;
@@ -1184,6 +1202,9 @@ div.favorite {
     border: 1px solid #979797;
     padding: 0;
     background-color: #eee;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCCCCC,endColorstr=#F8F8F8);
+    background: -webkit-gradient(linear, left top, left bottom, from(#CCC), to(#F8F8F8));
+    background:	-moz-linear-gradient(top, #CCC, #F8F8F8);
 }
 
 ul.favorite {
@@ -1200,6 +1221,9 @@ div.favinfo {
     padding: 0px 0 0px 5px;
     width: 380px;
     background-color: #eee;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCCCCC,endColorstr=#F8F8F8);
+    background: -webkit-gradient(linear, left top, left bottom, from(#CCC), to(#F8F8F8));
+    background:	-moz-linear-gradient(top, #CCC, #F8F8F8);
 }
 
 div.favinfo .right {
@@ -1328,6 +1352,10 @@ div#favClose {
 div#report_bug {
     width: 420px;
     padding-top: 5px;
+    border-top: 1px solid #979797;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCCCCC,endColorstr=#F8F8F8);
+    background: -webkit-gradient(linear, left top, left bottom, from(#CCC), to(#F8F8F8));
+    background:	-moz-linear-gradient(top, #CCC, #F8F8F8);
 }
 
 div#report_bug .bugItem {
@@ -1374,6 +1402,10 @@ div#history {
     height: 257px;
     width: 583px;
     margin-left: -288px;
+    border-top: 1px solid #979797;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCCCCC,endColorstr=#F8F8F8);
+    background: -webkit-gradient(linear, left top, left bottom, from(#CCC), to(#F8F8F8));
+    background:	-moz-linear-gradient(top, #CCC, #F8F8F8);
 }
 
 div#historyDialog .title {
@@ -1410,6 +1442,7 @@ div#history a#clearhistory {
 div#clear_cache a.toggleDialog {
    margin-right: 20px;
 }
+
 div#history a.toggleDialog {
     right: 6.5em;
 }

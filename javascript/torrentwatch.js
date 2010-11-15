@@ -85,7 +85,7 @@ $(function() {
         } else if (filter == 'transmission') {
             if ($('.feed').is(':visible')) {
                 $('.feed').hideMe();
-                $('.feed li.torrent').hideMe();
+                //$('.feed li.torrent').hideMe();
             }
             doShow($('.transmission'));
         }

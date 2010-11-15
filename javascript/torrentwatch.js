@@ -121,7 +121,7 @@ $(function() {
     // Filter Bar -- By Text
     $("input#filter_text_input").keyup(function() {
         var filterText = $(this).val().toLowerCase();
-        $("div.feed li.torrent").hide().each(function() {
+        $("li.torrent").hide().each(function() {
             if ($(this).find("span.torrent_name").text().toLowerCase().match(filterText)) {
                 $(this).show();
             }

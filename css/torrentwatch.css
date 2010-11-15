@@ -1091,7 +1091,7 @@ div#config_feeds {
     background: -webkit-gradient(linear, left top, left bottom, from(#CCC), to(#F8F8F8));
     background:	-moz-linear-gradient(top, #CCC, #F8F8F8);
     border-top: 0;
-    margin: 0 0 0 0 ;
+    margin: 0 0 0 0;
     padding: 5px 0 5px 0;
     background-color: #eee;
 }
@@ -1142,7 +1142,7 @@ div#config_feeds div.feeditem label.item {
 }
 
 div#config_feeds div.feeditem input[type=text] {
-    width: 300px;
+    width: 296px;
     margin: 3px 0;
     padding: 1px 3px 1px 3px;
     left: 0px;

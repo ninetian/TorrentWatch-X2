@@ -312,7 +312,7 @@ input#filter_text_input {
     height: 16px; 
     width: 8em; 
     border: 1px solid #5D80A1; 
-    padding: 0px 5px 2px 15px;
+    padding: 0px 5px 2px 17px;
     margin: 0 5px;
     border-radius: 10px;
     background: #FFF url('../images/filter_icon.png') top left no-repeat;

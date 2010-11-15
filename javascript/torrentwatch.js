@@ -47,7 +47,6 @@ $(function() {
             }
             var tor = $(".feed li.torrent").not(".hiddenFeed");
             doShow(tor);
-            //$('.hide_feed').fadeIn();
             tor.markAlt().closest(".feed div.feed");
         } else if (filter == 'matching') {
             if ($('.transmission').is(":visible")) {
@@ -56,7 +55,6 @@ $(function() {
             }
             var tor = $(".feed li.torrent").filter(".match_nomatch");
             tor.hideMe();
-            //$('.hide_feed').fadeOut();
             tor = $(".feed li.torrent").not(".match_nomatch");
             doShow(tor);
             tor.markAlt().closest(".feed div.feed");
@@ -67,7 +65,6 @@ $(function() {
             }
             var tor = $(".feed li.torrent").not('.match_downloading, .match_match');
             tor.hideMe();
-            //$('.hide_feed').fadeOut();
             tor = $(".feed  li.torrent").filter('.match_downloading, .match_match');
             doShow(tor);
             tor.markAlt().closest(".feed div.feed");
@@ -78,19 +75,19 @@ $(function() {
             }
             var tor = $(".feed li.torrent").not('.match_cachehit, .match_downloaded');
             tor.hideMe();
-            //$('.hide_feed').fadeOut();
             tor = $(".feed li.torrent").filter('.match_cachehit, .match_downloaded');
             doShow(tor);
             tor.markAlt().closest(".feed div.feed");
         } else if (filter == 'transmission') {
             if ($('.feed').is(':visible')) {
                 $('.feed').hideMe();
-                //$('.feed li.torrent').hideMe();
+                $('.feed li.torrent').hideMe();
             }
             doShow($('.transmission'));
         }
         $.checkHiddenFeeds(1);
         $('#filter_' + filter).addClass('selected').siblings().removeClass("selected");
+	$('#filter_text_input').val('');
     };
     // Filter Bar - Buttons
     $("ul#filterbar_container li:not(#filter_bytext)").click(function() {
@@ -173,14 +170,12 @@ $(function() {
     function() {
         $.get(this.href, '',
         function(html) {
-            // $(html).html() is used to strip the outer tag(<div#history></div>) and get the children
             $("div#history").html($(html).html());
         },
         'html');
         return false;
     });
     // Clear Cache ajax submit
-    //$("a.clear_cache a:not(.toggleDialog)").click(function() {
     $('a.clear_cache').live('click',
     function(e) {
         $.get(this.href, '', $.loadDynamicData, 'html');

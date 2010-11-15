@@ -88,7 +88,6 @@ div#topmenu {
     height: 58px;
     text-align: right;
     border: 1px solid #aaa;
-    //border-bottom: 0;
     background: #ddd;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#EEEEEE,endColorstr=#BBBBBB);
     background:	-webkit-gradient(linear, left top, left bottom, from(#eee), to(#bbb));
@@ -1204,7 +1203,6 @@ div#hideSearch input {
    padding: 1px 3px 0 20px;
    background: #FFF url('../images/filter_icon.png') top left no-repeat;
    font-size: 0.8em;
-   //background: #EEE;
 }
 
 div#config_hideList #hideListContainer {

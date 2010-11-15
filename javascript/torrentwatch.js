@@ -139,16 +139,16 @@ $(function() {
         case 'folder':
             $(".config_form .tor_settings, div.category tor_settings, #torrent_settings, div.favorite_savein, #config_tr_user, #config_tr_password, #config_tr_host, #config_tr_port, #filter_transmission, #tabTor").css("display", "none");
             $("#config_folderclient, #config_downloaddir").css("display", "block");
-	    $("#filter_transmission").removeClass('filter_rechts')
-	    $("#filter_downloaded").addClass('filter_rechts')
+	    $("#filter_transmission").removeClass('filter_right')
+	    $("#filter_downloaded").addClass('filter_right')
             $("form.favinfo, ul.favorite");
             $('li#webui').hide();
             window.client = 'folder';
             break;
         case 'Transmission':
             $(".config_form .tor_settings, div.category tor_settings, #config_tr_user, #config_tr_password, #config_tr_host, #config_tr_port, #config_downloaddir, div.favorite_seedratio, div.favorite_savein,#filter_transmission, #tabTor").css("display", "block");
-	    $("#filter_downloaded").removeClass('filter_rechts')
-	    $("#filter_transmission").addClass('filter_rechts')
+	    $("#filter_downloaded").removeClass('filter_right')
+	    $("#filter_transmission").addClass('filter_right')
             $("ul.favorite").css("height", 245);
 	    $("li#webui").show();
             window.client = 'Transmission';

@@ -64,7 +64,12 @@ function show_feed_html($idx) {
       $html_out .= "<span class=\"hide_feed_left\">\n";
       $html_out .= "<a href=\"#\" title=\"Hide this feed\" onclick=\"$.toggleFeed(".$idx.", 0)\">\n";
       $html_out .= "<img height='14' src=\"images/blank.gif\"></a></span></td>\n";
-      $html_out .= "<td class='feed_title'>".$config_values['Feeds'][$idx]['Name']."</td>\n";
+      if(!$config_values['Feeds'][$idx]['Name']) {
+	$title = $config_values['Feeds'][$idx]['Link'];
+      } else {
+	$title = $config_values['Feeds'][$idx]['Name'];
+      }
+      $html_out .= "<td class='feed_title'>$title</td>\n";
       $html_out .= "<td class='hide_feed'>\n";
       $html_out .= "<span class=\"hide_feed_right\">\n";
       $html_out .= "<a href=\"#\" title=\"Hide this feed\" onclick=\"$.toggleFeed(".$idx.", 0)\">\n";

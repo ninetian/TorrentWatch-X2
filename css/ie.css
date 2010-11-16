@@ -15,10 +15,10 @@ div#history {
     height: 256px;
 }
 
-div#hideSearch input {
-    border-top: 1px solid #979797;
-}
-
 div#linkButtons  {
     margin-bottom: 5px !important;
+}
+
+div#configuration div.config_form input#hideSearchText {
+    border-bottom: 1px solid #979797;
 }

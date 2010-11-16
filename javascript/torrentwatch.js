@@ -44,6 +44,7 @@ $(function() {
             if ($('.transmission').is(":visible")) {
                 $('.transmission').hideMe();
                 doShow($('.feed'));
+		doShow($('.header.combined'));
             }
             var tor = $(".feed li.torrent").not(".hiddenFeed");
             doShow(tor);
@@ -52,6 +53,7 @@ $(function() {
             if ($('.transmission').is(":visible")) {
                 $('.transmission').hideMe();
                 doShow($('.feed'));
+		doShow($('.header.combined'));
             }
             var tor = $(".feed li.torrent").filter(".match_nomatch");
             tor.hideMe();
@@ -62,6 +64,7 @@ $(function() {
             if ($('.transmission').is(":visible")) {
                 $('.transmission').hideMe();
                 doShow($('.feed'));
+		doShow($('.header.combined'));
             }
             var tor = $(".feed li.torrent").not('.match_downloading, .match_match');
             tor.hideMe();
@@ -72,6 +75,7 @@ $(function() {
             if ($('.transmission').is(":visible")) {
                 $('.transmission').hideMe();
                 doShow($('.feed'));
+		doShow($('.header.combined'));
             }
             var tor = $(".feed li.torrent").not('.match_cachehit, .match_downloaded');
             tor.hideMe();
@@ -82,6 +86,7 @@ $(function() {
             if ($('.feed').is(':visible')) {
                 $('.feed').hideMe();
                 $('.feed li.torrent').hideMe();
+	        $('.header.combined').hideMe();
             }
             doShow($('.transmission'));
         }

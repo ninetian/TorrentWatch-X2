@@ -57,6 +57,7 @@ label {
 div.left,
 div.right {
     display: inline-block;
+    min-height: 18px !important;
 }
 
 div.left {
@@ -1054,7 +1055,7 @@ div#configuration div.config_form input.text,
 div#configuration div.config_form input.password,
 div#configuration div.config_form input[type=text],
 div#configuration div.config_form input[type=password] {
-    width: 275px;
+    width: 270px;
     padding-left: 3px;
 }
 
@@ -1082,8 +1083,11 @@ div.config_form .left {
 }
 
 form#config_form div {
-    padding-top: 2px;
     min-height: 22px;
+}
+
+form#config_form div.configTab {
+   padding: 5px 0 5px 0; 
 }
 
 div#config_feeds {

@@ -1434,7 +1434,7 @@ div#report_bug input[type=submit] {
  *
  *****************************/
 div#history {
-    padding: 0 5px 0 5px;
+    padding: 0;
     height: 257px;
     width: 583px;
     margin-left: -288px;
@@ -1444,9 +1444,13 @@ div#history {
     background:	-moz-linear-gradient(top, #D3D3D3, #F8F8F8);
 }
 
+ul#historyItems li {
+    margin-right: 7px;
+}
+
 div#historyDialog .title {
     padding-top: 2px;
-    width: 593px;
+    width: 583px;
     margin-left: -288px;
 }
 

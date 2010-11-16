@@ -15,26 +15,10 @@ div#history {
     height: 256px;
 }
 
-ul#configTabs li {
-    border-bottom: 1px solid #979797;
-}
-
-ul#configTabs li.selTab {
-    border-bottom: 0px;
-}
-
-div.config_form {
-    border-top: 0px;
-}
-
-div#config_feeds {
-    border-top: 0px;
-}
-
-div#config_hideList {
-    border-top: 0px;
-}
-
 div#hideSearch input {
     border-top: 1px solid #979797;
+}
+
+div#linkButtons  {
+    margin-bottom: 5px !important;
 }

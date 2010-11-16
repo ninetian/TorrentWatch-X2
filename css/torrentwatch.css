@@ -308,24 +308,25 @@ ul#filterbar_container li#filter_bytext {
 }
 
 input#filter_text_input {
-    height: 16px; 
-    width: 8em; 
-    border: 1px solid #5D80A1; 
-    padding: 0px 5px 2px 17px;
-    margin: 0 5px;
-    border-radius: 10px;
-    background: #FFF url('../images/filter_icon.png') top left no-repeat;
-    -o-border-radius: 8px; 
-    -icab-border-radius: 8px;
-    -khtml-border-radius: 8px;
-    -moz-border-radius: 8px;
-    -webkit-border-radius: 8px; 
-    outline-style: none;
+    float: right;
+    height: 15px;
+    width: 130px;
+    border: 1px solid #5D80A1;
+    padding: 0 2px;
+    margin: 0px 5px 10px 0;
 }
 
-input#filter_text_input.blur {
-    border-color: #CCC;
-}
+/* Safari-look filter input for Firefox */
+@-moz-document url-prefix() {
+    input#filter_text_input {
+        background: #FFF url('../images/filter_icon.png') top left no-repeat;
+        border: 1px solid #5D80A1;
+        margin-top: 3px;
+        padding: 1px 10px 1px 18px;
+        width: 100px;
+        -moz-border-radius: 10px;
+    }
+} 
 
 /*------------
  *
@@ -664,7 +665,7 @@ div.welcome,
     height: 9px;
     width: 9px;
     padding: 0;
-    margin: 2px 3px 2px 3px;
+    margin: 1px 3px 2px 3px;
     background: #999;
     filter:			progid:DXImageTransform.Microsoft.gradient(startColorstr=#AAAAAA,endColorstr=#777777);
     background:                 -webkit-gradient(linear, left top, left bottom, from(#aaa), to(#777));
@@ -689,7 +690,7 @@ div.dialog .title {
     -moz-border-radius-topright: 5px;
     color:                      #000;
     text-shadow:                #eee 0px 1px 0px;
-    top: 			120px;
+    top: 			118px;
     height:			15px;
     left: 			50%;
     cursor: 			default;
@@ -758,7 +759,7 @@ h2.dialog_heading {
 div.buttonContainer {
     margin-top: 2px;
     float: right;
-    }
+}
 
 a.button,
 input[type=submit] {
@@ -966,6 +967,7 @@ div#configTabs {
     height: 26px;
     border-bottom: 1px solid #979797;
 } 
+
 div#configTabs ul {
     margin: 0 0 0 0;
     padding: 2px 0px 2px 0px;
@@ -1067,12 +1069,12 @@ div#configuration div.config_form input[type=checkbox] {
 div.config_form {
     border: 1px solid #979797;
     border-top: 0;
+    background-color: #eee;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCCCCC,endColorstr=#F8F8F8);
     background: -webkit-gradient(linear, left top, left bottom, from(#CCC), to(#F8F8F8));
     background:	-moz-linear-gradient(top, #CCC, #F8F8F8);
-    padding: 10px 0 5px 0;
+    padding: 10px 0 0 0;
     margin: 0 0 0 0 ;
-    background-color: #eee;
 }
 
 div.config_form .left {
@@ -1081,18 +1083,6 @@ div.config_form .left {
 
 form#config_form div {
     min-height: 22px;
-}
-
-div#config_feeds {
-    width: 460px;
-    border: 1px solid #979797;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCCCCC,endColorstr=#F8F8F8);
-    background: -webkit-gradient(linear, left top, left bottom, from(#CCC), to(#F8F8F8));
-    background:	-moz-linear-gradient(top, #CCC, #F8F8F8);
-    border-top: 0;
-    margin: 0 0 0 0;
-    padding: 5px 0 5px 0;
-    background-color: #eee;
 }
 
 div#config_feeds #feedItems {
@@ -1169,7 +1159,7 @@ div#config_feeds div.feeditem a.button#Update {
 }
 
 div#showURL {
-    padding-top: 5px;
+    padding: 5px 0 5px 0;
     border-top: 1px solid #979797;
 }
 
@@ -1177,50 +1167,37 @@ div#showURL input[type=checkbox] {
     margin-left: 10px;
 }
 
-div#config_hideList {
-    width: 461px;
-    border: 1px solid #979797;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCCCCC,endColorstr=#F8F8F8);
-    background: -webkit-gradient(linear, left top, left bottom, from(#CCC), to(#F8F8F8));
-    background:	-moz-linear-gradient(top, #CCC, #F8F8F8);
-    border-top: 0;
-    background-color: #eee;
-    padding-bottom: 0;
-    margin-bottom: 0;
-}
-
-div#hideSearch input {
-    margin: 0;
-    padding: 0;
-}
-
-div#hideSearch input {
-   border: 1px solid #979797;
-   border-top: 0;
-   width: 438px;
+div#configuration div.config_form input#hideSearchText {
+   border: 0;
+   border-top: 1px solid #979797;
+   width: 438px !important;
    height: 18px;
-   margin: 0;
+   margin: 10px 0 0 0;
    padding: 1px 3px 0 20px;
    background: #FFF url('../images/filter_icon.png') top left no-repeat;
    font-size: 0.8em;
 }
 
-div#config_hideList #hideListContainer {
+div#hideListContainer {
     max-height: 300px;
     overflow: auto;
 }
 
-div#config_hideList ul.hidelist li {
+div#hideListContainer ul.hidelist li {
      overflow: hidden;
 }
 
-div#config_hideList ul.hidelist li:hover {
+div#hideListContainer ul.hidelist li:hover {
     background-color: #9DACC1;
     color: #FFF;
 }
 
 div#linkButtons  {
     float: right; 
+}
+
+div#configButtons {
+    padding-top: 20px !important;
 }
 
 /***********************************

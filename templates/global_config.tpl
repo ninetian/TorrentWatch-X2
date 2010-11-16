@@ -30,8 +30,8 @@
 	      </li>
 	     </ul>
             </div> 
-            <form action="torrentwatch.php?setGlobals=1" id="config_form" name="config_form">
-                <div class="config_form">
+            <div class="config_form">
+                 <form action="torrentwatch.php?setGlobals=1" id="config_form" name="config_form">
                     <div id="config_interface" class="configTab">
                         <div class="int_settings">
                             <div id="config_webui">
@@ -286,54 +286,58 @@
 							</div>
                         </div>
                     </div>
-
-                </div>
-                <div class="buttonContainer">
-                    <a class="submitForm button" id="Save" href="#" name="Save">Save</a> 
-                </div>
-            </form>
-            <div id="config_feeds" class="configTab hidden">
-              <div id="addFeed">
-                  <form action="torrentwatch.php?updateFeed=1" class="feedform">
-                  <a class="submitForm button" id="Add" href="#">Add</a>
-                  <label class="item">Add feed:</label>
-                  <input type="text" class="feed_link" name="link">
-                  </form>
-              </div>
-              <div id="feedItems">
-                <div id="feedItemTitles">
-                    <div id="feedNameUrl">
-                        <label class="item">Name</label>
-                        <label class="item hidden">Link</label>
+                    <div class="buttonContainer">
+                        <a class="submitForm button" id="Save" href="#" name="Save">Save</a> 
                     </div>
-                    <label class="item">Ratio</label>
-                </div>
-                <?php if(isset($config_values['Feeds'])): ?>
-                    <?php foreach($config_values['Feeds'] as $key => $feed): ?>
-                        <div id="feedItem_<?php echo $key; ?>"class="feeditem">
-                              <form action="torrentwatch.php?updateFeed=1" class="feedform">  
-                              <input type="hidden" name="idx" value="<?php echo $key; ?>">
-                              <input class="feed_name" type="text" name="feed_name"
-                                    title="<?php echo $feed['Link']; ?>" value="<?php echo $feed['Name']; ?>"</input>
-                              <input class="feed_url hidden" type="text" name="feed_link"
-                                    title="<?php echo $feed['Name']; ?>" value="<?php echo $feed['Link']; ?>"</input>
-                              <input class="seed_ratio" type="text" name="seed_ratio" title="Set default seed ratio for this feed."
-                                    value="<?php echo $feed['seedRatio']; ?>"</input>
-                              <a class="submitForm button" id="Delete" href="#feedItem_<?php echo $key; ?>">Del</a>
-                              <a class="submitForm button" id="Update" href="#">Upd</a>
-                              </form>
+		    <div id='linkButtons' class="buttonContainer">
+			<a class='toggleDialog button close' href='#'>Close</a> 
+                    </div>
+                </form>
+                <div id="config_feeds" class="configTab hidden">
+                  <div id="addFeed">
+                      <form action="torrentwatch.php?updateFeed=1" class="feedform">
+                      <a class="submitForm button" id="Add" href="#">Add</a>
+                      <label class="item">Add feed:</label>
+                      <input type="text" class="feed_link" name="link">
+                      </form>
+                  </div>
+                  <div id="feedItems">
+                    <div id="feedItemTitles">
+                        <div id="feedNameUrl">
+                            <label class="item">Name</label>
+                            <label class="item hidden">Link</label>
                         </div>
-                    <?php endforeach; ?>
-                <?php endif; ?>
-              </div>
-              <div id="showURL">
-                  <input id="showURL" type="checkbox" onClick="$.toggleFeedNameUrl(<?php echo $key; ?>)"
-                      title="Toggle between name and link input fields">
-                  </input>
-                  <label id="showURLlabel" class="item">Show feed link</label>
-	      </div>
-            </div>
-	    <form action="torrentwatch.php?delHidden=1" id="hidelist_form" name="hidelist_form" class="hidden">
+                        <label class="item">Ratio</label>
+                    </div>
+                    <?php if(isset($config_values['Feeds'])): ?>
+                        <?php foreach($config_values['Feeds'] as $key => $feed): ?>
+                            <div id="feedItem_<?php echo $key; ?>"class="feeditem">
+                                  <form action="torrentwatch.php?updateFeed=1" class="feedform">  
+                                  <input type="hidden" name="idx" value="<?php echo $key; ?>">
+                                  <input class="feed_name" type="text" name="feed_name"
+                                        title="<?php echo $feed['Link']; ?>" value="<?php echo $feed['Name']; ?>"</input>
+                                  <input class="feed_url hidden" type="text" name="feed_link"
+                                        title="<?php echo $feed['Name']; ?>" value="<?php echo $feed['Link']; ?>"</input>
+                                  <input class="seed_ratio" type="text" name="seed_ratio" title="Set default seed ratio for this feed."
+                                        value="<?php echo $feed['seedRatio']; ?>"</input>
+                                  <a class="submitForm button" id="Delete" href="#feedItem_<?php echo $key; ?>">Del</a>
+                                  <a class="submitForm button" id="Update" href="#">Upd</a>
+                                  </form>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                  </div>
+                  <div id="showURL">
+                      <input id="showURL" type="checkbox" onClick="$.toggleFeedNameUrl(<?php echo $key; ?>)"
+                          title="Toggle between name and link input fields">
+                      </input>
+                      <label id="showURLlabel" class="item">Show feed link</label>
+                  </div>
+		    <div id='linkButtons' class="buttonContainer">
+			<a class='toggleDialog button close' href='#'>Close</a> 
+		    </div>
+                </div>
+	        <form action="torrentwatch.php?delHidden=1" id="hidelist_form" name="hidelist_form" class="hidden">
 	            <div id="config_hideList" class="hidden configTab">
 		      <div id="hideListContainer">
                         <ul class="hidelist">
@@ -358,9 +362,10 @@
                     <div class="buttonContainer">
                         <a class="submitForm button" id="Unhide" href="#">Unhide</a>
                     </div>
-	    </form>
-	    <div id='linkButtons' class="buttonContainer">
-		<a class='toggleDialog button close' href='#'>Close</a> 
-	    </div>
+		    <div id='linkButtons' class="buttonContainer">
+			<a class='toggleDialog button close' href='#'>Close</a> 
+		    </div>
+	        </form>
+            </div>
         </div>
       </div>

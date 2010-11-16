@@ -342,9 +342,9 @@ div#legendDialog .title {
 div#show_legend {
     padding-top: 5px;
     border-top: 1px solid #979797;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCCCCC,endColorstr=#F8F8F8);
-    background: -webkit-gradient(linear, left top, left bottom, from(#CCC), to(#F8F8F8));
-    background:	-moz-linear-gradient(top, #CCC, #F8F8F8);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#D3D3D3,endColorstr=#F8F8F8);
+    background: -webkit-gradient(linear, left top, left bottom, from(#D3D3D3), to(#F8F8F8));
+    background:	-moz-linear-gradient(top, #D3D3D3, #F8F8F8);
 }
 
 ul.show_legend {
@@ -781,9 +781,9 @@ a.button {
     -webkit-border-radius: 8px;    /* for Safari */
     -moz-border-radius: 8px;       /* for Firefox */
     background:	#ccc;
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCCCCC,endColorstr=#999999);
-    background: -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#999));
-    background:	-moz-linear-gradient(top, #ccc, #999);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#DDDDDD,endColorstr=#AAAAAA);
+    background: -webkit-gradient(linear, left top, left bottom, from(#ddd), to(#aaa));
+    background:	-moz-linear-gradient(top, #ddd, #aaa);
     color: #030303;
 }
 
@@ -1237,9 +1237,9 @@ div.favorite {
     border: 1px solid #979797;
     padding: 0;
     background-color: #eee;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCCCCC,endColorstr=#F8F8F8);
-    background: -webkit-gradient(linear, left top, left bottom, from(#CCC), to(#F8F8F8));
-    background:	-moz-linear-gradient(top, #CCC, #F8F8F8);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#D3D3D3,endColorstr=#F8F8F8);
+    background: -webkit-gradient(linear, left top, left bottom, from(#D3D3D3), to(#F8F8F8));
+    background:	-moz-linear-gradient(top, #D3D3D3, #F8F8F8);
 }
 
 ul.favorite {
@@ -1256,9 +1256,9 @@ div.favinfo {
     padding: 0px 0 0px 5px;
     width: 380px;
     background-color: #eee;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCCCCC,endColorstr=#F8F8F8);
-    background: -webkit-gradient(linear, left top, left bottom, from(#CCC), to(#F8F8F8));
-    background:	-moz-linear-gradient(top, #CCC, #F8F8F8);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#D3D3D3,endColorstr=#F8F8F8);
+    background: -webkit-gradient(linear, left top, left bottom, from(#D3D3D3), to(#F8F8F8));
+    background:	-moz-linear-gradient(top, #D3D3D3, #F8F8F8);
 }
 
 div.favinfo .right {
@@ -1388,9 +1388,9 @@ div#report_bug {
     width: 420px;
     padding-top: 5px;
     border-top: 1px solid #979797;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCCCCC,endColorstr=#F8F8F8);
-    background: -webkit-gradient(linear, left top, left bottom, from(#CCC), to(#F8F8F8));
-    background:	-moz-linear-gradient(top, #CCC, #F8F8F8);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#D3D3D3,endColorstr=#F8F8F8);
+    background: -webkit-gradient(linear, left top, left bottom, from(#D3D3D3), to(#F8F8F8));
+    background:	-moz-linear-gradient(top, #D3D3D3, #F8F8F8);
 }
 
 div#report_bug .bugItem {
@@ -1434,14 +1434,14 @@ div#report_bug input[type=submit] {
  *
  *****************************/
 div#history {
-    padding: 0 5px 5px 5px;
+    padding: 0 5px 0 5px;
     height: 257px;
     width: 583px;
     margin-left: -288px;
     border-top: 1px solid #979797;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCCCCC,endColorstr=#F8F8F8);
-    background: -webkit-gradient(linear, left top, left bottom, from(#CCC), to(#F8F8F8));
-    background:	-moz-linear-gradient(top, #CCC, #F8F8F8);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#D3D3D3,endColorstr=#F8F8F8);
+    background: -webkit-gradient(linear, left top, left bottom, from(#D3D3D3), to(#F8F8F8));
+    background:	-moz-linear-gradient(top, #D3D3D3, #F8F8F8);
 }
 
 div#historyDialog .title {

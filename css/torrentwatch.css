@@ -466,10 +466,6 @@ ul.torrentlist li.torrent.alt:hover {
     filter: alpha(opacity = 75);
 }
 
-ul.torrentlist li.torrent.match_transmission {
-    background: 0;
-}
-
 li.torrent.hidden_bytext {
     display: none;
 }

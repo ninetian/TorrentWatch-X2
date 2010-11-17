@@ -493,7 +493,7 @@ ul.torrentlist p {
 ul.torrentlist td.buttons {
     text-align: top;
     vertical-align: top;
-    padding-top: 2px;
+    padding: 3px 0 2px 0;
     width: 15px;
     height: 15px;
 }
@@ -556,7 +556,7 @@ ul.torrentlist li.match_nomatch td.torrent_name {
 }
 
 ul.torrentlist td.torrent_name.tor_client {
-    padding: 5px 8px 0 0;
+    padding: 2px 8px 0 0;
 }
 
 div#transmission_data td.torrent_name span {

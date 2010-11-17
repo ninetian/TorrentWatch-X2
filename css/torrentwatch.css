@@ -884,7 +884,7 @@ div#errorDialog {
     border: 1px solid red;
     color: red;
     text-align: center;
-    width: 600px;
+    width: 650px;
     margin-left: -310px;
     z-index: 1; 
 }

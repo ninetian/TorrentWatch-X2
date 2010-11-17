@@ -254,7 +254,7 @@ $(function() {
         curObject = null;
     };
     
-    getClientItem = function(item, clientData, liClass) {     
+    getClientItem = function(item, clientData, liClass, Percentage) {     
         var hideStop;
         var hideStart;
         if(item.status == 16) {
@@ -282,7 +282,7 @@ $(function() {
         '<a href="#" onclick="$.delTorrent(\'' + item.hashString + '\', \'true\');">' +
         '<img height=10 src="images/tor_trash.png" /></a></p>' +
         '</td><td class="torrent_name tor_client"><span class="torrent_name">' + item.name + '</span>' +
-	'<div class="progressBarContainer"><div class="progressDiv"></div></div>' +
+	'<div style="width: 100%; margin-top: 2px; border: 1px dotted #91A4BD; background: #DFE3E8;"><div class="progressDiv" style="width: '+Percentage+'%; height: 3px;"></div></div>' +
         '<span class="dateAdded hidden">' + item.addedDate + '</span>' +
         '<div id=tor_' + item.id + ' class="torInfo tor_' + item.hashString + '">' + clientData + '</div>' +
         '<div id="move_' + item.hashString + '" class="move_data hidden">' + 
@@ -433,7 +433,7 @@ $(function() {
             }
             
 	    if(recent == 1) {
-                clientItem = getClientItem(item, clientData, liClass);
+                clientItem = getClientItem(item, clientData, liClass, Percentage);
                 
                 if ($('#transmission_list li#clientId_' + item.id).length === 0) {
                         $('#transmission_list').prepend(clientItem);
@@ -465,7 +465,7 @@ $(function() {
                     }
                 }
             } else {
-                torListHtml += getClientItem(item, clientData, liClass);
+                torListHtml += getClientItem(item, clientData, liClass, Percentage);
                 $('#transmission_list').empty();
                 $('li.' + item.hashString).addClass('clientId_' + item.id);
             }

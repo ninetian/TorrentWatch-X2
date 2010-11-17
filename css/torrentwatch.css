@@ -571,18 +571,18 @@ ul.torrentlist div.torInfo {
 
 div.torrent_name {
     display: inline-block;
-    margin: 0 5px 1px 0;
+    margin: 0 5px 2px 0;
 }
 
 td.hideTD {
     vertical-align: middle;
-    padding: 0 2px 0 3px;
+    padding: 0 0 0 3px;
     width: 10px;
 }
 
 td.torrent_name {
     vertical-align: top;
-    padding-left: 3px !important;
+    padding-left: 5px !important;
 }
 
 td.progressRow {
@@ -597,11 +597,8 @@ div.progressBarContainer {
 }
 
 div.progressDiv {
-    width: 0;
-    height: 0;
-    margin: 0 10px 0 0; 
+    height: 3;
     background: #91A4BD;
-    border: 1px solid #91A4BD;
 }
 
 td.feed_info {

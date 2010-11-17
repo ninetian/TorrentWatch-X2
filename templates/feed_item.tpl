@@ -13,7 +13,8 @@ if(isset($item['pubDate'])) {
 if(!($torHash)) $torHash = '###torHash###';
 
 if($config_values['Settings']['Combine Feeds'] == 1) {
-    $feedItem = "<p class=\"feed_name\">$feedName</p>";
+    $feedItem = "<span class=\"feed_name\">$feedName - </span>";
+    $combined = "combined";
 }
 
 if(isset($torInfo)) {
@@ -22,9 +23,9 @@ if(isset($torInfo)) {
     $infoDiv = "<div id='tor_$id' class='torInfo tor_$torHash'>$stats</div>";
     if($torInfo['status'] == 4) $matched = "downloading";
 } else if((!$config_values['Settings']['Disable Hide List']) && ($matched == "nomatch"))  {
-    $hideSpan = "<span class=\"hide_item\"><a href=\"#\" 
+    $hideTD = "</td><td class='hideTD'><span class=\"hide_item\"><a href=\"#\" 
     title=\"Hide this show from the list\" onclick='$.hideItem(\"$utitle\")'>
-    <img src=\"images/hide.png\" /></a></span>";
+    <img src=\"images/hide.png\" /></a></span></td>";
 }
 
 if($matched == "downloading" || $matched == "downloaded" || $matched == "cachehit" || $matched == "match") { 
@@ -49,6 +50,7 @@ if(!isset($feedItem)) $feedItem = '';
 if(!isset($torInfo)) $torInfo = '';
 if(!isset($unixTime)) $unixTime = '';
 if(!isset($hideSpan)) $hideSpan = '';
+if(!isset($pubDateClass)) $pubDateClass = '';
 
 print <<< EOH
 
@@ -81,16 +83,15 @@ print <<< EOH
 <a href="#" title="Delete torrent and its data" onclick='javascript:$.delTorrent("$torHash", "true")'>
 <img height=10 src="images/tor_trash.png"></a></p>
 
-
-</td><td class="torrent_name">
-$hideSpan
-<span class='torrent_name'>$title</span>
-
+$hideTD
+<td class="torrent_name">
+<div class='torrent_name'>$title</div>
+<div class='torrent_pubDate'>$feedItem $pubDate</div>
+<div class='progressBarContainer'>
+ <div class="progressDiv"></div>
+</div>
 $infoDiv
-</td><td class='feed_info'>
-<p class='torrent_pubDate'>$pubDate</p>
 <span class='hidden' id=unixTime>$unixTime</span>
-$feedItem
 </td></tr></table></li>
 
 EOH;

@@ -57,7 +57,7 @@ function show_feed_html($idx) {
   if($config_values['Settings']['Combine Feeds'] == 1) {
       $html_out .= '<div class="header combined">Combined Feeds</div>';
   }
-  $html_out .= "<div class='feed' id='feed_$idx'><ul id='torrentlist' class='torrentlist'>";
+  $html_out .= "<div class='feed' id='feed_$idx'>";
   if($config_values['Settings']['Combine Feeds'] == 0) {
       $html_out .= "<div class=\"header\">\n";
       $html_out .= "<table width=\"100%\" cellspacing=\"0\"><tr><td class='hide_feed'>\n";
@@ -76,6 +76,7 @@ function show_feed_html($idx) {
       $html_out .= "<img height='14' src=\"images/blank.gif\"></a></span></td>\n";
       $html_out .= "</tr></table></div>\n";
   }
+  $html_out .= "<ul id='torrentlist' class='torrentlist'>";
 }
 
 function show_down_feed($idx) {

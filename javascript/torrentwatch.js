@@ -23,72 +23,79 @@ $(function() {
     };
     
     displayFilter = function(filter, empty) {
-        doHide = function(item) {
-	    if (navigator.appName == 'Microsoft Internet Explorer') { item.hide() } else { item.slideUp() }
-	};
-        doShow = function(item) {
-	    if (navigator.appName == 'Microsoft Internet Explorer') { item.show() } else { item.slideDown() }
-	};
-
-        if(empty == 1) {
-            $.fn.hideMe = function() {
-                $(this).hide();
-            }
-        } else {
-            $.fn.hideMe = function() {
-                doHide($(this));
-            }
-        }
         $.cookie('TWFILTER', filter, { expires: 666 });
         if (filter == 'all') {
             if ($('.transmission').is(":visible")) {
-                $('.transmission').hideMe();
-                doShow($('.feed'));
-		doShow($('.header.combined'));
-            }
-            var tor = $(".feed li.torrent").not(".hiddenFeed");
-            doShow(tor);
-            tor.markAlt().closest(".feed div.feed");
+                $('.transmission').slideUp();
+		$('.header.combined').slideDown();
+            } else if(!empty) {
+		$('.feed').slideUp();
+	    }
+	    setTimeout(function() {
+		var tor = $(".feed li.torrent").not(".hiddenFeed");
+		$(tor).show();
+		$('.feed').slideDown().slideDown(); 
+		tor.markAlt().closest(".feed div.feed");
+	    },400);
         } else if (filter == 'matching') {
             if ($('.transmission').is(":visible")) {
-                $('.transmission').hideMe();
-                doShow($('.feed'));
-		doShow($('.header.combined'));
-            }
-            var tor = $(".feed li.torrent").filter(".match_nomatch");
-            tor.hideMe();
-            tor = $(".feed li.torrent").not(".match_nomatch");
-            doShow(tor);
-            tor.markAlt().closest(".feed div.feed");
+                $('.transmission').slideUp();
+		$('.header.combined').slideDown();
+            } else if(!empty) {
+		$('.feed').slideUp();
+	    }
+	    setTimeout(function() {
+		var tor = $(".feed li.torrent").filter(".match_nomatch");
+		$(tor).hide();
+		tor = $(".feed li.torrent").not(".match_nomatch");
+		$(tor).show();
+		$('.feed').slideDown().slideDown();
+		tor.markAlt().closest(".feed div.feed");
+	    },400);
         } else if (filter == 'downloading') {
             if ($('.transmission').is(":visible")) {
-                $('.transmission').hideMe();
-                doShow($('.feed'));
-		doShow($('.header.combined'));
-            }
-            var tor = $(".feed li.torrent").not('.match_downloading, .match_match');
-            tor.hideMe();
-            tor = $(".feed  li.torrent").filter('.match_downloading, .match_match');
-            doShow(tor);
-            tor.markAlt().closest(".feed div.feed");
+                $('.transmission').slideUp();
+		$('.header.combined').slideDown();
+            } else if(!empty) {
+		$('.feed').slideUp();
+	    }
+	    setTimeout(function() {
+		var tor = $(".feed li.torrent").not('.match_downloading, .match_match');
+		$(tor).hide();
+		tor = $(".feed li.torrent").not(".match_nomatch");
+		$(tor).hide();
+		tor = $(".feed  li.torrent").filter('.match_downloading, .match_match');
+		$(tor).show();
+		$('.feed').slideDown().slideDown();
+		tor.markAlt().closest(".feed div.feed");
+	    },400);
         } else if (filter == 'downloaded') {
             if ($('.transmission').is(":visible")) {
-                $('.transmission').hideMe();
-                doShow($('.feed'));
-		doShow($('.header.combined'));
-            }
-            var tor = $(".feed li.torrent").not('.match_cachehit, .match_downloaded');
-            tor.hideMe();
-            tor = $(".feed li.torrent").filter('.match_cachehit, .match_downloaded');
-            doShow(tor);
-            tor.markAlt().closest(".feed div.feed");
+                $('.transmission').slideUp();
+		$('.header.combined').slideDown();
+            } else if(!empty) {
+		$('.feed').slideUp();
+	    }
+	    setTimeout(function() {
+		var tor = $(".feed li.torrent").not('.match_downloading, .match_match');
+		var tor = $(".feed li.torrent").not('.match_cachehit, .match_downloaded');
+		$(tor).hide();
+		tor = $(".feed li.torrent").not(".match_nomatch");
+		$(tor).hide();
+		tor = $(".feed li.torrent").filter('.match_cachehit, .match_downloaded');
+		$(tor).show();
+		$('.feed').slideDown().slideDown();
+		tor.markAlt().closest(".feed div.feed");
+	    },400);
         } else if (filter == 'transmission') {
             if ($('.feed').is(':visible')) {
-                $('.feed').hideMe();
-                $('.feed li.torrent').hideMe();
-	        $('.header.combined').hideMe();
+                $('.feed').slideUp();
+                //$('.feed li.torrent').hide();
+	        $('.header.combined').slideUp();
             }
-            doShow($('.transmission'));
+            setTimeout(function() {
+		$('.transmission').slideDown();
+	    }, 400)
         }
         $.checkHiddenFeeds(1);
         $('#filter_' + filter).addClass('selected').siblings().removeClass("selected");
@@ -126,7 +133,7 @@ $(function() {
     // Filter Bar -- By Text
     $("input#filter_text_input").keyup(function() {
         var filterText = $(this).val().toLowerCase();
-        $("li.torrent").not(".hiddenFeed").hide().each(function() {
+        $("li.torrent").hide().each(function() {
             if ($(this).find("span.torrent_name").text().toLowerCase().match(filterText)) {
                 $(this).show();
             }
@@ -890,25 +897,25 @@ $(function() {
     $.toggleFeed = function(feed, speed) {
         if(speed == 1) {
             if($.cookie('feed_' + feed) == 1) {
-                $("#feed_" + feed + " li").show().removeClass("hiddenFeed");
+                $("#feed_" + feed + " ul").show().removeClass("hiddenFeed");
                 $("#feed_" + feed + " .header").removeClass("header_hidden");
                 $.cookie('feed_' + feed , null, { expires: 666 });
 		var filter = $.cookie('TWFILTER');
 		displayFilter(filter, 1);
             } else {
-                $("#feed_" + feed + " li").hide().addClass("hiddenFeed");
+                $("#feed_" + feed + " ul").hide().addClass("hiddenFeed");
                 $("#feed_" + feed + " .header").addClass("header_hidden");    
                 $.cookie('feed_' + feed , 1, { expires: 666 });
             }
         } else {
             if($.cookie('feed_' + feed) == 1) {
-                $("#feed_" + feed + " li").slideDown().removeClass("hiddenFeed");
+                $("#feed_" + feed + " ul").slideDown().removeClass("hiddenFeed");
                 $("#feed_" + feed + " .header").removeClass("header_hidden");
                 $.cookie('feed_' + feed , null, { expires: 666 });
 		var filter = $.cookie('TWFILTER');
 		displayFilter(filter, 1);
             } else {
-                $("#feed_" + feed + " li").slideUp().addClass("hiddenFeed");
+                $("#feed_" + feed + " ul").slideUp().addClass("hiddenFeed");
                 $("#feed_" + feed + " .header").addClass("header_hidden");    
                 $.cookie('feed_' + feed , 1, { expires: 666 });
             }
@@ -919,9 +926,9 @@ $(function() {
         $.each($('#torrentlist_container .feed'), function() {
             if($.cookie(this.id)) { 
                 if(speed == 1) {
-                    $("#feed_" + this.id.match(/feed_(\d)/)[1] + " li").hide().addClass("hiddenFeed");
+                    $("#feed_" + this.id.match(/feed_(\d)/)[1] + " ul").hide().addClass("hiddenFeed");
                 } else {
-                    $("#feed_" + this.id.match(/feed_(\d)/)[1] + " li").slideUp().addClass("hiddenFeed");
+                    $("#feed_" + this.id.match(/feed_(\d)/)[1] + " ul").slideUp().addClass("hiddenFeed");
                 }
                 $("#feed_" + this.id.match(/feed_(\d)/)[1] + " .header").addClass("header_hidden");    
             }

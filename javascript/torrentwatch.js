@@ -95,6 +95,7 @@ $(function() {
             }
             setTimeout(function() {
 		$('.transmission').slideDown();
+		tor.markAlt().closest(".transmission");
 	    }, 400)
         }
         $.checkHiddenFeeds(1);

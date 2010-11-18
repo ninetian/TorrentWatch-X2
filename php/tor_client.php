@@ -195,6 +195,7 @@ function transmission_add_torrent($tor, $dest, $title, $seedRatio) {
 
 function client_add_torrent($filename, $dest, $title, $feed = NULL, &$fav = NULL, $retried=false) {
   global $config_values, $hit;
+  if(strtolower($fav['Filter']) == "any") $any=1;
   $hit = 1;
   $filename = htmlspecialchars_decode($filename);
 
@@ -288,8 +289,10 @@ function client_add_torrent($filename, $dest, $title, $feed = NULL, &$fav = NULL
           $msg = "TorrentWatch started downloading $tor_name";
           sendmail($msg, $subject);
       }
-      updateFavoriteEpisode($fav, $title);
-      _debug("Updated Favorites");
+      if(!$any) {
+	updateFavoriteEpisode($fav, $title);
+        _debug("Updated Favorites");
+      }
     } else {
         run_script('nonfavstart', $title);
     }

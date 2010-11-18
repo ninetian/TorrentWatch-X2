@@ -150,11 +150,10 @@ function check_for_torrent(&$item, $key, $opts) {
   if(!(strtolower($item['Feed']) == 'all' || $item['Feed'] === '' || $item['Feed'] == $opts['URL'])) {
     return;
   }
-
   $rs = $opts['Obj'];
   $title = strtolower($rs['title']);
   switch(_isset($config_values['Settings'], 'MatchStyle')) {
-    case 'simple':  
+    case 'simple':
       $hit = (($item['Filter'] != '' && strpos(strtr($title, " .", "__") , strtr(strtolower($item['Filter']), " .", "__")) === 0) &&
        ($item['Not'] == '' OR my_strpos($title, strtolower($item['Not'])) === FALSE) &&
        ($item['Quality'] == 'All' OR $item['Quality'] == '' OR my_strpos($title, strtolower($item['Quality'])) !== FALSE));
@@ -171,6 +170,12 @@ function check_for_torrent(&$item, $key, $opts) {
        ($item['Quality'] == 'All' OR $item['Quality'] == '' OR preg_match('/'.strtolower($item['Quality']).'/', $title)));
       break;
   }
+
+  if(strtolower($item['Filter']) == "any") { 
+    $hit=1;
+    $any=1;
+  }
+  
   if($hit)
     $guess = guess_match($title, TRUE);
 
@@ -181,7 +186,7 @@ function check_for_torrent(&$item, $key, $opts) {
         $PROPER = 1;
     }
     if(check_cache($rs['title'])) {
-      if(_isset($config_values['Settings'], 'Only Newer') == 1) {
+      if(!$any && _isset($config_values['Settings'], 'Only Newer') == 1) {
         if(!empty($guess['episode']) && preg_match('/^(\d+)x(\d+)p?$|^(\d{8})p?$/i',$guess['episode'],$regs)) {
           if(isset($regs[3]) && preg_match('/^(\d{8})$/', $regs[3]) && $item['Episode'] >= $regs[3]) {
             _debug($item['Name'] . ": " . $item['Episode'] .' >= '.$regs[3] . "\r\n", 1);

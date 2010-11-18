@@ -1,5 +1,6 @@
 <?php
 function guess_match($title, $normalize = FALSE) { 
+    global $config_values;
     
     // Episode
     $epi ='/[_.\s\(]';  //Start with _ , . or space
@@ -109,7 +110,7 @@ function guess_match($title, $normalize = FALSE) {
     if(preg_match('/^(S\d\d?|Season[_\s]?\d\d?|\d{2,4}[\sx-]\d{1,2}[\sx-]All)$/i', $episode_guess)) {
         $episode_guess = 'fullSeason';
     }
-    if(preg_match('/[\s]PROPER[\s]|[\s]REPACK[\s]|[\s]RERIP[\s]/i', $title)) {
+    if(isset($config_values['Settings']['Download Proper']) && preg_match('/[\s_.]PROPER[\s_.]|[\s_.]REPACK[\s_.]|[\s_.]RERIP[\s_.]/i', $title)) {
         $episode_guess .= "p";
     } 
     if(preg_match('/^(\d{1,2}xspecial)$/i', $episode_guess)) {

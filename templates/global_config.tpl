@@ -233,6 +233,14 @@
                                 	<input type="checkbox" name="onlynewer" value="1" <?php echo $onlynewer; ?>/> 
 								</div>
                             </div>
+                            <div>
+								<div class="left">
+                                	<label class="item checkbox">Download Proper/Repack:</label>
+								</div>
+								<div class="right">
+                                	<input type="checkbox" name="fetchproper" value="1" <?php echo $fetchproper; ?>/> 
+								</div>
+                            </div>
                         </div>
                     </div>
                     <div id="config_other" class="configTab hidden">

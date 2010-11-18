@@ -30,6 +30,7 @@ function setup_default_config() {
   _default('Client', "");
   _default('Verify Episode', "1");
   _default('Only Newer', "1");
+  _default('Download Proper', "1");
   _default('Default Feed All', "1");
   _default('Deep Directories', "0");
   _default('Combine Feeds', '0');
@@ -226,6 +227,7 @@ function update_global_config() {
                  'Client'             => 'client',
                  'MatchStyle'         => 'matchstyle',
                  'Only Newer'         => 'onlynewer',
+                 'Download Proper'    => 'fetchproper',
                  'Default Feed All'   => 'favdefaultall',
                  'Extension'          => 'extension');
                  
@@ -236,6 +238,7 @@ function update_global_config() {
                      'Verify Episode' => 'verifyepisodes',
                      'Save Torrents'  => 'savetorrents',
                      'Only Newer'     => 'onlynewer',
+                     'Download Proper'     => 'fetchproper',
                      'Default Feed All' => 'favdefaultall',
                      'Email Notifications' => 'mailonhit');
                      

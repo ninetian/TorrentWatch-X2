@@ -165,6 +165,7 @@ IMPORTANT: If you are updating from a previous version. Please copy php/config.p
 current:
     -- New fresh look!
     -- Added progressbar for active torrents.
+    -- Added "any" as filter option in favorites. See FAQ for more info.
     -- Fixed a lot of small UI bugs.
     -- Replaced greybox with own code.
     -- Added meaningfull error messages.

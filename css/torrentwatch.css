@@ -455,16 +455,18 @@ ul#transmission_list li.downloading {
     border-bottom: 1px solid #CCC;
 }
 
-ul.torrentlist li.torrent.alt {
+div.feed li.torrent.alt {
     background-color: #F0F1F2;
+}
+
+div.feed li.torrent:hover {
+    background-color: #DAE3F2;
 }
 
 ul.torrentlist li.torrent:hover,
 ul.torrentlist li.torrent.alt:hover {
-    background-color: #DAE3F2;
-    border: 1px solid #91A4BD;
-    //opacity: .75;
-    //filter: alpha(opacity = 75);
+    opacity: .80;
+    filter: alpha(opacity = 80);
 }
 
 li.torrent.hidden_bytext {

@@ -172,6 +172,7 @@ current:
     -- Replaced greybox with own code.
     -- Added meaningfull error messages.
     -- Added search option in hide list.
+    -- Upgraded jquery to 1.4.4
     -- Update guessing routine.
     -- Added option to hide donate button.
     -- Fixed issue where Episode filtering stoped working in 0.6.5.

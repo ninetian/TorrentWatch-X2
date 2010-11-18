@@ -166,7 +166,9 @@ current:
     -- New fresh look!
     -- Added progressbar for active torrents.
     -- Added "any" as filter option in favorites. See FAQ for more info.
+    -- Made Proper/Repack matching optional.
     -- Fixed a lot of small UI bugs.
+    -- Fixed bug where Proper & Repack's where not downloaded.
     -- Replaced greybox with own code.
     -- Added meaningfull error messages.
     -- Added search option in hide list.

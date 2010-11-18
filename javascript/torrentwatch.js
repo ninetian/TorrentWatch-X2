@@ -290,7 +290,7 @@ $(function() {
         '<a href="#" onclick="$.delTorrent(\'' + item.hashString + '\', \'true\');">' +
         '<img height=10 src="images/tor_trash.png" /></a></p>' +
         '</td><td class="torrent_name tor_client"><span class="torrent_name">' + item.name + '</span>' +
-	'<div style="width: 100%; margin-top: 2px; border: 1px dotted #91A4BD; background: #DFE3E8;"><div class="progressDiv" style="width: '+Percentage+'%; height: 3px;"></div></div>' +
+	'<div style="width: 100%; margin-top: 2px; border: 1px solid #BFCEE3; background: #DFE3E8;"><div class="progressDiv" style="width: '+Percentage+'%; height: 3px;"></div></div>' +
         '<span class="dateAdded hidden">' + item.addedDate + '</span>' +
         '<div id=tor_' + item.id + ' class="torInfo tor_' + item.hashString + '">' + clientData + '</div>' +
         '<div id="move_' + item.hashString + '" class="move_data hidden">' + 
@@ -319,8 +319,8 @@ $(function() {
                 'recent': recent
             },
                 function(json) {
-		if(!recent) { $('div#waiting').show(); };
 		$('#headerImg').show();
+		if(!recent) { $('div#waiting').show(); };
                 var check = json.match(/\S+/);
                 if(check == 'null') {
                     showClientError('Got no data from ' + window.client);

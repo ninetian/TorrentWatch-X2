@@ -591,7 +591,7 @@ td.progressRow {
 
 div.progressBarContainer {
     width: 100%;
-    border: 1px dotted #91A4BD;
+    border: 1px solid #BFCEE3;
     background: #DFE3E8;
     display: none
 }
@@ -974,8 +974,8 @@ div#welcome5 input.form_email[type=text] {
     right:              0px;
     top:                0px;
     bottom:             0px;
-    cursor:             wait;
     padding-top:        60px;
+    cursor:             wait;
     z-index: 99;
 }
 

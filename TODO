@@ -1,6 +1,7 @@
 0.7
-- New look
-- Search in hide list
+- New look *
+- Search in hide list *
+- Build 'any' option for fav filter
 
 0.8
 - More modulair code
@@ -11,6 +12,7 @@
 - Make torrent settings per show/feed/global
 - tvDB support.
 - In-app update option.
+- Command-line tools.
 
 0.9
 - sqlite for caching + migration script.

@@ -462,8 +462,9 @@ ul.torrentlist li.torrent.alt {
 ul.torrentlist li.torrent:hover,
 ul.torrentlist li.torrent.alt:hover {
     background-color: #DAE3F2;
-    opacity: .75;
-    filter: alpha(opacity = 75);
+    border: 1px solid #91A4BD;
+    //opacity: .75;
+    //filter: alpha(opacity = 75);
 }
 
 li.torrent.hidden_bytext {

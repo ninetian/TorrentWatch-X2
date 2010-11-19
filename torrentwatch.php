@@ -541,7 +541,7 @@ function post_bug($Summary, $Name, $Email, $Priority, $Description) {
 function get_tr_location() {
     global $config_values;
     $host = $config_values['Settings']['Transmission Host'] . ':' . $config_values['Settings']['Transmission Port'] . "/transmission/web/";
-    $host = preg_replace('/(localhost|127.0.0.1)/', $_SERVER['SERVER_ADDR'], $host);
+    $host = preg_replace('/(localhost|127.0.0.1)/', $_SERVER['REMOTE_ADDR'], $host);
     return $host;
 }
 

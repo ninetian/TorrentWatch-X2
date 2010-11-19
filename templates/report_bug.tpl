@@ -24,7 +24,7 @@
 	<label class="item">Email:</label>
       </div>
       <div class='right'>
-        <input id='Email' type='text' class='text' name='Name'?>
+        <input id='Email' type='text' class='text' name='Email'?>
       </div> 
     </div>
     <div class='bugItem'>

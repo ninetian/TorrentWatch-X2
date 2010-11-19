@@ -20,7 +20,7 @@ body {
     text-align: left;
     overflow: hidden;
     height: 100%;
-    }
+}
 
 input, select {
     margin-left: 5px;
@@ -873,7 +873,7 @@ div#clientError {
     width: 450px;
     margin-left: -225px;
     border: 1px solid red;
-    z-index: 1; 
+    z-index: 100; 
 }
 
 div#clientError h2 {
@@ -889,7 +889,7 @@ div#errorDialog {
     text-align: center;
     width: 650px;
     margin-left: -310px;
-    z-index: 1; 
+    z-index: 100; 
 }
 
 div#successDialog {
@@ -899,7 +899,7 @@ div#successDialog {
     text-align: center;
     width: 600px;
     margin-left: -310px;
-    z-index: 1; 
+    z-index: 100; 
 }
 
 div#newVersion {

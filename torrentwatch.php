@@ -11,7 +11,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 require_once('rss_dl_utils.php');
 global $platform;
 
-$tw_version[0] = "0.6.5";
+$tw_version[0] = "0.6.91";
 
 if(file_exists(get_base_dir() . "/.hg")) {
     exec('hg id -i', $hgId, $return);

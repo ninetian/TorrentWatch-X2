@@ -1442,6 +1442,7 @@ div#favClose {
  
 div#report_bug {
     width: 420px;
+    margin-left: -210px;
     padding-top: 5px;
     border-top: 1px solid #979797;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#D3D3D3,endColorstr=#F8F8F8);
@@ -1463,6 +1464,7 @@ div#report_bug .left {
 }
 
 div#bugDialog .title {
+    margin-left: -210px;
     padding-top: 2px;
     width: 430px;
 }

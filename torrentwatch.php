@@ -540,8 +540,10 @@ function post_bug($Summary, $Name, $Email, $Priority, $Description) {
 
 function get_tr_location() {
     global $config_values;
-    $host = $config_values['Settings']['Transmission Host'] . ':' . $config_values['Settings']['Transmission Port'] . "/transmission/web/";
-    $host = preg_replace('/(localhost|127.0.0.1)/', $_SERVER['HTTP_HOST'], $host);
+    $host = $config_values['Settings']['Transmission Host'];
+    if(preg_match('/(localhost|127.0.0.1|192.168.*|172.1.*|10.*|)/', $host))
+        $host = $_SERVER['SERVER_NAME'];
+    $host = $host . ':' . $config_values['Settings']['Transmission Port'] . "/transmission/web/";
     return $host;
 }
 

@@ -121,6 +121,9 @@ $(function() {
         var filter = this.id;
         $("div#torrentlist_container").show(function() {
             switch (filter) {
+            case 'refresh':
+		$.get('torrentwatch.php', '', $.loadDynamicData, 'html');
+		break;
             case 'filter_all':
                 displayFilter('all');
                 $.checkHiddenFeeds(1);

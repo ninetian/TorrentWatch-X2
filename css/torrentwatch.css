@@ -172,7 +172,7 @@ ul.mainoptions li#report a .icon {
     background: url(../images/report-bug.png) no-repeat left center;
 }
 ul.mainoptions li#webui a .icon{
-	 background-image: url(../images/webui.png);
+    background-image: url(../images/webui.png);
 }
 
 /*-----------------
@@ -217,6 +217,7 @@ ul#filterbar_container li {
     border-right: 1px solid #999;
     border-bottom: 1px solid #999;
     color: #111;
+    cursor: pointer;
 }
 
 ul#filterbar_container li:hover {
@@ -246,6 +247,20 @@ ul#filterbar_container li.selected {
     border-bottom-right-radius: 2px;
     -moz-border-radius-bottomright: 2px;
     height: 19px;
+}
+
+ul#filterbar_container li#refresh {
+    min-width: 20px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+ul#filterbar_container li#refresh:hover {
+    padding-left: 3px;
+}
+
+ul#filterbar_container li#refresh img {
+    margin-top: -1px;
 }
 
 ul#filterbar_container li.filter_left:hover,

@@ -5,17 +5,17 @@
 - Progressbar for torrents *
 
 0.8
-- More modulair code
-- New interface
 - Delete old episodes from transmission which are replaces by REPACK or PROPER episodes.
 - Remove torrents which are done. (paused and met ratio requirements)
-- Option for download everything from a feed
+- Run script on download-finish.
 - Make torrent settings per show/feed/global
 - tvDB support.
 - In-app update option.
 - Command-line tools.
 
 0.9
+- New interface
+- More modulair code
 - sqlite for caching + migration script.
 - Install/Setup script.
 - Movie support 

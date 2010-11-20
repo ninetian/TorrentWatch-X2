@@ -786,7 +786,7 @@ div#cacheDialog .title {
 
 div.move_data {
     position: inherit;
-    padding: 5px 10px 0px 0px;
+    padding: 2px 10px 5px 0px;
 }
 
 div.move_data input {

@@ -269,9 +269,9 @@ $(function() {
     toggleTorMove = function(torHash) {
         var curObject = $('div#move_' + torHash);
         if (curObject.is(":visible")) {
-            curObject.hide();
+            curObject.slideUp();
         } else {
-            curObject.show();
+            curObject.slideDown();
         }
         curObject = null;
     };

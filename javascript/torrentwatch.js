@@ -593,7 +593,7 @@ $(function() {
             if (!(filter)) {
                 filter = 'all';
             }
-            if($('.torrentlist div.header').length == 0) {
+            if($('#torrentlist_container div.header.combined').length == 1) {
                 $('.torrentlist>li').tsort('#unixTime', {order: 'desc'});
             }
             setTimeout(function() {

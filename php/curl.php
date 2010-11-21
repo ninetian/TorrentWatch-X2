@@ -43,6 +43,7 @@ function curl_exec ($sess) {
 	if (isset($curl_stuff[$sess][CURLOPT_NOBODY]) && $curl_stuff[$sess][CURLOPT_NOBODY]) {
 		$method = "HEAD";
 	}
+	$http=array('method' => $method);
 
 	if (isset($curl_stuff[$sess][CURLOPT_HTTPHEADER]) && (is_array($curl_stuff[$sess][CURLOPT_HTTPHEADER]))) {
      	    foreach ($curl_stuff[$sess][CURLOPT_HTTPHEADER] as $value) {
@@ -62,7 +63,6 @@ function curl_exec ($sess) {
 	if(isset($curl_stuff[$sess][CURLOPT_COOKIE])) {
 	    $header .= 'Cookie: ' . $curl_stuff[$sess][CURLOPT_COOKIE] . "\r\n";
 	}
-
         if(isset($curl_stuff[$sess][CURLOPT_USERAGENT])) {
 	    $http['user_agent'] = $curl_stuff[$sess][CURLOPT_USERAGENT];
         }
@@ -71,7 +71,6 @@ function curl_exec ($sess) {
 		$http['timeout'] = $curl_stuff[$sess][CURLOPT_TIMEOUT];
     	}
 
-	$http=array('method' => $method);
 	if (isset($header)) {
 		$http['header']=$header;
 	}

@@ -6,9 +6,12 @@ header( "Cache-Control: no-cache, must-revalidate" );
 header( "Pragma: no-cache" );
 
 ini_set('include_path', '.:./php');
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
+// error_reporting(E_ALL);
 require_once('rss_dl_utils.php');
+global $platform;
 
-$tw_version[0] = 0.6;
+$tw_version[0] = "0.7.0";
 
 if(file_exists(get_base_dir() . "/.hg")) {
     exec('hg id -i', $hgId, $return);
@@ -17,6 +20,9 @@ if(file_exists(get_base_dir() . "/.hg")) {
     } else {
         $tw_version[1] = "unknown";
     }
+} else if($platform == 'NMT') {
+    $tw_version[1] = 'NMT';
+    
 }
 
 $test_run = 0;
@@ -75,6 +81,9 @@ function parse_options() {
             }
             echo $response;
             exit;
+        case 'getClientActiveTorrents':
+	    echo getClientActiveTorrents();
+	    exit;
         case 'getHash':
             $response = torInfo($_REQUEST['getHash']);
             echo json_encode($response);
@@ -150,7 +159,7 @@ function parse_options() {
             if($response) echo "<div id=\"fav_error\" class=\"dialog_window\" style=\"display: block\">$response</div>";
             break;
         case 'hide':
-            $response = add_hidden($_GET['hide']);
+            $response = add_hidden(ucwords($_GET['hide']));
             if($response) echo "<div id=\"fav_error\" class=\"dialog_window\" style=\"display: block\">$response</div>";
             break;
         case 'delHidden':
@@ -165,13 +174,20 @@ function parse_options() {
                       $downloadDir = $fav['Save In'];
                 } 
             }
-            if(!$downloadDir || $downloadDir == "Default" ) $downloadDir = $config_values['Settings']['Download Dir'];
-            $r = client_add_torrent(trim($_GET['link']),
+            if((!isset($downloadDir) || $downloadDir == "Default" ) && 
+		isset($config_values['Settings']['Download Dir'])) {
+		    $downloadDir = $config_values['Settings']['Download Dir'];
+	    }
+            $r = client_add_torrent(preg_replace('/ /', '%20', trim($_GET['link'])),
                 $downloadDir, $_GET['title'], $_GET['feed']);
-            if($r) { 
+            if($r == "Success") { 
                 $torHash = get_torHash(add_cache($_GET['title'])); 
             }
-            echo $torHash;
+            if(isset($torHash)) {
+		echo $torHash;
+	    } else {
+		echo $r;
+	    }
             exit(0);
             break;
         case 'clearHistory':
@@ -182,10 +198,6 @@ function parse_options() {
             close_html();
             exit(0);
             break;
-        case 'get_tr_location':
-            global $config_values;
-            echo $config_values['Settings']['Transmission Host'] . ':' . $config_values['Settings']['Transmission Port'];
-            exit;
         case 'get_client':
             global $config_values;
             echo $config_values['Settings']['Client'];
@@ -198,6 +210,19 @@ function parse_options() {
             $footer = "<div id=\"footer\">TorrentWatch-X version $tw_version[0]";
             if($tw_version[1]) $footer.= " build $tw_version[1]</div>";
             echo $footer;
+            exit;
+        case 'show_donate':
+	    global $config_values;
+	    if (!$config_values['Settings']['Hide Donate Button']) {
+              echo '<div id="donate">
+		<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+		<input type="hidden" name="cmd" value="_s-xclick">
+		<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+		">
+		<input type="image" src="images/paypal-icon.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+		</form>
+              </div>';
+	    }
             exit;
         case 'post_bug':
             global $tw_version;
@@ -230,6 +255,9 @@ function parse_options() {
                 case '#clear_cache':
                     display_clearCache();
                     exit;
+                case '#show_transmission':
+                    display_transmission();
+                    exit;
                 default:
                     exit;
             }
@@ -253,9 +281,9 @@ function display_global_config() {
     global $config_values, $html_out;
 
     $savetorrent=$transmission="";
-    $deepfull=$deeptitle=$deepoff=$verifyepisode="";
-    $matchregexp=$matchglob=$matchsimple=$dishidelist=$mailonhit="";
-    $favdefaultall=$onlynewer=$folderclient=$combinefeeds=$require_epi_info="";
+    $deepfull=$deeptitle=$deepTitleSeason=$deepoff=$verifyepisode="";
+    $matchregexp=$matchglob=$matchsimple=$dishidelist=$hdiedonate=$mailonhit="";
+    $favdefaultall=$onlynewer=$fetchproper=$folderclient=$combinefeeds=$require_epi_info="";
 
     switch($config_values['Settings']['Client']) {
         case 'Transmission':
@@ -274,6 +302,8 @@ function display_global_config() {
         $require_epi_info = 'checked=1';
     if($config_values['Settings']['Disable Hide List'] == 1)
         $dishidelist = 'checked=1';    
+    if($config_values['Settings']['Hide Donate Button'] == 1)
+        $hidedonate = 'checked=1';    
     if($config_values['Settings']['Save Torrents'] == 1)
         $savetorrent = 'checked=1';
     if($config_values['Settings']['Email Notifications'] == 1)
@@ -282,6 +312,7 @@ function display_global_config() {
     switch($config_values['Settings']['Deep Directories']) {
         case 'Full': $deepfull = 'selected="selected"';break;
         case 'Title': $deeptitle = 'selected="selected"'; break;
+        case 'Title_Season': $deepTitleSeason = 'selected="selected"'; break;
         default:$deepoff = 'selected="selected"';break;
     }
 
@@ -289,6 +320,8 @@ function display_global_config() {
         $verifyepisode = 'checked=1';
     if($config_values['Settings']['Only Newer'] == 1)
         $onlynewer = 'checked=1';
+    if($config_values['Settings']['Download Proper'] == 1)
+        $fetchproper = 'checked=1';
     if($config_values['Settings']['Default Feed All'] == 1)
         $favdefaultall = 'checked=1';
 
@@ -382,6 +415,17 @@ function display_legend() {
     ob_end_clean();
 }
 
+function display_transmission() {
+    global $html_out;
+
+    $host = get_tr_location();
+
+    ob_start();
+    require('templates/transmission.tpl');
+    return ob_get_contents();
+    ob_end_clean();
+}
+
 function report_bug() {
     global $html_out;
 
@@ -436,10 +480,12 @@ function check_files() {
 
     if($config_values['Settings']['FirstRun']) return 0;
 
-    $toCheck = array('cache_dir' => $config_values['Settings']['Cache Dir'],
-                    'download_dir' => $config_values['Settings']['Download Dir'],
-                    );
-                    
+    $toCheck['cache_dir'] = $config_values['Settings']['Cache Dir'];
+    if(strtolower($config_values['Settings']['Transmission Host']) == 'localhost' ||
+         $config_values['Settings']['Transmission Host'] == '127.0.0.1') {
+            $toCheck['download_dir'] = $config_values['Settings']['Download Dir'];
+    }
+    
     $deepDir = $config_values['Settings']['Deep Directories'];
     
     $error = false;
@@ -461,11 +507,13 @@ function version_check() {
         $get = curl_init();
         $getOptions[CURLOPT_URL] = 'http://tw-version.vandalon.net/VERSION';
         $getOptions[CURLOPT_USERAGENT] = "TW-X/$tw_version[0] ($tw_version[1])";
-        get_curl_defaults(&$getOptions);
+        get_curl_defaults($getOptions);
         curl_setopt_array($get, $getOptions);
         $latest = curl_exec($get);
         curl_close($get);
-        if($latest && $latest > $tw_version[0]) {
+    	$version = (int)str_replace('.', '', $tw_version[0]);
+    	$tmplatest = (int)str_replace('.', '', $latest);
+        if($tmplatest && $tmplatest > $version) {
             return "<div id=\"newVersion\" class=\"dialog_window\" style=\"display: block\">TorrentWatch-X $latest is available.
                    Click <a href=\"https://code.google.com/p/torrentwatch-x/\">here</a> for more information.</div>";
         }
@@ -480,13 +528,23 @@ function post_bug($Summary, $Name, $Email, $Priority, $Description) {
     $postOptions[CURLOPT_URL] = "http://tw-issues.vandalon.net/";
     $postOptions[CURLOPT_USERAGENT] = "TW-X/$tw_version[0] ($tw_version[1])";
     $postOptions[CURLOPT_POSTFIELDS] = "Summary=$Summary&Name=$Name&Email=$Email&Priority=$Priority&Description=$Description&Version=$Version";
-    get_curl_defaults(&$postOptions);
+    get_curl_defaults($postOptions);
     curl_setopt_array($post, $postOptions);
     $response = curl_exec($post);
-    _debug("$response");
+    $http_code = curl_getinfo($post, CURLINFO_HTTP_CODE);
     curl_close($post);
+    if($http_code && $http_code != 200) $response = "Error: $http_code <br> $response";
     return "<div id=\"errorDialog\" class=\"dialog_window\" style=\"display: block\">$response</div>";
     
+}
+
+function get_tr_location() {
+    global $config_values;
+    $host = $config_values['Settings']['Transmission Host'];
+    if(preg_match('/(localhost|127.0.0.1|192.168.*|172.1.*|10.*|)/', $host))
+        $host = preg_replace('/:.*/', "", $_SERVER['HTTP_HOST']);
+    $host = $host . ':' . $config_values['Settings']['Transmission Port'] . "/transmission/web/";
+    return $host;
 }
 
 //
@@ -512,7 +570,8 @@ check_files();
 
 echo $html_out;
 $html_out = "";
-ob_flush();flush();
+// ob_flush();
+flush();
 
 // Feeds
 if(isset($config_values['Feeds'])) {

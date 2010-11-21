@@ -1,8 +1,14 @@
 <?php
+global $config_values, $platform;
+
 require_once("tools.php");
 require_once("atomparser.php");
 require_once("cache.php");
 require_once("class.bdecode.php"); 
+require_once("class.phpmailer.php");
+if (!extension_loaded("curl")) {
+    require_once("curl.php");
+}
 require_once("config.php");
 require_once("feeds.php");
 require_once("html.php");
@@ -11,11 +17,8 @@ require_once("tor_client.php");
 require_once("platform.php");
 require_once("guess.php");
 
-
-global $config_values;
 $config_values['Global'] = array();
 $time = 0;
-
 
 // Checks array is a key is set, return value or default
 function _isset($array, $key, $default = '') {

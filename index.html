@@ -8,51 +8,72 @@
   <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
   <link rel="Stylesheet" type="text/css" href="css/reset.css" />
   <link rel="Stylesheet" type="text/css" href="css/torrentwatch.css" />
-  <link rel="stylesheet" type="text/css" href="css/greybox.css" media="all" />
   <!--[if IE]>
     <link rel="Stylesheet" type="text/css" href="css/ie.css"></link>
   <![endif]-->
-  <script type="text/javascript" src="javascript/jquery-1.4.min.js"></script>
+  <script type="text/javascript" src="javascript/jquery-1.4.4.min.js"></script>
+  <script type="text/javascript" src="javascript/jquery.tinysort.min.js"></script>
   <script type="text/javascript" src="javascript/jquery.cookie.js"></script>
-  <script type="text/javascript" src="javascript/jquery.tinysort.js"></script>
   <script type="text/javascript" src="javascript/jquery.form.js"></script>
   <script type="text/javascript" src="javascript/json2.js"></script>
-  <script type="text/javascript" src="javascript/greybox.js"></script>
   <script type="text/javascript" src="javascript/torrentwatch.js"></script>
-    <script type="text/javascript">
-      var GB_ANIMATION = true;
-      $(document).ready(function(){
-        $("a.greybox").click(function(){
-          var t = this.title || $(this).text() || this.href;
-          GB_show(t,this.href,600,960);
-          return false;
-        });
-      });
-    </script>
 </head>
 <body>
-<ul class="mainoptions" id="mainoptions">
-  <li id="config"><a class="toggleDialog" href="#configuration">Configure</a></li>
-  <li id="favoritesMenu"><a class="toggleDialog" href="#favorites">Favorites</a></li>
-  <li class="divider">&nbsp;</li>
-  <li id="view"><a class="toggleDialog" href="#history">View History</a></li>
-  <li id="empty"><a class="toggleDialog" href="#clear_cache">Empty Cache</a></li>
-  <li id='webui'><a href='#' class="greybox">Client UI</a></li>
-  <li id="legend"><a class='toggleDialog' href='#show_legend'>Legend</a></li>
-  <li id="report"><a class='toggleDialog' href='#report_bug'>Report Bug</a></li>
-</ul>
+<div id="topmenu">
+ <ul class="mainoptions" id="mainoptions">
+  <li id="favoritesMenu">
+   <a class="toggleDialog" href="#favorites">
+   <span class="icon"></span>
+   Favorites</a>
+  </li>
+  <li id="config">
+   <a class="toggleDialog" href="#configuration">
+   <span class="icon"></span>
+   Configure</a>
+  </li>
+  <li id="view">
+   <a class="toggleDialog" href="#history">
+   <span class="icon"></span>
+   History</a>
+  </li>
+  <li id="empty">
+   <a class="toggleDialog" href="#clear_cache">
+   <span class="icon"></span>
+   Empty Cache</a>
+  </li>
+  <li id="legend">
+   <a class='toggleDialog' href='#show_legend'>
+   <span class="icon"></span>
+   Legend</a>
+  </li>
+  <li id="report">
+   <a class='toggleDialog' href='#report_bug'>
+   <span class="icon"></span>
+   Report Bug</a>
+  </li>
+  <li id="webui">
+   <a class='toggleDialog' href='#show_transmission'>
+   <span class="icon"></span>
+   </a>
+  </li>
+ </ul>
 <ul id="filterbar_container">
-  <li id="filter_all"><a href="#">All</a></li>
-  <li id="filter_matching"><a href="#">Matching</a></li>
-  <li id="filter_downloading"><a href="#">Downloading</a></li>
-  <li id="filter_downloaded"><a href="#">Downloaded</a></li>
-  <li id="filter_transmission"><a id="torClient" href="#">Client</a></li>
-  <li id="filter_bytext"><input type="text" id="filter_text_input"/></li>
+  <li id="refresh" class="tab filter_left"><a href="#"><img src="images/refresh.png"></a></li>
+  <li id="filter_all" class="tab"><a href="#">All</a></li>
+  <li id="filter_matching" class="tab"><a href="#">Matching</a></li>
+  <li id="filter_downloading" class="tab"><a href="#">Downloading</a></li>
+  <li id="filter_downloaded" class="tab"><a href="#">Downloaded</a></li>
+  <li id="filter_transmission" class="tab"><a id="torClient" href="#">Client</a><span id="activeTorrents">(-)</span></li>
+  <li id="filter_bytext"><input type=search results=0 placeholder="Filter" id="filter_text_input"/></li>
+  <li id="rates"></li>
 </ul>
-<div class="progressbar dialog_window" id="progressbar">
- <span>Loading . . .</span>
 </div>
-<form id="welcome_form" action="torrentwatch.php">
+<div id='progress' class="progress progress_full">
+ <div class="progressbar dialog_window" id="progressbar">
+  <span>Loading . . .</span>
+ </div>
+</div>
+ <form id="welcome_form" action="torrentwatch.php">
   <div id="welcome1" class="dialog_window welcome">
   <input type="hidden" name="firstRun" value="1"/>
   <input type="hidden" name="button" value="Add"/>
@@ -145,6 +166,8 @@
     <br/>
     <label class="item">If you want to get warnings or errors by mail, please enter an e-mail address:</label>
     <input type="text" name ="emailAddress" class="text form_email" title="Enter an email address here to send warnings and errors to." />
+    <label class="item">And mail server:</label>
+    <input type="text" name ="smtpServer" value="localhost" class="text form_email" title="Enter mailserver to send mail trough." />
     <br/>
     <label class="item">To get started click Apply below and you will be presented with the episodes in your chosen feed.</label>
     <label class="item">Right click on any show on the list and add it to your favorites.<br/>Once a show is in your favorites it will automatically download every week</label><br />
@@ -153,7 +176,7 @@
     <a class="toggleDialog button" href="#welcome4">Back</a>
     <a class="toggleDialog button" href="#">Close</a>
   </div>
-</form>
+ </form>
   <div id="clientError" class="dialog_window">
       <h2> Client Error! </h2>
       <p></p>

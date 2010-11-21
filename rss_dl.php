@@ -1,5 +1,8 @@
 #!/usr/bin/php-cgi -q
 <?php
+
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
+
 // rss_dl.php
 // This program is a command line interface to torrentwatch
 // 
@@ -87,7 +90,7 @@ function parse_args() {
     _debug(date("F j, Y, g:i a")."\n",0);
 
     if(isset($config_values['Feeds'])) {
-        load_feeds($config_values['Feeds']);
+        load_feeds($config_values['Feeds'], 1);
         feeds_perform_matching($config_values['Feeds']);
     }
 

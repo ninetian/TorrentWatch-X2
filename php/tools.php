@@ -1,19 +1,27 @@
 <?php
 function sendmail($msg, $subject) {
     global $config_values;
-    
+
     $emailAddress = $config_values['Settings']['Email Address'];
-    if($emailAddress) {
-        $mail = <<<END
-Hi,
 
-This is an automated message from TorrentWatch-X.
+	if(!empty($emailAddress)) {
+		$email = new PHPMailer();
+		
+		$email->From     = "$emailAddress";
+		$email->FromName = "TorrentWatch-X";
+		$email->AddAddress("$emailAddress");
+		$email->Subject  = $subject;
 
-$msg
-END;
-
-        mail($emailAddress, $subject, $mail, 'From: TorrentWatch-X' );
-        _debug("$emailAddress, $subject\n");
+		$email->Host     = $config_values['Settings']['SMTP Server'];
+		$email->Mailer   = "smtp";
+		
+		$mail = @file_get_contents("templates/email.tpl");
+		$mail = str_replace('[MSG]', $msg, $mail);
+		if (empty($mail)) {
+			$mail = $msg;
+		}
+		$email->Body = $mail;
+		$email->Send();
     }
 }
 
@@ -25,7 +33,7 @@ function run_script($param, $torrent, $error = "") {
     if($script) {
         if(!is_file($script)) {
             $msg = "The configured script is not a single file. Parameters are not allowed because of security reasons.";
-            $subject = "TorrentWatch-X: security error";
+            $subject = "TW-X: security error";
             sendmail($msg, $subject);
             return;
         }
@@ -41,7 +49,7 @@ function run_script($param, $torrent, $error = "") {
             $msg.= "Please read 'https://code.google.com/p/torrentwatch-x/wiki/Script' for more info about how to make a compatible script."; 
             
             _debug("$msg\n");
-            $subject = "TorrentWatch-X: $script returned error.";
+            $subject = "TW-X: $script returned error.";
             sendmail($msg, $subject);
         }
     }
@@ -62,7 +70,7 @@ function torInfo($torHash) {
 
     switch($config_values['Settings']['Client']) {
         case 'Transmission':
-            $request = array('arguments' => array('fields' => array('id', 'leftUntilDone', 'hashString',
+		$request = array('arguments' => array('fields' => array('id', 'leftUntilDone', 'hashString',
                     'totalSize', 'uploadedEver', 'downloadedEver', 'status', 'peersSendingToUs',
                     'peersGettingFromUs', 'peersConnected', 'recheckProgress'),
                     'ids' => $torHash), 'method' => 'torrent-get');
@@ -86,11 +94,13 @@ function torInfo($torHash) {
                     $ratio = round($ratio, 2);
                 }
                 $bytesDone = $totalSize-$leftUntilDone;
+		if(!$bytesDone) $bytesDone=0;
                 $sizeDone = human_readable($totalSize-$leftUntilDone);
                 $totalSize = human_readable($totalSize);
-                $clientId = $response['arguments']['torrents']['0']['id'];
-                $status = $response['arguments']['torrents']['0']['status'];
-                $seedRatioLimit = round($response['arguments']['torrents']['0']['seedRatioLimit'],2);
+                if(!$clientId = $response['arguments']['torrents']['0']['id']) $clientId = '';
+                if(!$status = $response['arguments']['torrents']['0']['status']) $status = 0;
+                if(isset($response['arguments']['torrents']['0']['seedRatioLimit']))
+		  $seedRatioLimit = round($response['arguments']['torrents']['0']['seedRatioLimit'],2);
                 $peersSendingToUs = $response['arguments']['torrents']['0']['peersSendingToUs'];
                 $peersGettingFromUs = $response['arguments']['torrents']['0']['peersGettingFromUs'];
                 $peersConnected = $response['arguments']['torrents']['0']['peersConnected'];
@@ -109,7 +119,9 @@ function torInfo($torHash) {
                     } else {
                         $stats = "Paused";
                     }
-                }
+                } else {
+		    $stats = '';
+		}
                 return array( 
                     'stats' => $stats,
                     'clientId' => $clientId,
@@ -129,14 +141,26 @@ function getClientData($recent) {
             if($recent) {
               $request = array('arguments' => array('fields' => array('id', 'name', 'status', 'errorString', 'hashString',
                'leftUntilDone', 'downloadDir', 'totalSize', 'uploadedEver', 'downloadedEver', 'addedDate', 'status',
-               'peersSendingToUs', 'peersGettingFromUs', 'peersConnected', 'seedRatioLimit', 'recheckProgress'),
+               'peersSendingToUs', 'peersGettingFromUs', 'peersConnected', 'seedRatioLimit', 'recheckProgress', 'rateDownload', 'rateUpload'),
                'ids' => 'recently-active'), 'method' => 'torrent-get');
             } else {
               $request = array('arguments' => array('fields' => array('id', 'name', 'status', 'errorString', 'hashString',
                'leftUntilDone', 'downloadDir','totalSize', 'uploadedEver', 'downloadedEver', 'addedDate', 'status',
-               'peersSendingToUs', 'peersGettingFromUs', 'peersConnected', 'seedRatioLimit', 'recheckProgress')),
+               'peersSendingToUs', 'peersGettingFromUs', 'peersConnected', 'seedRatioLimit', 'recheckProgress', 'rateDownload', 'rateUpload')),
                'method' => 'torrent-get');
             }
+            $response = transmission_rpc($request);
+            return json_encode($response);
+        break;
+    }
+}
+
+function getClientActiveTorrents() {
+    global $config_values;
+
+    switch($config_values['Settings']['Client']) {  
+        case 'Transmission':
+            $request = array('method' => 'session-stats');
             $response = transmission_rpc($request);
             return json_encode($response);
         break;

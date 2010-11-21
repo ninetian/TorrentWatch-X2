@@ -1,15 +1,30 @@
-- sqlite for caching + migration script.
-- Movie support 
-- Remove torrents which are done. (paused and met ratio requirements)
-- Add list of TV Shows to choose from.
+0.7
+- New look *
+- Search in hide list *
+- Build 'any' option for fav filter *
+- Progressbar for torrents *
+
+0.8
 - Delete old episodes from transmission which are replaces by REPACK or PROPER episodes.
-- New version notification.
+- Remove torrents which are done. (paused and met ratio requirements)
+- Run script on download-finish.
+- Make torrent settings per show/feed/global
+- tvDB support.
+- In-app update option.
+- Command-line tools.
+
+0.9
+- New interface
+- More modulair code
+- sqlite for caching + migration script.
 - Install/Setup script.
-- OSX Installer.
+- Movie support 
+- torrent rewriting
+- rtorrent support
+- nzb support
+
+1.0
+- OSX Installer (fluid?).
 - Windows Installer.
+- utorrent support
 
-
-- Torrent client support:
-    - utorrent support
-    - rtorrent support
-    - vuze support

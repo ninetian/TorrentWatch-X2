@@ -5,15 +5,16 @@ function guess_match($title, $normalize = FALSE) {
     $epi ='/[_.\s\(]';  //Start with _ , . or space
     $epi.='(S\d+[_.\s]?EP? ?\d+(?:-EP? ?\d+)?'.'|';  // S12E1 or S12EP1-EP2 
     $epi.='S\d\d?'.'|'; // Full season S03
-    $epi.='\d{1,2}x\d+(?:-\d+)?' .'|';  // 1x23 or 1x23-24
+    $epi.='\d{1,2}x#?S?(\d+|special)(?:-\d+)?'.'|';  // 1x23 or 1x23-24
     $epi.='\d+[_.\s]?of[_.\s]?\d+'.'|';  // 03of18
     $epi.='Season[_.\s]?\d+,?[_.\s]?Episode[_.\s]?\d+'.'|'; // Season 4, episode 15
     $epi.='Season[_.\s]?\d\d?'.'|'; // Full Season: Season1 or Season 02
     $epi.='0?\d{3}[_.\s]'.'|'; // 306
-    $epi.='Part[_.\s]?\d+[_.\s][^r][^a][^r]'.'|';
+    $epi.='Pa?r?t[_.\s]?\d+[_.\s]'.'|';
     $epi.='EP?(?:PS[_.\s]?)?\d+(?:-\d+)?'.'|'; // E137 or EP137 or EPS1-23
-    $epi.='\d{1,2}[-.]\d{1,2}[-.]\d{2,4}[_.\s]'.'|'; // 23-8-2007 or 07.23.2008 or 07-23-09
-    $epi.='\d{4}[-.]\d{1,2}[-.]\d{1,2}[_.\s]'.'|'; // 2007-8-23 or 2008.23.7
+    $epi.='\d{1,2}[-.]\d{1,2}[-.x]\d{2,4}[_.\s]'.'|'; // 23-8-2007 or 07.23.2008 or 07-23-09
+    $epi.='\d{4}[-.x]\d{1,2}[-.x]\d{1,2}[_.\s]'.'|'; // 2007-8-23, 2010x03.12 or 2008.23.7
+    $epi.='\d{4}[-.x]\d{1,2}([.-x]All)?'.'|'; // 2007-8, 2010x03 or 2008.23
     $epi.='\d{8}[_.\s])/i';   // 20082306 etc
 
     // Quality
@@ -30,7 +31,9 @@ function guess_match($title, $normalize = FALSE) {
     $quality.='BDRip'   .'|';
     $quality.='TELESYNC'.'|';
     $quality.='HR.HDTV' .'|';
+    $quality.='iTunes'  .'|';
     $quality.='HDTV'    .'|';
+    $quality.='x264'    .'|';
     $quality.='HR.PDTV' .'|';
     $quality.='PDTV'    .'|';
     $quality.='SatRip'  .'|';
@@ -38,6 +41,7 @@ function guess_match($title, $normalize = FALSE) {
     $quality.='TVRip'   .'|';
     $quality.='TVCap'   .'|';
     $quality.='WebRip'  .'|';
+    $quality.='WEB-DL'  .'|';
     $quality.='720p'    .'|';
     $quality.='1080i'   .'|';
     $quality.='1080p)\b/i';
@@ -54,11 +58,13 @@ function guess_match($title, $normalize = FALSE) {
     }
     
     if(preg_match($epi, $title, $match)) {
-        $episode_guess = $match[1];
-        $key_guess = preg_replace("/([^-\(\.]+)[\. ]*(?:[_.\s]-[_.\s].+)?(:?[_.\s]\(.+)?" . $episode_guess. "(.*$)/", '\1', $title);
+        $episode_guess = trim($match[1], ' .');
+        $key_guess = trim(preg_replace("/([^-\(\.]+)[\. ]*(?:[_.\s]-[_.\s].*)?(:?[_.\s]\(.+)?" . 
+            $episode_guess. "(.*$)/", '\1', $title), ' .');
     } elseif(preg_match($quality, $title, $match)) {
-        $quality_guess = $match[1];
-        $key_guess = preg_replace("/([^-\(\.]+)[\. ]*(?:[_.\s]-[_.\s].+)?(:?[_.\s]\(.+)?" . $quality_guess. "(.*$)/", '\1', $title);
+        $quality_guess = trim($match[1], ' .');
+        $key_guess = trim(preg_replace("/([^-\(\.]+)[\. ]*(?:[_.\s]-[_.\s].*)?(:?[_.\s]\(.+)?" . 
+            $quality_guess. "(.*$)/", '\1', $title), ' .');
         $episode_guess = "noShow";
     } else {
         return False;
@@ -77,23 +83,41 @@ function guess_match($title, $normalize = FALSE) {
     $key_guess = trim(strtr($key_guess, $from, $to));
     $data_guess = trim(strtr($data_guess, $from, $to));
     $episode_guess = trim(strtr($episode_guess, $from, $to));
+    
     // Standardize episode output to SSxEE, strip leading 0
-    // This is (b|c|d) from earlier.  If it is style e there will be no replacement, only strip leading 0
-    $episode_guess = preg_replace('/(\b(?:S(\d+))?[_.\s]?EP? ?(\d+)(?:-EP? ?\d+)?\b|\b(\d+)x(\d+)|(\d+)[. ?]of[_.\s]?(\d+)\b|\bseason[_.\s]?(\d+),?[_.\s]?episode[_.\s]?(\d+)\b|\b0?(\d)(\d\d)\b|\bEps[_.\s]?(\d+)-\d+\b|\bPart[_.\s]?(\d+)\b)/i',
-        '\2\4\6\8\10x\3\5\7\9\11\12\13', $episode_guess);
-    if(preg_match('/^x\d+/', $episode_guess)) {
-        $episode_guess = preg_replace('/(^x)(\d+)/', '1x\2', $episode_guess);
+    $epiGuess = array(  '/\b(?:S(\d+))?[\s]?EP? ?(\d+)(?:-EP? ?\d+)?\b/i',
+                        '/\b(\d+)x#?S?(\d+)/i',
+                        '/(\d+)[\s]?of[\s]?\d+\b/i',
+                        '/\bseason[\s]?(\d+),?[\s]?episode[\s]?(\d+)\b/i',
+                        '/\b0?(\d)(\d\d)\b/i',
+                        '/\bEps[\s]?(\d+)-\d+\b/i',
+                        '/\bPa?r?t[\s]?(\d+)\b/i');
+                        
+    $dateGuess = '/(\d\d\d\d)[\sx-](\d\d)[\sx-](\d\d).?/i';
+    
+    foreach($epiGuess as $guess) {
+	$episode_guess = preg_replace($guess, '\1x\2', $episode_guess, -1, $replaceCount);
+        if($replaceCount > 0) {
+            $episode_guess = preg_replace('/^(\d+)x$/', '1x\1', $episode_guess); //Match shows with EPI nr only.
+            break;
+        } else {
+            $episode_guess = preg_replace($dateGuess, '\1\2\3', $episode_guess);
+        }
     }
     $episode_guess = preg_replace('/0*(\d+)x0*(\d+)/', '\1x\2', $episode_guess);
-    if(preg_match('/^(\d\d\d\d \d\d \d\d)$/', $episode_guess)) {
-        $episode_guess = preg_replace('/ /', '', $episode_guess);
+    
+    if(preg_match('/^(S\d\d?|Season[_\s]?\d\d?|\d{2,4}[\sx-]\d{1,2}[\sx-]All)$/i', $episode_guess)) {
+        $episode_guess = 'fullSeason';
     }
-    if(preg_match('/[_.\s]PROPER[_.\s]|[_.\s]REPACK[_.\s]|[_.\s]RERIP[_.\s]/i', $title)) {
+
+    global $config_values;
+    if(($config_values['Settings']['Download Proper'] == 1) && (preg_match('/[\s_.]PROPER[\s_.]|[\s_.]REPACK[\s_.]|[\s_.]RERIP[\s_.]/i', $title))) {
         $episode_guess .= "p";
     } 
-    if(preg_match('/^(S\d\d?|Season[_.\s]?\d\d?)$/i', $episode_guess)) {
-        $episode_guess = 'fullSeason';
-    }            
+
+    if(preg_match('/^(\d{1,2}xspecial)$/i', $episode_guess)) {
+        $episode_guess = 'Special';
+    }
   }  
   return array("key" => $key_guess, "data" => $data_guess, "episode" => $episode_guess);
 }
@@ -101,10 +125,10 @@ function guess_match($title, $normalize = FALSE) {
 function guess_feedtype($feedurl) {
   global $config_values;
   $response = check_for_cookies($feedurl);
-  if($response) $feedurl = $response['url'];
+  if(isset($response)) $feedurl = $response['url'];
   $get = curl_init();
   $getOptions[CURLOPT_URL] = $feedurl;
-  get_curl_defaults(&$getOptions);
+  get_curl_defaults($getOptions);
   curl_setopt_array($get, $getOptions);
   $content = explode('\n', curl_exec($get));
   curl_close($get);
@@ -117,7 +141,7 @@ function guess_feedtype($feedurl) {
     else if (preg_match('/<rss/', $content[$i], $regs))
       return 'RSS';
   }
-  return "Unknown";
+  return "RSS";
 }
 
 

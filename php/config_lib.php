@@ -1,7 +1,7 @@
 <?php
 
 function setup_default_config() {
-  global $config_values;
+  global $config_values, $platform;
   function _default($a, $b) {
     global $config_values;
     if(!isset($config_values['Settings'][$a])) {
@@ -19,13 +19,18 @@ function setup_default_config() {
   _default('Transmission Port', '9091');
   _default('Transmission URI', '/transmission/rpc');
   _default('Watch Dir', '');
-  _default('Download Dir', '/mnt/Media/Downloads');
+  if($platform == 'NMT') {
+      _default('Download Dir', '/share/Download');
+  } else {
+      _default('Download Dir', '/mnt/Media/Downloads');
+  }
   _default('Cache Dir', $basedir."/rss_cache/");
   _default('Save Torrents', "0");
   _default('Run Torrentwatch', "True");
   _default('Client', "");
   _default('Verify Episode', "1");
   _default('Only Newer', "1");
+  _default('Download Proper', "1");
   _default('Default Feed All', "1");
   _default('Deep Directories', "0");
   _default('Combine Feeds', '0');
@@ -39,25 +44,28 @@ function setup_default_config() {
   _default('Default Seed Ratio', '-1');
   _default('Script', '');
   _default('Email Notifications', '');
+  _default('SMTP Server', 'localhost');
+  _default('TimeZone', 'UTC');
 }
 
-if(!(function_exists(get_base_dir))) {
+if(!(function_exists('get_base_dir'))) {
     function get_base_dir() {
         return dirname(dirname(__FILE__));
     }
 }
   
-if(!(function_exists(get_curl_defaults))) {    
+if(!(function_exists('get_curl_defaults'))) {  
+    global $platform;  
     function get_curl_defaults(&$curlopt) {
-        $curlopt[CURLOPT_CONNECTTIMEOUT] = 10;
-        $curlopt[CURLOPT_TIMEOUT] = 20;
+        if(extension_loaded("curl")) $curlopt[CURLOPT_CONNECTTIMEOUT] = 10;
+        $curlopt[CURLOPT_TIMEOUT] = 15;
         $curlopt[CURLOPT_RETURNTRANSFER] = true;
     }
 }
 
-if(!(function_exists(get_item_filter))) {
+if(!(function_exists('get_item_filter'))) {
     function get_item_filter() {
-        return '/[\[\]{}<>:;,]/';
+        return '/[\[\]{}<>,]/';
     }
 }
 
@@ -85,8 +93,8 @@ function read_config_file() {
     
   while (!feof($fp)) {
     $line = trim(fgets($fp));
-    if ($line && !ereg("^$comment", $line)) {
-      if (ereg("^\[", $line) && ereg("\]$", $line)) {
+    if ($line && !preg_match("/^$comment/", $line)) {
+      if (preg_match("/^\[/", $line) && preg_match("/\]$/", $line)) {
         $line = trim($line,"[");
         $line = trim($line, "]");
         $group = trim($line);
@@ -96,7 +104,7 @@ function read_config_file() {
         $pieces[1] = trim($pieces[1] , "\"");
         $option = trim($pieces[0]);
         $value = trim($pieces[1]);
-        if(ereg("\[\]$", $option)) {
+        if(preg_match("/\[\]$/", $option)) {
           $option = substr($option, 0, strlen($option)-2);
           $pieces = explode("=>", $value, 2);
           if(isset($pieces[1])) {
@@ -120,6 +128,11 @@ function read_config_file() {
     $config_values['Hidden'] = array();
   if(!isset($config_values['Feeds']))
     $config_values['Feeds'] = array();
+    
+  if(isset($config_values['Settings']['TimeZone'])) {
+    date_default_timezone_set($config_values['Settings']['TimeZone']);
+  }
+    
   return true;
 }
 
@@ -129,7 +142,7 @@ function get_client_passwd() {
 }
 
 function write_config_file() {
-  global $config_values, $config_out;
+  global $config_values, $config_out, $platform;
   $config_file = platform_getConfigFile();
 
   _debug("Preparing to write config file to $config_file\n");
@@ -182,14 +195,21 @@ function write_config_file() {
       return FALSE;
     }
   }
+  $config_out = html_entity_decode($config_out);
   file_put_contents($config_file, $config_out);
-  chmod($config_file, 0600);
+  if($platform == 'NMT') {
+      chmod($config_file, 0666);
+  } else {
+      chmod($config_file, 0600);
+  }
   unset($config_out);
 }
 
 function update_global_config() {
   global $config_values;
   $input = array('Email Address'      => 'emailAddress',
+                 'SMTP Server'	      => 'smtpServer',
+		 'TimeZone'	      => 'TZ',
                  'Email Notifications' => 'mailonhit',
                  'Transmission Login' => 'truser',
                  'Transmission Password' => 'trpass',
@@ -203,18 +223,22 @@ function update_global_config() {
                  'Combine Feeds'      => 'combinefeeds',
                  'Require Episode Info' => 'require_epi_info',
                  'Disable Hide List' => 'dishidelist',
+                 'Hide Donate Button' => 'hidedonate',
                  'Client'             => 'client',
                  'MatchStyle'         => 'matchstyle',
                  'Only Newer'         => 'onlynewer',
+                 'Download Proper'    => 'fetchproper',
                  'Default Feed All'   => 'favdefaultall',
                  'Extension'          => 'extension');
                  
   $checkboxs = array('Combine Feeds' => 'combinefeeds',
                      'Require Episode Info' => 'require_epi_info',
                      'Disable Hide List' => 'dishidelist',
+                     'Hide Donate Button' => 'hidedonate',
                      'Verify Episode' => 'verifyepisodes',
                      'Save Torrents'  => 'savetorrents',
                      'Only Newer'     => 'onlynewer',
+                     'Download Proper'     => 'fetchproper',
                      'Default Feed All' => 'favdefaultall',
                      'Email Notifications' => 'mailonhit');
                      
@@ -263,7 +287,7 @@ function add_hidden($name) {
     $guess = guess_match($name);
     if($guess) {
         $name = ucwords(trim(strtr($guess['key'], "._", "  ")));
-    
+
         foreach($config_values['Favorites'] as $fav) {
             if($name == ucwords($fav['Name'])) return("$name exists in favorites. Not adding to hide list.");
         }
@@ -345,6 +369,8 @@ function updateFavoriteEpisode(&$fav, $title) {
   if(preg_match('/^((\d+x)?\d+)p$/', $guess['episode'])) { 
       $guess['episode'] = preg_replace('/^((?:\d+x)?\d+)p$/', '\1', $guess['episode']);
       $PROPER = "p";
+  } else {
+      $PROPER = '';
   }
   
   if(preg_match('/(^)(\d{8})$/', $guess['episode'], $regs)) {
@@ -390,6 +416,8 @@ function updateFavoriteEpisode(&$fav, $title) {
 
 function add_feed($link) {
   global $config_values;
+  $link = preg_replace('/ /', '%20', $link);
+  $link = preg_replace('/^%20|%20$/', '', $link);
   _debug('adding feed: ' . $link);
   
   if(isset($link) AND ($tmp = guess_feedtype($link)) != 'Unknown') {
@@ -417,8 +445,16 @@ function update_feedData() {
     _debug('updating feed: ' . $idx);
     if(isset($_GET['idx']) AND isset($config_values['Feeds'][$_GET['idx']])) {
         if(!($_GET['feed_name']) || !($_GET['feed_link'])) return;
+
+	$old_feedurl = $config_values['Feeds'][$_GET['idx']]['Link'];
+
+	foreach ($config_values['Favorites'] as &$favorite) {
+	  if ($favorite['Feed'] == $old_feedurl) $favorite['Feed'] = preg_replace('/ /', '%20', $_GET['feed_link']);
+	}
+	
         $config_values['Feeds'][$_GET['idx']]['Name'] = $_GET['feed_name'];
-        $config_values['Feeds'][$_GET['idx']]['Link'] = $_GET['feed_link'];
+        $config_values['Feeds'][$_GET['idx']]['Link'] = preg_replace('/ /', '%20', $_GET['feed_link']);
+        $config_values['Feeds'][$_GET['idx']]['Link'] = preg_replace('/^%20|%20$/', '', $_GET['feed_link']);
         $config_values['Feeds'][$_GET['idx']]['seedRatio'] = $_GET['seed_ratio'];
     }
 }

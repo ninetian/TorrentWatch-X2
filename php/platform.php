@@ -1,6 +1,8 @@
 <?php
 
-if(is_dir("/Library/WebServer"))
+if(file_exists("/etc/init_nmt") || is_dir("/nmt/apps"))
+  $platform = "NMT";
+else if(is_dir("/Library/WebServer"))
   $platform = "OSX";
 else
   $platform = "Linux";

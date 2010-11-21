@@ -5,7 +5,12 @@ require_once("config_lib.php");
 
 //Config File Loaction.
 function platform_getConfigDir() {
-  return "/etc/torrentwatch";
+  global $platform;
+  if($platform == 'NMT') {
+	return get_base_dir() . "/etc";
+  } else {
+	return "/etc/torrentwatch";
+  }
 }
 
 //TorrentWatch-X install directory, uncomment if you want to overrule the automatic get_base_dir function.
@@ -16,7 +21,12 @@ function platform_getConfigDir() {
 
 //Transmission session-id cache file
 function get_tr_sessionIdFile() {
-    return '/tmp/.Transmission-Session-Id';
+    global $platform;
+    if($platform == 'NMT') {
+        return '/share/Apps/Torrentwatchx/tmp/.Transmission-Session-Id';
+    } else {
+        return '/tmp/.Transmission-Session-Id';
+    }
 }
 
 ?>

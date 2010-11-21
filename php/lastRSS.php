@@ -41,7 +41,7 @@ class lastRSS {
     // -------------------------------------------------------------------
     var $default_cp = 'UTF-8';
     var $CDATA = 'nochange';
-    var $cp = '';
+    var $cp = 'UTF-8';
     var $items_limit = 0;
     var $stripHTML = False;
     var $date_format = '';
@@ -73,7 +73,7 @@ class lastRSS {
                 _debug(date(DATE_RFC822) . " - lastRSS: feed cache is old, loading fresh: $rss_url", 0);
                 // cached file is too old, create new
                 $result = $this->Parse($rss_url);
-                if($result['items_count'] > 0) {
+                if($result['items_count'] >= 0) {
                     $serialized = serialize($result);
                     if ($f = @fopen($cache_file, 'w')) {
                         fwrite ($f, $serialized, strlen($serialized));
@@ -111,8 +111,9 @@ class lastRSS {
 
             // If code page is set convert character encoding to required
             if ($this->cp != '')
-                //$out[1] = $this->MyConvertEncoding($this->rsscp, $this->cp, $out[1]);
-                $out[1] = iconv($this->rsscp, $this->cp.'//TRANSLIT', $out[1]);
+		if (function_exists('iconv')) {
+                    $out[1] = iconv($this->rsscp, $this->cp.'//TRANSLIT', $out[1]);
+		}
             // Return result
             return trim($out[1]);
         } else {
@@ -145,7 +146,10 @@ class lastRSS {
         if($response) $rss_url = $response['url'];
         $get = curl_init();
         $getOptions[CURLOPT_URL] = $rss_url;
-        get_curl_defaults(&$getOptions);
+	if(isset($response['cookies'])) {
+	    $getOptions[CURLOPT_COOKIE] = $response['cookies'];
+	}
+        get_curl_defaults($getOptions);
         curl_setopt_array($get, $getOptions);
         $rss_content = curl_exec($get);
         curl_close($get);
@@ -209,7 +213,7 @@ class lastRSS {
                          */
                         $temp2 = trim($this->my_preg_match("'<$itemtag\s*([^>]*)/?'si", $rss_item));
                         if ($temp2 != '') {
-                            preg_match_all( '/([^\s"=]+)="([^"]*?)"/' , $temp2, $attr, PREG_SET_ORDER);
+                            preg_match_all( '/([^\s"=]+)=["\']([^\'"]*?)["\']/' , $temp2, $attr, PREG_SET_ORDER);
                             $result['items'][$i][$itemtag] = array();
                             if ($temp != '') $result['items'][$i][$itemtag]['value'] = $temp;
                                 foreach($attr as $a) { 

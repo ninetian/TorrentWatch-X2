@@ -205,6 +205,7 @@ $(function() {
     // Clear Cache ajax submit
     $('a.clear_cache').live('click',
     function(e) {
+	window.noProgressBG=1;
         $.get(this.href, '', $.loadDynamicData, 'html');
         return false;
     });
@@ -539,14 +540,14 @@ $(function() {
     $('#progress').ajaxStart(function() {
         if (!(window.hideProgressBar)) {
 	    if (!window.noProgressBG) {
-                $('#progress').addClass('progress_full');
+                $('#progress').addClass('progress_full').fadeIn();
 	    }
             $(this).show();
         }
     }).ajaxStop(function() {
  	$(this).fadeOut();
 	window.noProgressBG = 0;
-	$('#progress').removeClass('progress_full');
+	$('#progress').fadeOut(function() { removeClass('progress_full'); });
 	setTimeout(function() {
 	    $('#transmission_list li.torrent').markAlt();
 	},500);

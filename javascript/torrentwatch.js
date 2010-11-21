@@ -427,7 +427,7 @@ $(function() {
 	    $('li.'+item.hashString+' div.progressBarContainer').show();
 	    $('li.'+item.hashString+' div.progressDiv').width(Percentage+"%").height(3);
 
-	    liClass = '';
+	    liClass = 'normal';
             if (item.errorString) {
                 clientData = item.errorString;
                 liClass = "paused";

@@ -470,6 +470,7 @@ ul#transmission_list li.downloading {
     border-bottom: 1px solid #CCC;
 }
 
+ul#transmission_list li.normal.alt,
 div.feed li.torrent.alt {
     background-color: #F0F1F2;
 }

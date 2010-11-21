@@ -162,7 +162,7 @@ IMPORTANT: If you are updating from a previous version. Please copy php/config.p
     -- Fixed a lot of PHP notices and warnings
     -- Upgraded jquery to 1.4.3
 
-current:
+0.7:
     -- New fresh look!
     -- Added progressbar for active torrents.
     -- Added "any" as filter option in favorites. See FAQ for more info.

@@ -6,11 +6,11 @@
 
 0.8
 - Delete old episodes from transmission which are replaces by REPACK or PROPER episodes.
-- Remove torrents which are done. (paused and met ratio requirements)
-- Run script on download-finish.
-- Option to add file/url directly.
+- Remove torrents which are done. (paused and met ratio requirements) *Allan*
+- Run script on download-finish. *Allan*
+- Option to add file/url directly. *Allan*
 - Make torrent settings per show/feed/global
-- tvDB support.
+- tvDB support. *Allan*
 - In-app update option.
 - Command-line tools.
 

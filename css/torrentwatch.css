@@ -479,6 +479,7 @@ div.feed li.torrent:hover {
     background-color: #DAE3F2;
 }
 
+ul#transmission_list li.normal:hover,
 ul.torrentlist li.torrent:hover,
 ul.torrentlist li.torrent.alt:hover {
     opacity: .80;

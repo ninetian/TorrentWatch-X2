@@ -475,13 +475,14 @@ div.feed li.torrent.alt {
     background-color: #F0F1F2;
 }
 
-div.feed li.torrent:hover {
+div.feed li.torrent:hover,
+ul#transmission_list li.normal:hover {
     background-color: #DAE3F2;
 }
 
-ul#transmission_list li.normal:hover,
 ul.torrentlist li.torrent:hover,
-ul.torrentlist li.torrent.alt:hover {
+ul.torrentlist li.torrent.alt:hover,
+ul#transmission_list li.normal:hover {
     opacity: .80;
     filter: alpha(opacity = 80);
 }

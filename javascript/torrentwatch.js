@@ -914,11 +914,9 @@ $(function() {
     $.toggleFeed = function(feed, speed) {
         if(speed == 1) {
             if($.cookie('feed_' + feed) == 1) {
-                $("#feed_" + feed + " ul").show().removeClass("hiddenFeed");
+                $("#feed_" + feed + " ul").removeClass("hiddenFeed").show();
                 $("#feed_" + feed + " .header").removeClass("header_hidden");
                 $.cookie('feed_' + feed , null, { expires: 666 });
-		var filter = $.cookie('TWFILTER');
-		displayFilter(filter, 1);
             } else {
                 $("#feed_" + feed + " ul").hide().addClass("hiddenFeed");
                 $("#feed_" + feed + " .header").addClass("header_hidden");    
@@ -926,11 +924,9 @@ $(function() {
             }
         } else {
             if($.cookie('feed_' + feed) == 1) {
-                $("#feed_" + feed + " ul").slideDown().removeClass("hiddenFeed");
+                $("#feed_" + feed + " ul").removeClass("hiddenFeed").slideDown();
                 $("#feed_" + feed + " .header").removeClass("header_hidden");
                 $.cookie('feed_' + feed , null, { expires: 666 });
-		var filter = $.cookie('TWFILTER');
-		displayFilter(filter, 1);
             } else {
                 $("#feed_" + feed + " ul").slideUp().addClass("hiddenFeed");
                 $("#feed_" + feed + " .header").addClass("header_hidden");    

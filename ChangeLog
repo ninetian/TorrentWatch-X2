@@ -177,3 +177,6 @@ IMPORTANT: If you are updating from a previous version. Please copy php/config.p
     -- Added option to hide donate button.
     -- Fixed issue where Episode filtering stoped working in 0.6.5.
     -- Fixed an issue where in some cases Last epi info would not be updated.
+
+current:
+    -- Fixed some small UI bugs.

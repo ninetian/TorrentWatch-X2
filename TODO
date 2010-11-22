@@ -8,6 +8,7 @@
 - Delete old episodes from transmission which are replaces by REPACK or PROPER episodes.
 - Remove torrents which are done. (paused and met ratio requirements)
 - Run script on download-finish.
+- Option to add file/url directly.
 - Make torrent settings per show/feed/global
 - tvDB support.
 - In-app update option.

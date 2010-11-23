@@ -323,10 +323,10 @@ $(function() {
         $('div#clientError').show();
     }
 
-	window.waitingForData = false;
+    window.waitingForData = false;
     getClientData = function() {
-		if (window.waitingForData) return;
-		window.waitingForData = true;
+	if (window.waitingForData) return;
+	window.waitingForData = true;
         if(window.client == 'Transmission') {
             var recent;
             if(window.gotAllData) { recent = 1; } else { recent = 0; };

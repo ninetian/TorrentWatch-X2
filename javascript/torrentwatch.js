@@ -323,10 +323,7 @@ $(function() {
         $('div#clientError').show();
     }
 
-    window.waitingForData = false;
     getClientData = function() {
-	if (window.waitingForData) return;
-	window.waitingForData = true;
         if(window.client == 'Transmission') {
             var recent;
             if(window.gotAllData) { recent = 1; } else { recent = 0; };
@@ -337,7 +334,6 @@ $(function() {
                 'recent': recent
             },
                 function(json) {
-		window.waitingForData = false;
 		$('#headerImg').show();
 		if(!recent) { $('div#waiting').show(); };
                 var check = json.match(/\S+/);
@@ -551,7 +547,7 @@ $(function() {
     }).ajaxStop(function() {
  	$(this).fadeOut();
 	window.noProgressBG = 0;
-	$('#progress').fadeOut(function() { $(this).removeClass('progress_full'); });
+	$('#progress').fadeOut(function() { removeClass('progress_full'); });
 	setTimeout(function() {
 	    $('#transmission_list li.torrent').markAlt();
 	},500);
@@ -715,7 +711,7 @@ $(function() {
 	        $("li#" + this.parentNode.id + " a").addClass("selected");
 	        window.noProgressBG=0;
             } else {
-		$('#dynamicdata .dialog').fadeOut();
+		$('#dynamicdata .dialog').fadeOut()
 		setTimeout(function() {
 		    $('#dynamicdata .dialog').remove(); 
 		}, 400);
@@ -865,7 +861,7 @@ $(function() {
             });
         }
     };
-	
+
     $.stopStartTorrent = function(stopStart, torHash) {
         var param;
         if (stopStart == 'stop') {

@@ -50,7 +50,7 @@ function setup_default_config() {
 
 if(!(function_exists('get_base_dir'))) {
     function get_base_dir() {
-	return dirname(dirname(__FILE__));
+        return dirname(dirname(__FILE__));
     }
 }
   

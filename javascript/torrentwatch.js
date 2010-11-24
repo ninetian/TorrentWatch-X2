@@ -846,7 +846,7 @@ $(function() {
             }
 
 	    $('li#id_' + id + ' td.hideTD').remove();
-	    $('li#id_' + id + ' div.progressBarContainer').show();
+	    if(window.client != 'folder') $('li#id_' + id + ' div.progressBarContainer').show();
             $('li#id_' + id + ' p.dlTorrent').hide();
             $('li#id_' + id + ' p.torStop').show();
 	    if(window.client == 'folder') return;

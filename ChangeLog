@@ -179,7 +179,8 @@ IMPORTANT: If you are updating from a previous version. Please copy php/config.p
     -- Fixed an issue where in some cases Last epi info would not be updated.
 
 current:
+    -- Improved overall performance.
     -- Fixed issue where default config on NMT would give errors on devices with a sata drive.
     -- Fixed some small UI bugs.
-    -- Fixed issue that could cause a high load on pch devies and other slower systems. (Thanks Allan)
+    -- Fixed issue that could cause a high load on pch devies and other slower systems. (Thanks Allan for noticing)
 

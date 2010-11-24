@@ -293,6 +293,10 @@ ul#filterbar_container li.selected a {
     color: #111;
 }
 
+ul#filterbar_container li a.error {
+    color: red;
+}
+
 ul#filterbar_container span#activeTorrents {
     padding-left: 0.4em; 
     font-size: 0.8em;
@@ -586,6 +590,12 @@ div#transmission_data td.torrent_name span {
 
 ul.torrentlist div.torInfo {
     color: green;
+    font-size: 9px;
+    margin: 2px 0 2px 0;
+}
+
+ul.torrentlist div.torInfoErr {
+    color: red;
     font-size: 9px;
     margin: 2px 0 2px 0;
 }

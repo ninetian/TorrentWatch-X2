@@ -54,7 +54,7 @@ if(!isset($pubDateClass)) $pubDateClass = '';
 
 print <<< EOH
 
-<li id=$id name=$id class="torrent match_$matched $alt $torHash" title="$description">
+<li id=id_$id name=$id class="torrent match_$matched $alt item_$torHash" title="$description">
 <table width="100%" cellspacing="0"><tr><td class="buttons left match_$matched">
 
 <p class='$dlTorrent'>

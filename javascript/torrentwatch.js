@@ -341,7 +341,7 @@ $(function() {
             
             window.hideProgressBar = 1;
 	    if(!recent && window.getfail == 1) { 
-	        $('#headerImg').hide();
+	        $('#waiting').show();
 	    }
 
             $.get('torrentwatch.php', {

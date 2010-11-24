@@ -319,8 +319,8 @@ $(function() {
     };
 
     showClientError = function(error) {
-        $('div#clientError p').html('Torrent client returned no or bad data:<br />' + error);
-        $('div#clientError').show();
+        $('div#clientError p').html(error);
+        $('div#clientError').slideDown();
     }
     
     $(document).ajaxError(function(event, request, settings) {
@@ -348,7 +348,12 @@ $(function() {
                 'getClientData': 1,
                 'recent': recent
             },
-                function(json) {
+              function(json) {
+	      var check = json.match(/\S+/);		
+	      if(check == 'null') {		
+                   showClientError('Got no data from ' + window.client);		
+                   return;		
+               }
 
                 try { json = JSON.parse(json); }
                 catch(err) { 
@@ -391,13 +396,13 @@ $(function() {
         if (json === null) {
             $('div#clientError p').html('Torrent client dit not return any data.<br/>' +
                                     'This usualy happens when the client is not active.');
-            $('div#clientError').show();
+            $('div#clientError').slideDown();
             window.errorActive = 1;
             return;
         };
         
         if(window.errorActive = 1) {
-            $('div#clientError').hide();
+            $('div#clientError').slideUp();
             window.errorActive = null;
         }
         
@@ -642,7 +647,7 @@ $(function() {
                 if($('#fav_error').length > 0) {
                     setTimeout(function() {
                         $('#fav_error').hide();
-                    }, 7000);
+                    }, 10000);
                 }
                 setInterval(function() {
                     if(window.client && clientCheck == 1) {
@@ -653,9 +658,9 @@ $(function() {
                 $.get('torrentwatch.php', { version_check: 1 }, function(data) {
                     $('#dynamicdata').append(data);
                     setTimeout(function() {
-                        $('#newVersion').remove();
+                        $('#newVersion').slideUp().remove();
                     }, 15000);
-        		    var versionCheck = $.cookie('VERSION-CHECK');
+        	    var versionCheck = $.cookie('VERSION-CHECK');
                     if(versionCheck != 1) $.cookie('VERSION-CHECK', '1', { expires: 1 });
                 })
             },

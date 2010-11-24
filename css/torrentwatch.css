@@ -88,6 +88,7 @@ div#topmenu {
     height: 58px;
     text-align: right;
     border: 1px solid #aaa;
+    border-top: 0;
     background: #ddd;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#EEEEEE,endColorstr=#BBBBBB);
     background:	-webkit-gradient(linear, left top, left bottom, from(#eee), to(#bbb));
@@ -418,7 +419,7 @@ div#torrentlist_container {
     position: absolute;
     overflow: auto;
     width: 100%;
-    top: 60px;
+    top: 59px;
     bottom: 0;
     left: 0;
     right: 0;
@@ -896,12 +897,19 @@ div.legend input {
 }
     
 div#clientError {
-    top: 55px;
+    top: 0px;
     text-align: center;
     width: 450px;
-    margin-left: -225px;
-    border: 1px solid red;
+    margin-left: 25px;
+    color: red;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#EEEEEE,endColorstr=#BBBBBB);
+    background:	-webkit-gradient(linear, left top, left bottom, from(#eee), to(#bbb));
+    background:	-moz-linear-gradient(top, #eee, #bbb);
     z-index: 100; 
+}
+
+div#clientError p {
+    margin-top: 4px;
 }
 
 div#clientError h2 {
@@ -931,13 +939,16 @@ div#successDialog {
 }
 
 div#newVersion {
-    top: 55px;
-    color: green;
-    border: 1px solid green;
+    top: 0px;
     text-align: center;
+    padding-top: 5px;
     width: 450px;
-    margin-left: -225px;
-    z-index: 1; 
+    margin-left: 25px;
+    color: green;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#EEEEEE,endColorstr=#BBBBBB);
+    background:	-webkit-gradient(linear, left top, left bottom, from(#eee), to(#bbb));
+    background:	-moz-linear-gradient(top, #eee, #bbb);
+    z-index: 100; 
 }
 
 div#newVersion a {

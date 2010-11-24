@@ -16,7 +16,6 @@ function show_transmission_div() {
   global $html_out;
   $html_out .= '<div id="transmission_data" class="transmission">';
   $html_out .= '<div class="header">Transmission</div>';
-  $html_out .= '<div id="waiting"><img src="images/ajax-loader.gif"></div>';
   $html_out .= '<ul id="transmission_list" class="torrentlist">';
 }
 
@@ -30,7 +29,6 @@ function show_torrent_html($item, $feed, $feedName, $alt, $torHash, $matched, $i
  
   if(($matched == "cachehit" || $matched == "downloaded" || $matched == "match")
      && $config_values['Settings']['Client'] != 'folder') {
-    //$torInfo = torInfo($torHash); 
     $torInfo['dlStatus'] = 'old_download';
     $torInfo['stats'] = '';
     $torInfo['clientID'] = $torHash;

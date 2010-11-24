@@ -172,8 +172,11 @@ ul.mainoptions li#legend a .icon {
 ul.mainoptions li#report a .icon {
     background: url(../images/report-bug.png) no-repeat left center;
 }
-ul.mainoptions li#webui a .icon{
+ul.mainoptions li#webui a .icon {
     background-image: url(../images/webui.png);
+}
+ul.mainoptions li#webui a .altIcon {
+    background-image: url(../images/ajax-loader-small.gif);
 }
 
 /*-----------------

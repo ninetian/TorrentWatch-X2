@@ -340,9 +340,7 @@ $(function() {
             if(window.gotAllData && window.getfail != 1) { recent = 1; } else { recent = 0; };
             
             window.hideProgressBar = 1;
-	    if(!recent && window.getfail == 1) { 
-	        $('#waiting').show();
-	    }
+	    $('li#webui a span').addClass('altIcon');
 
             $.get('torrentwatch.php', {
                 'getClientData': 1,
@@ -367,8 +365,7 @@ $(function() {
 
                 if(recent === 0 && json.result == 'success') window.gotAllData = 1;
                 processClientData(json, recent);
-		$('div#waiting').hide();
-		$('#headerImg').hide();
+		$('li#webui a span').removeClass('altIcon');
                 
                 if(json && recent) {                    
                     $.each(json['arguments']['removed'],

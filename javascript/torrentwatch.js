@@ -440,13 +440,15 @@ $(function() {
             var Percentage = Math.roundWithPrecision(((item.totalSize - item.leftUntilDone) / item.totalSize) * 100, 2);
             var validProgress = Math.roundWithPrecision((100 * item.recheckProgress), 2);
 
-	    if(item.eta >= 7200) {
+	    if(item.eta >= 3600) {
 		var hours = Math.floor(item.eta/60/60);
 		var minutes = Math.round((item.eta/60)-(hours*60));
 		if(minutes <= 9) minutes = '0'+minutes;
 		item.eta = hours+':'+minutes;
 	    } else if(item.eta > 0) {
-		item.eta = '00:' + Math.round(item.eta/60);
+		minutes = Math.round(item.eta/60);
+		if(minutes <= 9) minutes = '0'+minutes;
+		item.eta = '00:' + minutes;
 	    } else {
 		item.eta = 'Unknown';
 	    }

@@ -500,7 +500,7 @@ $(function() {
                 
                 if(window.oldClientData[item.id] != clientData) {
                     $('li.item_' + item.hashString + ' div.torInfo').text(clientData);
-                    $('li.item_' + item.hashString + ' div.torEta').text('Remaining: ' + item.eta);
+                    if(item.status == 4) $('li.item_' + item.hashString + ' div.torEta').text('Remaining: ' + item.eta);
                 }
                 
                 if(window.oldStatus[item.id] != item.id + '_' + item.status) {  
@@ -529,7 +529,7 @@ $(function() {
                 clientItem = getClientItem(item, clientData, liClass, Percentage);
                 torListHtml += clientItem;
                 $('li.item_' + item.hashString + ' div.torInfo').text(clientData);
-                $('li.item_' + item.hashString + ' div.torEta').text('Remaining: ' + item.eta);
+                if(item.status == 4) $('li.item_' + item.hashString + ' div.torEta').text('Remaining: ' + item.eta);
                 if(item.status <= 16) {
                         $('li.item_' + item.hashString + ' ,li.item_' + item.hashString + ' .buttons')
 			    .removeClass('match_to_check').addClass('match_downloading');

@@ -443,7 +443,7 @@ $(function() {
 	    if(item.eta >= 7200) {
 		var hours = Math.floor(item.eta/60/60);
 		var minutes = Math.round((item.eta/60)-(hours*60));
-		if(Math.round(minutes) < 10) minutes = '0'+minutes;
+		if(minutes <= 9) minutes = '0'+minutes;
 		item.eta = hours+':'+minutes;
 	    } else if(item.eta > 0) {
 		item.eta = '00:' + Math.round(item.eta/60);
@@ -534,11 +534,16 @@ $(function() {
                 if(item.status <= 16) {
                         $('li.item_' + item.hashString + ' ,li.item_' + item.hashString + ' .buttons')
 			    .removeClass('match_to_check').addClass('match_downloading');
-                        $('li.item_' + item.hashString + ' p.torStop').show();
                         $('li.item_' + item.hashString + ' p.delete').show();
                         $('li.item_' + item.hashString + ' p.trash').show();
-                        $('li.item_' + item.hashString + ' p.dlTorrent').hide();
+                        if(item.status == 16) {
+                            $('li.item_' + item.hashString + ' p.torStart').show();
+			} else {
+                            $('li.item_' + item.hashString + ' p.torStop').show();
+			}
+			$('li.item_' + item.hashString + ' p.dlTorrent').hide();
 		}
+			
                 $('#transmission_list').empty();
                 $('li.item_' + item.hashString).addClass('clientId_' + item.id);
             }

@@ -87,7 +87,7 @@ print <<< EOH
 
 $hideTD
 <td class="torrent_name">
-<div class='torrent_name'>$title</div>
+<div class='torrent_name' onclick='javascript:$.episodeInfo("$utitle")'>$title</div>
 <div class='torrent_pubDate'>$feedItem $pubDate</div>
 <div class='progressBarContainer'>
  <div class="progressDiv"></div>

@@ -65,20 +65,18 @@ function check_for_cookies($url) {
     } 
 }
 
-/*function torInfo($torHash) {
+function torInfo($torHash) {
     global $config_values;
 
     switch($config_values['Settings']['Client']) {
         case 'Transmission':
 		$request = array('arguments' => array('fields' => array('id', 'leftUntilDone', 'hashString',
-                    'totalSize', 'uploadedEver', 'downloadedEver', 'status', 'eta', 'peersSendingToUs',
+                    'totalSize', 'uploadedEver', 'downloadedEver', 'status', 'peersSendingToUs',
                     'peersGettingFromUs', 'peersConnected', 'recheckProgress'),
                     'ids' => $torHash), 'method' => 'torrent-get');
                 $response = transmission_rpc($request);
                 $totalSize = $response['arguments']['torrents']['0']['totalSize'];
                 $leftUntilDone = $response['arguments']['torrents']['0']['leftUntilDone'];
-                $eta = $response['arguments']['torrents']['0']['eta'];
-		_debug("BLA: $eta");
                 $Uploaded = $response['arguments']['torrents']['0']['uploadedEver'];
                 $Downloaded = $response['arguments']['torrents']['0']['downloadedEver'];
                 $validProgress = 100 * $response['arguments']['torrents']['0']['recheckProgress'];
@@ -133,7 +131,7 @@ function check_for_cookies($url) {
             }
             exit;
     }
-}*/
+}
 
 function getClientData($recent) {
     global $config_values;

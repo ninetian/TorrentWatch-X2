@@ -336,6 +336,7 @@ $(function() {
     });
 
     getClientData = function() {
+	if(window.ajaxActive) return;
         if(window.client == 'Transmission') {
             var recent;
 	    window.updatingClientData = 1;
@@ -539,8 +540,10 @@ $(function() {
                         $('li.item_' + item.hashString + ' p.delete').show();
                         $('li.item_' + item.hashString + ' p.trash').show();
                         if(item.status == 16) {
+                            $('li.item_' + item.hashString + ' p.torStop').hide();
                             $('li.item_' + item.hashString + ' p.torStart').show();
 			} else {
+                            $('li.item_' + item.hashString + ' p.torStart').hide();
                             $('li.item_' + item.hashString + ' p.torStop').show();
 			}
 			$('li.item_' + item.hashString + ' p.dlTorrent').hide();
@@ -589,6 +592,7 @@ $(function() {
 
     // Ajax progress bar
     $('#progress').ajaxStart(function() {
+	window.ajaxActive = 1;
         if (!(window.hideProgressBar)) {
 	    if (!window.noProgressBG) {
                 $('#progress').addClass('progress_full').fadeIn();
@@ -596,6 +600,7 @@ $(function() {
             $(this).show();
         }
     }).ajaxStop(function() {
+	window.ajaxActive = 0;
  	$(this).fadeOut();
 	window.noProgressBG = 0;
 	$('#progress').fadeOut(function() { $(this).removeClass('progress_full'); });
@@ -605,7 +610,7 @@ $(function() {
     });
 	
     // set timeout for all ajax queries to 6 seconds.
-    $.ajaxSetup({timeout: '6000',})
+    $.ajaxSetup({timeout: '20000',})
 });
 
 (function($) {
@@ -630,13 +635,15 @@ $(function() {
 		    $(current_dialog).show();
                 } else {
 	            $('div.progressBarContainer').hide();
+		    window.hideProgressBar = 1;
                     container.slideDown(400,
                     function() {
                         $('#torrentlist_container').height($(window).height() - $('#torrentlist_container').attr('offsetTop'));
-			getClientData();
+			//getClientData();
+			setTimeout(getClientData, 500);
                     });
                 }
-		window.hideProgressBar = 1;
+		//window.hideProgressBar = 1;
 
                 $.get('torrentwatch.php', { show_donate: 1 }, function(donate) {
                     $.get('torrentwatch.php', { show_footer: 1 }, function(footer) {
@@ -645,7 +652,7 @@ $(function() {
                     })
                 })
 
-		window.hideProgressBar = 0;
+		//window.hideProgressBar = 0;
         	window.client = $('#clientId').html();
 		changeClient(window.client);
 		fontSize = $.cookie('twFontSize');

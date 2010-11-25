@@ -7,6 +7,8 @@
     <ul id='torrentlist' class='show_legend'>
       <li class='legend match_nomatch'>
         <span class='torrent_name'><b>No Match</b> <br> <i>Will not be downloaded</i></span>
+      <li class='legend match_to_check'>
+        <span class='torrent_name'><b>To Check</b> <br> <i>Wainging for torrent-client data.</i></span>
       <li class='legend match_cachehit'>
         <span class='torrent_name'><b>Cache Hit - Download</b><br><i> This item is either downloading or downloaded.</i></span>
       <li class='legend match_season'>

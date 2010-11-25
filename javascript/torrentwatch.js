@@ -325,12 +325,12 @@ $(function() {
     
     $(document).ajaxError(function(event, request, settings) {
        if(settings.url.match(/getClientData/)) {
+	    window.getfail = 1;
 	    var error = "Error connecting to " + window.client;
 	    $('div.torInfo').html(error);
 	    $('div.feed div.torInfo').addClass('torInfoErr');
 	    $('li#filter_transmission a').addClass('error');
-	    if($('div.torInfo').length == 0)  showClientError(error);
-	    window.getfail = 1;
+	    showClientError(error);
 	}
     });
 
@@ -349,7 +349,12 @@ $(function() {
               function(json) {
 	      var check = json.match(/\S+/);		
 	      if(check == 'null') {		
-                   showClientError('Got no data from ' + window.client);		
+		   window.getfail = 1;
+                   var error = 'Got no data from ' + window.client;
+                   showClientError(error);
+		   $('div.torInfo').html(error);
+		   $('div.feed div.torInfo').addClass('torInfoErr');
+		   $('li#filter_transmission a').addClass('error');
                    return;		
                }
 
@@ -360,8 +365,7 @@ $(function() {
                 }
                 
 	        $('li#filter_transmission a').removeClass('error');
-	        $('div.torInfo').removeClass('torInfoErr');
-	        window.getfail = 0;
+	        //$('div.torInfo').removeClass('torInfoErr');
 
                 if(recent === 0 && json.result == 'success') window.gotAllData = 1;
                 processClientData(json, recent);
@@ -391,7 +395,7 @@ $(function() {
 
     processClientData = function(json, recent) {
         if (json === null) {
-            $('div#clientError p').html('Torrent client dit not return any data.<br/>' +
+            $('div#clientError p').html('Torrent client dit not return any data.' +
                                     'This usualy happens when the client is not active.');
             $('div#clientError').slideDown();
             window.errorActive = 1;
@@ -504,11 +508,10 @@ $(function() {
                     }
                 }
             } else {
+	        if(window.getfail) window.getfail = 0;
                 clientItem = getClientItem(item, clientData, liClass, Percentage);
                 torListHtml += clientItem;
-                if(window.oldClientData[item.id] != clientData) {
-                    $('li.item_' + item.hashString + ' div.torInfo').text(clientData);
-                }
+                $('li.item_' + item.hashString + ' div.torInfo').text(clientData);
                 if(item.status <= 16) {
                         $('li.item_' + item.hashString + ' ,li.item_' + item.hashString + ' .buttons')
 			    .removeClass('match_old_download').addClass('match_downloading');
@@ -603,6 +606,7 @@ $(function() {
                     container.slideDown(400,
                     function() {
                         $('#torrentlist_container').height($(window).height() - $('#torrentlist_container').attr('offsetTop'));
+			getClientData();
                     });
                 }
 		window.hideProgressBar = 1;
@@ -646,12 +650,6 @@ $(function() {
                         $('#fav_error').hide();
                     }, 10000);
                 }
-                setInterval(function() {
-                    if(window.client && clientCheck == 1) {
-                        setTimeout(getClientData, 500);
-                        clientCheck = null;
-                    }
-                }, 100);
                 $.get('torrentwatch.php', { version_check: 1 }, function(data) {
                     $('#dynamicdata').append(data);
                     setTimeout(function() {
@@ -680,6 +678,7 @@ $(function() {
             form = $(button).closest("form");
         }
         //if ((button.id == "Delete") || (button.id == "Update")) {
+	window.noProgressBG=1;
         if (button.id == "Delete") {
             $.get(form.get(0).action, form.buildDataString(button));
             if (button.id == "Delete") {
@@ -699,6 +698,7 @@ $(function() {
         } else {
         	$.get(form.get(0).action, form.buildDataString(button), $.loadDynamicData, 'html');
     	}
+	window.noProgressBG=0;
     };
 
     $.fn.toggleDialog = function() {

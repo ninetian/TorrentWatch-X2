@@ -82,7 +82,12 @@ function show_feed_html($idx) {
 
 function show_down_feed($idx) {
     global $html_out, $config_values;
-    $html_out .= "<div class=\"errorHeader\">".$config_values['Feeds'][$idx]['Name']." is not available.</div>\n";
+    if(!$config_values['Feeds'][$idx]['Name']) {
+	$title = $config_values['Feeds'][$idx]['Link'];
+    } else {
+	$title = $config_values['Feeds'][$idx]['Name'];
+    }
+    $html_out .= "<div class=\"errorHeader\">$title is not available.</div>\n";
 }
 
 // Closing the div which contains all the feed items

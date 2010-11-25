@@ -652,7 +652,7 @@ $(function() {
                 var clientCheck = 1;
                 if($('#fav_error').length > 0) {
                     setTimeout(function() {
-                        $('#fav_error').hide();
+                        $('#fav_error').slideUp();
                     }, 10000);
                 }
                 $.get('torrentwatch.php', { version_check: 1 }, function(data) {
@@ -988,9 +988,9 @@ $(function() {
         $.post('torrentwatch.php?post_bug', $("#report_form").serialize(),
             function(data) {
                 if(data.match(/\bError:/)) {
-		    $('div#errorDialog').remove();
+		    $('div#errorDialog').slideUp().remove();
                     $(document.body).append(data);
-		    setTimeout(function() { $('div#errorDialog').remove(); }, 15000);
+		    setTimeout(function() { $('div#errorDialog').slideUp(); }, 15000);
                 } else {
                     $('.dialog').remove();
 		    $('ul#mainoptions li a').removeClass('selected')

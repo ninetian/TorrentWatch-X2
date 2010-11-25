@@ -369,6 +369,7 @@ $(function() {
                 }
                 
 	        $('li#filter_transmission a').removeClass('error');
+	        $('div.feed div.torInfo').removeClass('torInfoErr');
 
                 if(recent === 0 && json.result == 'success') window.gotAllData = 1;
                 processClientData(json, recent);

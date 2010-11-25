@@ -21,6 +21,7 @@ if(isset($torInfo)) {
     $stats = $torInfo['stats'];
     $clientId = $torInfo['clientId'];
     $infoDiv = "<div id='tor_$id' class='torInfo tor_$torHash'>$stats</div>";
+    $etaDiv = "<div class='torEta'>$eta</div>";
     if($torInfo['status'] == 4) $matched = "downloading";
 } else if((!$config_values['Settings']['Disable Hide List']) && ($matched == "nomatch"))  {
     $hideTD = "</td><td class='hideTD'><span class=\"hide_item\"><a href=\"#\" 
@@ -46,6 +47,7 @@ if($matched == "downloading" || $matched == "downloaded" || $matched == "cachehi
 } 
 
 if(!isset($infoDiv)) $infoDiv = '';
+if(!isset($etaDiv)) $etaDiv = '';
 if(!isset($feedItem)) $feedItem = '';
 if(!isset($torInfo)) $torInfo = '';
 if(!isset($unixTime)) $unixTime = '';
@@ -91,6 +93,7 @@ $hideTD
  <div class="progressDiv"></div>
 </div>
 $infoDiv
+$etaDiv
 <span class='hidden' id=unixTime>$unixTime</span>
 </td></tr></table></li>
 

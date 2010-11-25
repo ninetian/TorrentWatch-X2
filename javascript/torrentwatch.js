@@ -285,7 +285,7 @@ $(function() {
         } else {
               hideStart = 'hidden';
         }
-        
+	 
         var transmissionItem =
         '<li id="clientId_' + item.id + '" class="torrent match_transmission item_' + item.hashString + ' ' + liClass +'">' +
         '<table width="100%" cellspacing="0"><tr><td class="buttons left match_transmission">' +
@@ -308,6 +308,7 @@ $(function() {
 	'<div style="width: 100%; margin-top: 2px; border: 1px solid #BFCEE3; background: #DFE3E8;"><div class="progressDiv" style="width: '+Percentage+'%; height: 3px;"></div></div>' +
         '<span class="dateAdded hidden">' + item.addedDate + '</span>' +
         '<div id=tor_' + item.id + ' class="torInfo tor_' + item.hashString + '">' + clientData + '</div>' +
+	'<div class="torEta">Remaining: ' + item.eta + '</div>' +
         '<div id="move_' + item.hashString + '" class="move_data hidden">' + 
         '<input id="moveTo' + item.hashString + '" type="text" class="text" name="moveTo" value="' + item.downloadDir + '" />' +
         '<a class="move" id="Move" href="#" onclick="$.moveTorrent(\'' + item.hashString + '\')">Move</a>' +
@@ -380,6 +381,7 @@ $(function() {
                     function(i, item) {
                         if ($('li.clientId_' + item).length !== 0) {
                             $('li.clientId_' + item + ' div.torInfo').remove();
+                            $('li.clientId_' + item + ' div.torEta').remove();
                             $('li.clientId_' + item + ' div.progressBarContainer').hide();
                             $('li.clientId_' + item + ' p.activeTorrent').hide();
                             $('li.clientId_' + item + ' p.dlTorrent').show();
@@ -438,6 +440,16 @@ $(function() {
             var Percentage = Math.roundWithPrecision(((item.totalSize - item.leftUntilDone) / item.totalSize) * 100, 2);
             var validProgress = Math.roundWithPrecision((100 * item.recheckProgress), 2);
 
+	    if(item.eta >= 7200) {
+		var hours = Math.floor(item.eta/60/60);
+		var minutes = (item.eta/60)-(hours*60);
+		item.eta = hours+':'+Math.round(minutes);
+	    } else if(item.eta > 0) {
+		item.eta = '00:' + Math.round(item.eta/60);
+	    } else {
+		item.eta = 'Unknown';
+	    }
+
             if (!(Ratio > 0)) {
                 Ratio = 0;
             }
@@ -478,7 +490,7 @@ $(function() {
                 liClass = 'paused';
             }
 
-            $('li.match_old_download div.torInfo').html(''); 
+            $('li.match_old_download div.torInfo, li.match_old_download div.torEta').html(''); 
 	    if(recent == 1) {
                 clientItem = getClientItem(item, clientData, liClass, Percentage);
                 
@@ -488,6 +500,7 @@ $(function() {
                 
                 if(window.oldClientData[item.id] != clientData) {
                     $('li.item_' + item.hashString + ' div.torInfo').text(clientData);
+                    $('li.item_' + item.hashString + ' div.torEta').text('Remaining: ' + item.eta);
                 }
                 
                 if(window.oldStatus[item.id] != item.id + '_' + item.status) {  
@@ -516,6 +529,7 @@ $(function() {
                 clientItem = getClientItem(item, clientData, liClass, Percentage);
                 torListHtml += clientItem;
                 $('li.item_' + item.hashString + ' div.torInfo').text(clientData);
+                $('li.item_' + item.hashString + ' div.torEta').text('Remaining: ' + item.eta);
                 if(item.status <= 16) {
                         $('li.item_' + item.hashString + ' ,li.item_' + item.hashString + ' .buttons')
 			    .removeClass('match_to_check').addClass('match_downloading');
@@ -849,7 +863,7 @@ $(function() {
             $('li#id_' + id + ' td.buttons').removeClass('match_nomatch, match_old_download').addClass('match_downloading');
             if ($('li#id_' + id + ' div.torInfo').length === 0) {
                 $('li#id_' + id + ' td.torrent_name')
-                .append('<div id=tor_' + id + ' class="torInfo tor_' + torHash.match(/\w+/) + '"></div>');
+                .append('<div id=tor_' + id + ' class="torInfo tor_' + torHash.match(/\w+/) + '"></div><div class="torEta"></div>');
             }
 
 	    $('li#id_' + id + ' td.hideTD').remove();

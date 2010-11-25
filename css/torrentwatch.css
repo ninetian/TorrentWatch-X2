@@ -598,6 +598,14 @@ div#transmission_data td.torrent_name span {
 }
 
 ul.torrentlist div.torInfo {
+    display: inline-block;
+    color: green;
+    font-size: 9px;
+    margin: 2px 0 2px 0;
+}
+
+ul.torrentlist div.torEta {
+    float: right;
     color: green;
     font-size: 9px;
     margin: 2px 0 2px 0;
@@ -968,7 +976,7 @@ div#fav_error {
     color: red;
     background-color: #bbb;
     text-align: center;
-    z-index: 3; 
+    z-index: 1; 
 }
 
 /********************************

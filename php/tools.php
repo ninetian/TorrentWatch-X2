@@ -65,18 +65,20 @@ function check_for_cookies($url) {
     } 
 }
 
-function torInfo($torHash) {
+/*function torInfo($torHash) {
     global $config_values;
 
     switch($config_values['Settings']['Client']) {
         case 'Transmission':
 		$request = array('arguments' => array('fields' => array('id', 'leftUntilDone', 'hashString',
-                    'totalSize', 'uploadedEver', 'downloadedEver', 'status', 'peersSendingToUs',
+                    'totalSize', 'uploadedEver', 'downloadedEver', 'status', 'eta', 'peersSendingToUs',
                     'peersGettingFromUs', 'peersConnected', 'recheckProgress'),
                     'ids' => $torHash), 'method' => 'torrent-get');
                 $response = transmission_rpc($request);
                 $totalSize = $response['arguments']['torrents']['0']['totalSize'];
                 $leftUntilDone = $response['arguments']['torrents']['0']['leftUntilDone'];
+                $eta = $response['arguments']['torrents']['0']['eta'];
+		_debug("BLA: $eta");
                 $Uploaded = $response['arguments']['torrents']['0']['uploadedEver'];
                 $Downloaded = $response['arguments']['torrents']['0']['downloadedEver'];
                 $validProgress = 100 * $response['arguments']['torrents']['0']['recheckProgress'];
@@ -131,7 +133,7 @@ function torInfo($torHash) {
             }
             exit;
     }
-}
+}*/
 
 function getClientData($recent) {
     global $config_values;
@@ -140,12 +142,12 @@ function getClientData($recent) {
         case 'Transmission':
             if($recent) {
               $request = array('arguments' => array('fields' => array('id', 'name', 'status', 'errorString', 'hashString',
-               'leftUntilDone', 'downloadDir', 'totalSize', 'uploadedEver', 'downloadedEver', 'addedDate', 'status',
+               'leftUntilDone', 'downloadDir', 'totalSize', 'uploadedEver', 'downloadedEver', 'addedDate', 'status', 'eta',
                'peersSendingToUs', 'peersGettingFromUs', 'peersConnected', 'seedRatioLimit', 'recheckProgress', 'rateDownload', 'rateUpload'),
                'ids' => 'recently-active'), 'method' => 'torrent-get');
             } else {
               $request = array('arguments' => array('fields' => array('id', 'name', 'status', 'errorString', 'hashString',
-               'leftUntilDone', 'downloadDir','totalSize', 'uploadedEver', 'downloadedEver', 'addedDate', 'status',
+               'leftUntilDone', 'downloadDir','totalSize', 'uploadedEver', 'downloadedEver', 'addedDate', 'status', 'eta',
                'peersSendingToUs', 'peersGettingFromUs', 'peersConnected', 'seedRatioLimit', 'recheckProgress', 'rateDownload', 'rateUpload')),
                'method' => 'torrent-get');
             }

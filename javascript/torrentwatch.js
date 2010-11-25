@@ -442,9 +442,9 @@ $(function() {
 
 	    if(item.eta >= 7200) {
 		var hours = Math.floor(item.eta/60/60);
-		var minutes = (item.eta/60)-(hours*60);
+		var minutes = Math.round((item.eta/60)-(hours*60));
 		if(Math.round(minutes) < 10) minutes = '0'+minutes;
-		item.eta = hours+':'+Math.round(minutes);
+		item.eta = hours+':'+minutes;
 	    } else if(item.eta > 0) {
 		item.eta = '00:' + Math.round(item.eta/60);
 	    } else {

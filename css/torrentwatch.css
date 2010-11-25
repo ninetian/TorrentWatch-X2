@@ -927,9 +927,9 @@ div#clientError h2 {
 }
 
 div#errorDialog {
-    top: 54px;
-    border: 1px solid red;
+    top: 60px;
     color: red;
+    background-color: #bbb;
     text-align: center;
     width: 650px;
     margin-left: -310px;
@@ -940,6 +940,9 @@ div#successDialog {
     top: 55px;
     color: green;
     border: 1px solid green;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#EEEEEE,endColorstr=#BBBBBB);
+    background:	-webkit-gradient(linear, left top, left bottom, from(#eee), to(#bbb));
+    background:	-moz-linear-gradient(top, #eee, #bbb);
     text-align: center;
     width: 600px;
     margin-left: -310px;
@@ -964,11 +967,11 @@ div#newVersion a {
 }
 
 div#fav_error {
-    top: 55px;
+    top: 60px;
     color: red;
-    border: 1px solid red;
+    background-color: #bbb;
     text-align: center;
-    z-index: 1; 
+    z-index: 3; 
 }
 
 /********************************

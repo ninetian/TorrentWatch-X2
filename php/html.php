@@ -29,7 +29,7 @@ function show_torrent_html($item, $feed, $feedName, $alt, $torHash, $matched, $i
  
   if(($matched == "cachehit" || $matched == "downloaded" || $matched == "match")
      && $config_values['Settings']['Client'] != 'folder') {
-    $torInfo['dlStatus'] = 'old_download';
+    $torInfo['dlStatus'] = 'to_check';
     $torInfo['stats'] = '';
     $torInfo['clientID'] = $torHash;
     if(isset($torInfo['dlStatus'])) { $matched = $torInfo['dlStatus']; }

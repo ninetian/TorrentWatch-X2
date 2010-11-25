@@ -183,4 +183,4 @@ current:
     -- Fixed issue where default config on NMT would give errors on devices with a sata drive.
     -- Fixed some small UI bugs.
     -- Fixed issue that could cause a high load on pch devies and other slower systems. (Thanks Allan for noticing)
-
+    -- Fixed issue causing torrents that failed to be added to transmission still got cached. (Thanks Henk for noticing)

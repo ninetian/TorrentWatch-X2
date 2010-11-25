@@ -337,16 +337,20 @@ $(function() {
     getClientData = function() {
         if(window.client == 'Transmission') {
             var recent;
+	    window.updatingClientData = 1;
             if(window.gotAllData && window.getfail != 1) { recent = 1; } else { recent = 0; };
             
             window.hideProgressBar = 1;
-	    $('li#webui a span').addClass('altIcon');
+	    setTimeout(function() {
+		if(window.updatingClientData) $('li#webui a span').addClass('altIcon');
+	    },1000)
 
             $.get('torrentwatch.php', {
                 'getClientData': 1,
                 'recent': recent
             },
               function(json) {
+	      window.updatingClientData = 0;
 	      var check = json.match(/\S+/);		
 	      if(check == 'null') {		
 		   window.getfail = 1;
@@ -365,7 +369,6 @@ $(function() {
                 }
                 
 	        $('li#filter_transmission a').removeClass('error');
-	        //$('div.torInfo').removeClass('torInfoErr');
 
                 if(recent === 0 && json.result == 'success') window.gotAllData = 1;
                 processClientData(json, recent);
@@ -379,7 +382,7 @@ $(function() {
                             $('li.clientId_' + item + ' div.progressBarContainer').hide();
                             $('li.clientId_' + item + ' p.activeTorrent').hide();
                             $('li.clientId_' + item + ' p.dlTorrent').show();
-                            $('li.clientId_' + item + ' td.buttons').removeClass('match_downloading match_downloaded match_cachehit')
+                            $('li.clientId_' + item + ', li.clientId_' + item + ' td.buttons').removeClass('match_downloading match_downloaded match_cachehit')
                             .addClass('match_old_download');
                             $('li.clientId_' + item).removeClass('clientId_' + item);
                         }
@@ -514,7 +517,7 @@ $(function() {
                 $('li.item_' + item.hashString + ' div.torInfo').text(clientData);
                 if(item.status <= 16) {
                         $('li.item_' + item.hashString + ' ,li.item_' + item.hashString + ' .buttons')
-			    .removeClass('match_old_download').addClass('match_downloading');
+			    .removeClass('match_to_check').addClass('match_downloading');
                         $('li.item_' + item.hashString + ' p.torStop').show();
                         $('li.item_' + item.hashString + ' p.delete').show();
                         $('li.item_' + item.hashString + ' p.trash').show();
@@ -531,6 +534,7 @@ $(function() {
             window.oldStatus[item.id] = item.id + '_' + item.status;
 	    function count(arrayObj){return arrayObj.length;}
         });
+	$('li.match_to_check, li.match_to_check .buttons').addClass('match_old_download').removeClass('match_to_check');
 
 	if(!isNaN(downSpeed) && !isNaN(upSpeed)) {
 		$('li#rates').html('D: ' + Math.formatBytes(downSpeed) + '/s&nbsp;&nbsp;</br>' + 'U: ' + Math.formatBytes(upSpeed) + '/s');
@@ -840,8 +844,8 @@ $(function() {
                 alert('Something went wrong while adding this torrent. ' + torHash);
                 return;
             }
-            $('li#id_' + id).removeClass('match_nomatch').addClass('match_downloading');
-            $('li#id_' + id + ' td.buttons').removeClass('match_nomatch').addClass('match_downloading');
+            $('li#id_' + id).removeClass('match_nomatch, match_old_download').addClass('match_downloading');
+            $('li#id_' + id + ' td.buttons').removeClass('match_nomatch, match_old_download').addClass('match_downloading');
             if ($('li#id_' + id + ' div.torInfo').length === 0) {
                 $('li#id_' + id + ' td.torrent_name')
                 .append('<div id=tor_' + id + ' class="torInfo tor_' + torHash.match(/\w+/) + '"></div>');

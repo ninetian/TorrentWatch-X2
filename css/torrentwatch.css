@@ -528,8 +528,14 @@ ul.torrentlist td.buttons {
 }
 
 div#show_legend li.legend.match_nomatch,
+ul.torrentlist td.buttons.match_to_check,
 ul.torrentlist td.buttons.match_nomatch {
     background-color: #D6ABAB;
+}
+
+ul.torrentlist td.buttons.match_to_check {
+    opacity: .60;
+    filter: alpha(opacity = 60);
 }
 
 div#show_legend li.legend.match_season,
@@ -539,7 +545,7 @@ ul.torrentlist td.buttons.match_season {
 
 div#show_legend li.legend.match_old_download,
 ul.torrentlist td.buttons.match_old_download {
-    background-color: #CDCDCD;
+    background-color: #CCC;
 }
 
 div#show_legend li.legend.match_match,

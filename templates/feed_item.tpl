@@ -54,7 +54,7 @@ if(!isset($pubDateClass)) $pubDateClass = '';
 
 print <<< EOH
 
-<li id=$id name=$id class="torrent match_$matched $alt $torHash" title="$description">
+<li id="$id" name="$id" class="torrent match_$matched $alt $torHash" title="$description">
 <table width="100%" cellspacing="0"><tr><td class="buttons left match_$matched">
 
 <p class='$dlTorrent'>
@@ -85,7 +85,7 @@ print <<< EOH
 
 $hideTD
 <td class="torrent_name">
-<div class='torrent_name'>$title</div>
+<div class='torrent_name' onclick='javascript:$.episodeInfo("$utitle")'>$title</div>
 <div class='torrent_pubDate'>$feedItem $pubDate</div>
 <div class='progressBarContainer'>
  <div class="progressDiv"></div>

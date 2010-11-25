@@ -304,7 +304,7 @@ $(function() {
         '<p title="Delete torrent and its data" class="button torTrash">' +
         '<a href="#" onclick="$.delTorrent(\'' + item.hashString + '\', \'true\');">' +
         '<img height=10 src="images/tor_trash.png" /></a></p>' +
-        '</td><td class="torrent_name tor_client"><span class="torrent_name">' + item.name + '</span>' +
+        '</td><td class="torrent_name tor_client"><span class="torrent_name" onclick="javascript:$.episodeInfo(\'' + item.name.replace("'","\\'") + '\')">' + item.name + '</span>' +
 	'<div style="width: 100%; margin-top: 2px; border: 1px solid #BFCEE3; background: #DFE3E8;"><div class="progressDiv" style="width: '+Percentage+'%; height: 3px;"></div></div>' +
         '<span class="dateAdded hidden">' + item.addedDate + '</span>' +
         '<div id=tor_' + item.id + ' class="torInfo tor_' + item.hashString + '">' + clientData + '</div>' +
@@ -865,6 +865,23 @@ $(function() {
             });
         }
     };
+	
+	$.episodeInfo = function(torrentName) {
+		this.hash = '#episode_info';
+		window.noProgressBG = 1;
+		current_dialog = this.hash;
+		$.get('torrentwatch.php', {
+				get_dialog_data: this.hash,
+				episode_name: torrentName
+			}, function (data) {
+				$('#dynamicdata.dyndata').append(data);
+				$('#dynamicdata .dialog_last').remove();
+				$('.dialog').show();
+				window.dialog = 1;
+			}
+		);
+		window.noProgressBG = 0;	
+	}
 	
     $.stopStartTorrent = function(stopStart, torHash) {
         var param;

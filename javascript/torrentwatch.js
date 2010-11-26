@@ -572,14 +572,6 @@ $(function() {
         $('#transmission_list li.torrent').markAlt();
     };
 
-    $(document).ready(function() { 
-        setTimeout(function() {
-            setInterval(function() {
-                getClientData();
-            },6000);            
-        },2000); 
-    });
-
     $(document).keyup(function(e) {
 	if (e.keyCode == '27') {
 		$('.dialog .close').click();
@@ -632,6 +624,7 @@ $(function() {
                     function() {
                         $('#torrentlist_container').height($(window).height() - $('#torrentlist_container').attr('offsetTop'));
 			setTimeout(getClientData, 10);
+		        setInterval(getClientData, 5000);            
                     });
                 }
 

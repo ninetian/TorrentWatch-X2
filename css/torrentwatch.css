@@ -520,8 +520,7 @@ ul.torrentlist p {
 }
 
 ul.torrentlist td.buttons {
-    text-align: top;
-    vertical-align: top;
+    vertical-align: middle;
     padding: 3px 0 2px 0;
     width: 15px;
     height: 15px;
@@ -559,8 +558,8 @@ ul.torrentlist td.buttons.match_test {
 }
 
 div#show_legend li.legend.match_cachehit,
-ul.torrentlist td.buttons.match_cachehit,
 div#show_legend li.legend.match_to_check,
+ul.torrentlist td.buttons.match_cachehit, 
 ul.torrentlist td.buttons.match_to_check,
 ul.torrentlist td.buttons.match_downloaded,
 ul.torrentlist td.buttons.match_downloading,
@@ -573,7 +572,7 @@ ul.torrentlist td.buttons.left {
 }
 
 ul.torrentlist td.buttons.right {
-    padding-right: 5px;
+    padding-right: 3px;
 }
 
 ul.torrentlist td.torrent_name {

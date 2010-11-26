@@ -641,13 +641,6 @@ $(function() {
                     });
                 }
 
-                /*$.get('torrentwatch.php', { show_donate: 1 }, function(donate) {
-                    $.get('torrentwatch.php', { show_footer: 1 }, function(footer) {
-                        $('#torrentlist_container').append(footer);
-                        $('#torrentlist_container').append(donate);
-                    })
-                })*/
-
         	window.client = $('#clientId').html();
 		changeClient(window.client);
 		fontSize = $.cookie('twFontSize');

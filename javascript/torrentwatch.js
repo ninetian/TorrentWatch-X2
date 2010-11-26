@@ -563,6 +563,8 @@ $(function() {
 	    .addClass('match_old_download').removeClass('match_to_check');
 	$('#torrentlist_container li.match_old_download .progressBarContainer, #torrentlist_container li.match_old_download .activeTorrent.delete, #torrentlist_container li.match_old_download .activeTorrent.trash').hide();
 	$('#torrentlist_container li.match_old_download .torInfo, #torrentlist_container li.match_old_download .torEta').remove();
+	$('#torrentlist_container li.match_old_download p.torStop').hide();
+	$('#torrentlist_container li.match_old_download p.dlTorrent').show();
 
 	if(!isNaN(downSpeed) && !isNaN(upSpeed)) {
 		$('li#rates').html('D: ' + Math.formatBytes(downSpeed) + '/s&nbsp;&nbsp;</br>' + 'U: ' + Math.formatBytes(upSpeed) + '/s');
@@ -637,7 +639,7 @@ $(function() {
                     container.slideDown(400,
                     function() {
                         $('#torrentlist_container').height($(window).height() - $('#torrentlist_container').attr('offsetTop'));
-			setTimeout(getClientData, 100);
+			setTimeout(getClientData, 10);
                     });
                 }
 
@@ -881,7 +883,7 @@ $(function() {
             p.html(p.html().replace(/###torHash###/g, torHash.match(/\w+/)));
             p = $('li#id_' + id + ' p.torStop');
             p.html(p.html().replace(/###torHash###/g, torHash.match(/\w+/)));
-            setTimeout(getClientData,100);
+            setTimeout(getClientData,10);
         });
     };
 
@@ -899,7 +901,7 @@ $(function() {
             },
             function(json) {
                 if (json.result == "success") {
-                    setTimeout(getClientData, 100);
+                    setTimeout(getClientData, 10);
                 } else {
                     alert('Request failed');
                 }
@@ -923,7 +925,7 @@ $(function() {
             if (json.result == "success") {
                 $('li.item_' + torHash + ' p.dlTorrent').hide();
                 torStartStopToggle(torHash);
-                setTimeout(getClientData, 100);
+                setTimeout(getClientData, 10);
             } else {
                 alert('Request failed');
             }
@@ -939,7 +941,7 @@ $(function() {
         },
         function(json) {
             toggleTorMove(torHash);
-            setTimeout(getClientData, 100);
+            setTimeout(getClientData, 10);
         });
     };
     

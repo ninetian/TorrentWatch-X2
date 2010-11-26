@@ -424,15 +424,7 @@ $(function() {
         if(!(window.oldStatus)) window.oldStatus = [];
         if(!(window.oldClientData)) window.oldClientData = [];
 
-        $.get('torrentwatch.php', { 'getClientActiveTorrents': 1 }, function(stats) {
-	    try { stats = JSON.parse(stats); }
-            catch(err) {
-                showClientError(json);
-                return;
-	    }
-	    var torrentCount = stats['arguments'].torrentCount;
- 	    $('#activeTorrents').html("("+torrentCount+")");
-	})
+ 	$('#activeTorrents').html("("+json['arguments']['torrents'][0]['torrentCount']+")");
 
         $.each(json['arguments']['torrents'],
         function(i, item) {

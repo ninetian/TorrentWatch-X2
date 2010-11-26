@@ -80,9 +80,6 @@ function parse_options() {
             }
             echo $response;
             exit;
-        case 'getClientActiveTorrents':
-	    echo getClientActiveTorrents();
-	    exit;
         case 'delTorrent':
             $response = delTorrent($_REQUEST['delTorrent'], $_REQUEST['trash']);
             echo "$response";

@@ -346,7 +346,7 @@ $(function() {
             window.hideProgressBar = 1;
 	    setTimeout(function() {
 		if(window.updatingClientData) $('li#webui a span').addClass('altIcon');
-	    },1000)
+	    },1500)
 
             $.get('torrentwatch.php', {
                 'getClientData': 1,
@@ -423,7 +423,7 @@ $(function() {
         var torListHtml = "";
 	var upSpeed = 0;
 	var downSpeed = 0;
-	var activeTorrents = 0;
+	if(!activeTorrents) var activeTorrents = 0;
         
         if(!(window.oldStatus)) window.oldStatus = [];
         if(!(window.oldClientData)) window.oldClientData = [];

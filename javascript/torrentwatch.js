@@ -307,7 +307,7 @@ $(function() {
 	'<div style="width: 100%; margin-top: 2px; border: 1px solid #BFCEE3; background: #DFE3E8;"><div class="progressDiv" style="width: '+Percentage+'%; height: 3px;"></div></div>' +
         '<span class="dateAdded hidden">' + item.addedDate + '</span>' +
         '<div id=tor_' + item.id + ' class="torInfo tor_' + item.hashString + '">' + clientData + '</div>' +
-	'<div class="torEta">Remaining: ' + item.eta + '</div>' +
+	'<div class="torEta">' + item.eta + '</div>' +
         '<div id="move_' + item.hashString + '" class="move_data hidden">' + 
         '<input id="moveTo' + item.hashString + '" type="text" class="text" name="moveTo" value="' + item.downloadDir + '" />' +
         '<a class="move" id="Move" href="#" onclick="$.moveTorrent(\'' + item.hashString + '\')">Move</a>' +
@@ -435,19 +435,6 @@ $(function() {
             var Percentage = Math.roundWithPrecision(((item.totalSize - item.leftUntilDone) / item.totalSize) * 100, 2);
             var validProgress = Math.roundWithPrecision((100 * item.recheckProgress), 2);
 
-	    if(item.eta >= 3600) {
-		var hours = Math.floor(item.eta/60/60);
-		var minutes = Math.round((item.eta/60)-(hours*60));
-		if(minutes <= 9) minutes = '0'+minutes;
-		item.eta = hours+':'+minutes;
-	    } else if(item.eta > 0) {
-		minutes = Math.round(item.eta/60);
-		if(minutes <= 9) minutes = '0'+minutes;
-		item.eta = '00:' + minutes;
-	    } else {
-		item.eta = 'Unknown';
-	    }
-
             if (!(Ratio > 0)) {
                 Ratio = 0;
             }
@@ -458,6 +445,21 @@ $(function() {
 
 	    $('li.item_'+item.hashString+' div.progressBarContainer').show();
 	    $('li.item_'+item.hashString+' div.progressDiv').width(Percentage+"%").height(3);
+
+	    if(item.errorString || item.status == 4) {
+		if(item.eta >= 3600) {
+		    var hours = Math.floor(item.eta/60/60);
+	    	    var minutes = Math.round((item.eta/60)-(hours*60));
+		    if(minutes <= 9) minutes = '0'+minutes;
+		    item.eta = 'Remaining: ' + hours + ':'+minutes;
+		} else if(item.eta > 0) {
+		    minutes = Math.round(item.eta/60);
+		    if(minutes <= 9) minutes = '0'+minutes;
+		    item.eta = 'Remaining: 00:' + minutes;
+		} else {
+		    item.eta = 'Remaining: unknown';
+	        }
+	    }
 
 	    liClass = 'normal';
             if (item.errorString) {
@@ -498,7 +500,7 @@ $(function() {
                 
                 if(window.oldClientData[item.id] != clientData) {
                     $('li.item_' + item.hashString + ' div.torInfo').text(clientData);
-                    if(item.status == 4) $('li.item_' + item.hashString + ' div.torEta').text('Remaining: ' + item.eta);
+                    if(item.status == 4) $('li.item_' + item.hashString + ' div.torEta').text(item.eta);
                 }
                 
                 if(window.oldStatus[item.id] != item.id + '_' + item.status) {  
@@ -527,7 +529,7 @@ $(function() {
                 clientItem = getClientItem(item, clientData, liClass, Percentage);
                 torListHtml += clientItem;
                 $('li.item_' + item.hashString + ' div.torInfo').text(clientData);
-                if(item.status == 4) $('li.item_' + item.hashString + ' div.torEta').text('Remaining: ' + item.eta);
+                if(item.status == 4) $('li.item_' + item.hashString + ' div.torEta').text(item.eta);
                 if(item.status <= 16) {
                         $('li.item_' + item.hashString + ' ,li.item_' + item.hashString + ' .buttons')
 			    .removeClass('match_to_check').addClass('match_downloading');

@@ -423,11 +423,13 @@ $(function() {
         var torListHtml = "";
 	var upSpeed = 0;
 	var downSpeed = 0;
+	var activeTorrents = 0;
         
         if(!(window.oldStatus)) window.oldStatus = [];
         if(!(window.oldClientData)) window.oldClientData = [];
 
- 	$('#activeTorrents').html("("+json['arguments']['torrents'][0]['torrentCount']+")");
+ 	if(json['arguments']['torrents'][0]) activeTorrents = json['arguments']['torrents'][0]['torrentCount'];
+ 	$('#activeTorrents').html("("+activeTorrents+")");
 
         $.each(json['arguments']['torrents'],
         function(i, item) {
@@ -447,15 +449,18 @@ $(function() {
 	    $('li.item_'+item.hashString+' div.progressDiv').width(Percentage+"%").height(3);
 
 	    if(item.errorString || item.status == 4) {
-		if(item.eta >= 3600) {
+		if(item.eta >= 86400) {
+		    var days = Math.floor(item.eta/60/60/24);
+		    var hours = Math.floor((item.eta/60/60)-(days*24));
+		    if(minutes <= 9) minutes = '0'+minutes;
+		    item.eta = 'Remaining: ' + days + ' days ' + hours + ' hr';
+		} else if(item.eta >= 3600) {
 		    var hours = Math.floor(item.eta/60/60);
 	    	    var minutes = Math.round((item.eta/60)-(hours*60));
-		    if(minutes <= 9) minutes = '0'+minutes;
-		    item.eta = 'Remaining: ' + hours + ':'+minutes;
+		    item.eta = 'Remaining: ' + hours + ' hr ' + minutes + ' min';
 		} else if(item.eta > 0) {
 		    minutes = Math.round(item.eta/60);
-		    if(minutes <= 9) minutes = '0'+minutes;
-		    item.eta = 'Remaining: 00:' + minutes;
+		    item.eta = 'Remaining: ' + minutes + ' min';
 		} else {
 		    item.eta = 'Remaining: unknown';
 	        }

@@ -589,10 +589,6 @@ ul.torrentlist td.torrent_name.tor_client {
     padding: 2px 8px 0 0;
 }
 
-div#transmission_data td.torrent_name span {
-    margin-left: 3px;
-}
-
 ul.torrentlist div.torInfo {
     display: inline-block;
     color: green;
@@ -604,7 +600,7 @@ ul.torrentlist div.torEta {
     float: right;
     color: green;
     font-size: 9px;
-    margin: 2px 0 2px 0;
+    margin: 3px 0 2px 0;
 }
 
 ul.torrentlist div.torInfoErr {

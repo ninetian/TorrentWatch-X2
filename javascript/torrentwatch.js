@@ -459,6 +459,8 @@ $(function() {
 		} else {
 		    item.eta = 'Remaining: unknown';
 	        }
+	    } else {
+		item.eta = '';
 	    }
 
 	    liClass = 'normal';

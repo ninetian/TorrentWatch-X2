@@ -205,7 +205,6 @@ $(function() {
     // Clear Cache ajax submit
     $('a.clear_cache').live('click',
     function(e) {
-	window.noProgressBG=1;
         $.get(this.href, '', $.loadDynamicData, 'html');
         return false;
     });
@@ -560,7 +559,10 @@ $(function() {
             window.oldStatus[item.id] = item.id + '_' + item.status;
 	    function count(arrayObj){return arrayObj.length;}
         });
-	$('#torrentlist_container li.match_to_check, #torrentlist_container li.match_to_check .buttons').addClass('match_old_download').removeClass('match_to_check');
+	$('#torrentlist_container li.match_to_check, #torrentlist_container li.match_to_check .buttons')
+	    .addClass('match_old_download').removeClass('match_to_check');
+	$('#torrentlist_container li.match_old_download .progressBarContainer, #torrentlist_container li.match_old_download .activeTorrent.delete, #torrentlist_container li.match_old_download .activeTorrent.trash').hide();
+	$('#torrentlist_container li.match_old_download .torInfo, #torrentlist_container li.match_old_download .torEta').remove();
 
 	if(!isNaN(downSpeed) && !isNaN(upSpeed)) {
 		$('li#rates').html('D: ' + Math.formatBytes(downSpeed) + '/s&nbsp;&nbsp;</br>' + 'U: ' + Math.formatBytes(upSpeed) + '/s');
@@ -591,19 +593,16 @@ $(function() {
     });
 
     // Ajax progress bar
-    $('#progress').ajaxStart(function() {
+    $('#refresh').ajaxStart(function() {
 	window.ajaxActive = 1;
         if (!(window.hideProgressBar)) {
-	    if (!window.noProgressBG) {
-                $('#progress').addClass('progress_full').fadeIn();
-	    }
-            $(this).show();
+	    $('#refresh a').html('<img src="images/ajax-loader-small.gif">');
+            if($('div.dialog').is(":visible")) $('#progress').removeClass('progress_full').fadeIn();
         }
     }).ajaxStop(function() {
 	window.ajaxActive = 0;
- 	$(this).fadeOut();
-	window.noProgressBG = 0;
-	$('#progress').fadeOut(function() { $(this).removeClass('progress_full'); });
+	$('#refresh a').html('<img src="images/refresh.png">');
+	$('#progress').fadeOut();
 	setTimeout(function() {
 	    $('#transmission_list li.torrent').markAlt();
 	},500);
@@ -634,25 +633,21 @@ $(function() {
                     $("#welcome_form").show();
 		    $(current_dialog).show();
                 } else {
-	            $('div.progressBarContainer').hide();
-		    window.hideProgressBar = 1;
+	            $('li.torrent:not(.match_to_check) div.progressBarContainer').hide();
                     container.slideDown(400,
                     function() {
                         $('#torrentlist_container').height($(window).height() - $('#torrentlist_container').attr('offsetTop'));
-			//getClientData();
-			setTimeout(getClientData, 500);
+			setTimeout(getClientData, 100);
                     });
                 }
-		//window.hideProgressBar = 1;
 
-                $.get('torrentwatch.php', { show_donate: 1 }, function(donate) {
+                /*$.get('torrentwatch.php', { show_donate: 1 }, function(donate) {
                     $.get('torrentwatch.php', { show_footer: 1 }, function(footer) {
                         $('#torrentlist_container').append(footer);
                         $('#torrentlist_container').append(donate);
                     })
-                })
+                })*/
 
-		//window.hideProgressBar = 0;
         	window.client = $('#clientId').html();
 		changeClient(window.client);
 		fontSize = $.cookie('twFontSize');
@@ -684,14 +679,16 @@ $(function() {
                         $('#fav_error').slideUp();
                     }, 10000);
                 }
-                $.get('torrentwatch.php', { version_check: 1 }, function(data) {
-                    $('#dynamicdata').append(data);
-                    setTimeout(function() {
-                        $('#newVersion').slideUp().remove();
-                    }, 15000);
-        	    var versionCheck = $.cookie('VERSION-CHECK');
-                    if(versionCheck != 1) $.cookie('VERSION-CHECK', '1', { expires: 1 });
-                })
+        	var versionCheck = $.cookie('VERSION-CHECK');
+		if(!versionCheck) {
+                    $.get('torrentwatch.php', { version_check: 1 }, function(data) {
+                        $('#dynamicdata').append(data);
+                        setTimeout(function() {
+                            $('#newVersion').slideUp().remove();
+                        }, 15000);
+                        $.cookie('VERSION-CHECK', '1', { expires: 1 });
+                    })
+		}
             },
             100);
         },
@@ -712,7 +709,6 @@ $(function() {
             form = $(button).closest("form");
         }
         //if ((button.id == "Delete") || (button.id == "Update")) {
-	window.noProgressBG=1;
         if (button.id == "Delete") {
             $.get(form.get(0).action, form.buildDataString(button));
             if (button.id == "Delete") {
@@ -732,7 +728,6 @@ $(function() {
         } else {
         	$.get(form.get(0).action, form.buildDataString(button), $.loadDynamicData, 'html');
     	}
-	window.noProgressBG=0;
     };
 
     $.fn.toggleDialog = function() {
@@ -753,7 +748,6 @@ $(function() {
 		$('#dynamicdata .dialog').addClass('dialog_last');
             }
             if (current_dialog && this.hash != '#') {
-		window.noProgressBG=1;
                 $.get('torrentwatch.php', { get_dialog_data: this.hash }, function(data) {
                     $('#dynamicdata.dyndata').append(data);
                     $('#dynamicdata').find("ul.favorite > li").initFavorites().end().find("form").initForm().end().initConfigDialog();
@@ -773,7 +767,6 @@ $(function() {
                     $(current_dialog + ' a.submitForm').click(function() { window.dialog = 0 })
                 });
 	        $("li#id_" + this.parentNode.id + " a").addClass("selected");
-	        window.noProgressBG=0;
             } else {
 		$('#dynamicdata .dialog').fadeOut();
 		setTimeout(function() {
@@ -781,12 +774,10 @@ $(function() {
 		}, 400);
 	    }
 	    if(last == '#configuration') {
-		window.noProgressBG = 1;
 	        $.get('torrentwatch.php', { get_client: 1 }, function(client) {
 		    window.client = client
 		    changeClient(client);
 		})
-		window.noProgressBG = 0;
 	    }
         });
         return this;
@@ -862,12 +853,10 @@ $(function() {
     };
 
     $.addFavorite = function(url) {
-        window.noProgressBG = 1;
         $.get(url, '', $.loadDynamicData, 'html');
     };
 
     $.dlTorrent = function(url, id) {
-        window.noProgressBG = 1;
         $.get(url,
         function(torHash) {
             if(torHash.match(/Error:\s\w+/) && window.client != 'folder') {
@@ -899,7 +888,7 @@ $(function() {
             p.html(p.html().replace(/###torHash###/g, torHash.match(/\w+/)));
             p = $('li#id_' + id + ' p.torStop');
             p.html(p.html().replace(/###torHash###/g, torHash.match(/\w+/)));
-            getClientData();
+            setTimeout(getClientData,100);
         });
     };
 
@@ -911,14 +900,13 @@ $(function() {
         }
         
         if(sure) {
-            window.noProgressBG = 1;
             $.getJSON('torrentwatch.php', {
                 'delTorrent': torHash,
                 'trash': trash
             },
             function(json) {
                 if (json.result == "success") {
-                    getClientData();
+                    setTimeout(getClientData, 100);
                 } else {
                     alert('Request failed');
                 }
@@ -937,13 +925,12 @@ $(function() {
                 'startTorrent': torHash
             };
         }
-        window.noProgressBG = 1;
         $.getJSON('torrentwatch.php', param,
         function(json) {
             if (json.result == "success") {
                 $('li.item_' + torHash + ' p.dlTorrent').hide();
                 torStartStopToggle(torHash);
-                getClientData();
+                setTimeout(getClientData, 100);
             } else {
                 alert('Request failed');
             }
@@ -953,14 +940,13 @@ $(function() {
     $.moveTorrent = function(torHash) {
         var path = $('input#moveTo' + torHash)[0].value;
         
-        window.noProgressBG = 1;
         $.getJSON('torrentwatch.php', {
             'moveTo': path,
             'torHash': torHash
         },
         function(json) {
             toggleTorMove(torHash);
-            getClientData();
+            setTimeout(getClientData, 100);
         });
     };
     
@@ -971,7 +957,6 @@ $(function() {
     }
     
     $.hideItem = function(title) {
-        window.noProgressBG = 1;
         $.get('torrentwatch.php?hide=' + title, '', $.loadDynamicData, 'html');
     }
     
@@ -1013,7 +998,6 @@ $(function() {
     }
     
     $.submitBug = function() {
-	window.noProgressBG = 1;
         $.post('torrentwatch.php?post_bug', $("#report_form").serialize(),
             function(data) {
                 if(data.match(/\bError:/)) {
@@ -1027,7 +1011,6 @@ $(function() {
 		    setTimeout(function() { $('div#successDialog').remove(); }, 10000);
                 }
             });
-	window.noProgressBG = 0;
         return;
     }
     

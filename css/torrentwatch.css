@@ -532,11 +532,6 @@ ul.torrentlist td.buttons.match_nomatch {
     background-color: #D6ABAB;
 }
 
-div#show_legend li.legend.match_to_check,
-ul.torrentlist td.buttons.match_to_check {
-    background-color: #D6C5C5;
-}
-
 div#show_legend li.legend.match_season,
 ul.torrentlist td.buttons.match_season {
     background-color: #99CCBB;
@@ -565,6 +560,8 @@ ul.torrentlist td.buttons.match_test {
 
 div#show_legend li.legend.match_cachehit,
 ul.torrentlist td.buttons.match_cachehit,
+div#show_legend li.legend.match_to_check,
+ul.torrentlist td.buttons.match_to_check,
 ul.torrentlist td.buttons.match_downloaded,
 ul.torrentlist td.buttons.match_downloading,
 ul.torrentlist td.buttons.match_transmission {
@@ -641,7 +638,7 @@ div.progressBarContainer {
     width: 100%;
     border: 1px solid #BFCEE3;
     background: #DFE3E8;
-    display: none
+    display: block;
 }
 
 div.progressDiv {

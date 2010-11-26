@@ -29,7 +29,9 @@ if(isset($torInfo)) {
     <img src=\"images/hide.png\" /></a></span></td>";
 }
 
-if($matched == "downloading" || $matched == "downloaded" || $matched == "cachehit" || $matched == "match") { 
+if($config_values['Settings']['Client'] != 'folder') $progressBar = "<div class='progressBarContainer'><div class='progressDiv' style='width: 0.07%; height: 3px; '></div></div>";
+
+if($matched == "downloading" || $matched == "downloaded" || $matched == "cachehit" || $matched == "match" ||  $torInfo['dlStatus'] == "to_check") { 
   $hidden = ""; 
   $dlTorrent = "dlTorrent hidden";
   if ($torInfo['status'] == 16) {
@@ -40,10 +42,10 @@ if($matched == "downloading" || $matched == "downloaded" || $matched == "cachehi
     $torStop= "torStop";
   }
 } else {
-  $hidden = "hidden";
   $dlTorrent = "dlTorrent";
   $torStart = "torStart hidden";
   $torStop = "torStop hidden";
+  $hidden = "hidden";
 } 
 
 if(!isset($infoDiv)) $infoDiv = '';
@@ -89,9 +91,7 @@ $hideTD
 <td class="torrent_name">
 <div class='torrent_name'>$title</div>
 <div class='torrent_pubDate'>$feedItem $pubDate</div>
-<div class='progressBarContainer'>
- <div class="progressDiv"></div>
-</div>
+$progressBar
 $infoDiv
 $etaDiv
 <span class='hidden' id=unixTime>$unixTime</span>

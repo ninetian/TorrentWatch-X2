@@ -323,14 +323,16 @@ $(function() {
         $('div#clientError').slideDown();
     }
     
+    window.clientErrorCount = 0;
     $(document).ajaxError(function(event, request, settings) {
        if(settings.url.match(/getClientData/)) {
 	    window.getfail = 1;
 	    var error = "Error connecting to " + window.client;
+	    window.clientErrorCount++;
 	    $('div.torInfo').html(error);
 	    $('div.feed div.torInfo').addClass('torInfoErr');
 	    $('li#filter_transmission a').addClass('error');
-	    showClientError(error);
+	    if(window.clientErrorCount >= 3) showClientError(error);
 	}
     });
 
@@ -368,7 +370,8 @@ $(function() {
                 showClientError(json);
                     return;
                 }
-                
+
+		window.clientErrorCount = 0;                
 	        $('li#filter_transmission a').removeClass('error');
 	        $('div.feed div.torInfo').removeClass('torInfoErr');
 

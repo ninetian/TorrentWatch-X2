@@ -460,7 +460,8 @@ $(function() {
 		    item.eta = 'Remaining: ' + hours + ' hr ' + minutes + ' min';
 		} else if(item.eta > 0) {
 		    minutes = Math.round(item.eta/60);
-		    item.eta = 'Remaining: ' + minutes + ' min';
+		    seconds = item.eta-(minutes*60);
+		    item.eta = 'Remaining: ' + minutes + ' min ' + seconds + ' sec';
 		} else {
 		    item.eta = 'Remaining: unknown';
 	        }
@@ -606,7 +607,7 @@ $(function() {
 	},500);
     });
 	
-    // set timeout for all ajax queries to 6 seconds.
+    // set timeout for all ajax queries to 20 seconds.
     $.ajaxSetup({timeout: '20000',})
 });
 

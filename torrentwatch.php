@@ -514,7 +514,7 @@ function post_bug($Summary, $Name, $Email, $Priority, $Description) {
 function get_tr_location() {
     global $config_values;
     $host = $config_values['Settings']['Transmission Host'];
-    if(preg_match('/(localhost|127.0.0.1|192.168.*|172.1.*|10.*)/', $host))
+    if(preg_match('/(localhost|127.0.0.1)/', $host))
         $host = preg_replace('/:.*/', "", $_SERVER['HTTP_HOST']);
     if(preg_match('/(localhost|127.0.0.1)/', $host))
         $host = preg_replace('/:.*/', "", $_SERVER['SERVER_NAME']);

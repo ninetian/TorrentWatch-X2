@@ -427,6 +427,7 @@ $(function() {
         if(!(window.oldStatus)) window.oldStatus = [];
         if(!(window.oldClientData)) window.oldClientData = [];
 
+	if(typeof window.activeTorrents != 'number') window.activeTorrents = 0;
  	if(json['arguments']['torrents'][0]) window.activeTorrents = json['arguments']['torrents'][0]['torrentCount'];
  	$('#activeTorrents').html("("+window.activeTorrents+")");
 

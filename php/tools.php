@@ -150,9 +150,6 @@ function getClientData($recent) {
                'method' => 'torrent-get');
             }
             $response = transmission_rpc($request);
-            $request2 = array('method' => 'session-stats');
-            $response2 = transmission_rpc($request2);
-	    if($response['arguments']['torrents'][0]) $response['arguments']['torrents'][0]['torrentCount'] = $response2['arguments']['torrentCount'];
             return json_encode($response);
         break;
     }

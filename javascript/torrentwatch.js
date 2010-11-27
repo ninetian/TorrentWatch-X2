@@ -426,11 +426,7 @@ $(function() {
         
         if(!(window.oldStatus)) window.oldStatus = [];
         if(!(window.oldClientData)) window.oldClientData = [];
-
-	if(typeof window.activeTorrents != 'number') window.activeTorrents = 0;
- 	if(json['arguments']['torrents'][0]) window.activeTorrents = json['arguments']['torrents'][0]['torrentCount'];
- 	$('#activeTorrents').html("("+window.activeTorrents+")");
-
+	
         $.each(json['arguments']['torrents'],
         function(i, item) {
             var Ratio = Math.roundWithPrecision(item.uploadedEver / item.downloadedEver, 2);
@@ -578,7 +574,12 @@ $(function() {
         if(recent === 0 && torListHtml) {
             $('#transmission_list').append(torListHtml);
         } 
-        
+       
+	setTimeout(function() { 
+	    var activeTorrents = $('#transmission_list li').length;
+ 	    $('#activeTorrents').html("("+activeTorrents+")");
+	}, 100)
+
         if(!$('.move_data').is(':visible')) {
             $('#transmission_list>li').tsort('span.dateAdded', { order: 'desc' });
         }

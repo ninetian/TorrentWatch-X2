@@ -29,7 +29,7 @@ if(isset($torInfo)) {
     <img src=\"images/hide.png\" /></a></span></td>";
 }
 
-if($config_values['Settings']['Client'] != 'folder') $progressBar = "<div class='progressBarContainer'><div class='progressDiv' style='width: 0.07%; height: 3px; '></div></div>";
+if($config_values['Settings']['Client'] != 'folder') $progressBar = "<div class='progressBarContainer init'><div class='progressDiv' style='width: 0.07%; height: 3px; '></div></div>";
 
 if($matched == "downloading" || $matched == "downloaded" || $matched == "cachehit" || $matched == "match" ||  $torInfo['dlStatus'] == "to_check") { 
   $hidden = ""; 

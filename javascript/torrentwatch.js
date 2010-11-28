@@ -669,6 +669,7 @@ $(function() {
 			getClientData();
 			if(window.gotAllData) {
 			    clearInterval(initGetData);
+			    $('div.progressBarContainer').removeClass('init');
 		    	    setInterval(getClientData, 5000);            
 			}
 		    },250);

@@ -630,10 +630,15 @@ td.progressRow {
 }
 
 div.progressBarContainer {
-    width: 100%;
     border: 1px solid #BFCEE3;
+    width: 100%;
     background: #DFE3E8;
     display: block;
+}
+
+div.progressBarContainer.init {
+    border: none;
+    background: none;
 }
 
 div.progressDiv {

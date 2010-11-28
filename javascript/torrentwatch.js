@@ -906,7 +906,7 @@ $(function() {
 					'onclick="$(\'#confirmTrash\').remove();' +
                         		'$.cookie(\'TorTrash\', 1, { expires: 30 });' +
 					'$.delTorrent(\''+torHash+'\',\'true\', \'true\');">' +
-					'Yes, don\'t ask again.</a>' +
+					'Yes, don\'t ask again</a>' +
 				    '<a class="button trash_tor_data close" onclick="$(\'#confirmTrash\').remove()">No</a>' +
   				'</div>' +
 			  '</div>'

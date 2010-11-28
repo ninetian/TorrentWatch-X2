@@ -814,9 +814,9 @@ div#trash_tor_data {
     border: 1px solid #979797;
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCCCCC,endColorstr=#F8F8F8);
-    background: -webkit-gradient(linear, left top, left bottom, from(#CCC), to(#F8F8F8));
-    background:	-moz-linear-gradient(top, #CCC, #F8F8F8);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#BBBBBB,endColorstr=#EEEEEE);
+    background: -webkit-gradient(linear, left top, left bottom, from(#bbb), to(#eee));
+    background:	-moz-linear-gradient(top, #bbb, #eee);
 }
 
 div#trash_tor_data .buttonContainer {

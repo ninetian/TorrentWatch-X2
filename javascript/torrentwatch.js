@@ -664,12 +664,17 @@ $(function() {
 		        displayFilter(filter,1)
                         $('#torrentlist_container').height($(window).height() - $('#torrentlist_container').attr('offsetTop'));
 		    });
+                if($('#fav_error').length > 0) {
+                    setTimeout(function() {
+                        $('#fav_error').slideUp();
+                    }, 10000);
+                }
 		    setTimeout(getClientData,10);
 		    var initGetData = setInterval(function () {
 			getClientData();
 			if(window.gotAllData) {
 			    clearInterval(initGetData);
-			    $('div.progressBarContainer').removeClass('init');
+			    $('div.progressBarContainer').removeClass('init').addClass('progressBarContainer');
 		    	    setInterval(getClientData, 5000);            
 			}
 		    },250);
@@ -684,12 +689,6 @@ $(function() {
                 $('.torrentlist>li').tsort('#unixTime', {order: 'desc'});
             }
             setTimeout(function() {
-                var clientCheck = 1;
-                if($('#fav_error').length > 0) {
-                    setTimeout(function() {
-                        $('#fav_error').slideUp();
-                    }, 10000);
-                }
         	var versionCheck = $.cookie('VERSION-CHECK');
 		if(!versionCheck) {
                     $.get('torrentwatch.php', { version_check: 1 }, function(data) {
@@ -700,8 +699,7 @@ $(function() {
                         $.cookie('VERSION-CHECK', '1', { expires: 1 });
                     })
 		}
-            },
-            100);
+            },1000);
         },
         100);
     };

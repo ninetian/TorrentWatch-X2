@@ -726,6 +726,10 @@ div.dialog {
     z-index:		2;
 }
 
+div.dialog.confirm {
+    top: 0;
+}
+
 div.dialog_window {
     position: fixed; 
     margin-right: auto;
@@ -800,6 +804,30 @@ div#clear_cache {
     background:	-moz-linear-gradient(top, #CCC, #F8F8F8);
 }
 
+div#trash_tor_data {
+    position: fixed;
+    font-size: 0.85em;
+    width: 300px;
+    padding-top: 5px;
+    margin-left: -150px;
+    text-align: center;
+    border: 1px solid #979797;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCCCCC,endColorstr=#F8F8F8);
+    background: -webkit-gradient(linear, left top, left bottom, from(#CCC), to(#F8F8F8));
+    background:	-moz-linear-gradient(top, #CCC, #F8F8F8);
+}
+
+div#trash_tor_data .buttonContainer {
+    font-size: 1em;
+    margin-right: 23px;
+}
+
+div#trash_tor_data .buttonContainer a.wide {
+    width: 100px;
+}
+
 div#cacheDialog .title {
     padding-top: 2px;
     margin-left: -160px;
@@ -857,7 +885,7 @@ div.buttonContainer {
 a.button,
 input[type=submit] {
     float: right;
-    margin: 5px 1em 0 0;
+    margin: 5px 6px 0 0;
     padding: 0.5em;
     background-color: #EEE;
     border: 1px solid #787878;

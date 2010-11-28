@@ -592,6 +592,12 @@ $(function() {
         }
     });
 
+    $(document).keyup(function(e) {
+	if (e.keyCode == '13') {
+		$('.dialog .confirm').click();
+        }
+    });
+
     // Ajax progress bar
     $('#refresh').ajaxStart(function() {
 	window.ajaxActive = 1;
@@ -890,13 +896,25 @@ $(function() {
         });
     };
 
-    $.delTorrent = function(torHash, trash) {
-        if(trash == 'true') {
-            sure = confirm('This will remove the torrent along with its data.\nAre you sure?');
+    $.delTorrent = function(torHash, trash, sure) {
+        if(trash == 'true' && sure != 'true' && !$.cookie('TorTrash')) {
+	    var dialog = '<div id="confirmTrash" class="dialog confirm" style="display: block; ">' +
+				'<div class="dialog_window" id="trash_tor_data"><div>Are you sure?<br />This will remove the torrent along with its data.</div>' +
+				    '<div class="buttonContainer"><a class="button confirm trash_tor_data" ' +
+					'onclick="$(\'#confirmTrash\').remove(); $.delTorrent(\''+torHash+'\',\'true\', \'true\');">Yes</a>' +
+				    '<a class="button trash_tor_data wide" ' + 
+					'onclick="$(\'#confirmTrash\').remove();' +
+                        		'$.cookie(\'TorTrash\', 1, { expires: 30 });' +
+					'$.delTorrent(\''+torHash+'\',\'true\', \'true\');">' +
+					'Yes, don\'t ask again.</a>' +
+				    '<a class="button trash_tor_data close" onclick="$(\'#confirmTrash\').remove()">No</a>' +
+  				'</div>' +
+			  '</div>'
+	    $('#dynamicdata').append(dialog);
         } else {
             sure = 1;
         }
-        
+       
         if(sure) {
             $.getJSON('torrentwatch.php', {
                 'delTorrent': torHash,

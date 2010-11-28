@@ -664,8 +664,14 @@ $(function() {
 		        displayFilter(filter,1)
                         $('#torrentlist_container').height($(window).height() - $('#torrentlist_container').attr('offsetTop'));
 		    });
-		    setTimeout(getClientData,50);
-		    setInterval(getClientData, 5000);            
+		    setTimeout(getClientData,10);
+		    var initGetData = setInterval(function () {
+			getClientData();
+			if(window.gotAllData) {
+			    clearInterval(initGetData);
+		    	    setInterval(getClientData, 5000);            
+			}
+		    },250);
                 }
 
         	window.client = $('#clientId').html();

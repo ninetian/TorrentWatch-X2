@@ -580,6 +580,7 @@ $(function() {
 	setTimeout(function() { 
 	    var activeTorrents = $('#transmission_list li').length;
  	    $('#activeTorrents').html("("+activeTorrents+")");
+	    if(!activeTorrents) window.gotAllData = 1;
 	}, 100)
 
         if(!$('.move_data').is(':visible')) {

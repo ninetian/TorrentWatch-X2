@@ -375,7 +375,6 @@ $(function() {
 	        $('li#filter_transmission a').removeClass('error');
 	        $('div.feed div.torInfo').removeClass('torInfoErr');
 
-                if(recent === 0 && json.result == 'success') window.gotAllData = 1;
                 processClientData(json, recent);
 		$('li#webui a span').removeClass('altIcon');
                 
@@ -388,8 +387,8 @@ $(function() {
                             $('li.clientId_' + item + ' div.progressBarContainer').hide();
                             $('li.clientId_' + item + ' p.activeTorrent').hide();
                             $('li.clientId_' + item + ' p.dlTorrent').show();
-                            $('li.clientId_' + item + ', li.clientId_' + item + ' td.buttons').removeClass('match_downloading match_downloaded match_cachehit')
-                            .addClass('match_old_download');
+                            $('li.clientId_' + item + ', li.clientId_' + item + ' td.buttons')
+				.removeClass('match_downloading match_downloaded match_cachehit').addClass('match_old_download');
                             $('li.clientId_' + item).removeClass('clientId_' + item);
                         }
                         if ($('#transmission_data li#clientId_' + item).length !== 0) {
@@ -551,6 +550,7 @@ $(function() {
 			
                 $('#transmission_list').empty();
                 $('li.item_' + item.hashString).addClass('clientId_' + item.id);
+		window.gotAllData = 1;
             }
             
 	    upSpeed = upSpeed + item.rateUpload;
@@ -560,12 +560,6 @@ $(function() {
             window.oldStatus[item.id] = item.id + '_' + item.status;
 	    function count(arrayObj){return arrayObj.length;}
         });
-	$('#torrentlist_container li.match_to_check, #torrentlist_container li.match_to_check .buttons')
-	    .addClass('match_old_download').removeClass('match_to_check');
-	$('#torrentlist_container li.match_old_download .progressBarContainer, #torrentlist_container li.match_old_download .activeTorrent.delete, #torrentlist_container li.match_old_download .activeTorrent.trash').hide();
-	$('#torrentlist_container li.match_old_download .torInfo, #torrentlist_container li.match_old_download .torEta').remove();
-	$('#torrentlist_container li.match_old_download p.torStop').hide();
-	$('#torrentlist_container li.match_old_download p.dlTorrent').show();
 
 	if(!isNaN(downSpeed) && !isNaN(upSpeed)) {
 		$('li#rates').html('D: ' + Math.formatBytes(downSpeed) + '/s&nbsp;&nbsp;</br>' + 'U: ' + Math.formatBytes(upSpeed) + '/s');
@@ -574,7 +568,15 @@ $(function() {
         if(recent === 0 && torListHtml) {
             $('#transmission_list').append(torListHtml);
         } 
-       
+
+	if(window.gotAllData) {
+	    $('#torrentlist_container li.match_to_check, #torrentlist_container li.match_to_check .buttons').addClass('match_old_download').removeClass('match_to_check');
+	    $('#torrentlist_container li.match_old_download .progressBarContainer, #torrentlist_container li.match_old_download .activeTorrent.delete, #torrentlist_container li.match_old_download .activeTorrent.trash').hide();
+	    $('#torrentlist_container li.match_old_download .torInfo, #torrentlist_container li.match_old_download .torEta').remove();
+	    $('#torrentlist_container li.match_old_download p.torStop').hide();
+	    $('#torrentlist_container li.match_old_download p.dlTorrent').show();
+	}
+
 	setTimeout(function() { 
 	    var activeTorrents = $('#transmission_list li').length;
  	    $('#activeTorrents').html("("+activeTorrents+")");
@@ -664,18 +666,19 @@ $(function() {
 		        displayFilter(filter,1)
                         $('#torrentlist_container').height($(window).height() - $('#torrentlist_container').attr('offsetTop'));
 		    });
-                if($('#fav_error').length > 0) {
-                    setTimeout(function() {
-                        $('#fav_error').slideUp();
-                    }, 10000);
-                }
+                    if($('#fav_error').length > 0) {
+                        setTimeout(function() {
+                            $('#fav_error').slideUp();
+                        }, 10000);
+                    }
 		    setTimeout(getClientData,10);
 		    var initGetData = setInterval(function () {
-			getClientData();
 			if(window.gotAllData) {
 			    clearInterval(initGetData);
-			    $('div.progressBarContainer').removeClass('init').addClass('progressBarContainer');
+			    $('div.progressBarContainer').removeClass('init');
 		    	    setInterval(getClientData, 5000);            
+			} else {
+			    setTimeout(getClientData,10);
 			}
 		    },250);
                 }

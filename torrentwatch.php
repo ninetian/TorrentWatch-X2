@@ -128,6 +128,8 @@ function parse_options() {
                 if($config_values['Settings']['MatchStyle'] == "glob") {
                     $_GET['filter'] = trim(strtr($tmp['key'], " ._", "???"));
                     $_GET['filter'] .= '*';
+                } else if($config_values['Settings']['MatchStyle'] == "regexp") {
+                    $_GET['filter'] = trim(strtr($tmp['key'], " _", ".."));
                 } else {
                     $_GET['filter'] = trim($tmp['key']);
                 }

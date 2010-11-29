@@ -1,6 +1,7 @@
 <?php
 function guess_match($title, $normalize = FALSE) { 
-    
+    //Remove soft hyphens
+	$title = str_replace("\xC2\xAD", "", $title);
     // Episode
     $epi ='/[_.\s\(]';  //Start with _ , . or space
     $epi.='(S\d+[_.\s]?EP? ?\d+(?:-EP? ?\d+)?'.'|';  // S12E1 or S12EP1-EP2 
@@ -21,6 +22,7 @@ function guess_match($title, $normalize = FALSE) {
     $quality ='/\b(DVB '.'|';
     $quality.='DSRIP'   .'|';
     $quality.='DVBRip'  .'|';
+    $quality.='BRRip'  	.'|';
     $quality.='DVDR'    .'|';
     $quality.='DVDRip'  .'|';
     $quality.='DVDScr'  .'|';
@@ -56,7 +58,7 @@ function guess_match($title, $normalize = FALSE) {
     if(preg_match('/\b(720p|1080p|1080i)\b/i', $title)) {
         $title = preg_replace('/( -)?[_. ]HDTV/', '', $title);
     }
-    
+	
     if(preg_match($epi, $title, $match)) {
         $episode_guess = trim($match[1], ' .');
         $key_guess = trim(preg_replace("/([^-\(\.]+)[\. ]*(?:[_.\s]-[_.\s].*)?(:?[_.\s]\(.+)?" . 

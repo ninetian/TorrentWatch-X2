@@ -97,7 +97,7 @@ $hideTD
 <img height=15 src="images/tor_trash.png">Delete data</a></p></div>
 
 <div><p class="episodeInfo">
-<a href="#" title="Delete torrent and its data" onclick='javascript:$.episodeInfo("$utitle")'>
+<a href="#" title="Show details about this episode" onclick='javascript:$.episodeInfo("$utitle")'>
 <img height=15 src="images/tv_icon.png">Episode Info</a></p></div>
 </div>
 </li>

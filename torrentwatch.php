@@ -465,7 +465,6 @@ function episode_info($title) {
 				}
 			}
 		}
-		print_r($movie);
 	}
 	ob_start();
     require('templates/episode.tpl');

@@ -37,7 +37,7 @@ function setup_default_config() {
   _default('Require Episode Info', '0');
   _default('Disable Hide List', '0');
   _default('History', $basedir."/rss_cache/rss_dl.history");
-  _default('MatchStyle',"simple");
+  _default('MatchStyle',"regexp");
   _default('FirstRun',"1");
   _default('Extension',"torrent");
   _default('verbosity','0');

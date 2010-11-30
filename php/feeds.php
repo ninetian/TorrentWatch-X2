@@ -165,7 +165,7 @@ function check_for_torrent(&$item, $key, $opts) {
       break;
     case 'regexp':
     default:
-      $hit = (($item['Filter'] != '' && preg_match('/\b'.strtolower($item['Filter']).'\b/', $title)) &&
+      $hit = (($item['Filter'] != '' && preg_match('/\b'.strtolower(str_replace(' ', '[\s._]', $item['Filter'])).'\b/', $title)) &&
        ($item['Not'] == '' OR !preg_match('/'.strtolower($item['Not']).'/', $title)) &&
        ($item['Quality'] == 'All' OR $item['Quality'] == '' OR preg_match('/'.strtolower($item['Quality']).'/', $title)));
       break;

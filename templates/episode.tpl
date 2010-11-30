@@ -38,7 +38,7 @@
 	<strong>Released:</string> <?=$date?>. <strong>Rating: <?=$rating?>. <strong>Certification:</string> <?=$certification?>
 	<br /><br />
 	<?if(!empty($image)):?>
-	<img style="float:left;margin-right:5px;margin-bottom:5px;" width="350" src="<?=$image?>" />
+	<img style="float:left;margin-right:5px;margin-bottom:5px;" width="150" src="<?=$image?>" />
 	<?endif;?>
 	<?if(!empty($text)):?>
 	<span class="text"><span class="firstletter"><?=substr($text, 0, 1)?></span><?=substr($text, 1)?></span>

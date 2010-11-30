@@ -526,6 +526,10 @@ ul.torrentlist li.torrent {
     min-height: 15px;
 }
 
+ul#transmission_list li {
+    padding-left: 5px;
+}
+
 ul#transmission_list li.paused,
 ul#transmission_list li.waiting,
 ul#transmission_list li.verifying,
@@ -581,44 +585,47 @@ ul.torrentlist td.buttons {
     height: 15px;
 }
 
+ul.torrentlist td.identifier {
+    width: 5px;
+}
+
 div#show_legend li.legend.match_nomatch,
-ul.torrentlist td.buttons.match_nomatch {
+ul.torrentlist li.match_nomatch td.identifier {
     background-color: #D6ABAB;
 }
 
 div#show_legend li.legend.match_season,
-ul.torrentlist td.buttons.match_season {
+ul.torrentlist li.match_season td.identifier {
     background-color: #99CCBB;
 }
 
 div#show_legend li.legend.match_old_download,
-ul.torrentlist td.buttons.match_old_download {
-    background-color: #CCC;
+ul.torrentlist li.match_old_download td.identifier {
+    background-color: #bbb;
 }
 
 div#show_legend li.legend.match_match,
-ul.torrentlist td.buttons.match_match {
+ul.torrentlist li.match_match td.identifier {
     background-color: #FFEFCF;
 }
 
-ul.torrentlist td.buttons.match_duplicate,
 div#show_legend li.legend.match_old,
-ul.torrentlist td.buttons.match_old {
-    background-color: #C5C5EB;
+ul.torrentlist li.match_duplicate td.identifier,
+ul.torrentlist li.match_old td.identifier {
+    background-color: #A2A2E8;
 }
 
 div#show_legend li.legend.match_test,
-ul.torrentlist td.buttons.match_test {
-    background-color: #E0C3E0;
+ul.torrentlist li.match_test td.identifier {
+    background-color: #C975C9;
 }
 
 div#show_legend li.legend.match_cachehit,
 div#show_legend li.legend.match_to_check,
-ul.torrentlist td.buttons.match_cachehit, 
-ul.torrentlist td.buttons.match_to_check,
-ul.torrentlist td.buttons.match_downloaded,
-ul.torrentlist td.buttons.match_downloading,
-ul.torrentlist td.buttons.match_transmission {
+ul.torrentlist li.match_cachehit td.identifier,
+ul.torrentlist li.match_to_check td.identifier,
+ul.torrentlist li.match_downloaded td.identifier,
+ul.torrentlist li.match_downloading td.identifier {
     background-color: #C1E0C1;
 }
 
@@ -631,12 +638,12 @@ ul.torrentlist td.buttons.right {
 }
 
 ul.torrentlist td.torrent_name {
-    padding: 2px 8px 0px 3px;
+    padding: 2px 8px 0 5px;
 }
 
 ul.torrentlist li.match_nomatch td.torrent_name {
     vertical-align: middle;
-    padding: 2px 8px 1px 0;
+    padding: 2px 8px 1px 5px;
     height: 15px;
 }
 
@@ -669,32 +676,36 @@ div.torrent_name {
     margin: 0 5px 2px 0;
 }
 
-div.torrent_name, span.torrent_name {
-    cursor:pointer;
+td.torrent_name a.contextButton,
+div.torrent_name a.contextButton {
+    background: #DFE3E8 url(../images/dropdown.png) no-repeat left;
+    float: left;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 0;
+    margin: 2px 5px 0 0;
+    width: 11px;
+    height: 9px;
 }
 
-
-td.hideTD {
-    vertical-align: middle;
-    padding: 0 0 0 3px;
-    width: 10px;
-}
-
-div.contextMenu:hover,
 div.contextMenu {
     display: none;
     position: absolute;
-    margin: -5px 0 0 5px;
-    border: 1px solid #BFCEE3;
-    background: #C1E0C1;
+    margin: 20px 0 0 10px;
+    border: 1px solid #888;
+    background: #DDD;
+    filter:			progid:DXImageTransform.Microsoft.gradient(startColorstr=#EEEEEE,endColorstr=#CCCCCC);
+    background:                 -webkit-gradient(linear, left top, left bottom, from(#eee), to(#ccc));
+    background: 		-moz-linear-gradient(top, #eee, #ccc);
     font-size: 0.9em;
     opacity: .90;
     filter: alpha(opacity = 90);
-    z-index: 50;
+    z-index: 2;
 }
 
 div.contextMenu a {
-    color: #555;
+    margin-left: 15px;
+    color: #333;
     text-decoration: none;
 }
 
@@ -702,13 +713,38 @@ div.contextMenu div:hover {
     background: #BFCEE3;
 }
 
-div.contextMenu img {
-    margin: 0 5px 0 0;
+div.contextMenu p {
+    margin-left: 5px;
+}
+
+div.contextMenu p.favorite {
+    background: url(../images/tor_fav.png) no-repeat left center;
+}
+div.contextMenu p.dlTorrent {
+    background: url(../images/tor_start.png) no-repeat left center;
+}
+div.contextMenu p.torStart {
+    background: url(../images/tor_start.png) no-repeat left center;
+}
+div.contextMenu p.torStop {
+    background: url(../images/tor_pause.png) no-repeat left center;
+}
+div.contextMenu p.delete {
+    background: url(../images/tor_stop.png) no-repeat left center;
+}
+div.contextMenu p.trash {
+    background: url(../images/tor_trash.png) no-repeat left center;
+}
+div.contextMenu p.torMove {
+    background: url(../images/tor_move.png) no-repeat left center;
+}
+div.contextMenu p.episodeInfo {
+    background: url(../images/tv_icon.png) no-repeat left center;
 }
 
 td.torrent_name {
     vertical-align: top;
-    padding-left: 5px !important;
+    padding-left: 5px;
 }
 
 td.progressRow {

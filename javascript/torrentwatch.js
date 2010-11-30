@@ -425,7 +425,7 @@ $(function() {
         
         if(!(window.oldStatus)) window.oldStatus = [];
         if(!(window.oldClientData)) window.oldClientData = [];
-	
+
         $.each(json['arguments']['torrents'],
         function(i, item) {
             var Ratio = Math.roundWithPrecision(item.uploadedEver / item.downloadedEver, 2);
@@ -560,6 +560,7 @@ $(function() {
             window.oldStatus[item.id] = item.id + '_' + item.status;
 	    function count(arrayObj){return arrayObj.length;}
         });
+	if(json['arguments']['torrents'].length === 0) window.gotAllData=1;	
 
 	if(!isNaN(downSpeed) && !isNaN(upSpeed)) {
 		$('li#rates').html('D: ' + Math.formatBytes(downSpeed) + '/s&nbsp;&nbsp;</br>' + 'U: ' + Math.formatBytes(upSpeed) + '/s');
@@ -581,6 +582,18 @@ $(function() {
 	    var activeTorrents = $('#transmission_list li').length;
  	    $('#activeTorrents').html("("+activeTorrents+")");
 	    if(!activeTorrents) window.gotAllData = 1;
+	    var totalMatching = $('.feed li.torrent').not('.match_nomatch').length;
+	    var totalDownloaded = $('.feed li.match_downloaded').length;
+	    var totalDownloading = $('.feed li.match_downloading').length;
+	    $('#Matching, #Downloaded, #Downloading').html('');
+	    if(totalMatching) $('#Matching').html('('+totalMatching+')');
+	    if(totalDownloaded) $('#Downloaded').html('('+totalDownloaded+')');
+	    if(totalDownloading) $('#Downloading').html('('+totalDownloading+')');
+	    $.each($('.feed'), function(i, item) { 
+		var matches = $('#' + item.id + ' li.torrent').not('.match_nomatch').length
+		if(matches)
+		    $('#' + item.id + ' span.matches').html('('+matches+')');
+	    });
 	}, 100)
 
         if(!$('.move_data').is(':visible')) {

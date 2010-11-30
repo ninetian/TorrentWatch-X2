@@ -301,6 +301,9 @@ ul#filterbar_container li a.error {
     color: red;
 }
 
+ul#filterbar_container span#Matching,
+ul#filterbar_container span#Downloaded,
+ul#filterbar_container span#Downloading,
 ul#filterbar_container span#activeTorrents {
     padding-left: 0.4em; 
     font-size: 0.8em;
@@ -460,6 +463,16 @@ div#torrentlist_container div.header td.hide_feed {
 
 div#torrentlist_container div.header td.feed_title {
     text-align: center;
+}
+
+div#torrentlist_container div.header td.feed_title span {
+   color: #666;
+   margin-left: 0.5em;
+   font-size: 0.8em;
+}
+
+div#torrentlist_container div.header_hidden td.feed_title span {
+    color: #999;
 }
 
 div#torrentlist_container ul.torrentlist {	

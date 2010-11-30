@@ -543,8 +543,8 @@ ul#transmission_list li.normal:hover {
     background-color: #DAE3F2;
 }
 
-ul.torrentlist li.torrent:hover,
-ul.torrentlist li.torrent.alt:hover,
+ul.torrentlist li.torrent table:hover,
+ul.torrentlist li.torrent.alt table:hover,
 ul#transmission_list li.normal:hover {
     opacity: .80;
     filter: alpha(opacity = 80);
@@ -678,6 +678,32 @@ td.hideTD {
     vertical-align: middle;
     padding: 0 0 0 3px;
     width: 10px;
+}
+
+div.contextMenu:hover,
+div.contextMenu {
+    display: none;
+    position: absolute;
+    margin: -5px 0 0 5px;
+    border: 1px solid #BFCEE3;
+    background: #C1E0C1;
+    font-size: 0.9em;
+    opacity: .90;
+    filter: alpha(opacity = 90);
+    z-index: 50;
+}
+
+div.contextMenu a {
+    color: #555;
+    text-decoration: none;
+}
+
+div.contextMenu div:hover {
+    background: #BFCEE3;
+}
+
+div.contextMenu img {
+    margin: 0 5px 0 0;
 }
 
 td.torrent_name {

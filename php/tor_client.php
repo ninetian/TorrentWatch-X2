@@ -248,7 +248,7 @@ function client_add_torrent($filename, $dest, $title, $feed = NULL, &$fav = NULL
     $dest = $fav['Save In'];
   }
 
-  $dest = get_deep_dir($dest, $tor_name);
+  $dest = get_deep_dir(preg_replace('/\/$/', '', $dest), $tor_name);
 
   if(!file_exists($dest) or !is_dir($dest)) {
     $old_umask = umask(0);

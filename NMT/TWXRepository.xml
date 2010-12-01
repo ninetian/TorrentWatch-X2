@@ -3,8 +3,8 @@
     <Applications>
     <Application>
       <Name>TorrentWatch-X</Name>
-      <Version>0.7</Version>
-      <DownloadURL>http://torrentwatch-x.googlecode.com/files/TorrentWatchX-NMT-0.7.zip</DownloadURL>
+      <Version>0.7.1</Version>
+      <DownloadURL>http://torrentwatch-x.googlecode.com/files/TorrentWatchX-NMT-0.7.1.zip</DownloadURL>
       <Author>Wiebel</Author>
       <Maintainer>Wiebel</Maintainer>
       <Description>TorrentWatch-X is a web based tool to automate downloads of tv shows via torrents and rss. Based on the torrentwatch project (now known as NMTDVR).</Description>
@@ -21,20 +21,15 @@
       <UsageInstructions />
       <Forum />
       <Changelog>
-	-- New fresh look.
-	-- Added progressbar for active torrents.
-	-- Added "any" as filter option in favorites. See FAQ for more info.
-	-- Made Proper/Repack matching optional.
-	-- Fixed a lot of small UI bugs.
-	-- Fixed bug where Proper / Repack's where not downloaded.
-	-- Replaced greybox with own code.
-	-- Added meaningfull error messages.
-	-- Added search option in hide list.
-	-- Upgraded jquery to 1.4.4
-	-- Update guessing routine.
-	-- Added option to hide donate button.
-	-- Fixed issue where Episode filtering stoped working in 0.6.5.
-	-- Fixed an issue where in some cases Last epi info would not be updated.
+	    -- Improved overall performance.
+	    -- Added matching counter on tabs.
+	    -- some other minor UI enhancements.
+	    -- made regexp matching default, simple will be removed in the future.
+	    -- updated guessing routine.
+	    -- Fixed issue where default config on NMT would give errors on devices with a sata drive.
+	    -- Fixed issue that could cause a high load on pch devies and other slower systems. (Thanks Allan for noticing)
+	    -- Fixed issue causing torrents that failed to be added to transmission still got cached. (Thanks Henk for noticing)
+	    -- Fixed a bunch of other small bugs.
       </Changelog>
     </Application>
     </Applications>

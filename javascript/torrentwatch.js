@@ -252,13 +252,13 @@ $(function() {
 
     torStartStopToggle = function(torHash) {
         var curObject = $('li.item_' + torHash + ' p.torStart');
-        if (curObject.is(":visible")) {
+        if (curObject.css('display') == 'block') {
             curObject.hide();
         } else {
             curObject.show();
         }
         curObject = $('li.item_' + torHash + ' p.torStop');
-        if (curObject.is(":visible")) {
+        if (curObject.css('display') == 'block') {
             curObject.hide();
         } else {
             curObject.show();
@@ -904,14 +904,9 @@ $(function() {
 
             $('li#id_' + id).removeClass('item_###torHash###').addClass('item_'+torHash);
 
-            var p = $('li#id_' + id + ' p.delete');
-            p.html(p.html().replace(/###torHash###/g, torHash.match(/\w+/)));
-            p = $('li#id_' + id + ' p.trash');
-            p.html(p.html().replace(/###torHash###/g, torHash.match(/\w+/)));
-            p = $('li#id_' + id + ' p.torStart');
-            p.html(p.html().replace(/###torHash###/g, torHash.match(/\w+/)));
-            p = $('li#id_' + id + ' p.torStop');
-            p.html(p.html().replace(/###torHash###/g, torHash.match(/\w+/)));
+	    var item = $('li#id_' + id);
+	    item.html(item.html().replace(/###torHash###/g, torHash));
+
             setTimeout(getClientData,10);
         });
     };

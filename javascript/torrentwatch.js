@@ -289,7 +289,7 @@ $(function() {
         '<li id="clientId_' + item.id + '" class="torrent match_transmission item_' + item.hashString + ' ' + liClass +'">' +
         '<table width="100%" cellspacing="0"><tr>' +
         '<td class="torrent_name tor_client"><a class="contextButton" onclick=\'$.toggleContextMenu(TransContext_'+item.id+');\'></a>' +
-	'<span class="torrent_name" onclick="javascript:$.episodeInfo(\'' + item.name.replace("'","\\'") + '\')">' + item.name + '</span>' +
+	'<div class="torrent_name" onclick="javascript:$.episodeInfo(\'' + item.name.replace("'","\\'") + '\')">' + item.name + '</div>' +
         '<div id="TransContext_' + item.id + '" class="contextMenu"><div><p title="Resume" class="button torStart ' + hideStart + '" ' +
         'onclick="$.stopStartTorrent(\'start\', \'' + item.hashString + '\');">Resume transfer</p></div>' +
         '<div><p title="Pause download" class="button torStop ' + hideStop + '" ' +
@@ -304,8 +304,8 @@ $(function() {
 	'onclick=\'javascript:$.episodeInfo("' + item.name + '")\'>Episode Info</a></p></div></div>' +
 	'<div style="width: 100%; margin-top: 2px; border: 1px solid #BFCEE3; background: #DFE3E8;"><div class="progressDiv" style="width: '+Percentage+'%; height: 3px;"></div></div>' +
         '<span class="dateAdded hidden">' + item.addedDate + '</span>' +
-        '<span id=tor_' + item.id + ' class="torInfo tor_' + item.hashString + '">' + clientData + '</span>' +
-	'<span class="torEta">' + item.eta + '</span>' +
+        '<div class="infoDiv"><span id=tor_' + item.id + ' class="torInfo tor_' + item.hashString + '">' + clientData + '</span>' +
+	'<span class="torEta">' + item.eta + '</span></div>' +
         '<div id="move_' + item.hashString + '" class="move_data hidden">' + 
         '<input id="moveTo' + item.hashString + '" type="text" class="text" name="moveTo" value="' + item.downloadDir + '" />' +
         '<a class="move" id="Move" href="#" onclick="$.moveTorrent(\'' + item.hashString + '\')">Move</a>' +
@@ -892,7 +892,8 @@ $(function() {
             $('li#id_' + id + ' td.buttons').removeClass('match_nomatch match_old_download').addClass('match_downloading');
             if ($('li#id_' + id + ' span.torInfo').length === 0) {
                 $('li#id_' + id + ' td.torrent_name')
-                .append('<span id=tor_' + id + ' class="torInfo tor_' + torHash.match(/\w+/) + '">Waiting for client data...</span><span class="torEta"></span>');
+                .append('<div class="infoDiv"><span id=tor_' + id + ' class="torInfo tor_' + torHash.match(/\w+/) + '">' +
+			'Waiting for client data...</span><span class="torEta"></span></div>');
             }
 
 	    if(window.client != 'folder') $('li#id_' + id + ' div.progressBarContainer').show();

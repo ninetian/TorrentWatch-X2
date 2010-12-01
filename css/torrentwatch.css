@@ -645,18 +645,20 @@ ul.torrentlist td.torrent_name.tor_client {
     padding: 2px 8px 0 0;
 }
 
-ul.torrentlist .torInfo {
-    float: left;
+ul.torrentlist div.infoDiv {
+    height: 12px;
+    display: block;
     color: green;
     font-size: 9px;
-    margin: 2px 0 2px 0;
+    margin-top: 1px;
+}
+
+ul.torrentlist .torInfo {
+    float: left;
 }
 
 ul.torrentlist .torEta {
     float: right;
-    color: green;
-    font-size: 9px;
-    margin: 1px 0 1px 0;
 }
 
 ul.torrentlist .torInfoErr {
@@ -666,8 +668,8 @@ ul.torrentlist .torInfoErr {
 }
 
 div.torrent_name {
-    display: inline;
-    margin: 0 5px 0px 0;
+    display: block;
+    margin: 0 0 2px 0;
     padding: 0;
 }
 
@@ -702,7 +704,7 @@ div.contextMenu {
 
 div.contextMenu p {
     margin: 0 3px 0 3px;
-    padding-left: 15px;
+    padding: 0 0 3px 15px;
     color: #333;
     text-decoration: none;
     cursor: pointer;
@@ -738,6 +740,7 @@ div.contextMenu p.episodeInfo {
 }
 
 td.torrent_name {
+    font-size: 12px;
     vertical-align: top;
     padding-left: 5px;
 }
@@ -751,7 +754,7 @@ div.progressBarContainer {
     width: 100%;
     background: #DFE3E8;
     display: block;
-    margin-top: 3px;
+    margin-top: 1px;
 }
 
 div.progressBarContainer.init {
@@ -784,9 +787,9 @@ div.feed_info p {
 }
 
 span.dateAdded,
-div.torrent_pubDate {
+span.torrent_pubDate {
     float: right;
-    padding: 1px 0 1px 0;
+    padding: 2px 0 0px 0;
     font-size: 10px;
 }    
 

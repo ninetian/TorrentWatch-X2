@@ -20,8 +20,7 @@ if($config_values['Settings']['Combine Feeds'] == 1) {
 if(isset($torInfo)) {
     $stats = $torInfo['stats'];
     $clientId = $torInfo['clientId'];
-    $infoDiv = "<span id='tor_$id' class='torInfo tor_$torHash'>$stats</span>";
-    $etaDiv = "<span class='torEta'>$eta</span>";
+    $infoDiv = "<div class='infoDiv'><span id='tor_$id' class='torInfo tor_$torHash'>$stats</span><span class='torEta'>$eta</span></div>";
     if($torInfo['status'] == 4) $matched = "downloading";
 } else if((!$config_values['Settings']['Disable Hide List']) && ($matched == "nomatch"))  {
     $hideTD = "<td class='hideTD'><span class=\"hide_item\"><a href=\"#\"
@@ -49,7 +48,6 @@ if($matched == "downloading" || $matched == "downloaded" || $matched == "cachehi
 } 
 
 if(!isset($infoDiv)) $infoDiv = '';
-if(!isset($etaDiv)) $etaDiv = '';
 if(!isset($feedItem)) $feedItem = '';
 if(!isset($torInfo)) $torInfo = '';
 if(!isset($unixTime)) $unixTime = '';
@@ -67,6 +65,7 @@ print <<< EOH
    <div class='torrent_name'>
 	<a id="contextButton_$id" class="contextButton" onclick='$.toggleContextMenu("#divContext_$id", "$id");'></a>
 	<span title="$description">$title</span>
+	<span class='torrent_pubDate'>$feedItem $pubDate</span>
    </div>
    <div id="divContext_$id" class="contextMenu">
 	<div><p class='favorite' onclick='javascript:$.addFavorite("torrentwatch.php?matchTitle=1&rss=$feed&title=$utitle")' title="Add this show to favorites">Add to favorites</p></div>
@@ -77,10 +76,8 @@ print <<< EOH
 	<div><p class="activeTorrent trash $hidden" onclick='javascript:$.delTorrent("$torHash", "true")' title="Delete torrent and its data">Remove & Trash data</p></div>
 	<div><p class="episodeInfo" onclick='javascript:$.episodeInfo("$utitle")' title="Delete torrent and its data">Episode Info</p></div>
    </div>
-   <div class='torrent_pubDate'>$feedItem $pubDate</div>
    $progressBar
    $infoDiv
-   $etaDiv
    <span class='hidden' id=unixTime>$unixTime</span>
   </td>
  </tr>

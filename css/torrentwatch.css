@@ -544,7 +544,7 @@ div.feed li.torrent.alt {
 
 div.feed li.torrent:hover,
 ul#transmission_list li.normal:hover {
-    background-color: #DAE3F2;
+    background-color: #E1E9F5;
 }
 
 li.torrent.hidden_bytext {
@@ -656,13 +656,13 @@ ul.torrentlist .torEta {
     float: right;
     color: green;
     font-size: 9px;
-    margin: 2px 0 2px 0;
+    margin: 1px 0 1px 0;
 }
 
 ul.torrentlist .torInfoErr {
     color: red;
     font-size: 9px;
-    margin: 2px 0 2px 0;
+    margin: 1px 0 1px 0;
 }
 
 div.torrent_name {
@@ -751,7 +751,7 @@ div.progressBarContainer {
     width: 100%;
     background: #DFE3E8;
     display: block;
-    margin-top: 2px;
+    margin-top: 3px;
 }
 
 div.progressBarContainer.init {

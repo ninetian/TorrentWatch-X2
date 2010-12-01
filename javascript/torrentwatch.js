@@ -955,7 +955,6 @@ $(function() {
 	    }, function (data) {
 		$('#dynamicdata.dyndata').append(data);
 		$('#dynamicdata .dialog_last').remove();
-		$('div.contextMenu').hide();
 		$('.dialog').show();
 		window.dialog = 1;
 	    }
@@ -1091,6 +1090,9 @@ $(function() {
 		},500)
 		$('div.contextMenu, a#contextButton_'+id).mouseenter(function() {
 		    clearTimeout(contextTimeout);
+		})
+		$(item_id).click(function() {
+		    $(item_id).slideUp('fast');
 		})
 	    });
 	}

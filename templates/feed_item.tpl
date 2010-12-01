@@ -58,43 +58,25 @@ if(!isset($pubDateClass)) $pubDateClass = '';
 
 print <<< EOH
 
-<li id=id_$id name=$id class="torrent match_$matched $alt item_$torHash" title="$description">
+<li id=id_$id name=$id class="torrent match_$matched $alt item_$torHash">
 
-<div id="divContext_$id" class="contextMenu">
-  <div><p class='favorite'>
-  <a href="#" title="Add this show to favorites" onclick='javascript:$.addFavorite("torrentwatch.php?matchTitle=1&rss=$feed&title=$utitle")'>
-  Add to favorites</a></p></div>
-
-  <div><p class='$dlTorrent'>
-  <a href="#" title="Download this torrent" onclick='javascript:$.dlTorrent("torrentwatch.php?dlTorrent=1&title=$utitle&link=$ulink&feed=$feed","$id")'>
-  Download</a></p></div>
-
-  <div><p class="activeTorrent $torStart">
-  <a href="#" title="Resume download" onclick='javascript:$.stopStartTorrent("start", "$torHash")'>
-  Resume</a></p></div>
-
-  <div><p class="activeTorrent $torStop">
-  <a href="#" title="Pause download" onclick='javascript:$.stopStartTorrent("stop", "$torHash")'>
-  Pause</a></p></div>
-
-  <div><p class="activeTorrent delete $hidden">
-  <a href="#" title="Delete torrent but keep data" onclick='javascript:$.delTorrent("$torHash", "false")'>
-  Delete</a></p></div>
-
-  <div><p class="activeTorrent trash $hidden">
-  <a href="#" title="Delete torrent and its data" onclick='javascript:$.delTorrent("$torHash", "true")'>
-  Delete data</a></p></div>
-
-  <div><p class="episodeInfo">
-  <a href="#" title="Delete torrent and its data" onclick='javascript:$.episodeInfo("$utitle")'>
-  Episode Info</a></p></div>
-</div>
 <table width="100%" cellspacing="0">
  <tr>
   <td class="identifier"></td>
   <td class="torrent_name">
    <div class='torrent_name'>
-   <a class="contextButton button" onclick='$("#divContext_$id").slideToggle("fast");'></a>$title</div>
+	<a id="contextButton_$id" class="contextButton" onclick='$.toggleContextMenu("#divContext_$id", "$id");'></a>
+	<span title="$description">$title</span>
+   </div>
+   <div id="divContext_$id" class="contextMenu">
+	<div><p class='favorite' onclick='javascript:$.addFavorite("torrentwatch.php?matchTitle=1&rss=$feed&title=$utitle")' title="Add this show to favorites">Add to favorites</p></div>
+	<div><p class='$dlTorrent' onclick='javascript:$.dlTorrent("torrentwatch.php?dlTorrent=1&title=$utitle&link=$ulink&feed=$feed","$id")' title="Download this torrent">Download</p></div>
+	<div><p class="activeTorrent $torStart" onclick='javascript:$.stopStartTorrent("start", "$torHash")' title="Resume download">Resume transfer</p></div>
+	<div><p class="activeTorrent $torStop" onclick='javascript:$.stopStartTorrent("stop", "$torHash")' title="Pause download">Pause transfer</p></div>
+	<div><p class="activeTorrent delete $hidden" onclick='javascript:$.delTorrent("$torHash", "false")' title="Delete torrent but keep data">Remove from client</p></div>
+	<div><p class="activeTorrent trash $hidden" onclick='javascript:$.delTorrent("$torHash", "true")' title="Delete torrent and its data">Remove & Trash data</p></div>
+	<div><p class="episodeInfo" onclick='javascript:$.episodeInfo("$utitle")' title="Delete torrent and its data">Episode Info</p></div>
+   </div>
    <div class='torrent_pubDate'>$feedItem $pubDate</div>
    $progressBar
    $infoDiv

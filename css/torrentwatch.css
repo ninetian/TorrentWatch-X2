@@ -547,13 +547,6 @@ ul#transmission_list li.normal:hover {
     background-color: #DAE3F2;
 }
 
-ul.torrentlist li.torrent table:hover,
-ul.torrentlist li.torrent.alt table:hover,
-ul#transmission_list li.normal:hover {
-    opacity: .80;
-    filter: alpha(opacity = 80);
-}
-
 li.torrent.hidden_bytext {
     display: none;
 }
@@ -643,7 +636,7 @@ ul.torrentlist td.torrent_name {
 
 ul.torrentlist li.match_nomatch td.torrent_name {
     vertical-align: middle;
-    padding: 2px 8px 1px 5px;
+    padding: 2px 8px 0 5px;
     height: 15px;
 }
 
@@ -673,48 +666,49 @@ ul.torrentlist div.torInfoErr {
 
 div.torrent_name {
     display: inline-block;
-    margin: 0 5px 2px 0;
+    margin: 0 5px 0 0;
 }
 
 td.torrent_name a.contextButton,
 div.torrent_name a.contextButton {
-    background: #DFE3E8 url(../images/dropdown.png) no-repeat left;
+    background: #F0F0F0;
+    background-image: url('../images/dropdown.png');
+    background-repeat: no-repeat;
+    background-position: left;
     float: left;
     border: 1px solid #ccc;
     border-radius: 4px;
     padding: 0;
     margin: 2px 5px 0 0;
     width: 11px;
-    height: 9px;
+    height: 10px;
 }
 
 div.contextMenu {
     display: none;
     position: absolute;
-    margin: 20px 0 0 10px;
+    margin: 0;
     border: 1px solid #888;
     background: #DDD;
-    filter:			progid:DXImageTransform.Microsoft.gradient(startColorstr=#EEEEEE,endColorstr=#CCCCCC);
-    background:                 -webkit-gradient(linear, left top, left bottom, from(#eee), to(#ccc));
-    background: 		-moz-linear-gradient(top, #eee, #ccc);
+    filter:			progid:DXImageTransform.Microsoft.gradient(startColorstr=#F8F8F8,endColorstr=#DDDDDD);
+    background:                 -webkit-gradient(linear, left top, left bottom, from(#f8f8f8), to(#ddd));
+    background: 		-moz-linear-gradient(top, #f8f8f8, #ddd);
     font-size: 0.9em;
-    opacity: .90;
-    filter: alpha(opacity = 90);
+    opacity: .95;
+    filter: alpha(opacity = 95);
     z-index: 2;
 }
 
-div.contextMenu a {
-    margin-left: 15px;
+div.contextMenu p {
+    margin: 0 3px 0 3px;
+    padding-left: 15px;
     color: #333;
     text-decoration: none;
+    cursor: pointer;
 }
 
 div.contextMenu div:hover {
     background: #BFCEE3;
-}
-
-div.contextMenu p {
-    margin-left: 5px;
 }
 
 div.contextMenu p.favorite {

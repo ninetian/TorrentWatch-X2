@@ -636,7 +636,8 @@ ul.torrentlist td.torrent_name {
 
 ul.torrentlist li.match_nomatch td.torrent_name {
     vertical-align: middle;
-    padding: 2px 8px 0 5px;
+    padding: 2px 8px 2px 5px;
+    margin: 0;
     height: 15px;
 }
 
@@ -644,29 +645,30 @@ ul.torrentlist td.torrent_name.tor_client {
     padding: 2px 8px 0 0;
 }
 
-ul.torrentlist div.torInfo {
-    display: inline-block;
+ul.torrentlist .torInfo {
+    float: left;
     color: green;
     font-size: 9px;
     margin: 2px 0 2px 0;
 }
 
-ul.torrentlist div.torEta {
+ul.torrentlist .torEta {
     float: right;
     color: green;
     font-size: 9px;
-    margin: 3px 0 2px 0;
+    margin: 2px 0 2px 0;
 }
 
-ul.torrentlist div.torInfoErr {
+ul.torrentlist .torInfoErr {
     color: red;
     font-size: 9px;
     margin: 2px 0 2px 0;
 }
 
 div.torrent_name {
-    display: inline-block;
-    margin: 0 5px 0 0;
+    display: inline;
+    margin: 0 5px 0px 0;
+    padding: 0;
 }
 
 td.torrent_name a.contextButton,
@@ -677,7 +679,6 @@ div.torrent_name a.contextButton {
     background-position: left;
     float: left;
     border: 1px solid #ccc;
-    border-radius: 4px;
     padding: 0;
     margin: 2px 5px 0 0;
     width: 11px;
@@ -750,6 +751,7 @@ div.progressBarContainer {
     width: 100%;
     background: #DFE3E8;
     display: block;
+    margin-top: 2px;
 }
 
 div.progressBarContainer.init {

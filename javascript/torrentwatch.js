@@ -326,8 +326,8 @@ $(function() {
 	    window.getfail = 1;
 	    var error = "Error connecting to " + window.client;
 	    window.clientErrorCount++;
-	    $('div.torInfo').html(error);
-	    $('div.feed div.torInfo').addClass('torInfoErr');
+	    $('span.torInfo').html(error);
+	    $('div.feed span.torInfo').addClass('torInfoErr');
 	    $('li#filter_transmission a').addClass('error');
 	    if(window.clientErrorCount >= 3) showClientError(error);
 	}
@@ -356,8 +356,8 @@ $(function() {
 		   window.getfail = 1;
                    var error = 'Got no data from ' + window.client;
                    showClientError(error);
-		   $('div.torInfo').html(error);
-		   $('div.feed div.torInfo').addClass('torInfoErr');
+		   $('span.torInfo').html(error);
+		   $('div.feed span.torInfo').addClass('torInfoErr');
 		   $('li#filter_transmission a').addClass('error');
                    return;		
                }
@@ -370,7 +370,7 @@ $(function() {
 
 		window.clientErrorCount = 0;                
 	        $('li#filter_transmission a').removeClass('error');
-	        $('div.feed div.torInfo').removeClass('torInfoErr');
+	        $('div.feed span.torInfo').removeClass('torInfoErr');
 
                 processClientData(json, recent);
 		$('li#webui a span').removeClass('altIcon');
@@ -379,8 +379,8 @@ $(function() {
                     $.each(json['arguments']['removed'],
                     function(i, item) {
                         if ($('li.clientId_' + item).length !== 0) {
-                            $('li.clientId_' + item + ' div.torInfo').remove();
-                            $('li.clientId_' + item + ' div.torEta').remove();
+                            $('li.clientId_' + item + ' span.torInfo').remove();
+                            $('li.clientId_' + item + ' span.torEta').remove();
                             $('li.clientId_' + item + ' div.progressBarContainer').hide();
                             $('li.clientId_' + item + ' p.activeTorrent').hide();
                             $('li.clientId_' + item + ' p.dlTorrent').show();
@@ -491,7 +491,7 @@ $(function() {
                 clientData = item.errorString;
             }
 
-            $('li.match_old_download div.torInfo, li.match_old_download div.torEta').html(''); 
+            $('li.match_old_download span.torInfo, li.match_old_download span.torEta').html(''); 
 	    if(recent == 1) {
                 clientItem = getClientItem(item, clientData, liClass, Percentage);
                 
@@ -499,8 +499,8 @@ $(function() {
                         $('#transmission_list').prepend(clientItem);
                 }
                 
-                $('li.item_' + item.hashString + ' div.torInfo').text(clientData);
-                if(item.status == 4) $('li.item_' + item.hashString + ' div.torEta').text(item.eta);
+                $('li.item_' + item.hashString + ' span.torInfo').text(clientData);
+                if(item.status == 4) $('li.item_' + item.hashString + ' span.torEta').text(item.eta);
                 
                 if(window.oldStatus[item.id] != item.id + '_' + item.status) {  
                     if (item.status == 16 || item.errorString) {
@@ -527,8 +527,8 @@ $(function() {
 	        if(window.getfail) window.getfail = 0;
                 clientItem = getClientItem(item, clientData, liClass, Percentage);
                 torListHtml += clientItem;
-                $('li.item_' + item.hashString + ' div.torInfo').text(clientData);
-                if(item.status == 4) $('li.item_' + item.hashString + ' div.torEta').text(item.eta);
+                $('li.item_' + item.hashString + ' span.torInfo').text(clientData);
+                if(item.status == 4) $('li.item_' + item.hashString + ' span.torEta').text(item.eta);
                 if(item.status <= 16) {
 			if(item.status == 8) { var match = 'match_downloaded' } else { var match = 'match_downloading' };
                         $('li.item_' + item.hashString + ' ,li.item_' + item.hashString + ' .buttons')
@@ -890,7 +890,7 @@ $(function() {
             }
             $('li#id_' + id).removeClass('match_nomatch match_old_download').addClass('match_downloading');
             $('li#id_' + id + ' td.buttons').removeClass('match_nomatch match_old_download').addClass('match_downloading');
-            if ($('li#id_' + id + ' div.torInfo').length === 0) {
+            if ($('li#id_' + id + ' span.torInfo').length === 0) {
                 $('li#id_' + id + ' td.torrent_name')
                 .append('<div id=tor_' + id + ' class="torInfo tor_' + torHash.match(/\w+/) + '"></div><div class="torEta"></div>');
             }

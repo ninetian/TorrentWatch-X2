@@ -11,12 +11,17 @@ div#torrentlist_container {
     top: 58px;
 }
 
+div.torrent_name {
+    display: inline-block;
+    margin: 0 5px 2px 0;
+}
+
 div#history {
     height: 256px;
 }
 
 div#linkButtons  {
-    margin-bottom: 5px !important;
+    margin-bottom: 5px;
 }
 
 div#configuration div.config_form input#hideSearchText {

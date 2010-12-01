@@ -20,8 +20,8 @@ if($config_values['Settings']['Combine Feeds'] == 1) {
 if(isset($torInfo)) {
     $stats = $torInfo['stats'];
     $clientId = $torInfo['clientId'];
-    $infoDiv = "<div id='tor_$id' class='torInfo tor_$torHash'>$stats</div>";
-    $etaDiv = "<div class='torEta'>$eta</div>";
+    $infoDiv = "<span id='tor_$id' class='torInfo tor_$torHash'>$stats</span>";
+    $etaDiv = "<span class='torEta'>$eta</span>";
     if($torInfo['status'] == 4) $matched = "downloading";
 } else if((!$config_values['Settings']['Disable Hide List']) && ($matched == "nomatch"))  {
     $hideTD = "<td class='hideTD'><span class=\"hide_item\"><a href=\"#\"

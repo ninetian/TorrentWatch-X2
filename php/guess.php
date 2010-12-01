@@ -1,6 +1,7 @@
 <?php
 function guess_match($title, $normalize = FALSE) { 
-    
+    //Remove soft hyphens
+	$title = str_replace("\xC2\xAD", "", $title);
     // Episode
     $epi ='/[_.\s\(]';  //Start with _ , . or space
     $epi.='(S\d+[_.\s]?EP? ?\d+(?:-EP? ?\d+)?'.'|';  // S12E1 or S12EP1-EP2 
@@ -21,6 +22,8 @@ function guess_match($title, $normalize = FALSE) {
     $quality ='/\b(DVB '.'|';
     $quality.='DSRIP'   .'|';
     $quality.='DVBRip'  .'|';
+    $quality.='BRRip'   .'|';
+    $quality.='BluRay'  .'|';
     $quality.='DVDR'    .'|';
     $quality.='DVDRip'  .'|';
     $quality.='DVDScr'  .'|';
@@ -35,6 +38,8 @@ function guess_match($title, $normalize = FALSE) {
     $quality.='HDTV'    .'|';
     $quality.='XviD'    .'|';
     $quality.='x264'    .'|';
+    $quality.='H264'    .'|';
+    $quality.='H 264'   .'|';
     $quality.='HR.PDTV' .'|';
     $quality.='PDTV'    .'|';
     $quality.='SatRip'  .'|';
@@ -50,14 +55,21 @@ function guess_match($title, $normalize = FALSE) {
     // Audio
     $audio = '/([_.\s]AC3)/i';
     
+	// Junk
+    $junk ='/\b(';
+    $junk.='LiMiTED';
+    $junk.=')\b/';
+	
     //Sanatize title
     if($filter = get_item_filter()) $title = preg_replace($filter, '', $title);
     $title = preg_replace('/( ?\/ ?)/', ' ', $title);
     $title = preg_replace($audio, '', $title);
+    $title = preg_replace($junk, '', $title);
+    $title = preg_replace('/(x|h)\s+264/i', '{$1}264', $title);
     if(preg_match('/\b(720p|1080p|1080i)\b/i', $title)) {
         $title = preg_replace('/( -)?[_. ]HDTV/', '', $title);
     }
-    
+	
     if(preg_match($epi, $title, $match)) {
         $episode_guess = trim($match[1], ' .');
         $key_guess = trim(preg_replace("/([^-\(\.]+)[\. ]*(?:[_.\s]-[_.\s].*)?(:?[_.\s]\(.+)?" . 

@@ -178,10 +178,13 @@ IMPORTANT: If you are updating from a previous version. Please copy php/config.p
     -- Fixed issue where Episode filtering stoped working in 0.6.5.
     -- Fixed an issue where in some cases Last epi info would not be updated.
 
-current:
+0.7.1:
     -- Improved overall performance.
-    -- some UI enhancements.
-    -- Fixed some small UI bugs.
+    -- Added matching counter on tabs.
+    -- some other minor UI enhancements.
+    -- made regexp matching default, simple will be removed in the future.
+    -- updated guessing routine.
     -- Fixed issue where default config on NMT would give errors on devices with a sata drive.
     -- Fixed issue that could cause a high load on pch devies and other slower systems. (Thanks Allan for noticing)
     -- Fixed issue causing torrents that failed to be added to transmission still got cached. (Thanks Henk for noticing)
+    -- Fixed a bunch of other small bugs.

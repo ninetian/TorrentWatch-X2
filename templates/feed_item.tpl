@@ -23,7 +23,7 @@ if(isset($torInfo)) {
     $infoDiv = "<div class='infoDiv'><span id='tor_$id' class='torInfo tor_$torHash'>$stats</span><span class='torEta'>$eta</span></div>";
     if($torInfo['status'] == 4) $matched = "downloading";
 } else if((!$config_values['Settings']['Disable Hide List']) && ($matched == "nomatch"))  {
-    $hideItem = "<div><p class='hideItem' onclick='$.hideItem(\"$utitle\")' title='Hide show'>Hide show</p></div>";
+    $hideItem = "<div class='hideItem' onclick='$.hideItem(\"$utitle\")' title='Hide show'>Hide show</div>";
 }
 
 if($config_values['Settings']['Client'] != 'folder') $progressBar = "<div class='progressBarContainer init'><div class='progressDiv' style='width: 0.07%; height: 3px; '></div></div>";
@@ -66,14 +66,14 @@ print <<< EOH
 	<span class='torrent_pubDate'>$feedItem $pubDate</span>
    </div>
    <div id="divContext_$id" class="contextMenu">
-	<div><p class='favorite' onclick='javascript:$.addFavorite("torrentwatch.php?matchTitle=1&rss=$feed&title=$utitle")' title="Add this show to favorites">Add to favorites</p></div>
-	<div><p class='$dlTorrent' onclick='javascript:$.dlTorrent("torrentwatch.php?dlTorrent=1&title=$utitle&link=$ulink&feed=$feed","$id")' title="Download this torrent">Download</p></div>
-	<div><p class="activeTorrent $torStart" onclick='javascript:$.stopStartTorrent("start", "$torHash")' title="Resume download">Resume transfer</p></div>
-	<div><p class="activeTorrent $torStop" onclick='javascript:$.stopStartTorrent("stop", "$torHash")' title="Pause download">Pause transfer</p></div>
-	<div><p class="activeTorrent delete $hidden" onclick='javascript:$.delTorrent("$torHash", "false")' title="Delete torrent but keep data">Remove from client</p></div>
-	<div><p class="activeTorrent trash $hidden" onclick='javascript:$.delTorrent("$torHash", "true")' title="Delete torrent and its data">Remove & Trash data</p></div>
+	<div class='addFavorite' onclick='javascript:$.addFavorite("torrentwatch.php?matchTitle=1&rss=$feed&title=$utitle")' title="Add this show to favorites">Add to favorites</div>
+	<div class='$dlTorrent' onclick='javascript:$.dlTorrent("torrentwatch.php?dlTorrent=1&title=$utitle&link=$ulink&feed=$feed","$id")' title="Download this torrent">Download</div>
+	<div class="activeTorrent $torStart" onclick='javascript:$.stopStartTorrent("start", "$torHash")' title="Resume download">Resume transfer</div>
+	<div class="activeTorrent $torStop" onclick='javascript:$.stopStartTorrent("stop", "$torHash")' title="Pause download">Pause transfer</div>
+	<div class="activeTorrent delete $hidden" onclick='javascript:$.delTorrent("$torHash", "false")' title="Delete torrent but keep data">Remove from client</div>
+	<div class="activeTorrent trash $hidden" onclick='javascript:$.delTorrent("$torHash", "true")' title="Delete torrent and its data">Remove & Trash data</div>
         $hideItem
-	<div><p class="episodeInfo" onclick='javascript:$.episodeInfo("$utitle")' title="Delete torrent and its data">Episode Info</p></div>
+	<div class="episodeInfo" onclick='javascript:$.episodeInfo("$utitle")' title="Delete torrent and its data">Episode Info</p></div>
    </div>
    $progressBar
    $infoDiv

@@ -699,41 +699,48 @@ div.contextMenu {
     z-index: 2;
 }
 
-div.contextMenu p {
-    margin: 0 3px 0 3px;
-    padding: 0 0 3px 15px;
+div.contextMenu div {
+    padding: 1px 3px 1px 15px;
     color: #333;
     text-decoration: none;
     cursor: pointer;
 }
 
 div.contextMenu div:hover {
-    background: #BFCEE3;
+    background-color: #BFCEE3;
 }
 
-div.contextMenu p.favorite {
+div.contextMenu .addFavorite {
     background: url(../images/tor_fav.png) no-repeat left center;
+    background-position: 2px 3px;
 }
-div.contextMenu p.dlTorrent {
+div.contextMenu .dlTorrent {
     background: url(../images/tor_start.png) no-repeat left center;
+    background-position: 2px 3px;
 }
-div.contextMenu p.torStart {
+div.contextMenu .torStart {
     background: url(../images/tor_start.png) no-repeat left center;
+    background-position: 2px 3px;
 }
-div.contextMenu p.torStop {
+div.contextMenu .torStop {
     background: url(../images/tor_pause.png) no-repeat left center;
+    background-position: 2px 3px;
 }
-div.contextMenu p.delete {
+div.contextMenu .delete {
     background: url(../images/tor_stop.png) no-repeat left center;
+    background-position: 2px 3px;
 }
-div.contextMenu p.trash {
+div.contextMenu .trash {
     background: url(../images/tor_trash.png) no-repeat left center;
+    background-position: 2px 3px;
 }
-div.contextMenu p.torMove {
+div.contextMenu .torMove {
     background: url(../images/tor_move.png) no-repeat left center;
+    background-position: 2px 3px;
 }
-div.contextMenu p.episodeInfo {
+div.contextMenu .episodeInfo {
     background: url(../images/tv_icon.png) no-repeat left center;
+    background-position: 2px 3px;
 }
 
 td.torrent_name {

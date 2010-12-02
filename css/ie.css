@@ -11,11 +11,6 @@ div#torrentlist_container {
     top: 58px;
 }
 
-div.torrent_name {
-    display: inline-block;
-    margin: 0 5px 2px 0;
-}
-
 div#history {
     height: 256px;
 }

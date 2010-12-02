@@ -288,17 +288,17 @@ $(function() {
         var transmissionItem =
         '<li id="clientId_' + item.id + '" class="torrent match_transmission item_' + item.hashString + ' ' + liClass +'">' +
         '<table width="100%" cellspacing="0"><tr>' +
-        '<td class="torrent_name tor_client"><a class="contextButton" onclick=\'$.toggleContextMenu(TransContext_'+item.id+');\'></a>' +
-	'<div class="torrent_name">' + item.name + '</div>' +
+        '<td class="torrent_name tor_client"><div class="torrent_name">' +
+	'<a class="contextButton" onclick=\'$.toggleContextMenu(TransContext_'+item.id+');\'></a>' + item.name + '</div>' +
         '<div id="TransContext_' + item.id + '" class="contextMenu"><div><p title="Resume" class="button torStart ' + hideStart + '" ' +
         'onclick="$.stopStartTorrent(\'start\', \'' + item.hashString + '\');">Resume transfer</p></div>' +
         '<div><p title="Pause download" class="button torStop ' + hideStop + '" ' +
         'onclick="$.stopStartTorrent(\'stop\', \'' + item.hashString + '\');">Pause transfer</a></p></div>' +
         '<div><p title="Set location or move torrent data.&#13;Current location: ' + item.downloadDir + '" class="button torMove" ' +
         'onclick="toggleTorMove(\'' + item.hashString + '\');">Move data</a></p></div>' +
-        '<div><p title="Delete torrent and its data" class="button trash" ' +
-        'onclick="$.delTorrent(\'' + item.hashString + '\', \'false\');">Remove from client</a></p></div>' +
         '<div><p title="Delete torrent but keep data" class="button delete" ' +
+        'onclick="$.delTorrent(\'' + item.hashString + '\', \'false\');">Remove from client</a></p></div>' +
+        '<div><p title="Delete torrent and its data" class="button trash" ' +
         'onclick="$.delTorrent(\'' + item.hashString + '\', \'true\');">Remove & Trash data</a></p></div>' +
   	'<div><p class="episodeInfo" title="Delete torrent and its data" ' +
 	'onclick=\'javascript:$.episodeInfo("' + item.name + '")\'>Episode Info</a></p></div></div>' +
@@ -452,7 +452,15 @@ $(function() {
 		} else if(item.eta > 0) {
 		    minutes = Math.round(item.eta/60);
 		    seconds = item.eta-(minutes*60);
-		    item.eta = 'Remaining: ' + minutes + ' min ' + seconds + ' sec';
+		    if(seconds < 0) { 
+			minutes--;
+			seconds = seconds+60;
+		    }
+		    if(item.eta < 60) {
+		        item.eta = 'Remaining: ' + item.eta + ' sec';
+		    } else {
+		    	item.eta = 'Remaining: ' + minutes + ' min ' + seconds + ' sec';
+		    }
 		} else {
 		    item.eta = 'Remaining: unknown';
 	        }
@@ -464,9 +472,11 @@ $(function() {
 	    if (item.status == 1) {
                 clientData = 'Waiting to verify';
                 liClass = 'waiting';
+                $('li.torrent span.torEta').html('');
             } else if (item.status == 2) {
                 clientData = 'Verifying files (' + validProgress + '%)';
                 liClass = 'verifying';
+                $('li.torrent span.torEta').html('');
             } else if (item.status == 4) {
                 clientData = 'Downloading from ' + item.peersSendingToUs + ' of ' +
                 item.peersConnected + ' peers: ' +
@@ -478,6 +488,7 @@ $(function() {
                 clientData = 'Seeding to ' + item.peersGettingFromUs + ' of ' +
                 item.peersConnected + ' peers  -  Ratio: ' + Ratio;
 		$('li.item_' + item.hashString).removeClass('match_downloading').addClass('match_downloaded');
+                $('li.torrent span.torEta').html('');
             } else if (item.status == 16) {
                 if(Ratio >= item.seedRatioLimit && Percentage == 100) {
                     clientData = "Downloaded and seed ratio met. This torrent can be removed.";
@@ -485,6 +496,7 @@ $(function() {
                     clientData = "Paused";
                 }
                 liClass = 'paused';
+                $('li.torrent span.torEta').html('paused');
             }
             if (item.errorString) {
                 clientData = item.errorString;

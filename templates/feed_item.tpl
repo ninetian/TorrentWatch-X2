@@ -23,7 +23,7 @@ if(isset($torInfo)) {
     $infoDiv = "<div class='infoDiv'><span id='tor_$id' class='torInfo tor_$torHash'>$stats</span><span class='torEta'>$eta</span></div>";
     if($torInfo['status'] == 4) $matched = "downloading";
 } else if((!$config_values['Settings']['Disable Hide List']) && ($matched == "nomatch"))  {
-    $hideItem = '<div><p class="hideItem" onclick=\'$.hideItem("$utitle")\' title="Hide show">Hide show</p></div>';
+    $hideItem = "<div><p class='hideItem' onclick='$.hideItem(\"$utitle\")' title='Hide show'>Hide show</p></div>";
 }
 
 if($config_values['Settings']['Client'] != 'folder') $progressBar = "<div class='progressBarContainer init'><div class='progressDiv' style='width: 0.07%; height: 3px; '></div></div>";

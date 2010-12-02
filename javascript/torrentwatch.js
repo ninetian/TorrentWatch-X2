@@ -290,18 +290,18 @@ $(function() {
         '<table width="100%" cellspacing="0"><tr>' +
         '<td class="torrent_name tor_client"><div class="torrent_name">' +
 	'<a class="contextButton" onclick=\'$.toggleContextMenu(TransContext_'+item.id+');\'></a>' + item.name + '</div>' +
-        '<div id="TransContext_' + item.id + '" class="contextMenu"><div><p title="Resume" class="button torStart ' + hideStart + '" ' +
-        'onclick="$.stopStartTorrent(\'start\', \'' + item.hashString + '\');">Resume transfer</p></div>' +
-        '<div><p title="Pause download" class="button torStop ' + hideStop + '" ' +
-        'onclick="$.stopStartTorrent(\'stop\', \'' + item.hashString + '\');">Pause transfer</a></p></div>' +
-        '<div><p title="Set location or move torrent data.&#13;Current location: ' + item.downloadDir + '" class="button torMove" ' +
-        'onclick="toggleTorMove(\'' + item.hashString + '\');">Move data</a></p></div>' +
-        '<div><p title="Delete torrent but keep data" class="button delete" ' +
-        'onclick="$.delTorrent(\'' + item.hashString + '\', \'false\');">Remove from client</a></p></div>' +
-        '<div><p title="Delete torrent and its data" class="button trash" ' +
-        'onclick="$.delTorrent(\'' + item.hashString + '\', \'true\');">Remove & Trash data</a></p></div>' +
-  	'<div><p class="episodeInfo" title="Delete torrent and its data" ' +
-	'onclick=\'javascript:$.episodeInfo("' + item.name + '")\'>Episode Info</a></p></div></div>' +
+        '<div id="TransContext_' + item.id + '" class="contextMenu"><div title="Resume" class="button torStart ' + hideStart + '" ' +
+        'onclick="$.stopStartTorrent(\'start\', \'' + item.hashString + '\');">Resume transfer</div>' +
+        '<div title="Pause download" class="button torStop ' + hideStop + '" ' +
+        'onclick="$.stopStartTorrent(\'stop\', \'' + item.hashString + '\');">Pause transfer</a></div>' +
+        '<div title="Set location or move torrent data.&#13;Current location: ' + item.downloadDir + '" class="button torMove" ' +
+        'onclick="toggleTorMove(\'' + item.hashString + '\');">Move data</a></div>' +
+        '<div title="Delete torrent but keep data" class="button delete" ' +
+        'onclick="$.delTorrent(\'' + item.hashString + '\', \'false\');">Remove from client</a></div>' +
+        '<div title="Delete torrent and its data" class="button trash" ' +
+        'onclick="$.delTorrent(\'' + item.hashString + '\', \'true\');">Remove & Trash data</a></div>' +
+  	'<div class="episodeInfo" title="Delete torrent and its data" ' +
+	'onclick=\'javascript:$.episodeInfo("' + item.name + '")\'>Episode Info</a></div></div>' +
 	'<div style="width: 100%; margin-top: 2px; border: 1px solid #BFCEE3; background: #DFE3E8;"><div class="progressDiv" style="width: '+Percentage+'%; height: 3px;"></div></div>' +
         '<span class="dateAdded hidden">' + item.addedDate + '</span>' +
         '<div class="infoDiv"><span id=tor_' + item.id + ' class="torInfo tor_' + item.hashString + '">' + clientData + '</span>' +
@@ -1104,8 +1104,14 @@ $(function() {
 		$('div.contextMenu, a#contextButton_'+id).mouseenter(function() {
 		    clearTimeout(contextTimeout);
 		})
+		$('div.contextItem').mouseover(function() {
+		    $(this).addClass('alt');
+		    $(this).mouseleave(function() {
+		        $(this).removeClass('alt');
+		    });
+		});
 		$(item_id).click(function() {
-		    $(item_id).slideUp('fast');
+		    $(this).slideUp('fast');
 		})
 	    });
 	}

@@ -706,7 +706,7 @@ div.contextMenu div {
     cursor: pointer;
 }
 
-div.contextMenu div:hover {
+div.contextMenu .contextItem.alt {
     background-color: #BFCEE3;
 }
 

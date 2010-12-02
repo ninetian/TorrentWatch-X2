@@ -289,16 +289,16 @@ $(function() {
         '<li id="clientId_' + item.id + '" class="torrent match_transmission item_' + item.hashString + ' ' + liClass +'">' +
         '<table width="100%" cellspacing="0"><tr>' +
         '<td class="torrent_name tor_client"><a class="contextButton" onclick=\'$.toggleContextMenu(TransContext_'+item.id+');\'></a>' +
-	'<div class="torrent_name" onclick="javascript:$.episodeInfo(\'' + item.name.replace("'","\\'") + '\')">' + item.name + '</div>' +
+	'<div class="torrent_name">' + item.name + '</div>' +
         '<div id="TransContext_' + item.id + '" class="contextMenu"><div><p title="Resume" class="button torStart ' + hideStart + '" ' +
         'onclick="$.stopStartTorrent(\'start\', \'' + item.hashString + '\');">Resume transfer</p></div>' +
         '<div><p title="Pause download" class="button torStop ' + hideStop + '" ' +
         'onclick="$.stopStartTorrent(\'stop\', \'' + item.hashString + '\');">Pause transfer</a></p></div>' +
-        '<div><p title="Delete torrent but keep data" class="button delete" ' +
+        '<div><p title="Set location or move torrent data.&#13;Current location: ' + item.downloadDir + '" class="button torMove" ' +
         'onclick="toggleTorMove(\'' + item.hashString + '\');">Move data</a></p></div>' +
         '<div><p title="Delete torrent and its data" class="button trash" ' +
         'onclick="$.delTorrent(\'' + item.hashString + '\', \'false\');">Remove from client</a></p></div>' +
-        '<div><p title="Set location or move torrent data.&#13;Current location: ' + item.downloadDir + '" class="button torMove" ' +
+        '<div><p title="Delete torrent but keep data" class="button delete" ' +
         'onclick="$.delTorrent(\'' + item.hashString + '\', \'true\');">Remove & Trash data</a></p></div>' +
   	'<div><p class="episodeInfo" title="Delete torrent and its data" ' +
 	'onclick=\'javascript:$.episodeInfo("' + item.name + '")\'>Episode Info</a></p></div></div>' +
@@ -379,8 +379,7 @@ $(function() {
                     $.each(json['arguments']['removed'],
                     function(i, item) {
                         if ($('li.clientId_' + item).length !== 0) {
-                            $('li.clientId_' + item + ' span.torInfo').remove();
-                            $('li.clientId_' + item + ' span.torEta').remove();
+                            $('li.clientId_' + item + ' div.infoDiv').remove();
                             $('li.clientId_' + item + ' div.progressBarContainer').hide();
                             $('li.clientId_' + item + ' p.activeTorrent').hide();
                             $('li.clientId_' + item + ' p.dlTorrent').show();
@@ -570,7 +569,7 @@ $(function() {
 	if(window.gotAllData) {
 	    $('#torrentlist_container li.match_to_check, #torrentlist_container li.match_to_check .buttons').addClass('match_old_download').removeClass('match_to_check');
 	    $('#torrentlist_container li.match_old_download .progressBarContainer, #torrentlist_container li.match_old_download .activeTorrent.delete, #torrentlist_container li.match_old_download .activeTorrent.trash').hide();
-	    $('#torrentlist_container li.match_old_download .torInfo, #torrentlist_container li.match_old_download .torEta').remove();
+	    $('#torrentlist_container li.match_old_download div.infoDiv, #torrentlist_container li.match_old_download .torEta').remove();
 	    $('#torrentlist_container li.match_old_download p.torStop').hide();
 	    $('#torrentlist_container li.match_old_download p.dlTorrent').show();
 	}
@@ -896,6 +895,7 @@ $(function() {
 			'Waiting for client data...</span><span class="torEta"></span></div>');
             }
 
+            $('li#id_' + id + ' p.hideItem').hide();
 	    if(window.client != 'folder') $('li#id_' + id + ' div.progressBarContainer').show();
             $('li#id_' + id + ' p.dlTorrent').hide();
             $('li#id_' + id + ' p.torStop').show();

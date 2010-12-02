@@ -23,9 +23,7 @@ if(isset($torInfo)) {
     $infoDiv = "<div class='infoDiv'><span id='tor_$id' class='torInfo tor_$torHash'>$stats</span><span class='torEta'>$eta</span></div>";
     if($torInfo['status'] == 4) $matched = "downloading";
 } else if((!$config_values['Settings']['Disable Hide List']) && ($matched == "nomatch"))  {
-    $hideTD = "<td class='hideTD'><span class=\"hide_item\"><a href=\"#\"
-    title=\"Hide this show from the list\" onclick='$.hideItem(\"$utitle\")'>
-    <img src=\"images/hide.png\" /></a></span></td>";
+    $hideItem = '<div><p class="hideItem" onclick=\'$.hideItem("$utitle")\' title="Hide show">Hide show</p></div>';
 }
 
 if($config_values['Settings']['Client'] != 'folder') $progressBar = "<div class='progressBarContainer init'><div class='progressDiv' style='width: 0.07%; height: 3px; '></div></div>";
@@ -48,10 +46,10 @@ if($matched == "downloading" || $matched == "downloaded" || $matched == "cachehi
 } 
 
 if(!isset($infoDiv)) $infoDiv = '';
+if(!isset($hideItem)) $hideItem = '';
 if(!isset($feedItem)) $feedItem = '';
 if(!isset($torInfo)) $torInfo = '';
 if(!isset($unixTime)) $unixTime = '';
-if(!isset($hideTD)) $hideTD = "<td class='hideTD'></td>";
 if(!isset($pubDateClass)) $pubDateClass = '';
 
 print <<< EOH
@@ -63,8 +61,8 @@ print <<< EOH
   <td class="identifier"></td>
   <td class="torrent_name">
    <div class='torrent_name'>
-	<a id="contextButton_$id" class="contextButton" onclick='$.toggleContextMenu("#divContext_$id", "$id");'></a>
-	<span title="$description">$title</span>
+	<span><a id="contextButton_$id" class="contextButton" onclick='$.toggleContextMenu("#divContext_$id", "$id");'></a></span>
+	<span class='torrent_title' title="$description">$title</span>
 	<span class='torrent_pubDate'>$feedItem $pubDate</span>
    </div>
    <div id="divContext_$id" class="contextMenu">
@@ -74,6 +72,7 @@ print <<< EOH
 	<div><p class="activeTorrent $torStop" onclick='javascript:$.stopStartTorrent("stop", "$torHash")' title="Pause download">Pause transfer</p></div>
 	<div><p class="activeTorrent delete $hidden" onclick='javascript:$.delTorrent("$torHash", "false")' title="Delete torrent but keep data">Remove from client</p></div>
 	<div><p class="activeTorrent trash $hidden" onclick='javascript:$.delTorrent("$torHash", "true")' title="Delete torrent and its data">Remove & Trash data</p></div>
+        $hideItem
 	<div><p class="episodeInfo" onclick='javascript:$.episodeInfo("$utitle")' title="Delete torrent and its data">Episode Info</p></div>
    </div>
    $progressBar

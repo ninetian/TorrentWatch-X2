@@ -631,12 +631,11 @@ ul.torrentlist td.buttons.right {
 }
 
 ul.torrentlist td.torrent_name {
-    padding: 2px 8px 0 5px;
+    padding: 2px 5px 2px 5px;
 }
 
 ul.torrentlist li.match_nomatch td.torrent_name {
     vertical-align: middle;
-    padding: 2px 8px 2px 5px;
     margin: 0;
     height: 15px;
 }
@@ -650,7 +649,8 @@ ul.torrentlist div.infoDiv {
     display: block;
     color: green;
     font-size: 9px;
-    margin-top: 1px;
+    margin: 2px 0 0 0;
+    width: 100%;
 }
 
 ul.torrentlist .torInfo {
@@ -667,24 +667,17 @@ ul.torrentlist .torInfoErr {
     margin: 1px 0 1px 0;
 }
 
-div.torrent_name {
-    display: block;
-    margin: 0 0 2px 0;
-    padding: 0;
-}
-
-td.torrent_name a.contextButton,
 div.torrent_name a.contextButton {
     background: #F0F0F0;
     background-image: url('../images/dropdown.png');
     background-repeat: no-repeat;
-    background-position: left;
+    background-position: 0 1px;
     float: left;
     border: 1px solid #ccc;
     padding: 0;
     margin: 2px 5px 0 0;
     width: 11px;
-    height: 10px;
+    height: 9px;
 }
 
 div.contextMenu {
@@ -750,11 +743,10 @@ td.progressRow {
 }
 
 div.progressBarContainer {
-    border: 1px solid #BFCEE3;
-    width: 100%;
-    background: #DFE3E8;
     display: block;
-    margin-top: 1px;
+    border: 1px solid #BFCEE3;
+    background: #DFE3E8;
+    margin-top: 2px;
 }
 
 div.progressBarContainer.init {
@@ -786,18 +778,29 @@ div.feed_info p {
     //font-size: 0.8em;
 }
 
-span.dateAdded,
-span.torrent_pubDate {
-    float: right;
-    padding: 2px 0 0px 0;
-    font-size: 10px;
-}    
+div.torrent_name {
+    display: block;
+    padding: 0;
+    height: 15px;
+    width: 100%;
+}
+
+div.torrent_name span.torrent_title {
+    float: left;
+}
 
 span.feed_name {
-    padding-top: 1px;
+    float: left;
+    padding: 1px 3px 0 0;
     font-size: 9px;
     color: #777777;
 }
+
+span.torrent_pubDate {
+    float: right;
+    padding-top: 2px;
+    font-size: 10px;
+}    
 
 span.hide_item img {
     border: 1px solid #b0b0b0;

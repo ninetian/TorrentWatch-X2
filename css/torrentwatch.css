@@ -512,7 +512,7 @@ ul#transmission_list li.selected td.torrent_name,
 ul#transmission_list li.selected td.torrent_name:hover,
 ul#transmission_list li.selected td.alt.torrent_name:hover,
 ul#transmission_list li.selected td.alt.torrent_name {
-    background-color: #3879D7;
+    background-color: #778DA8;
     color: #FFFFFF;
 }
 

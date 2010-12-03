@@ -851,9 +851,9 @@ div#transmission_data div.header {
     height: 15px;
     font-size: 12px;
     background: #DDD;
-    filter:			progid:DXImageTransform.Microsoft.gradient(startColorstr=#F8F8F8,endColorstr=#DDDDDD);
-    background:                 -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ddd));
-    background: 		-moz-linear-gradient(top, #fff, #ddd);
+    filter:			progid:DXImageTransform.Microsoft.gradient(startColorstr=#EEEEEE,endColorstr=#CCCCCC);
+    background:                 -webkit-gradient(linear, left top, left bottom, from(#eee), to(#ccc));
+    background: 		-moz-linear-gradient(top, #eee, #ccc);
     border-bottom: 1px solid #aaa;
 }
 

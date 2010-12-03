@@ -267,11 +267,11 @@ $(function() {
     };
     
     toggleTorMove = function(torHash) {
-        var curObject = $('div#move_' + torHash);
+        var curObject = $('div.move_data');
         if (curObject.is(":visible")) {
-            curObject.slideUp();
+            curObject.fadeOut();
         } else {
-            curObject.slideDown();
+            curObject.fadeIn();
         }
         curObject = null;
     };
@@ -287,30 +287,14 @@ $(function() {
 	 
         var transmissionItem =
         '<li id="clientId_' + item.id + '" class="torrent match_transmission item_' + item.hashString + ' ' + liClass +'">' +
-        '<table width="100%" cellspacing="0"><tr>' +
-        '<td class="torrent_name tor_client"><div class="torrent_name">' +
-	'<a class="contextButton" onclick=\'$.toggleContextMenu(TransContext_'+item.id+');\'></a>' + item.name + '</div>' +
-        '<div id="TransContext_' + item.id + '" class="contextMenu"><div title="Resume" class="button torStart ' + hideStart + '" ' +
-        'onclick="$.stopStartTorrent(\'start\', \'' + item.hashString + '\');">Resume transfer</div>' +
-        '<div title="Pause download" class="button torStop ' + hideStop + '" ' +
-        'onclick="$.stopStartTorrent(\'stop\', \'' + item.hashString + '\');">Pause transfer</a></div>' +
-        '<div title="Set location or move torrent data.&#13;Current location: ' + item.downloadDir + '" class="button torMove" ' +
-        'onclick="toggleTorMove(\'' + item.hashString + '\');">Move data</a></div>' +
-        '<div title="Delete torrent but keep data" class="button delete" ' +
-        'onclick="$.delTorrent(\'' + item.hashString + '\', \'false\');">Remove from client</a></div>' +
-        '<div title="Delete torrent and its data" class="button trash" ' +
-        'onclick="$.delTorrent(\'' + item.hashString + '\', \'true\');">Remove & Trash data</a></div>' +
-  	'<div class="episodeInfo" title="Delete torrent and its data" ' +
-	'onclick=\'javascript:$.episodeInfo("' + item.name + '")\'>Episode Info</a></div></div>' +
+        '<table width="100%" cellspacing="0"><tr><td class="tr_identifier"></td>' +
+        '<td class="torrent_name tor_client"><div class="torrent_name">' + item.name + '</div>' +
 	'<div style="width: 100%; margin-top: 2px; border: 1px solid #BFCEE3; background: #DFE3E8;"><div class="progressDiv" style="width: '+Percentage+'%; height: 3px;"></div></div>' +
         '<span class="dateAdded hidden">' + item.addedDate + '</span>' +
         '<div class="infoDiv"><span id=tor_' + item.id + ' class="torInfo tor_' + item.hashString + '">' + clientData + '</span>' +
 	'<span class="torEta">' + item.eta + '</span></div>' +
-        '<div id="move_' + item.hashString + '" class="move_data hidden">' + 
-        '<input id="moveTo' + item.hashString + '" type="text" class="text" name="moveTo" value="' + item.downloadDir + '" />' +
-        '<a class="move" id="Move" href="#" onclick="$.moveTorrent(\'' + item.hashString + '\')">Move</a>' +
-        '<a class="close" href="#" onclick="toggleTorMove(\'' + item.hashString + '\');">-</a>' +
-        '</div></td></tr></table></li>';
+	'<input type="hidden" class="path" value="' + item.downloadDir + '"></input>'+
+        '</td></tr></table></li>';
         
         return(transmissionItem);
     };
@@ -498,10 +482,11 @@ $(function() {
                 liClass = 'paused';
                 $('li.torrent span.torEta').html('paused');
             }
+
             if (item.errorString) {
                 clientData = item.errorString;
             }
-
+	
             $('li.match_old_download span.torInfo, li.match_old_download span.torEta').html(''); 
 	    if(recent == 1) {
                 clientItem = getClientItem(item, clientData, liClass, Percentage);
@@ -560,7 +545,7 @@ $(function() {
                 $('li.item_' + item.hashString).addClass('clientId_' + item.id);
 		window.gotAllData = 1;
             }
-            
+
 	    upSpeed = upSpeed + item.rateUpload;
 	    downSpeed = downSpeed + item.rateDownload;
 
@@ -602,6 +587,29 @@ $(function() {
 		if(matches)
 		    $('#' + item.id + ' span.matches').html('('+matches+')');
 	    });
+	    if(!window.toProcess) window.toProcess = new Array();
+	    $('#transmission_list li.torrent').not('.selActive').each(function() {
+		$(this).addClass('selActive');
+		var trItem = this.id.match(/[0-9]+/)[0];
+		$('#' + this.id).click(function() {
+		    if($(this).hasClass('selected')) {
+			$(this).removeClass('selected');
+			removeByElement(window.toProcess, trItem);
+		    } else {
+			$(this).addClass('selected');
+			window.toProcess.push(trItem);
+		    }	
+		    if($('#transmission_list li.torrent.selected').length)  {
+			$('input#moveTo').val($('#' + this.id + ' input.path').val());
+			if($('#transmission_data .header').is(":hidden"))
+			    $('#transmission_data .header').slideDown();
+		    } else {
+			$('input#moveTo').val('');
+			if($('#transmission_data .header').is(":visible"))
+			    $('#transmission_data .header').slideUp();
+		    }
+		});
+	    })
 	}, 100)
 
         if(!$('.move_data').is(':visible')) {
@@ -609,6 +617,14 @@ $(function() {
         }
         $('#transmission_list li.torrent').markAlt();
     };
+
+
+    function removeByElement(arrayName,arrayElement) {
+        for(var i=0; i<arrayName.length;i++ ) { 
+	    if(arrayName[i]==arrayElement)
+	        arrayName.splice(i,1); 
+        } 
+    }
 
     $(document).keyup(function(e) {
 	if (e.keyCode == '27') {
@@ -924,12 +940,12 @@ $(function() {
         });
     };
 
-    $.delTorrent = function(torHash, trash, sure) {
-        if(trash == 'true' && sure != 'true' && !$.cookie('TorTrash')) {
+    $.delTorrent = function(torHash, trash, batch, sure) {
+        if(trash && sure != 'true' && !$.cookie('TorTrash')) {
 	    var dialog = '<div id="confirmTrash" class="dialog confirm" style="display: block; ">' +
 				'<div class="dialog_window" id="trash_tor_data"><div>Are you sure?<br />This will remove the torrent along with its data.</div>' +
 				    '<div class="buttonContainer"><a class="button confirm trash_tor_data" ' +
-					'onclick="$(\'#confirmTrash\').remove(); $.delTorrent(\''+torHash+'\',\'true\', \'true\');">Yes</a>' +
+					'onclick="$(\'#confirmTrash\').remove(); $.delTorrent(\''+torHash+'\',\'true\', \''+batch+'\', \'true\');">Yes</a>' +
 				    '<a class="button trash_tor_data wide" ' + 
 					'onclick="$(\'#confirmTrash\').remove();' +
                         		'$.cookie(\'TorTrash\', 1, { expires: 30 });' +
@@ -946,7 +962,8 @@ $(function() {
         if(sure) {
             $.getJSON('torrentwatch.php', {
                 'delTorrent': torHash,
-                'trash': trash
+                'trash': trash,
+		'batch': batch
             },
             function(json) {
                 if (json.result == "success") {
@@ -974,16 +991,12 @@ $(function() {
 	);
     }
 	
-    $.stopStartTorrent = function(stopStart, torHash) {
+    $.stopStartTorrent = function(stopStart, torHash, batch) {
         var param;
         if (stopStart == 'stop') {
-            param = {
-                'stopTorrent': torHash
-            };
+            param = { stopTorrent: torHash, batch: batch};
         } else if (stopStart == 'start') {
-            param = {
-                'startTorrent': torHash
-            };
+            param = { startTorrent: torHash, batch: batch};
         }
         $.getJSON('torrentwatch.php', param,
         function(json) {
@@ -997,12 +1010,13 @@ $(function() {
         });
     };
 
-    $.moveTorrent = function(torHash) {
-        var path = $('input#moveTo' + torHash)[0].value;
+    $.moveTorrent = function(torHash, batch) {
+        path = $('input#moveTo')[0].value;
         
         $.getJSON('torrentwatch.php', {
             'moveTo': path,
-            'torHash': torHash
+            'torHash': torHash,
+	    'batch': batch
         },
         function(json) {
             toggleTorMove(torHash);
@@ -1099,7 +1113,7 @@ $(function() {
 	    $(item_id).slideDown('fast');
 	    $('div.contextMenu, a.contextButton').mouseleave(function() {
 	        var contextTimeout = setTimeout(function() {
-		    $(item_id).hide();
+		    $(item_id).fadeOut('fast');
 		},500)
 		$('div.contextMenu, a#contextButton_'+id).mouseenter(function() {
 		    clearTimeout(contextTimeout);
@@ -1117,6 +1131,27 @@ $(function() {
 	}
     }
 
+    $.processSelected = function(action) {
+	var list = ''; 
+	$.each(window.toProcess, function(i, item) {
+	    if(list) {
+		list = list + ',' + item;
+	    } else {
+		list = list + item;
+	    }
+	})
+	
+        if(action == 'trash') var trash = 1;
+	if((action == 'delete') || (action == 'trash')) { 
+	    $.delTorrent(list, trash, true);
+	    window.toProcess = new Array();
+	}
+	if(action == 'start') $.stopStartTorrent('start', list, true);
+	if(action == 'stop') $.stopStartTorrent('stop', list, true);
+	if(action == 'move') $.moveTorrent(list, true);
+		
+    }
+
     $.noEnter = function(evt) { 
       var evt = (evt) ? evt : ((event) ? event : null); 
       var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null); 
@@ -1124,4 +1159,3 @@ $(function() {
     } 
     document.onkeypress = $.noEnter; 
 })(jQuery);
-

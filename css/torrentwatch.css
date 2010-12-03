@@ -455,6 +455,53 @@ div#transmissionWindow {
 	height: 550px;
 }
 	
+div#transmissionButtons {
+    display: inline;
+    //text-align: center;
+    cursor: pointer;
+    float: left;
+}
+
+div#transmissionButtons span {
+    margin-right: 10px;
+}
+
+div.move_data {
+    float: left;
+}
+
+div.move_data input {
+    float: none;
+    font-size: 0.8em;
+    width: 200px;
+    margin: 0;
+    padding-bottom: 1px;
+}
+
+div.move_data a {
+    float: none;
+    border: 1px solid #979797;
+    text-align: center;
+    text-decoration: none;
+    background-color: #EEE;
+    font-size: 0.8em;
+    color: #323232;
+    margin: 0 0 0 5px;
+    padding: 0 5px 1px 5px;
+}
+
+div.move_data a.close {
+    width: 40px;
+}
+
+div.move_data a.button.close {
+    width: 10px;
+}
+
+div.move_data label {
+    margin: 0 0 0 2px;
+}
+    
 
 /*-------------------------
  *
@@ -482,12 +529,17 @@ div#torrentlist_container div.errorHeader {
     border-bottom: 1px solid #ddd;
 }
 
-div#torrentlist_container div.header,
-div.transmission div.header {
+div#torrentlist_container div.header {
     font-size: 1em;
     padding: 0.2em 0 0.2em 0;
     text-align: center;
     background: #C1E0C1;
+}
+
+div#transmission_data div.header {
+    height: 20px;
+    background: #DDD;
+    border-bottom: 1px solid #aaa;
 }
 
 div.transmission #waiting {
@@ -526,49 +578,47 @@ ul.torrentlist li.torrent {
     min-height: 15px;
 }
 
-ul#transmission_list li {
+ul#transmission_list td.torrent_name {
     padding-left: 5px;
 }
 
-ul#transmission_list li.paused,
-ul#transmission_list li.waiting,
-ul#transmission_list li.verifying,
-ul#transmission_list li.downloading {
-    border-bottom: 1px solid #CCC;
-}
-
-ul#transmission_list li.normal.alt,
+ul#transmission_list li.alt td.torrent_name,
 div.feed li.torrent.alt {
     background-color: #F0F1F2;
 }
 
 div.feed li.torrent:hover,
-ul#transmission_list li.normal:hover {
+ul#transmission_list li td.torrent_name:hover,
+ul#transmission_list li.alt td.torrent_name:hover {
     background-color: #E1E9F5;
+}
+
+ul#transmission_list li.selected td.torrent_name,
+ul#transmission_list li.selected td.torrent_name:hover,
+ul#transmission_list li.selected td.alt.torrent_name:hover,
+ul#transmission_list li.selected td.alt.torrent_name {
+    background-color: #3879D7;
+    color: #FFFFFF;
 }
 
 li.torrent.hidden_bytext {
     display: none;
 }
 
-ul.torrentlist li.torrent.paused {
+ul#transmission_list li.torrent.paused .tr_identifier {
     background-color: #FBBFBF;
 }
 
-ul.torrentlist li.torrent.downloading {
-    background-color: #f2e2ff;
+ul#transmission_list li.torrent.downloading .tr_identifier {
+    background-color: #E9CFFF;
 }
 
-ul.torrentlist li.torrent.verifying {
-    background-color: #FFFFCC;
+ul#transmission_list li.torrent.verifying .tr_identifier {
+    background-color: #FFFFBB;
 }
 
-ul.torrentlist li.torrent.waiting {
-    background-color: #FFFFFF;
-}
-
-ul.torrentlist p {
-    padding: 1px;
+ul#transmission_list li.torrent.waiting .tr_identifier {
+    background-color: #C1E0C1;
 }
 
 ul.torrentlist td.buttons {
@@ -579,6 +629,10 @@ ul.torrentlist td.buttons {
 }
 
 ul.torrentlist td.identifier {
+    width: 5px;
+}
+
+ul.torrentlist td.tr_identifier {
     width: 5px;
 }
 
@@ -653,6 +707,10 @@ ul.torrentlist div.infoDiv {
     width: 100%;
 }
 
+ul#transmission_list li.selected div.infoDiv {
+    color: #FFFFFF;
+}
+
 ul.torrentlist .torInfo {
     float: left;
 }
@@ -689,7 +747,7 @@ div.contextMenu {
     border: 1px solid #888;
     border-radius: 3px;
     -moz-border-radius: 3px;
-    background: #DDD;
+    background: #EEE;
     filter:			progid:DXImageTransform.Microsoft.gradient(startColorstr=#F8F8F8,endColorstr=#DDDDDD);
     background:                 -webkit-gradient(linear, left top, left bottom, from(#f8f8f8), to(#ddd));
     background: 		-moz-linear-gradient(top, #f8f8f8, #ddd);
@@ -973,44 +1031,6 @@ div#cacheDialog .title {
     margin-left: -160px;
     width: 330px;
 }
-
-div.move_data {
-    position: inherit;
-    padding: 2px 10px 5px 0px;
-}
-
-div.move_data input {
-    float: none;
-    font-size: 0.8em;
-    width: 200px;
-    margin: 0 0 0 0;
-    padding: 0 2px 1px 2px;
-}
-
-div.move_data a {
-    float: none;
-    border: 1px solid #979797;
-    text-align: center;
-    text-decoration: none;
-    background-color: #EEE;
-    font-size: 0.8em;
-    color: #323232;
-    margin: 0 0 0 5px;
-    padding: 0 5px 1px 5px;
-}
-
-div.move_data a.close {
-    width: 40px;
-}
-
-div.move_data a.button.close {
-    width: 10px;
-}
-
-div.move_data label {
-    margin: 0 0 0 2px;
-}
-    
 
 h2.dialog_heading {
     font-size: 1.3em;

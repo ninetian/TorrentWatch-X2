@@ -83,19 +83,19 @@ function parse_options() {
             echo $response;
             exit;
         case 'delTorrent':
-            $response = delTorrent($_REQUEST['delTorrent'], $_REQUEST['trash']);
+            $response = delTorrent($_REQUEST['delTorrent'], $_REQUEST['trash'], $_REQUEST['batch']);
             echo "$response";
             exit;
         case 'stopTorrent':
-            $response = stopTorrent($_REQUEST['stopTorrent']);
+            $response = stopTorrent($_REQUEST['stopTorrent'], $_REQUEST['batch']);
             echo "$response";
             exit;
         case 'startTorrent':
-            $response = startTorrent($_REQUEST['startTorrent']);
+            $response = startTorrent($_REQUEST['startTorrent'], $_REQUEST['batch']);
             echo "$response";
             exit;
         case 'moveTo':
-            $response = moveTorrent($_REQUEST['moveTo'], $_REQUEST['torHash']);
+            $response = moveTorrent($_REQUEST['moveTo'], $_REQUEST['torHash'], $_REQUEST['batch']);
             echo "$response";
             exit;
         case 'updateFavorite':

@@ -424,85 +424,6 @@ div#show_episode .firstletter {
 	font-size: 20px;
 }
 
-/*-----------------------------
- *
- * T O R R E N T   C L I E N T
- *
- * ----------------------------*/
-
-div#transmissionDialog {
-	display: inline;
-}
-	
-div#transmissionDialog .title {
-    padding-top: 2px;
-    top: 50px;
-    width: 800px;
-    margin-left: -400px;
-}
-
-div#transmissionWindow {
-	width: 800px;
-	height: 550px;
-	top: 71px;
-	margin-left: -400px;
-	padding: 0;
-        border: 1px solid #979797;
-}
-
-#transmissionFrame {
-	width: 800px;
-	height: 550px;
-}
-	
-div#transmissionButtons {
-    display: inline;
-    //text-align: center;
-    cursor: pointer;
-    float: left;
-}
-
-div#transmissionButtons span {
-    margin-right: 10px;
-}
-
-div.move_data {
-    float: left;
-}
-
-div.move_data input {
-    float: none;
-    font-size: 0.8em;
-    width: 200px;
-    margin: 0;
-    padding-bottom: 1px;
-}
-
-div.move_data a {
-    float: none;
-    border: 1px solid #979797;
-    text-align: center;
-    text-decoration: none;
-    background-color: #EEE;
-    font-size: 0.8em;
-    color: #323232;
-    margin: 0 0 0 5px;
-    padding: 0 5px 1px 5px;
-}
-
-div.move_data a.close {
-    width: 40px;
-}
-
-div.move_data a.button.close {
-    width: 10px;
-}
-
-div.move_data label {
-    margin: 0 0 0 2px;
-}
-    
-
 /*-------------------------
  *
  * T O R R E N T   L I S T
@@ -534,12 +455,6 @@ div#torrentlist_container div.header {
     padding: 0.2em 0 0.2em 0;
     text-align: center;
     background: #C1E0C1;
-}
-
-div#transmission_data div.header {
-    height: 20px;
-    background: #DDD;
-    border-bottom: 1px solid #aaa;
 }
 
 div.transmission #waiting {
@@ -900,6 +815,95 @@ div#donate {
     padding-top: 3px;
     text-align: center;
 }
+
+/*-----------------------------
+ *
+ * T O R R E N T   C L I E N T
+ *
+ * ----------------------------*/
+
+div#transmissionDialog {
+	display: inline;
+}
+	
+div#transmissionDialog .title {
+    padding-top: 2px;
+    top: 50px;
+    width: 800px;
+    margin-left: -400px;
+}
+
+div#transmissionWindow {
+	width: 800px;
+	height: 550px;
+	top: 71px;
+	margin-left: -400px;
+	padding: 0;
+        border: 1px solid #979797;
+}
+
+#transmissionFrame {
+	width: 800px;
+	height: 550px;
+}
+	
+div#transmission_data div.header {
+    height: 15px;
+    font-size: 12px;
+    background: #DDD;
+    filter:			progid:DXImageTransform.Microsoft.gradient(startColorstr=#F8F8F8,endColorstr=#DDDDDD);
+    background:                 -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ddd));
+    background: 		-moz-linear-gradient(top, #fff, #ddd);
+    border-bottom: 1px solid #aaa;
+}
+
+div#transmissionButtons {
+    display: inline;
+    //text-align: center;
+    cursor: pointer;
+    float: left;
+}
+
+div#transmissionButtons span {
+    margin-right: 10px;
+}
+
+div.move_data {
+    float: left;
+}
+
+div.move_data input {
+    float: none;
+    font-size: 0.8em;
+    width: 200px;
+    margin: 0;
+    padding-bottom: 1px;
+}
+
+div.move_data a {
+    float: none;
+    border: 1px solid #979797;
+    text-align: center;
+    text-decoration: none;
+    background-color: #EEE;
+    font-size: 0.8em;
+    color: #323232;
+    margin: 0 0 0 5px;
+    padding: 0 5px 1px 5px;
+}
+
+div.move_data a.close {
+    width: 40px;
+}
+
+div.move_data a.button.close {
+    width: 10px;
+}
+
+div.move_data label {
+    margin: 0 0 0 2px;
+}
+    
 
 /*--------------------------
  *

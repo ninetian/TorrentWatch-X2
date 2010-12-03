@@ -636,6 +636,7 @@ $(function() {
     $(document).keyup(function(e) {
 	if (e.keyCode == '13') {
 		$('.dialog .confirm').click();
+		if($('#transmission_data .header #Move').is(":visible")) $('#transmission_data .header #Move').click();
         }
     });
 
@@ -1132,6 +1133,7 @@ $(function() {
     }
 
     $.processSelected = function(action) {
+	if($('#transmission_list .torrent.selected').length === 0) return;
 	var list = ''; 
 	$.each(window.toProcess, function(i, item) {
 	    if(list) {

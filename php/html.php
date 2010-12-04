@@ -15,7 +15,18 @@ function finish_rss_list_html() {
 function show_transmission_div() {
   global $html_out;
   $html_out .= '<div id="transmission_data" class="transmission">';
-  $html_out .= '<div class="header">Transmission</div>';
+  $html_out .= '<div class="header hidden">';
+  $html_out .= '<div id="transmissionButtons">';
+  $html_out .= '<span onclick="javascript:$.processSelected(\'start\')">|></span>';
+  $html_out .= '<span onclick="javascript:$.processSelected(\'stop\')">||</span>';
+  $html_out .= '<span onclick="javascript:$.processSelected(\'delete\')">[]</span>';
+  $html_out .= '<span onclick="javascript:$.processSelected(\'trash\')">X</span>';
+  $html_out .= '<span onclick="toggleTorMove();">>></span>';
+  $html_out .= '</div><div class="move_data hidden">';
+  $html_out .= '<input id="moveTo" type="text" class="text" name="moveTo"/>';
+  $html_out .= '<a class="move" id="Move" href="#" onclick="$.processSelected(\'move\')">Move</a>';
+  $html_out .= '<a class="close" href="#" onclick="toggleTorMove();">-</a>';
+  $html_out .= '</div></div>';
   $html_out .= '<ul id="transmission_list" class="torrentlist">';
 }
 

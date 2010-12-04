@@ -58,8 +58,9 @@ if(!(function_exists('get_curl_defaults'))) {
     global $platform;  
     function get_curl_defaults(&$curlopt) {
         if(extension_loaded("curl")) $curlopt[CURLOPT_CONNECTTIMEOUT] = 15;
-        $curlopt[CURLOPT_TIMEOUT] = 20;
-        $curlopt[CURLOPT_RETURNTRANSFER] = true;
+	$curlopt[CURLOPT_SSL_VERIFYPEER] = false;
+	$curlopt[CURLOPT_TIMEOUT] = 20;
+	$curlopt[CURLOPT_RETURNTRANSFER] = true;
 	return($curlopt);
     }
 }

@@ -188,3 +188,6 @@ IMPORTANT: If you are updating from a previous version. Please copy php/config.p
     -- Fixed issue that could cause a high load on pch devies and other slower systems. (Thanks Allan for noticing)
     -- Fixed issue causing torrents that failed to be added to transmission still got cached. (Thanks Henk for noticing)
     -- Fixed a bunch of other small bugs.
+
+current:
+    -- Disabled ssl checking so https feeds with non-official certs work as well.

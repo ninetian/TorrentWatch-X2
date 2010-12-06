@@ -120,11 +120,11 @@ $(function() {
 	        $('.header.combined').slideUp();
             }
             setTimeout(function() {
-		if($('#transmission_list li.selActive').length > 0) {
-		$('#transmissionButtons').show();
-                $('#torrentlist_container').animate({
+		if($('#transmission_list li.selected').length !== 0) {
+		  $('#transmissionButtons').show();
+                  $('#torrentlist_container').animate({
 		    top: 75,
-		   },400)
+		   },timeOut)
                 }
 		$('.transmission').slideDown();
                 $('#transmission_list li.torrent').markAlt();

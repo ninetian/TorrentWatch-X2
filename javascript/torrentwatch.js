@@ -123,7 +123,7 @@ $(function() {
 		if($('#transmission_list li.selected').length !== 0) {
 		  $('#transmissionButtons').show();
                   $('#torrentlist_container').animate({
-		    top: 75,
+		    top: 79,
 		   },timeOut)
                 }
 		$('.transmission').slideDown();
@@ -613,33 +613,28 @@ $(function() {
 		if(matches)
 		    $('#' + item.id + ' span.matches').html('('+matches+')');
 	    });
-	    if(!window.toProcess) window.toProcess = new Array();
 	    $('#transmission_list li.torrent').not('.selActive').each(function() {
 		$(this).addClass('selActive');
 		var trItem = this.id.match(/[0-9]+/)[0];
 		$('#' + this.id).click(function() {
 		    if($(this).hasClass('selected')) {
 			$(this).removeClass('selected');
-			removeByElement(window.toProcess, trItem);
 		    } else {
 			$(this).addClass('selected');
-			window.toProcess.push(trItem);
-		    }	
+		    }
 		    if($('#transmission_list li.torrent.selected').length)  {
+			updateClientButtons();
 			$('input#moveTo').val($('#' + this.id + ' input.path').val());
 			if($('#transmissionButtons').is(":hidden")) {
 			    $('#transmissionButtons').show();
-			    $('#torrentlist_container').animate({
-				top: 75,
-			    }, 400);
+			    $('#torrentlist_container').animate({ top: 79, }, 400);
 			}
 		    } else {
 			$('input#moveTo').val('');
 			if($('#transmissionButtons').is(":visible")) {
 			    $('#transmissionButtons').slideUp();
-			    $('#torrentlist_container').animate({
-				top: 58,
-			    }, 400);
+			    $('#transmissionButtons .move_data').fadeOut();
+			    $('#torrentlist_container').animate({ top: 58, }, 400);
 			}
 		    }
 		});
@@ -650,28 +645,51 @@ $(function() {
             $('#transmission_list>li').tsort('span.dateAdded', { order: 'desc' });
         }
         $('#transmission_list li.torrent').markAlt();
+	updateClientButtons();
     };
 
-
-    function removeByElement(arrayName,arrayElement) {
-        for(var i=0; i<arrayName.length;i++ ) { 
-	    if(arrayName[i]==arrayElement)
-	        arrayName.splice(i,1); 
-        } 
+    function updateClientButtons() {
+		        if($('#transmission_list li.selected.paused').length === 0) {
+			    $('#transmissionButtons .resume').hide();
+			} else { 
+			    $('#transmissionButtons .resume').show();
+			}
+		        if($('#transmission_list li.selected').not('.paused').length === 0) {
+			    $('#transmissionButtons .pause').hide();
+			} else { 
+			    $('#transmissionButtons .pause').show();
+			}
     }
 
     $(document).keyup(function(e) {
 	if (e.keyCode == '27') {
 		$('.dialog .close').click();
+		$('#transmissionButtons .close').click();
 		$('div.contextMenu').hide();
         }
-    });
-
-    $(document).keyup(function(e) {
 	if (e.keyCode == '13') {
 		$('.dialog .confirm').click();
-		if($('#transmission_data .header #Move').is(":visible")) $('#transmission_data .header #Move').click();
+		if($('#transmissionButtons .move_data').is(":visible")) $('#transmissionButtons #Move').click();
         }
+	if (e.keyCode == '17') window.ctrlKey = 0
+    });
+
+    $(document).keydown(function(e) {
+	if (e.keyCode == '17' || e.keyCode == '91' || e.keyCode == '224') window.ctrlKey = 1
+	if (window.ctrlKey && e.keyCode == '65' && $('#transmission_list').is(":visible")) {
+	    if($('#transmission_list li.torrent').length == $('#transmission_list li.selected').length) {
+	        $('#transmission_list li.torrent').removeClass('selected');
+		$('#transmissionButtons').slideUp();
+		$('#transmissionButtons .move_data').fadeOut();
+		$('#torrentlist_container').animate({ top: 59, }, 400);
+	    } else {
+	        $('#transmission_list li.torrent').addClass('selected');
+		$('#transmissionButtons').show();
+		$('#torrentlist_container').animate({ top: 79, }, 400);
+	    }
+	    updateClientButtons()
+	    return false;
+	}
     });
 
     // Ajax progress bar
@@ -1169,18 +1187,19 @@ $(function() {
     $.processSelected = function(action) {
 	if($('#transmission_list .torrent.selected').length === 0) return;
 	var list = ''; 
-	$.each(window.toProcess, function(i, item) {
+	$.each($('#transmission_list li.torrent.selected'), function(i, item) {
+	    var trItem = this.id.match(/[0-9]+/)[0];
 	    if(list) {
-		list = list + ',' + item;
+		list = list + ',' + trItem;
 	    } else {
-		list = list + item;
+		list = trItem;
 	    }
 	})
+	    console.log(list);
 	
         if(action == 'trash') var trash = 1;
 	if((action == 'delete') || (action == 'trash')) { 
 	    $.delTorrent(list, trash, true);
-	    window.toProcess = new Array();
 	}
 	if(action == 'start') $.stopStartTorrent('start', list, true);
 	if(action == 'stop') $.stopStartTorrent('stop', list, true);

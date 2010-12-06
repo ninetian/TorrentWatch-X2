@@ -269,7 +269,7 @@ ul#filterbar_container li#refresh img {
 
 ul#filterbar_container li.filter_left:hover,
 ul#filterbar_container li.filter_left {
-    border-left:			1px solid #aaa;
+    border-left:			1px solid #bbb;
     border-top-left-radius: 		5px;
     -moz-border-radius-topleft: 	5px;
     border-bottom-left-radius: 		5px;
@@ -365,46 +365,51 @@ ul#transmissionButtons {
     display: none;
     top: 58px;
     position: fixed;
-    height: 16px;
+    height: 20px;
     left: 0;
     right: 0;
     padding-left: 10px;
     font-size: 12px;
-    background: #DDD;
-    filter:			progid:DXImageTransform.Microsoft.gradient(startColorstr=#EEEEEE,endColorstr=#CCCCCC);
-    background:                 -webkit-gradient(linear, left top, left bottom, from(#eee), to(#ccc));
-    background: 		-moz-linear-gradient(top, #eee, #ccc);
+    background: #E2E2E2;
     border-bottom: 1px solid #aaa;
 }
 
 ul#transmissionButtons li {
     float: left;
     cursor: pointer;
+    margin-top: 2px;
     margin-right: 5px;
 }
 
-ul#transmissionButtons li.move_data {
-    float: left;
-}
-
 ul#transmissionButtons li.move_data input {
-    float: none;
-    font-size: 0.8em;
-    width: 200px;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    background: #F0F0F0;
+    -moz-border-radius: 4px;
+    font-size: 10px;
+    height: 14px;
+    width: 300px;
     margin: 0;
-    padding-bottom: 1px;
+    padding: 0 5px 0 3px;
 }
 
-ul#transmissionButtons li.move_data a {
-    float: none;
-    border: 1px solid #979797;
+ul#transmissionButtons li.button {
+    height: 12px;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
     text-align: center;
     text-decoration: none;
-    background-color: #EEE;
-    font-size: 0.8em;
+    background-color: #none;
+    font-size: 10px;
     color: #323232;
-    margin: 0 0 0 5px;
-    padding: 0 5px 1px 5px;
+    padding: 1px 5px 1px 5px;
+}
+
+ul#transmissionButtons li.button:hover {
+    background-color: #D1D1D1;
+    border-bottom: 1px solid #eee;
+    border-right: 1px solid #eee;
 }
 
 /*------------

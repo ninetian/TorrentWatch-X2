@@ -68,16 +68,14 @@
   <li id="rates"></li>
 </ul>
 <ul id="transmissionButtons">
-  <li onclick="javascript:$.processSelected('start')">|></li>
-  <li onclick="javascript:$.processSelected('stop')">||</li>
-  <li onclick="javascript:$.processSelected('delete')">[]</li>
-  <li onclick="javascript:$.processSelected('trash')">X</li>
-  <li onclick="toggleTorMove();">>></li>
-  <li class="move_data hidden">
-    <input id="moveTo" type="text" class="text" name="moveTo"/>
-    <a class="move" id="Move" href="#" onclick="$.processSelected('move')">Move</a>
-    <a class="close" href="#" onclick="toggleTorMove();">-</a>
-  </li>
+  <li class='button resume' onclick="javascript:$.processSelected('start')">Resume</li>
+  <li class='button pause' onclick="javascript:$.processSelected('stop')">Pause</li>
+  <li class='button' onclick="javascript:$.processSelected('delete')">Delete</li>
+  <li class='button' onclick="javascript:$.processSelected('trash')">Trash</li>
+  <li class='button' onclick="toggleTorMove();">Move data</li>
+  <li class="move_data hidden"><input id="moveTo" type="text" class="text" name="moveTo"/></li>
+  <li id="Move" class='button move_data hidden' onclick="$.processSelected('move')">Move</li>
+  <li class='close hidden' onclick="toggleTorMove();"></li>
 </ul>
 <div id='progress' class="progress progress_full">
  <div class="progressbar dialog_window" id="progressbar">

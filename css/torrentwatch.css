@@ -587,6 +587,7 @@ div#show_legend li.legend.match_to_check,
 ul.torrentlist li.match_cachehit td.identifier,
 ul.torrentlist li.match_to_check td.identifier,
 ul.torrentlist li.match_downloaded td.identifier,
+ul.torrentlist li.match_transmission td.identifier,
 ul.torrentlist li.match_downloading td.identifier {
     background-color: #C1E0C1;
 }

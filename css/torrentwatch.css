@@ -354,6 +354,59 @@ input#filter_text_input {
     }
 } 
 
+
+/*----------------------------------------
+ *
+ * T R A N S M I S S I O N   B U T T O N S 
+ *
+ *---------------------------------------*/
+
+ul#transmissionButtons {
+    display: none;
+    top: 58px;
+    position: fixed;
+    height: 16px;
+    left: 0;
+    right: 0;
+    padding-left: 10px;
+    font-size: 12px;
+    background: #DDD;
+    filter:			progid:DXImageTransform.Microsoft.gradient(startColorstr=#EEEEEE,endColorstr=#CCCCCC);
+    background:                 -webkit-gradient(linear, left top, left bottom, from(#eee), to(#ccc));
+    background: 		-moz-linear-gradient(top, #eee, #ccc);
+    border-bottom: 1px solid #aaa;
+}
+
+ul#transmissionButtons li {
+    float: left;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+ul#transmissionButtons li.move_data {
+    float: left;
+}
+
+ul#transmissionButtons li.move_data input {
+    float: none;
+    font-size: 0.8em;
+    width: 200px;
+    margin: 0;
+    padding-bottom: 1px;
+}
+
+ul#transmissionButtons li.move_data a {
+    float: none;
+    border: 1px solid #979797;
+    text-align: center;
+    text-decoration: none;
+    background-color: #EEE;
+    font-size: 0.8em;
+    color: #323232;
+    margin: 0 0 0 5px;
+    padding: 0 5px 1px 5px;
+}
+
 /*------------
  *
  * L E G E N D
@@ -435,7 +488,7 @@ div#torrentlist_container {
     position: absolute;
     overflow: auto;
     width: 100%;
-    top: 59px;
+    top: 58px;
     bottom: 0;
     left: 0;
     right: 0;
@@ -848,51 +901,6 @@ div#transmissionWindow {
 	height: 550px;
 }
 	
-div#transmission_data div.header {
-    height: 15px;
-    font-size: 12px;
-    background: #DDD;
-    filter:			progid:DXImageTransform.Microsoft.gradient(startColorstr=#EEEEEE,endColorstr=#CCCCCC);
-    background:                 -webkit-gradient(linear, left top, left bottom, from(#eee), to(#ccc));
-    background: 		-moz-linear-gradient(top, #eee, #ccc);
-    border-bottom: 1px solid #aaa;
-}
-
-div#transmissionButtons {
-    display: inline;
-    //text-align: center;
-    cursor: pointer;
-    float: left;
-}
-
-div#transmissionButtons span {
-    margin-right: 10px;
-}
-
-div.move_data {
-    float: left;
-}
-
-div.move_data input {
-    float: none;
-    font-size: 0.8em;
-    width: 200px;
-    margin: 0;
-    padding-bottom: 1px;
-}
-
-div.move_data a {
-    float: none;
-    border: 1px solid #979797;
-    text-align: center;
-    text-decoration: none;
-    background-color: #EEE;
-    font-size: 0.8em;
-    color: #323232;
-    margin: 0 0 0 5px;
-    padding: 0 5px 1px 5px;
-}
-
 div.move_data a.close {
     width: 40px;
 }
@@ -1239,20 +1247,12 @@ div#welcome5 input.form_email[type=text] {
     border-top-right-radius:    5px;
     -moz-border-radius-topright: 5px;
     display: block;
-    height: 30px;
-    top: 150px;
+    height: 14px;
+    top: 155px;
     overflow: hidden;
-    width: 300px;
-    margin: -0.2em auto 0 -150px;
+    width: 250px;
     z-index: 99;
-}
-
-#progressbar span {
-    text-align: center;
-    font-size: 1.2em;
-    padding-left: 125px;
-    color: #4F5D70;
-    z-index: 99;
+    margin-left: -125px;
 }
 
 /*****************************

@@ -67,10 +67,20 @@
   <li id="filter_bytext"><input type=search results=0 placeholder="Filter" id="filter_text_input"/></li>
   <li id="rates"></li>
 </ul>
-</div>
+<ul id="transmissionButtons">
+  <li onclick="javascript:$.processSelected('start')">|></li>
+  <li onclick="javascript:$.processSelected('stop')">||</li>
+  <li onclick="javascript:$.processSelected('delete')">[]</li>
+  <li onclick="javascript:$.processSelected('trash')">X</li>
+  <li onclick="toggleTorMove();">>></li>
+  <li class="move_data hidden">
+    <input id="moveTo" type="text" class="text" name="moveTo"/>
+    <a class="move" id="Move" href="#" onclick="$.processSelected('move')">Move</a>
+    <a class="close" href="#" onclick="toggleTorMove();">-</a>
+  </li>
+</ul>
 <div id='progress' class="progress progress_full">
  <div class="progressbar dialog_window" id="progressbar">
-  <span>Loading . . .</span>
  </div>
 </div>
  <form id="welcome_form" action="torrentwatch.php">

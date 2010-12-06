@@ -40,6 +40,11 @@ $(function() {
             if ($('.transmission').is(":visible")) {
                 $('.transmission').hideMe();
 		$('.header.combined').slideDown();
+                $('#torrentlist_container').animate({
+		    top: 58,
+		},400,function() {
+		    $('#transmissionButtons').hide();
+		})
             } else {
 		$('.feed').hideMe();
 	    }
@@ -53,6 +58,11 @@ $(function() {
             if ($('.transmission').is(":visible")) {
                 $('.transmission').hideMe();
 		$('.header.combined').slideDown();
+                $('#torrentlist_container').animate({
+		    top: 58,
+		},400,function() {
+		    $('#transmissionButtons').hide();
+		})
             } else {
 		$('.feed').hideMe();
 	    }
@@ -68,6 +78,11 @@ $(function() {
             if ($('.transmission').is(":visible")) {
                 $('.transmission').hideMe();
 		$('.header.combined').slideDown();
+                $('#torrentlist_container').animate({
+		    top: 58,
+		},400,function() {
+		    $('#transmissionButtons').hide();
+		})
             } else {
 		$('.feed').hideMe();
 	    }
@@ -83,6 +98,11 @@ $(function() {
             if ($('.transmission').is(":visible")) {
                 $('.transmission').hideMe();
 		$('.header.combined').slideDown();
+                $('#torrentlist_container').animate({
+		    top: 58,
+		},400,function() {
+		    $('#transmissionButtons').hide();
+		})
             } else {
 		$('.feed').hideMe();
 	    }
@@ -100,6 +120,12 @@ $(function() {
 	        $('.header.combined').slideUp();
             }
             setTimeout(function() {
+		if($('#transmission_list li.selActive').length > 0) {
+		$('#transmissionButtons').show();
+                $('#torrentlist_container').animate({
+		    top: 75,
+		   },400)
+                }
 		$('.transmission').slideDown();
                 $('#transmission_list li.torrent').markAlt();
 	    }, timeOut)
@@ -267,7 +293,7 @@ $(function() {
     };
     
     toggleTorMove = function(torHash) {
-        var curObject = $('div.move_data');
+        var curObject = $('ul#transmissionButtons li.move_data');
         if (curObject.is(":visible")) {
             curObject.fadeOut();
         } else {
@@ -601,12 +627,20 @@ $(function() {
 		    }	
 		    if($('#transmission_list li.torrent.selected').length)  {
 			$('input#moveTo').val($('#' + this.id + ' input.path').val());
-			if($('#transmission_data .header').is(":hidden"))
-			    $('#transmission_data .header').slideDown();
+			if($('#transmissionButtons').is(":hidden")) {
+			    $('#transmissionButtons').show();
+			    $('#torrentlist_container').animate({
+				top: 75,
+			    }, 400);
+			}
 		    } else {
 			$('input#moveTo').val('');
-			if($('#transmission_data .header').is(":visible"))
-			    $('#transmission_data .header').slideUp();
+			if($('#transmissionButtons').is(":visible")) {
+			    $('#transmissionButtons').slideUp();
+			    $('#torrentlist_container').animate({
+				top: 58,
+			    }, 400);
+			}
 		    }
 		});
 	    })

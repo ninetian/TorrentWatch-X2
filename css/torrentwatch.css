@@ -195,24 +195,24 @@ ul#filterbar_container {
 }
 
 ul#filterbar_container li.tab:hover {
-    min-width: 90px;
+    width: 90px;
 }
 
 ul#filterbar_container li.selected:hover,
 ul#filterbar_container li.tab {
-    min-width: 91px;
+    width: 91px;
 }
 
 ul#filterbar_container li {
     float: left;
-    margin-top: 3px;
-    padding: 0.3em 1em 0 1em;
+    margin-top: 2px;
+    padding: 4px 7px 0 7px;
     border: 1px solid #CACACA;
     border-top: 1px solid #bAbAbA;
     border-left: 0;
     height: 18px;
     text-align: center;
-    font-size: 0.8em;
+    font-size: 11px;
     background: #CCC;
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#EEEEEE,endColorstr=#AAAAAA);
     background: -webkit-gradient(linear, left top, left bottom, from(#eee), to(#aaa));
@@ -254,7 +254,7 @@ ul#filterbar_container li.selected {
 }
 
 ul#filterbar_container li#refresh {
-    min-width: 20px;
+    width: 20px;
     padding-left: 4px;
     padding-right: 4px;
 }
@@ -327,7 +327,7 @@ ul#filterbar_container li#filter_bytext {
     filter: 0;
     background: none;
     float: right;
-    margin: 3px 0 0 0;
+    margin: 0;
     padding: 2px 5px 0 0;
     border: 0;
     font-size: 0.8em;
@@ -335,35 +335,25 @@ ul#filterbar_container li#filter_bytext {
 
 input#filter_text_input {
     float: right;
-    height: 15px;
-    width: 130px;
+    height: 17px;
+    width: 200px;
     border: 1px solid #5D80A1;
-    padding: 0 2px;
-    margin: 0px 5px 10px 0;
+    padding: 1px 10px 1px 18px;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    background: #FFF url('../images/filter_icon.png') top left no-repeat;
+    padding: 2px 2px 0 20px;
+    margin: 1px 5px 1px 0;
 }
-
-/* Safari-look filter input for Firefox */
-@-moz-document url-prefix() {
-    input#filter_text_input {
-        background: #FFF url('../images/filter_icon.png') top left no-repeat;
-        border: 1px solid #5D80A1;
-        margin-top: 3px;
-        padding: 1px 10px 1px 18px;
-        width: 100px;
-        -moz-border-radius: 10px;
-    }
-} 
-
 
 /*----------------------------------------
  *
- * T R A N S M I S S I O N   B U T T O N S 
+ * C L I E N T   B U T T O N S 
  *
  *---------------------------------------*/
 
-ul#transmissionButtons {
-    display: none;
-    top: 58px;
+ul#clientButtons {
+    top: 59px;
     position: fixed;
     height: 20px;
     left: 0;
@@ -374,14 +364,14 @@ ul#transmissionButtons {
     border-bottom: 1px solid #aaa;
 }
 
-ul#transmissionButtons li {
+ul#clientButtons li {
     float: left;
     cursor: pointer;
     margin-top: 2px;
     margin-right: 5px;
 }
 
-ul#transmissionButtons li.move_data input {
+ul#clientButtons li.move_data input {
     border: 1px solid #bbb;
     border-radius: 4px;
     background: #F0F0F0;
@@ -393,7 +383,7 @@ ul#transmissionButtons li.move_data input {
     padding: 0 5px 0 3px;
 }
 
-ul#transmissionButtons li.button {
+ul#clientButtons li.button {
     height: 12px;
     border: 1px solid #bbb;
     border-radius: 4px;
@@ -406,7 +396,16 @@ ul#transmissionButtons li.button {
     padding: 1px 5px 1px 5px;
 }
 
-ul#transmissionButtons li.button:hover {
+ul#clientButtons li.button.disabled,
+ul#clientButtons li.button.disabled:hover {
+    color: #AAA;
+    borde-bottomr: 1px solid #bbb;
+    borde-right: 1px solid #bbb;
+    background-color: #none;
+    cursor: default;
+}
+
+ul#clientButtons li.button:hover:not(.disabled) {
     background-color: #D1D1D1;
     border-bottom: 1px solid #eee;
     border-right: 1px solid #eee;
@@ -418,7 +417,7 @@ ul#transmissionButtons li.button:hover {
  *
  *------------*/
 
-div#legendDialog .title {
+div#legendDialog .dialogTitle {
     padding-top: 2px;
     width: 470px;
 }
@@ -446,7 +445,7 @@ ul.show_legend li {
  *
  *------------*/
 
-div#episodeDialog .title {
+div#episodeDialog .dialogTitle {
     padding-top: 2px;
     width: 740px;
 	margin-left: -350px;
@@ -493,7 +492,7 @@ div#torrentlist_container {
     position: absolute;
     overflow: auto;
     width: 100%;
-    top: 58px;
+    top: 80px;
     bottom: 0;
     left: 0;
     right: 0;
@@ -555,21 +554,19 @@ ul#transmission_list td.torrent_name {
     padding-left: 5px;
 }
 
-ul#transmission_list li.alt td.torrent_name,
-div.feed li.torrent.alt {
+#torrentlist_container li.torrent.alt {
     background-color: #F0F1F2;
 }
 
-div.feed li.torrent:hover,
-ul#transmission_list li td.torrent_name:hover,
+#torrentlist_container li.torrent:hover,
 ul#transmission_list li.alt td.torrent_name:hover {
     background-color: #E1E9F5;
 }
 
-ul#transmission_list li.selected td.torrent_name,
-ul#transmission_list li.selected td.torrent_name:hover,
-ul#transmission_list li.selected td.alt.torrent_name:hover,
-ul#transmission_list li.selected td.alt.torrent_name {
+#torrentlist_container li.selected td.torrent_name,
+#torrentlist_container li.selected td.torrent_name:hover,
+#torrentlist_container li.alt.selected td.torrent_name,
+#torrentlist_container li.alt.selected td.torrent_name:hover {
     background-color: #778DA8;
     color: #FFFFFF;
 }
@@ -681,7 +678,7 @@ ul.torrentlist div.infoDiv {
     width: 100%;
 }
 
-ul#transmission_list li.selected div.infoDiv {
+#torrentlist_container li.selected div.infoDiv {
     color: #FFFFFF;
 }
 
@@ -703,7 +700,7 @@ div.torrent_name a.contextButton {
     background: #F0F0F0;
     background-image: url('../images/dropdown.png');
     background-repeat: no-repeat;
-    background-position: 0 2px;
+    background-position: 3px -1px;
     float: left;
     border: 1px solid #ccc;
     border-radius: 3px;
@@ -711,7 +708,7 @@ div.torrent_name a.contextButton {
     padding: 0;
     margin: 2px 5px 0 0;
     width: 11px;
-    height: 10px;
+    height: 9px;
 }
 
 div.contextMenu {
@@ -885,7 +882,7 @@ div#transmissionDialog {
 	display: inline;
 }
 	
-div#transmissionDialog .title {
+div#transmissionDialog .dialogTitle {
     padding-top: 2px;
     top: 50px;
     width: 800px;
@@ -906,18 +903,6 @@ div#transmissionWindow {
 	height: 550px;
 }
 	
-div.move_data a.close {
-    width: 40px;
-}
-
-div.move_data a.button.close {
-    width: 10px;
-}
-
-div.move_data label {
-    margin: 0 0 0 2px;
-}
-    
 
 /*--------------------------
  *
@@ -973,7 +958,7 @@ div.welcome,
     display: none;
 }
 
-.title a.button {
+.dialogTitle a.button {
     float: left;
     height: 9px;
     width: 9px;
@@ -986,7 +971,7 @@ div.welcome,
     cursor: 			default;
 }
 
-div.dialog .title {
+div.dialog .dialogTitle {
     position: 			fixed; 
     font-size:                  8pt;
     padding:                    2px 0 2px 0;
@@ -1044,7 +1029,7 @@ div#trash_tor_data .buttonContainer a.wide {
     width: 100px;
 }
 
-div#cacheDialog .title {
+div#cacheDialog .dialogTitle {
     padding-top: 2px;
     margin-left: -160px;
     width: 330px;
@@ -1169,12 +1154,14 @@ div#newVersion a {
     color: green;
 }
 
-div#fav_error {
+div#twError {
+    display: none;
     top: 60px;
     color: red;
     background-color: #bbb;
     text-align: center;
     z-index: 1; 
+    border-color: #AAA;
 }
 
 /********************************
@@ -1341,7 +1328,7 @@ div#configTabs .right {
     -moz-border-radius-topright: 5px;
 }
 
-div#configDialog .title {
+div#configDialog .dialogTitle {
     padding-top: 2px;
     margin-left: -231px;
     width: 473px;
@@ -1524,7 +1511,7 @@ div#favorites {
     padding-top: 5px;
 }
 
-div#favDialog .title {
+div#favDialog .dialogTitle {
     padding-top: 2px;
     width: 600px;
     margin-left: -287px;
@@ -1708,7 +1695,7 @@ div#report_bug .left {
     width: 100px;
 }
 
-div#bugDialog .title {
+div#bugDialog .dialogTitle {
     margin-left: -210px;
     padding-top: 2px;
     width: 430px;
@@ -1751,7 +1738,7 @@ ul#historyItems li {
     margin-right: 7px;
 }
 
-div#historyDialog .title {
+div#historyDialog .dialogTitle {
     padding-top: 2px;
     width: 583px;
     margin-left: -288px;

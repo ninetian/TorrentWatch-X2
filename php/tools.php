@@ -160,7 +160,6 @@ function delTorrent($torHash, $trash, $batch=false) {
 
     if($batch) {
 	$torHash = explode(',',$torHash); 
-   	$torHash = array_map(intval, $torHash);
     }
 
     switch($config_values['Settings']['Client']) {  
@@ -177,13 +176,14 @@ function stopTorrent($torHash, $batch=false) {
 
     if($batch) {
 	$torHash = explode(',',$torHash); 
-   	$torHash = array_map(intval, $torHash);
+   	//$torHash = array_map(intval, $torHash);
     }
 
     switch($config_values['Settings']['Client']) {  
         case 'Transmission':
             $request = array('arguments' => array('ids' => $torHash), 'method' => 'torrent-stop');
             $response = transmission_rpc($request);
+	    _debug(var_export($request,true));
             return json_encode($response);
         break;
     }
@@ -194,7 +194,6 @@ function startTorrent($torHash, $batch=false) {
 
     if($batch) {
 	$torHash = explode(',',$torHash); 
-   	$torHash = array_map(intval, $torHash);
     }
 
     switch($config_values['Settings']['Client']) {  
@@ -211,7 +210,6 @@ function moveTorrent($location, $torHash, $batch=false) {
 
     if($batch) {
 	$torHash = explode(',',$torHash); 
-   	$torHash = array_map(intval, $torHash);
     }
 
     switch($config_values['Settings']['Client']) {  

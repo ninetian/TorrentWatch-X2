@@ -1,6 +1,6 @@
   <script type="text/javascript" src="javascript/configure.js"></script>
       <div id="configDialog" class="dialog">
-        <div class="title">
+        <div class="dialogTitle">
     		<a class="toggleDialog button titleClose" href="#"></a>
             Configure
         </div>

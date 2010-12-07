@@ -150,12 +150,13 @@ function parse_options() {
             if($config_values['Settings']['Default Feed All'] && 
                 preg_match('/^(\d+)x(\d+)p?$|^(\d{8})$/i', $tmp['episode'])) $_GET['feed'] = 'All';
             $response = update_favorite();
-            if($response) echo "<div id=\"fav_error\" class=\"dialog_window\" style=\"display: block\">$response</div>";
-            break;
+            if($response) echo "$response";
+            //break;
+	    exit;
         case 'hide':
             $response = add_hidden(ucwords($_GET['hide']));
-            if($response) echo "<div id=\"fav_error\" class=\"dialog_window\" style=\"display: block\">$response</div>";
-            break;
+            if($response) echo "$response";
+            exit;
         case 'delHidden':
             del_hidden($_GET['unhide']);
             break;

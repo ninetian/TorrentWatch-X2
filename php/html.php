@@ -35,15 +35,11 @@ function show_torrent_html($item, $feed, $feedName, $alt, $torHash, $matched, $i
   }
   // add word-breaking flags after each period
   $title = preg_replace('/\./', '.&shy;', $item['title']);
-  // prepare items for use in a url
-  $utitle = urlencode($item['title']);
   // Copy feed cookies to item
   $ulink = get_torrent_link($item);
   if(($pos = strpos($feed, ':COOKIE:')) !== False) {
     $ulink .= substr($feed, $pos);
   }
-  $ulink = urlencode($ulink);
-  $feed = urlencode($feed);
 
   ob_start();
   require('templates/feed_item.tpl');

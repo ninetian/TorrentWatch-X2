@@ -64,15 +64,18 @@
   <li id="filter_downloading" class="tab"><a href="#">Downloading</a><span id="Downloading"></span></li>
   <li id="filter_downloaded" class="tab"><a href="#">Downloaded</a><span id="Downloaded"></span></li>
   <li id="filter_transmission" class="tab"><a id="torClient" href="#">Client</a><span id="activeTorrents">(-)</span></li>
-  <li id="filter_bytext"><input type=search results=0 placeholder="Filter" id="filter_text_input"/></li>
+  <li id="filter_bytext"><input type=text results=0 placeholder="Filter" id="filter_text_input"/></li>
   <li id="rates"></li>
 </ul>
-<ul id="transmissionButtons">
+<ul id="clientButtons">
+  <li class='button start' onclick="javascript:$.processSelected('dlTorrent')">Start</li>
+  <li class='button add_fav' onclick="javascript:$.processSelected('addFavorite')">Add Favorite</li>
+  <li class='button hide_item' onclick="javascript:$.processSelected('hideItem')">Hide</li>
   <li class='button resume' onclick="javascript:$.processSelected('start')">Resume</li>
   <li class='button pause' onclick="javascript:$.processSelected('stop')">Pause</li>
-  <li class='button' onclick="javascript:$.processSelected('delete')">Delete</li>
-  <li class='button' onclick="javascript:$.processSelected('trash')">Trash</li>
-  <li class='button' onclick="toggleTorMove();">Move data</li>
+  <li class='button delete' onclick="javascript:$.processSelected('delete')">Delete</li>
+  <li class='button trash' onclick="javascript:$.processSelected('trash')">Trash</li>
+  <li class='button move_button' onclick="toggleTorMove();">Move data</li>
   <li class="move_data hidden"><input id="moveTo" type="text" class="text" name="moveTo"/></li>
   <li id="Move" class='button move_data hidden' onclick="$.processSelected('move')">Move</li>
   <li class='close hidden' onclick="toggleTorMove();"></li>
@@ -188,4 +191,5 @@
   <div id="clientError" class="dialog_window">
       <p></p>
   </div>
+  <div id="twError" class="dialog_window"></div>
 </body></html>

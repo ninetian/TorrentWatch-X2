@@ -1,4 +1,5 @@
 <?php
+if(isset($item['title'])) $utitle = $item['title'];
 if(isset($item['description'])) {
     $description = $item['description'];
 } else {
@@ -55,6 +56,10 @@ if(!isset($pubDateClass)) $pubDateClass = '';
 print <<< EOH
 
 <li id=id_$id name=$id class="torrent match_$matched $alt item_$torHash">
+<input type="hidden" class="title" value="$utitle" />
+<input type="hidden" class="link" value="$ulink" />
+<input type="hidden" class="feed_link" value="$feed" />
+<input type="hidden" class="client_id" value="$id" />
 
 <table width="100%" cellspacing="0">
  <tr>
@@ -66,8 +71,8 @@ print <<< EOH
 	<span class='torrent_pubDate'>$feedItem $pubDate</span>
    </div>
    <div id="divContext_$id" class="contextMenu">
-	<div class='contextItem addFavorite' onclick='javascript:$.addFavorite("torrentwatch.php?matchTitle=1&rss=$feed&title=$utitle")' title="Add this show to favorites">Add to favorites</div>
-	<div class='contextItem $dlTorrent' onclick='javascript:$.dlTorrent("torrentwatch.php?dlTorrent=1&title=$utitle&link=$ulink&feed=$feed","$id")' title="Download this torrent">Download</div>
+	<div class='contextItem addFavorite' onclick='javascript:$.addFavorite("$feed","$utitle")' title="Add this show to favorites">Add to favorites</div>
+	<div class='contextItem $dlTorrent' onclick='javascript:$.dlTorrent("$utitle","$ulink","$feed","$id")' title="Download this torrent">Download</div>
 	<div class="contextItem activeTorrent $torStart" onclick='javascript:$.stopStartTorrent("start", "$torHash")' title="Resume download">Resume transfer</div>
 	<div class="contextItem activeTorrent $torStop" onclick='javascript:$.stopStartTorrent("stop", "$torHash")' title="Pause download">Pause transfer</div>
 	<div class="contextItem activeTorrent delete $hidden" onclick='javascript:$.delTorrent("$torHash", "false")' title="Delete torrent but keep data">Remove from client</div>

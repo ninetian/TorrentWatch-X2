@@ -7,8 +7,11 @@ ul#filterbar_container {
     border: 0px;
 }
 
-div#torrentlist_container {
+ul#clientButtons {
     top: 58px;
+}
+div#torrentlist_container {
+    top: 79px;
 }
 
 div#history {
@@ -22,3 +25,4 @@ div#linkButtons  {
 div#configuration div.config_form input#hideSearchText {
     border-bottom: 1px solid #979797;
 }
+

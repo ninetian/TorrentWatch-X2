@@ -66,7 +66,7 @@ print <<< EOH
   <td class="identifier"></td>
   <td class="torrent_name">
    <div class='torrent_name'>
-	<span><a id="contextButton_$id" class="contextButton" onclick='$.toggleContextMenu("#divContext_$id", "$id");'></a></span>
+	<span class="contextButton"><a id="contextButton_$id" class="contextButton" onclick='$.toggleContextMenu("#divContext_$id", "$id");'></a></span>
 	<span class='torrent_title' title="$description">$title</span>
 	<span class='torrent_pubDate'>$feedItem $pubDate</span>
    </div>

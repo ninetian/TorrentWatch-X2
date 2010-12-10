@@ -294,8 +294,10 @@ $(function() {
         var transmissionItem =
         '<li id="clientId_' + item.id + '" class="torrent item_' + item.hashString + ' match_transmission ' + liClass +'">' +
         '<table width="100%" cellspacing="0"><tr><td class="tr_identifier"></td>' +
-        '<td class="torrent_name tor_client"><div class="torrent_name">' + item.name + '</div>' +
-	'<div style="width: 100%; margin-top: 2px; border: 1px solid #BFCEE3; background: #DFE3E8;"><div class="progressDiv" style="width: '+Percentage+'%; height: 3px;"></div></div>' +
+        '<td class="torrent_name tor_client">' +
+	'<div class="torrent_name"><span class="torrent_title">' + item.name.replace(/[._]/g, '.&shy;') + '</span></div>' +
+	'<div style="width: 100%; margin-top: 2px; border: 1px solid #BFCEE3; background: #DFE3E8;">' + 
+	'<div class="progressDiv" style="width: '+Percentage+'%; height: 3px;"></div></div>' +
         '<span class="dateAdded hidden">' + item.addedDate + '</span>' +
         '<div class="infoDiv"><span id=tor_' + item.id + ' class="torInfo tor_' + item.hashString + '">' + clientData + '</span>' +
 	'<span class="torEta">' + item.eta + '</span></div>' +
@@ -593,22 +595,22 @@ $(function() {
 		if(matches)
 		    $('#' + item.id + ' span.matches').html('('+matches+')');
 	    });
-	    $('#torrentlist_container li.torrent').not('.selActive').each(function() {
-		$(this).addClass('selActive');
-		console.log(this.id)
-		$('li.torrent').find('a').mousedown(function() { return false })
-		$('#' + this.id).mousedown(function() { 
-		    toggleSelect(this);
-		}) ;
-		$('#' + this.id).mouseenter(function() {
-		    if(window.mousedown) toggleSelect(this);
-		});
-	    })
+ 	    listSelector(); 
 	    updateClientButtons();
 	}, 100)
 
         $('#transmission_list>li').tsort('span.dateAdded', { order: 'desc' });
         $('#transmission_list li.torrent').markAlt();
+    };
+
+    listSelector = function() {
+	$('#torrentlist_container li.torrent').not('.selActive').each(function() {
+	    $(this).addClass('selActive');
+	    $('#' + this.id).mousedown(function() { 
+	        toggleSelect(this);
+	    }) ;
+        })
+        $('li.torrent').find('a').mousedown(function() { return false })
     };
 
     toggleSelect = function(item) {
@@ -627,56 +629,142 @@ $(function() {
     }
 
     updateClientButtons = function() {
-			if($('#transmission_data').is(":visible")) { 
-			    $('#clientButtons .add_fav').hide();
-			    $('#clientButtons .start').hide();
-			    $('#clientButtons .hide_item').hide();
-			} else {
-			    $('#clientButtons .add_fav').show();
-			    $('#clientButtons .start').show();
-			    $('#clientButtons .hide_item').show();
-			}
-		        if($('#torrentlist_container .feed  li.torrent.selected').length) { 
-			    $('#clientButtons .add_fav').removeClass('disabled');
-			} else {
-			    $('#clientButtons .add_fav').addClass('disabled');
-			}
-		        if($('#torrentlist_container .feed li.selected.match_nomatch').length ||
-		           $('#torrentlist_container .feed li.selected.match_duplicate').length || 
-		           $('#torrentlist_container .feed li.selected.match_old_download').length ) {
-			    $('#clientButtons .start').removeClass('disabled');
-			    $('#clientButtons .hide_item').removeClass('disabled');
-			} else {
-			    $('#clientButtons .start').addClass('disabled');
-			    $('#clientButtons .hide_item').addClass('disabled');
-			}
-		        if($('#torrentlist_container li.selected.paused').length) {
-			    $('#clientButtons .resume').removeClass('disabled');
-			} else { 
-			    $('#clientButtons .resume').addClass('disabled');
-			}
-		        if($('#torrentlist_container li.selected.downloading').length) {
-			    $('#clientButtons .pause').removeClass('disabled');
-			} else { 
-			    $('#clientButtons .pause').addClass('disabled');
-			}
-		        if($('#torrentlist_container li.selected.downloading').length ||
-			   $('#torrentlist_container li.selected.paused').length ||
-			   $('#torrentlist_container li.selected.match_transmission').length) {
-			    $('#clientButtons .trash').removeClass('disabled');
-			    $('#clientButtons .delete').removeClass('disabled');
-			    $('#clientButtons .move_data').removeClass('disabled');
-			    $('#clientButtons .move_button').removeClass('disabled');
-			} else { 
-			    $('#clientButtons .trash').addClass('disabled');
-			    $('#clientButtons .delete').addClass('disabled');
-			    $('#clientButtons .move_data').addClass('disabled').fadeOut();
-			    $('#clientButtons .move_button').addClass('disabled');
-			}
+	if($('#transmission_data').is(":visible")) { 
+	    $('#clientButtons .add_fav').hide();
+	    $('#clientButtons .start').hide();
+	    $('#clientButtons .hide_item').hide();
+	} else {
+	    $('#clientButtons .add_fav').show();
+	    $('#clientButtons .start').show();
+	    $('#clientButtons .hide_item').show();
+	}
+	if($('#torrentlist_container .feed  li.torrent.selected').length) { 
+	    $('#clientButtons .add_fav').removeClass('disabled');
+	} else {
+	    $('#clientButtons .add_fav').addClass('disabled');
+	}
+	if($('#torrentlist_container .feed li.selected.match_nomatch').length ||
+	   $('#torrentlist_container .feed li.selected.match_duplicate').length || 
+	   $('#torrentlist_container .feed li.selected.match_old_download').length ) {
+	    $('#clientButtons .start').removeClass('disabled');
+	    $('#clientButtons .hide_item').removeClass('disabled');
+	} else {
+	    $('#clientButtons .start').addClass('disabled');
+	    $('#clientButtons .hide_item').addClass('disabled');
+	}
+	if(window.client != 'folder') {
+	    if($('#torrentlist_container li.selected.paused').length) {
+	        $('#clientButtons .resume').removeClass('disabled');
+    	    } else { 
+	        $('#clientButtons .resume').addClass('disabled');
+    	    }
+	    if($('#torrentlist_container li.selected.downloading').length) {
+	        $('#clientButtons .pause').removeClass('disabled');
+	    } else { 
+	        $('#clientButtons .pause').addClass('disabled');
+	    }
+	    if($('#torrentlist_container li.selected.downloading').length ||
+	       $('#torrentlist_container li.selected.paused').length ||
+	       $('#torrentlist_container li.selected.match_transmission').length) {
+    	        $('#clientButtons .trash').removeClass('disabled');
+	        $('#clientButtons .delete').removeClass('disabled');
+	        $('#clientButtons .move_data').removeClass('disabled');
+	        $('#clientButtons .move_button').removeClass('disabled');
+	    } else { 
+	        $('#clientButtons .trash').addClass('disabled');
+	        $('#clientButtons .delete').addClass('disabled');
+	        $('#clientButtons .move_data').addClass('disabled').fadeOut();
+	        $('#clientButtons .move_button').addClass('disabled');
+    	    }
+	} else {
+	    $('#clientButtons .resume').hide();
+	    $('#clientButtons .pause').hide();
+	    $('#clientButtons .trash').hide();
+	    $('#clientButtons .delete').hide();
+	    $('#clientButtons .move_data').hide();
+	    $('#clientButtons .move_button').hide();
+	}
+
+	toggleClientButtons();
     }
 
-    $(document).mousedown(function() { window.mousedown = 1; })
-    $(document).mouseup(function() { window.mousedown = 0; })
+    toggleClientButtons = function(fast) {
+	if($('#torrentlist_container li.selected').length) {
+	    if(fast) {
+	        if($('#clientButtonsHolder').is(':visible') == false) $('#clientButtonsHolder').show();
+	    } else {
+	        if($('#clientButtonsHolder').is(':visible') == false) {
+	            $('#clientButtonsHolder').css('right', -$('#clientButtonsHolder').width());
+	            $('#clientButtonsHolder').show().animate({right: '+=' + ($('#clientButtonsHolder').width() + getScrollBarWidth() + 5)},300);
+	        }
+	    }
+	    if(navigator.userAgent.toLowerCase().search('(iphone|ipod|android)') > -1) {
+	        document.getElementById('clientButtonsHolder').style.top =
+		    ((window.pageYOffset + window.innerHeight - $('#clientButtonsHolder').height() - 10)) + 'px';
+		$('#clientButtons').width($('#clientButtons li.button:visible').length * 47);
+	    } else {
+	        document.getElementById('clientButtonsHolder').style.top = 
+		    ($('#topmenu').height() + 5) + 'px';
+	    }
+	} else {
+	    if(fast) {
+	        if($('#clientButtonsHolder').is(':visible') == true) $('#clientButtonsHolder').hide();
+	    } else {
+	        if($('#clientButtonsHolder').is(':visible') == true) {
+		    $('#clientButtonsHolder').show().animate({
+			right: '+=' + -$('#clientButtonsHolder').width()
+		    }, 300, function() {
+			$('#clientButtonsHolder').hide();
+		    })
+		}
+	    }
+	}
+    } 
+
+    function getScrollBarWidth() {  
+	var inner = document.createElement('p');  
+	inner.style.width = "100%";  
+	inner.style.height = "200px";  
+
+	var outer = document.createElement('div');  
+	outer.style.position = "absolute";  
+	outer.style.top = "0px";  
+	outer.style.left = "0px";  
+	outer.style.visibility = "hidden";  
+	outer.style.width = "200px";  
+	outer.style.height = "150px";  
+	outer.style.overflow = "hidden";  
+	outer.appendChild (inner);  
+
+	document.body.appendChild (outer);  
+	var w1 = inner.offsetWidth;  
+	outer.style.overflow = 'scroll';  
+	var w2 = inner.offsetWidth;  
+	if (w1 == w2) w2 = outer.clientWidth;  
+
+	document.body.removeChild (outer);  
+
+	return (w1 - w2);  
+    };  
+
+    var resetClientButtonsContainer = function() {
+        var clientButtonsTop = $(window).height() - $('#clientButtonsHolder').height();
+	$('#clientButtonsHolder').css('top', clientButtonsTop);
+    }
+
+    $(document).ready(function() {
+	var supportsOrientationChange = "onorientationchange" in window,
+	    orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
+	if (orientationEvent in document.documentElement)
+	    window.addEventListener(orientationEvent, function() { resetClientButtonsContainer(); }, false);
+	waitForDynData = setInterval(function() {
+	    if($('#dynamicdata').length) {
+		listSelector();
+		clearInterval(waitForDynData);
+	    }
+	},250);
+    });
+
     $(document).keyup(function(e) {
 	if (e.keyCode == '27') {
 		$('.dialog .close').click();
@@ -721,11 +809,13 @@ $(function() {
 	
     // set timeout for all ajax queries to 20 seconds.
     $.ajaxSetup({timeout: '20000',})
+
 });
 
 (function($) {
     var current_favorite,
     current_dialog;
+
     // Remove old dynamic content, replace it with passed html(ajax success function)
     $.loadDynamicData = function(html) {
         window.gotAllData = 0;
@@ -738,14 +828,14 @@ $(function() {
             dynamic.find("ul.favorite > li").initFavorites().end()
             .find("form").initForm().end().initConfigDialog().appendTo("body");
             setTimeout(function() {
-                var container = $("#torrentlist_container");
+            	var container = $("#torrentlist_container");
                 if (!container.length && !$("#errorDialog").length) {
                     current_dialog = '#welcome1';
                     $("#welcome_form").show();
 		    $(current_dialog).show();
                 } else {
-	            $('li.torrent:not(.match_to_check) div.progressBarContainer').hide();
 		    var filter = $.cookie('TWFILTER');
+	            $('li.torrent:not(.match_to_check) div.progressBarContainer').hide();
 		    if (!(filter)) {
 			filter = 'all';
 		    }
@@ -766,9 +856,22 @@ $(function() {
 		    }
  		    $("#torrentlist_container li").hide();
 		    container.show(0,function() {
+	    		var clientButtonsTop = $(window).height() - $('#clientButtonsHolder').height();
 		        displayFilter(filter,1)
-                        $('#torrentlist_container').height($(window).height() - $('#torrentlist_container').attr('offsetTop'));
+			$('#dynamicdata').css('height', $(window).height() - ($('#topmenu').css('height') + 1));
+			$('#clientButtonsHolder').css('top', clientButtonsTop);
+			var scrollArea = document.getElementById('torrentlist_container');
+			if(navigator.userAgent.toLowerCase().search('(iphone|ipod)') > -1) {
+			    setTimeout(function() { window.scrollTo(0, 1); }, 500);
+			    scrollArea.addEventListener('touchmove', function(){ $('#clientButtonsHolder').hide(); }, false);
+			} else {
+			    window.scrollTo(0, 2)
+			    if('ontouchstart' in document.documentElement)
+				scrollArea.addEventListener('touchstart', function(){ $('#clientButtonsHolder').hide(); }, false);
+			}
+			if(window.addEventListener) window.addEventListener('scroll', function(){ toggleClientButtons(1); }, false);
 		    });
+
 		    setTimeout(getClientData,10);
 		    var initGetData = setInterval(function () {
 			if(window.gotAllData) {
@@ -786,9 +889,6 @@ $(function() {
 		changeClient(window.client);
 		fontSize = $.cookie('twFontSize');
 		changeFontSize(fontSize);
-		var element = document.getElementById('torrentlist_container');
-		element.onselectstart = function() { return false; };
-		element.onmousedown = function() { return false; };
             },50);
             if($('#torrentlist_container div.header.combined').length == 1) {
                 $('.torrentlist>li').tsort('#unixTime', {order: 'desc'});
@@ -808,11 +908,7 @@ $(function() {
         },
         100);
     };
-    
-    $(window).resize(function() {
-        $('#torrentlist_container').height($(window).height() - $('#torrentlist_container').attr('offsetTop'));
-    });
-    
+  
     $.submitForm = function(button) {
         var form;
         if ($(button).is('form')) {

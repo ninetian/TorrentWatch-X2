@@ -85,7 +85,7 @@ label.category {
  * ----------------*/
 
 div#topmenu {
-    height: 58px;
+    height: 59px;
     text-align: right;
     border: 1px solid #aaa;
     border-top: 0;
@@ -328,7 +328,7 @@ ul#filterbar_container li#filter_bytext {
     background: none;
     float: right;
     margin: 0;
-    padding: 2px 5px 0 0;
+    padding: 4px 5px 0 0;
     border: 0;
     font-size: 0.8em;
 }
@@ -352,57 +352,76 @@ input#filter_text_input {
  *
  *---------------------------------------*/
 
-ul#clientButtons {
-    top: 59px;
+div#clientButtonsHolder {
+    display: none;
     position: fixed;
-    height: 20px;
-    left: 0;
-    right: 0;
-    padding-left: 10px;
+    right: 20px;
+    height: 28px;
     font-size: 12px;
-    background: #E2E2E2;
-    border-bottom: 1px solid #aaa;
+    z-index: 3;
+}
+
+ul#clientButtons {
+    height: 100%;
+    background: #ddd;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#D3D3D3,endColorstr=#F8F8F8);
+    background: -webkit-gradient(linear, left top, left bottom, from(#EEE), to(#CCC));
+    background:	-moz-linear-gradient(top, #D3D3D3, #F8F8F8);
+    opacity: .90;
+    filter: alpha(opacity = 90);
+    padding-left: 10px;
+    padding-right: 5px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
 }
 
 ul#clientButtons li {
     float: left;
     cursor: pointer;
-    margin-top: 2px;
+    margin-top: 3px;
     margin-right: 5px;
 }
 
+ul#clientButtons li#Move {
+    padding: 1px 2px 0 2px;
+    font-size: 14px;
+    font-weight: bold;
+    height: 19px;
+}
+
 ul#clientButtons li.move_data input {
-    border: 1px solid #bbb;
-    border-radius: 4px;
-    background: #F0F0F0;
-    -moz-border-radius: 4px;
-    font-size: 10px;
-    height: 14px;
+    border: 1px solid #999;
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    font-size: 12px;
+    height: 20px;
     width: 300px;
     margin: 0;
     padding: 0 5px 0 3px;
 }
 
 ul#clientButtons li.button {
-    height: 12px;
-    border: 1px solid #bbb;
-    border-radius: 4px;
-    -moz-border-radius: 4px;
+    height: 20px;
+    border: 1px solid #aaa;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
     text-align: center;
     text-decoration: none;
-    background-color: #none;
-    font-size: 10px;
+    background-color: none;
+    font-size: 11px;
     color: #323232;
-    padding: 1px 5px 1px 5px;
+    padding: 0px 5px 0px 5px;
 }
 
 ul#clientButtons li.button.disabled,
 ul#clientButtons li.button.disabled:hover {
-    color: #AAA;
-    borde-bottomr: 1px solid #bbb;
-    borde-right: 1px solid #bbb;
+    border-bottom: 1px solid #aaa;
+    border-right: 1px solid #aaa;
     background-color: #none;
     cursor: default;
+    opacity: .30;
+    filter: alpha(opacity = 30);
 }
 
 ul#clientButtons li.button:hover:not(.disabled) {
@@ -448,12 +467,12 @@ ul.show_legend li {
 div#episodeDialog .dialogTitle {
     padding-top: 2px;
     width: 740px;
-	margin-left: -350px;
+    margin-left: -350px;
 }
 
 div#show_episode {
     width: 730px;
-	margin-left: -350px;
+    margin-left: -350px;
     padding-top: 5px;
     border-top: 1px solid #979797;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#D3D3D3,endColorstr=#F8F8F8);
@@ -492,10 +511,11 @@ div#torrentlist_container {
     position: absolute;
     overflow: auto;
     width: 100%;
-    top: 80px;
+    top: 60px;
     bottom: 0;
     left: 0;
     right: 0;
+    -webkit-user-select: none;
 }
 
 div#torrentlist_container div.errorHeader {
@@ -647,14 +667,6 @@ ul.torrentlist li.match_transmission td.tr_identifier {
     background-color: #C1E0C1;
 }
 
-ul.torrentlist td.buttons.left {
-    padding-left: 4px;
-}
-
-ul.torrentlist td.buttons.right {
-    padding-right: 3px;
-}
-
 ul.torrentlist td.torrent_name {
     padding: 2px 5px 2px 5px;
 }
@@ -700,7 +712,7 @@ div.torrent_name a.contextButton {
     background: #F0F0F0;
     background-image: url('../images/dropdown.png');
     background-repeat: no-repeat;
-    background-position: 3px -1px;
+    background-position: 0 2px;
     float: left;
     border: 1px solid #ccc;
     border-radius: 3px;
@@ -708,7 +720,7 @@ div.torrent_name a.contextButton {
     padding: 0;
     margin: 2px 5px 0 0;
     width: 11px;
-    height: 9px;
+    height: 10px;
 }
 
 div.contextMenu {
@@ -740,31 +752,35 @@ div.contextMenu .contextItem.alt {
 }
 
 div.contextMenu .addFavorite {
-    background: url(../images/tor_fav.png) no-repeat left center;
+    background: url(../images/tor_fav_10x10.png) no-repeat left center;
     background-position: 2px 3px;
 }
 div.contextMenu .dlTorrent {
-    background: url(../images/tor_start.png) no-repeat left center;
+    background: url(../images/tor_start_10x10.png) no-repeat left center;
+    background-position: 2px 3px;
+}
+div.contextMenu .hideItem {
+    background: url(../images/tor_hide_10x10.png) no-repeat left center;
     background-position: 2px 3px;
 }
 div.contextMenu .torStart {
-    background: url(../images/tor_start.png) no-repeat left center;
+    background: url(../images/tor_start_10x10.png) no-repeat left center;
     background-position: 2px 3px;
 }
 div.contextMenu .torStop {
-    background: url(../images/tor_pause.png) no-repeat left center;
+    background: url(../images/tor_pause_10x10.png) no-repeat left center;
     background-position: 2px 3px;
 }
 div.contextMenu .delete {
-    background: url(../images/tor_stop.png) no-repeat left center;
+    background: url(../images/tor_stop_10x10.png) no-repeat left center;
     background-position: 2px 3px;
 }
 div.contextMenu .trash {
-    background: url(../images/tor_trash.png) no-repeat left center;
+    background: url(../images/tor_trash_10x10.png) no-repeat left center;
     background-position: 2px 3px;
 }
 div.contextMenu .torMove {
-    background: url(../images/tor_move.png) no-repeat left center;
+    background: url(../images/tor_move_10x10.png) no-repeat left center;
     background-position: 2px 3px;
 }
 div.contextMenu .episodeInfo {

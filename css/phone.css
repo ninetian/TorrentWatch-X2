@@ -1,22 +1,28 @@
 html {
     overflow: scroll;
 }
+
 body {
     overflow: scroll;
 }
+
 div#topmenu { 
     zoom: 130%;
     height: 26px;
     z-index: 3;
 }
+
 ul#mainoptions { display: none; }
 
 ul#filterbar_container {
     top: 2px;
     padding-left: 6px;
 }
+
 li#filter_downloading { display: none; }
+
 li#filter_downloaded { display: none; }
+
 ul#filterbar_container li:hover {
     height: 18px;
     background: #CCC;
@@ -29,48 +35,74 @@ ul#filterbar_container li:hover {
     border-bottom: 1px solid #999;
     color: #111;
 }
+
 li#filter_all { 
     width: 20px !important;
 }
+
 li#filter_matching {
     width: 57px !important;
 }
+
 li#filter_matching span { display: none; }
+
 li#filter_transmission {
     max-width: 82px !important;
 }
+
 li#filter_transmission span { display: none; }
+
 li#rates { display: none !important; }
+
 ul#clientButtons {
     height: 34px;
 }
+
 li.add_fav { display: none !important; }
+
 li.hide_item { display: none !important; }
+
 li.move_button { display: none !important; }
+
 li#filter_bytext { display: none !important; }
+
 div#torrentlist_container { 
     position: static; 
     top: 30px;
 }
+
 div#torrentlist_container div.header,
 div#torrentlist_container div.header td.feed_title span.matches {
     overflow: hidden;
     font-size: 10px;
     zoom: 120%;
 }
+
 ul#torrentlist li.torrent { 
     min-height: 22px;
 }
+
 ul.torrentlist li.torrent td {
     height: 22px;
 }
+
 ul.torrentlist td.torrent_name {
     border-top: 1px solid #ddd;
     padding-top: 1px;
 }
+
 span.torrent_pubDate { display: none; }
+
 span.torEta { display: none; }
+
 span.contextButton { display: none; }
+
+ul#clientButtons {
+    height: 34px;
+}
+
+ul#clientButtons li { zoom: 130%; }
+
 span.torrent_title { 
     font-size: 13px;
     height: 17px;
@@ -78,11 +110,13 @@ span.torrent_title {
     word-wrap: break-word;
     width: 100% !important;
 }
+
 ul#transmission_list span.torrent_title,
 ul.torrentlist li.match_downloaded span.torrent_title,
 ul.torrentlist li.match_downloading span.torrent_title {
     font-size: 12px;
 }
+
 span.torInfo { 
     overflow: hidden;
     height: 12px;
@@ -95,5 +129,9 @@ span.torInfo {
 	height: 16px;
         font-size: 10px;
 	zoom: 120%;
+    }
+
+    div#trash_tor_data {
+        left: 155px;
     }
 }

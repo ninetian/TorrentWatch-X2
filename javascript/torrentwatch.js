@@ -654,8 +654,8 @@ $(function() {
 		tor['trash'] = 1;
 		tor['move']= 1;
 	    }
-	    if($('#torrentlist_container li.selected.match_downloading,' +
-		 '#torrentlist_container li.selected.match_downloaded,' +
+	    if($('#torrentlist_container li.selected.match_downloading:not(.paused),' +
+		 '#torrentlist_container li.selected.match_downloaded:not(.paused),' +
 		 '#torrentlist_container li.selected.match_transmission:not(.paused)').length) {
 		tor['pause'] = 1
 		tor['del'] = 1;
@@ -855,7 +855,7 @@ $(function() {
 		        displayFilter(filter,1)
 			$('#dynamicdata').css('height', $(window).height() - ($('#topmenu').css('height') + 1));
 			$('#clientButtonsHolder').css('top', clientButtonsTop);
-			if('ontouchmove' in document.documentElement && !navigator.userAgent.toLowerCase().search('android')) {
+			if('ontouchmove' in document.documentElement && navigator.userAgent.toLowerCase().search('android') == -1) {
 			    $('#torrentlist_container').bind('touchstart', function() {
 			        $('#torrentlist_container').bind('touchmove', function() { $('#clientButtonsHolder').hide(); });
 			    });
@@ -1137,7 +1137,9 @@ $(function() {
 				    '<a class="button trash_tor_data close" onclick="$(\'#confirmTrash\').remove()">No</a>' +
   				'</div>' +
 			  '</div>'
-	    $('#dynamicdata').append(dialog);
+	    $('body').append(dialog);
+	    $('#confirmTrash').css('height', $(document).height() + 'px');
+	    $('#trash_tor_data').css('top', window.pageYOffset + (($(window).height()/2)-$('#trash_tor_data').height()) + 'px');
         } else {
             sure = 1;
         }

@@ -53,7 +53,8 @@ div.dialogTitle {
     display: none;
 }
 
-div.dialog_window {
+div.dialog_window:not(#trash_tor_data):not(#transmissionWindow) {
+    border-radius:     5px;
     top: 50px;
     zoom: 140%;
 }
@@ -63,7 +64,7 @@ div#torrentlist_container {
     top: 30px;
 }
 
-div#torrentlist_container { zoom: 130%; }
+div#torrentlist_container { zoom: 120%; }
 
 span.torInfo {
     overflow: hidden;
@@ -76,10 +77,19 @@ span.torrent_title {
     width: 700px;
 }
 
+div#trash_tor_data {
+    margin-left: -300px;
+    width: 600px;
+}
+
+div#trash_tor_data div {
+    zoom: 200%;
+}
+
 @media only screen and (orientation:portrait){
    /* portrait styles here */
 
-    div.dialog_window {
+    div.dialog_window:not(#trash_tor_data):not(#transmissionWindow) {
         top: 130px;
         zoom: 125%;
     }

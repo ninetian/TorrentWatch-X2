@@ -54,6 +54,7 @@ div#torrentlist_container {
 }
 div#torrentlist_container div.header,
 div#torrentlist_container div.header td.feed_title span.matches {
+    overflow: hidden;
     font-size: 10px;
     zoom: 120%;
 }
@@ -91,7 +92,7 @@ span.torInfo {
    /* portrait styles here */
     div#torrentlist_container div.header,
     div#torrentlist_container div.header td.feed_title span.matches {
-	height: 18px;
+	height: 16px;
         font-size: 10px;
 	zoom: 120%;
     }

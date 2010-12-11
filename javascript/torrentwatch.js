@@ -654,7 +654,9 @@ $(function() {
 		tor['trash'] = 1;
 		tor['move']= 1;
 	    }
-	    if($('#torrentlist_container li.selected.downloading, #torrentlist_container li.selected.downloaded').length) {
+	    if($('#torrentlist_container li.selected.match_downloading,' +
+		 '#torrentlist_container li.selected.match_downloaded,' +
+		 '#torrentlist_container li.selected.match_transmission:not(.paused)').length) {
 		tor['pause'] = 1
 		tor['del'] = 1;
 		tor['trash'] = 1;

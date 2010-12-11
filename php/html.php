@@ -65,7 +65,7 @@ function show_feed_html($idx) {
       } else {
 	$title = $config_values['Feeds'][$idx]['Name'];
       }
-      $html_out .= "<td class='feed_title'>$title<span class='matches'></span></td>\n";
+      $html_out .= "<td class='feed_title'><span>$title</span><span class='matches'></span></td>\n";
       $html_out .= "<td class='hide_feed'>\n";
       $html_out .= "<span class=\"hide_feed_right\">\n";
       $html_out .= "<a href=\"#\" title=\"Hide this feed\" onclick=\"$.toggleFeed(".$idx.", 0)\">\n";

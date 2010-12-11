@@ -391,7 +391,7 @@ ul#clientButtons li#Move {
 }
 
 ul#clientButtons li.move_data input {
-    border: 1px solid #999;
+    border: 1px solid #aaa;
     border-radius: 2px;
     -moz-border-radius: 2px;
     font-size: 12px;
@@ -519,17 +519,17 @@ div#torrentlist_container {
 }
 
 div#torrentlist_container div.errorHeader {
-    font-size: 1.0em;
+    font-size: 14px;
     text-align: center;
-    padding: 0.2em 0 0.2em 0;
+    padding-bottom: 3px;
     background: #C1E0C1;
     color: #D6001A;
     border-bottom: 1px solid #ddd;
 }
 
 div#torrentlist_container div.header {
-    font-size: 1em;
-    padding: 0.2em 0 0.2em 0;
+    font-size: 14px;
+    padding-bottom: 3px;
     text-align: center;
     background: #C1E0C1;
 }
@@ -551,10 +551,10 @@ div#torrentlist_container div.header td.feed_title {
     text-align: center;
 }
 
-div#torrentlist_container div.header td.feed_title span {
+div#torrentlist_container div.header td.feed_title span.matches {
    color: #666;
    margin-left: 0.5em;
-   font-size: 0.8em;
+   font-size: 12px;
 }
 
 div#torrentlist_container div.header_hidden td.feed_title span {
@@ -566,7 +566,7 @@ div#torrentlist_container ul.torrentlist {
 }
 
 ul.torrentlist li.torrent {
-    font-size: 0.9em;
+    font-size: 12px;
     min-height: 15px;
 }
 
@@ -940,7 +940,7 @@ div.dialog {
     cursor:		wait;
     padding-top:	60px;
     border-top:		1px solid #000;
-    z-index:		2;
+    z-index:		4;
 }
 
 div.dialog.confirm {

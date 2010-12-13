@@ -356,24 +356,24 @@ div#clientButtonsHolder {
     display: none;
     position: fixed;
     right: 20px;
-    height: 28px;
+    min-height: 28px;
     font-size: 12px;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#D3D3D3,endColorstr=#F8F8F8);
+    background: -webkit-gradient(linear, left top, left bottom, from(#EEE), to(#CCC));
+    background:	-moz-linear-gradient(top, #D3D3D3, #F8F8F8);
+    opacity: .90;
+    filter: alpha(opacity = 90);
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
     z-index: 3;
 }
 
 ul#clientButtons {
     height: 100%;
     background: #ddd;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#D3D3D3,endColorstr=#F8F8F8);
-    background: -webkit-gradient(linear, left top, left bottom, from(#EEE), to(#CCC));
-    background:	-moz-linear-gradient(top, #D3D3D3, #F8F8F8);
-    opacity: .90;
-    filter: alpha(opacity = 90);
     padding-left: 10px;
     padding-right: 5px;
-    border: 1px solid #aaa;
-    border-radius: 4px;
-    -moz-border-radius: 4px;
 }
 
 ul#clientButtons li {
@@ -389,9 +389,8 @@ ul#clientButtons li img {
 }
 
 ul#clientButtons li#Move {
-    padding: 1px 2px 0 2px;
+    padding: 1px 4px 0 4px;
     font-size: 14px;
-    font-weight: bold;
     height: 19px;
 }
 
@@ -402,7 +401,7 @@ ul#clientButtons li.move_data input {
     font-size: 12px;
     height: 20px;
     width: 300px;
-    margin: 0;
+    margin: 0 0 3px 0;
     padding: 0 5px 0 3px;
 }
 

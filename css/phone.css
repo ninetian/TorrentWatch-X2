@@ -8,7 +8,7 @@ body {
 
 div#topmenu { 
     zoom: 130%;
-    height: 26px;
+    height: 29px;
     z-index: 3;
 }
 
@@ -62,8 +62,6 @@ li.add_fav { display: none !important; }
 
 li.hide_item { display: none !important; }
 
-li.move_button { display: none !important; }
-
 li#filter_bytext { display: none !important; }
 
 div#torrentlist_container { 
@@ -99,13 +97,16 @@ span.contextButton { display: none; }
 
 ul#clientButtons {
     height: 34px;
+    padding: 0 0 0 5px;
 }
 
 ul#clientButtons li { zoom: 130%; }
 
+ul#clientButtons li.move_data input { width: 294px; }
+
 span.torrent_title { 
-    font-size: 13px;
-    height: 17px;
+    font-size: 15px;
+    height: 20px;
     overflow: hidden;
     word-wrap: break-word;
     width: 100% !important;
@@ -115,6 +116,7 @@ ul#transmission_list span.torrent_title,
 ul.torrentlist li.match_downloaded span.torrent_title,
 ul.torrentlist li.match_downloading span.torrent_title {
     font-size: 12px;
+    height: 17px;
 }
 
 span.torInfo { 
@@ -130,6 +132,8 @@ span.torInfo {
         font-size: 10px;
 	zoom: 120%;
     }
+
+    ul#clientButtons li.move_data input { width: 171px; }
 
     div#trash_tor_data {
         left: 155px;

@@ -155,7 +155,12 @@ function parse_options() {
 	    exit;
         case 'hide':
             $response = add_hidden(ucwords($_GET['hide']));
-            if($response) echo "$response";
+            if($response) {
+		echo "ERROR:$response";
+	    } else {
+                $guess = guess_match(html_entity_decode($_GET['hide']), TRUE);
+		echo $guess['key'];
+	    }
             exit;
         case 'delHidden':
             del_hidden($_GET['unhide']);

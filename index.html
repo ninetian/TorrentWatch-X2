@@ -86,7 +86,7 @@
   <li class='button move_button' onclick="toggleTorMove();"><img src='images/tor_move_20x20.png' /></li>
   <li class="move_data hidden"><input id="moveTo" type="text" class="text" name="moveTo"/></li>
   <li id="Move" class='button move_data hidden' onclick="$.processSelected('move')">Move</li>
-  <li class='close hidden' onclick="toggleTorMove();"></li>
+  <li class='close hidden' onclick="$('#clientButtons .move_data').fadeOut();"></li>
  </ul>
 </div>
 <div id='progress' class="progress progress_full">

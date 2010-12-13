@@ -47,14 +47,14 @@ ul#clientButtons {
 
 ul#clientButtons li { zoom: 130%; }
 
-ul#clientButtons li.move_data input { width: 275px; }
+ul#clientButtons li.move_data input { width: 525px; }
 
 div.dialogTitle {
     display: none;
 }
 
 div.dialog_window:not(#trash_tor_data):not(#transmissionWindow) {
-    border-radius:     5px;
+    border-radius: 5px;
     top: 50px;
     zoom: 140%;
 }
@@ -102,7 +102,7 @@ div#trash_tor_data div {
         width: 480px;
     }
 
-    ul#clientButtons li.move_data input { width: 250px; }
+    ul#clientButtons li.move_data input { width: 330px; }
 
     div#transmissionDialog .dialogTitle {
 	padding-top: 2px;

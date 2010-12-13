@@ -53,10 +53,15 @@ if(!isset($torInfo)) $torInfo = '';
 if(!isset($unixTime)) $unixTime = '';
 if(!isset($pubDateClass)) $pubDateClass = '';
 
+$guessed = guess_match($utitle, TRUE);
+$show_title = $guessed['key'];
+$show_quality = $guessed['data'];
 print <<< EOH
 
 <li id=id_$id name=$id class="torrent match_$matched $alt item_$torHash">
-<input type="hidden" class="title" value="$utitle" />
+<input type="hidden" class="title" value="$title" />
+<input type="hidden" class="show_title" value="$show_title" />
+<input type="hidden" class="show_quality" value="$show_quality" />
 <input type="hidden" class="link" value="$ulink" />
 <input type="hidden" class="feed_link" value="$feed" />
 <input type="hidden" class="client_id" value="$id" />

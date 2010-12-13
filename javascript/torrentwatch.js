@@ -279,11 +279,11 @@ $(function() {
     };
     
     toggleTorMove = function(torHash) {
-        var curObject = $('ul#clientButtons li.move_data').not('.disabled');
+        var curObject = $('ul#clientButtons li.move_data, ul#clientButtons li#Move');
         if (curObject.is(":visible")) {
-            curObject.fadeOut();
+            curObject.fadeOut('normal', updateClientButtons);
         } else {
-            curObject.fadeIn();
+            curObject.fadeIn('normal', updateClientButtons);
         }
         curObject = null;
     };
@@ -639,8 +639,10 @@ $(function() {
 	
 	if($('#transmission_data').is(":visible")) { 
 	    $('#clientButtons .add_fav, #clientButtons .start, #clientButtons .hide_item').hide();
+	    $('#clientButtons .move_button').show();
 	} else {
 	    $('#clientButtons .add_fav, #clientButtons .start, #clientButtons .hide_item').show();
+	    $('#clientButtons .move_button').hide();
 	}
 
 	if($('#torrentlist_container .feed  li.torrent.selected').length) tor['fav'] = 1;
@@ -652,7 +654,7 @@ $(function() {
 		tor['resume'] = 1;
 		tor['del'] = 1;
 		tor['trash'] = 1;
-		tor['move']= 1;
+		if($('#transmission_data').is(':visible')) tor['move']= 1;
 	    }
 	    if($('#torrentlist_container li.selected.match_downloading:not(.paused),' +
 		 '#torrentlist_container li.selected.match_downloaded:not(.paused),' +
@@ -660,7 +662,7 @@ $(function() {
 		tor['pause'] = 1
 		tor['del'] = 1;
 		tor['trash'] = 1;
-		tor['move'] = 1;
+		if($('#transmission_data').is(':visible')) tor['move']= 1;
     	    }
 	} else {
 	    $('#clientButtons .resume, #clientButtons .pause, #clientButtons .trash, #clientButtons .delete, #clientButtons .move_data, #clientButtons .move_button').hide();
@@ -674,7 +676,7 @@ $(function() {
 		if(item == 'resume') buttons += "#clientButtons .resume,";
 		if(item == 'del') buttons += "#clientButtons .delete,";
 		if(item == 'trash') buttons += "#clientButtons .trash,";
-		if(item == 'move') buttons += "#clientButtons .move_button,";
+		if(item == 'move') buttons += "#clientButtons .move_button, #clientButtons #Move,";
 	}
 	buttons = buttons.slice(0,buttons.length-1);
 	$('#clientButtons li.button:not(buttons)').addClass('disabled');
@@ -690,13 +692,14 @@ $(function() {
 	    } else {
 	        if($('#clientButtonsHolder').is(':visible') == false) {
 	            $('#clientButtonsHolder').css('right', -$('#clientButtonsHolder').width());
-	            $('#clientButtonsHolder').show().animate({right: '+=' + ($('#clientButtonsHolder').width() + getScrollBarWidth() + 5)},300);
+	            $('#clientButtonsHolder').show().animate({right: '+=' + ($('#clientButtonsHolder').width() + getScrollBarWidth() + 4)},300);
 	        }
 	    }
 	    if(navigator.userAgent.toLowerCase().search('(iphone|ipod|ipad|android)') > -1) {
 	        document.getElementById('clientButtonsHolder').style.top =
-		    ((window.pageYOffset + window.innerHeight - $('#clientButtonsHolder').height() - 15)) + 'px';
-		$('#clientButtons').width($('#clientButtons li.button:visible').length * 46);
+		    ((window.pageYOffset + window.innerHeight - $('#clientButtonsHolder').height() - 6)) + 'px';
+	        $('#clientButtons').css('min-width', $('#clientButtons li.button:visible').length * 46);
+		$('#clientButtons').css('max-width', ($(window).width() - 15));
 	    } else {
 	        document.getElementById('clientButtonsHolder').style.top = 
 		    ($('#topmenu').height() + window.pageYOffset + 5) + 'px';
@@ -713,6 +716,7 @@ $(function() {
 		    })
 		}
 	    }
+	    $('#clientButtons .move_data').hide();
 	}
     } 
 
@@ -742,16 +746,10 @@ $(function() {
 	return (w1 - w2);  
     };  
 
-    var resetClientButtonsContainer = function() {
-        var clientButtonsTop = $(window).height() - $('#clientButtonsHolder').height();
-	$('#clientButtonsHolder').css('top', clientButtonsTop);
-    }
-
     $(document).ready(function() {
 	var supportsOrientationChange = "onorientationchange" in window,
 	    orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
-	if (orientationEvent in document.documentElement)
-	    window.addEventListener(orientationEvent, function() { resetClientButtonsContainer(); }, false);
+	window.addEventListener(orientationEvent, toggleClientButtons);
 	waitForDynData = setInterval(function() {
 	    if($('#dynamicdata').length) {
 		listSelector();
@@ -762,13 +760,22 @@ $(function() {
 
     $(document).keyup(function(e) {
 	if (e.keyCode == '27') {
+	    if($('.dialog').length) {
 		$('.dialog .close').click();
-		$('#clientButtons .close').click();
 		$('div.contextMenu').hide();
+	    } else if($('#clientButtons .move_data').is(":visible")) {
+		$('#clientButtons .close').click();
+	    } else if($('#torrentlist_container li.torrent.selected').length) {
+		$('#torrentlist_container li.torrent.selected').removeClass('selected');
+		updateClientButtons();
+	    }
         }
 	if (e.keyCode == '13') {
-		$('.dialog .confirm').click();
-		if($('#clientButtons .move_data').is(":visible")) $('#clientButtons #Move').click();
+	    if($('.dialog .confirm').length) {
+	        $('.dialog .confirm').click();
+	    } else if($('#clientButtons .move_data').is(":visible")) {
+		$('#clientButtons #Move').click();
+	    }
         }
 	if (e.keyCode == '17' || e.keyCode == '91' || e.keyCode == '224') window.ctrlKey = 0
     });
@@ -1217,15 +1224,17 @@ $(function() {
     
     $.hideItem = function(title, id) {
         $.get('torrentwatch.php', { hide: title }, function(response) {
-	    if(response) {
+	    if(response.match(/^ERROR:/)) {
 		var errorID = new Date().getTime();
-		$('#twError').show().append('<p id="error_' + errorID + '">' + response + '</p>');
+		$('#twError').show().append('<p id="error_' + errorID + '">' + response.match(/^ERROR:(.*)/)[1] + '</p>');
 		setTimeout(function() {
 		    $('#twError p#error_'+errorID).remove();
 		    if(!$('#twError p').length)  $('#twError').hide();
 		},5000);
 	    } else {
-		 if(id) $('#id_' + id).remove();
+		$.each($('#torrentlist_container li'), function() {
+		    if($('#' + this.id + ' input.show_title').val() == response) $(this).hide();
+		});
 	    }
 	});
     }
@@ -1243,10 +1252,12 @@ $(function() {
             }
         } else {
             if($.cookie('feed_' + feed) == 1) {
+	    console.log(feed + ' show');
                 $("#feed_" + feed + " ul").removeClass("hiddenFeed").slideDown();
                 $("#feed_" + feed + " .header").removeClass("header_hidden");
                 $.cookie('feed_' + feed , null, { expires: 666 });
             } else {
+	    console.log(feed + ' hide');
                 $("#feed_" + feed + " ul").slideUp().addClass("hiddenFeed");
                 $("#feed_" + feed + " .header").addClass("header_hidden");    
                 $.cookie('feed_' + feed , 1, { expires: 666 });

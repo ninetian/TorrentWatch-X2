@@ -755,7 +755,7 @@ $(function() {
 		listSelector();
 		clearInterval(waitForDynData);
 	    }
-	},250);
+	},500);
     });
 
     $(document).keyup(function(e) {
@@ -895,7 +895,7 @@ $(function() {
 			} else {
 			    setTimeout(getClientData,10);
 			}
-		    },250);
+		    },500);
                 }
 
         	window.client = $('#clientId').html();

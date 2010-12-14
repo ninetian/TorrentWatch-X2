@@ -60,8 +60,6 @@ ul#clientButtons {
 
 li.add_fav { display: none !important; }
 
-li.hide_item { display: none !important; }
-
 li#filter_bytext { display: none !important; }
 
 div#torrentlist_container { 
@@ -106,7 +104,9 @@ ul#clientButtons li.move_data input { width: 294px; }
 
 span.torrent_title { 
     font-size: 15px;
-    height: 20px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    height: 18px;
     overflow: hidden;
     word-wrap: break-word;
     width: 100% !important;
@@ -115,8 +115,10 @@ span.torrent_title {
 ul#transmission_list span.torrent_title,
 ul.torrentlist li.match_downloaded span.torrent_title,
 ul.torrentlist li.match_downloading span.torrent_title {
+    padding-top: 1px;
+    padding-bottom: 1px;
     font-size: 12px;
-    height: 17px;
+    height: 14px;
 }
 
 span.torInfo { 

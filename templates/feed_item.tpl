@@ -1,4 +1,5 @@
 <?php
+if(isset($item['title'])) $utitle = $item['title'];
 if(isset($item['description'])) {
     $description = $item['description'];
 } else {
@@ -20,13 +21,10 @@ if($config_values['Settings']['Combine Feeds'] == 1) {
 if(isset($torInfo)) {
     $stats = $torInfo['stats'];
     $clientId = $torInfo['clientId'];
-    $infoDiv = "<div id='tor_$id' class='torInfo tor_$torHash'>$stats</div>";
-    $etaDiv = "<div class='torEta'>$eta</div>";
+    $infoDiv = "<div class='infoDiv'><span id='tor_$id' class='torInfo tor_$torHash'>$stats</span><span class='torEta'>$eta</span></div>";
     if($torInfo['status'] == 4) $matched = "downloading";
 } else if((!$config_values['Settings']['Disable Hide List']) && ($matched == "nomatch"))  {
-    $hideTD = "</td><td class='hideTD'><span class=\"hide_item\"><a href=\"#\" 
-    title=\"Hide this show from the list\" onclick='$.hideItem(\"$utitle\")'>
-    <img src=\"images/hide.png\" /></a></span></td>";
+    $hideItem = "<div class='contextItem hideItem' onclick='$.hideItem(\"$utitle\")' title='Hide show'>Hide show</div>";
 }
 
 if($config_values['Settings']['Client'] != 'folder') $progressBar = "<div class='progressBarContainer init'><div class='progressDiv' style='width: 0.07%; height: 3px; '></div></div>";
@@ -49,53 +47,51 @@ if($matched == "downloading" || $matched == "downloaded" || $matched == "cachehi
 } 
 
 if(!isset($infoDiv)) $infoDiv = '';
-if(!isset($etaDiv)) $etaDiv = '';
+if(!isset($hideItem)) $hideItem = '';
 if(!isset($feedItem)) $feedItem = '';
 if(!isset($torInfo)) $torInfo = '';
 if(!isset($unixTime)) $unixTime = '';
-if(!isset($hideSpan)) $hideSpan = '';
 if(!isset($pubDateClass)) $pubDateClass = '';
 
+$guessed = guess_match($utitle, TRUE);
+$show_title = $guessed['key'];
+$show_quality = $guessed['data'];
 print <<< EOH
 
-<li id=id_$id name=$id class="torrent match_$matched $alt item_$torHash" title="$description">
-<table width="100%" cellspacing="0"><tr><td class="buttons left match_$matched">
+<li id=id_$id name=$id class="torrent match_$matched $alt item_$torHash">
+<input type="hidden" class="title" value="$title" />
+<input type="hidden" class="show_title" value="$show_title" />
+<input type="hidden" class="show_quality" value="$show_quality" />
+<input type="hidden" class="link" value="$ulink" />
+<input type="hidden" class="feed_link" value="$feed" />
+<input type="hidden" class="client_id" value="$id" />
 
-<p class='$dlTorrent'>
-<a href="#" title="Download this torrent" onclick='javascript:$.dlTorrent("torrentwatch.php?dlTorrent=1&title=$utitle&link=$ulink&feed=$feed","$id")'>
-<img height=10 src="images/tor_start.png"></a></p>
+<table width="100%" cellspacing="0">
+ <tr>
+  <td class="identifier"></td>
+  <td class="torrent_name">
+   <div class='torrent_name'>
+	<span class="contextButton"><a id="contextButton_$id" class="contextButton" onclick='$.toggleContextMenu("#divContext_$id", "$id");'></a></span>
+	<span class='torrent_title' title="$description">$title</span>
+	<span class='torrent_pubDate'>$feedItem $pubDate</span>
+   </div>
+   <div id="divContext_$id" class="contextMenu">
+	<div class='contextItem addFavorite' onclick='javascript:$.addFavorite("$feed","$utitle")' title="Add this show to favorites">Add to favorites</div>
+	<div class='contextItem $dlTorrent' onclick='javascript:$.dlTorrent("$utitle","$ulink","$feed","$id")' title="Download this torrent">Download</div>
+	<div class="contextItem activeTorrent $torStart" onclick='javascript:$.stopStartTorrent("start", "$torHash")' title="Resume download">Resume transfer</div>
+	<div class="contextItem activeTorrent $torStop" onclick='javascript:$.stopStartTorrent("stop", "$torHash")' title="Pause download">Pause transfer</div>
+	<div class="contextItem activeTorrent delete $hidden" onclick='javascript:$.delTorrent("$torHash", "false")' title="Delete torrent but keep data">Remove from client</div>
+	<div class="contextItem activeTorrent trash $hidden" onclick='javascript:$.delTorrent("$torHash", "true")' title="Delete torrent and its data">Remove & Trash data</div>
+        $hideItem
+	<div class="contextItem episodeInfo" onclick='javascript:$.episodeInfo("$utitle")' title="Delete torrent and its data">Episode Info</p></div>
+   </div>
+   $progressBar
+   $infoDiv
+   <span class='hidden' id=unixTime>$unixTime</span>
+  </td>
+ </tr>
+</table>
 
-<p class="activeTorrent $torStart">
-<a href="#" title="Resume download" onclick='javascript:$.stopStartTorrent("start", "$torHash")'>
-<img height=10 src="images/tor_start.png"></a></p>
-
-<p class="activeTorrent $torStop">
-<a href="#" title="Pause download" onclick='javascript:$.stopStartTorrent("stop", "$torHash")'>
-<img height=10 src="images/tor_pause.png"></a></p>
-
-<p class="activeTorrent delete $hidden">
-<a href="#" title="Delete torrent but keep data" onclick='javascript:$.delTorrent("$torHash", "false")'>
-<img height=10 src="images/tor_stop.png"></a></p>
-
-</td><td class="buttons right match_$matched ">
-
-<p class='favorite'>
-<a href="#" title="Add this show to favorites" onclick='javascript:$.addFavorite("torrentwatch.php?matchTitle=1&rss=$feed&title=$utitle")'>
-<img height=10 src="images/tor_fav.png"></a></p>
-
-<p class="activeTorrent trash $hidden">
-<a href="#" title="Delete torrent and its data" onclick='javascript:$.delTorrent("$torHash", "true")'>
-<img height=10 src="images/tor_trash.png"></a></p>
-
-$hideTD
-<td class="torrent_name">
-<div class='torrent_name'>$title</div>
-<div class='torrent_pubDate'>$feedItem $pubDate</div>
-$progressBar
-$infoDiv
-$etaDiv
-<span class='hidden' id=unixTime>$unixTime</span>
-</td></tr></table></li>
-
+</li>
 EOH;
 ?>

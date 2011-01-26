@@ -155,8 +155,12 @@ function getClientData($recent) {
     }
 }
 
-function delTorrent($torHash, $trash) {
+function delTorrent($torHash, $trash, $batch=false) {
     global $config_values;
+
+    if($batch) {
+	$torHash = explode(',',$torHash); 
+    }
 
     switch($config_values['Settings']['Client']) {  
         case 'Transmission':
@@ -167,20 +171,30 @@ function delTorrent($torHash, $trash) {
     }
 }
 
-function stopTorrent($torHash) {
+function stopTorrent($torHash, $batch=false) {
     global $config_values;
+
+    if($batch) {
+	$torHash = explode(',',$torHash); 
+   	//$torHash = array_map(intval, $torHash);
+    }
 
     switch($config_values['Settings']['Client']) {  
         case 'Transmission':
             $request = array('arguments' => array('ids' => $torHash), 'method' => 'torrent-stop');
             $response = transmission_rpc($request);
+	    _debug(var_export($request,true));
             return json_encode($response);
         break;
     }
 }
 
-function startTorrent($torHash) {
+function startTorrent($torHash, $batch=false) {
     global $config_values;
+
+    if($batch) {
+	$torHash = explode(',',$torHash); 
+    }
 
     switch($config_values['Settings']['Client']) {  
         case 'Transmission':
@@ -191,8 +205,12 @@ function startTorrent($torHash) {
     }
 }
 
-function moveTorrent($location, $torHash) {
+function moveTorrent($location, $torHash, $batch=false) {
     global $config_values;
+
+    if($batch) {
+	$torHash = explode(',',$torHash); 
+    }
 
     switch($config_values['Settings']['Client']) {  
         case 'Transmission':

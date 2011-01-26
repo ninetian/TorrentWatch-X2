@@ -1,5 +1,5 @@
 <div id="transmissionDialog" class="dialog">
-	<div class="title">
+	<div class="dialogTitle">
         <a class="toggleDialog button close" href="#"></a>
 		Transmission
 	</div>

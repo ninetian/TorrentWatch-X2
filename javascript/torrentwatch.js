@@ -749,7 +749,7 @@ $(function() {
     $(document).ready(function() {
 	var supportsOrientationChange = "onorientationchange" in window,
 	    orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
-	window.addEventListener(orientationEvent, toggleClientButtons);
+	window.addEventListener(orientationEvent, toggleClientButtons, false);
 	waitForDynData = setInterval(function() {
 	    if($('#dynamicdata').length) {
 		listSelector();

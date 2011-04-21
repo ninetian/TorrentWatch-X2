@@ -323,7 +323,7 @@ function add_favorite() {
   
   if(!isset($_GET['idx']) || $_GET['idx'] == 'new' ) {
       foreach($config_values['Favorites'] as $fav) {
-          if($_GET['name'] == $fav['Name']) return("\"Error: " . $_GET['name'] . "\" Allready exists in favorites");
+          if($_GET['name'] == $fav['Name']) return("Error: \"" . $_GET['name'] . "\" Allready exists in favorites");
       }
   }
   
@@ -334,7 +334,7 @@ function add_favorite() {
     $idx = end(array_keys($config_values['Favorites']));
     $_GET['idx'] = $idx; // So display_favorite_info() can see it
   } else
-    return("Bad form data, not added to favorites"); // Bad form data
+    return("Error: Bad form data, not added to favorites"); // Bad form data
 
   $list = array("name"      => "Name",
                 "filter"    => "Filter",
@@ -348,11 +348,13 @@ function add_favorite() {
                 "episode"   => "Episode");
    
   foreach($list as $key => $data) {
-    if(isset($_GET[$key]))
+    if(isset($_GET[$key])) {
       $config_values['Favorites'][$idx][$data] = urldecode($_GET[$key]);
-    else
+    } else {
       $config_values['Favorites'][$idx][$data] = "";
+    }
   }
+  return(urldecode($_GET['name']));
 }
 
 function del_favorite() {

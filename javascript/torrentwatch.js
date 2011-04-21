@@ -617,6 +617,7 @@ $(function() {
 	    }) ;
         })
         $('li.torrent').find('a').mousedown(function() { return false })
+        $('li.torrent').find('div.contextItem').mousedown(function() { return false })
     };
 
     toggleSelect = function(item) {
@@ -1081,13 +1082,15 @@ $(function() {
 	     title: title,
 	     rss: feed
 	    }, function(response) {
-	        if(response) {
+	        if(response.match(/^Error:/)) {
 		    var errorID = new Date().getTime();
 		    $('#twError').show().append('<p id="error_' + errorID + '">' + response + '</p>');
 		    setTimeout(function() {
 			$('#twError p#error_'+errorID).remove();
 			if(!$('#twError p').length)  $('#twError').hide();
 		    },5000);
+		} else {
+		    $('input[value="' + response + '"]').parent().removeClass('match_nomatch').addClass('match_test')
 		}
 	    }, 'html');
     };

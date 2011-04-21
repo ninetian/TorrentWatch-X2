@@ -323,7 +323,7 @@ function add_favorite() {
   
   if(!isset($_GET['idx']) || $_GET['idx'] == 'new' ) {
       foreach($config_values['Favorites'] as $fav) {
-          if($_GET['name'] == $fav['Name']) return("\"" . $_GET['name'] . "\" Allready exists in favorites");
+          if($_GET['name'] == $fav['Name']) return("\"Error: " . $_GET['name'] . "\" Allready exists in favorites");
       }
   }
   

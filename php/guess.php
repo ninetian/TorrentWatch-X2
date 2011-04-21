@@ -19,7 +19,7 @@ function guess_match($title, $normalize = FALSE) {
     $epi.='\d{8}[_.\s])/i';   // 20082306 etc
 
     // Quality
-    $quality ='/[_. -](DVB '.'|';
+    $quality ='/[_. -(](DVB '.'|';
     $quality.='DSRIP'   .'|';
     $quality.='DVBRip'  .'|';
     $quality.='BRRip'   .'|';
@@ -50,7 +50,7 @@ function guess_match($title, $normalize = FALSE) {
     $quality.='WEB-DL'  .'|';
     $quality.='720p'    .'|';
     $quality.='1080i'   .'|';
-    $quality.='1080p)[_. -]/i';
+    $quality.='1080p)[_. -)]/i';
 
     // Audio
     $audio = '/([_.\s]AC3)/i';

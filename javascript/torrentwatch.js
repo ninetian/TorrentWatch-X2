@@ -301,13 +301,13 @@ $(function() {
         '<li id="clientId_' + item.id + '" class="torrent item_' + item.hashString + ' match_transmission ' + liClass +'">' +
         '<table width="100%" cellspacing="0"><tr><td class="tr_identifier"></td>' +
         '<td class="torrent_name tor_client">' +
-	'<div class="torrent_name"><span class="torrent_title">' + item.name.replace(/[._]/g, '.&shy;') + '</span></div>' +
-	'<div style="width: 100%; margin-top: 2px; border: 1px solid #BFCEE3; background: #DFE3E8;">' + 
-	'<div class="progressDiv" style="width: '+Percentage+'%; height: 3px;"></div></div>' +
+        '<div class="torrent_name"><span class="torrent_title">' + item.name.replace(/[._]/g, '&shy;') + '</span></div>' +
+        '<div style="width: 100%; margin-top: 2px; border: 1px solid #BFCEE3; background: #DFE3E8;">' + 
+        '<div class="progressDiv" style="width: '+Percentage+'%; height: 3px;"></div></div>' +
         '<span class="dateAdded hidden">' + item.addedDate + '</span>' +
         '<div class="infoDiv"><span id=tor_' + item.id + ' class="torInfo tor_' + item.hashString + '">' + clientData + '</span>' +
-	'<span class="torEta">' + item.eta + '</span></div>' +
-	'<input type="hidden" class="path" value="' + item.downloadDir + '"></input>'+
+        '<span class="torEta">' + item.eta + '</span></div>' +
+        '<input type="hidden" class="path" value="' + item.downloadDir + '"></input>'+
         '</td></tr></table></li>';
         
         return(transmissionItem);
@@ -340,7 +340,9 @@ $(function() {
             
             window.hideProgressBar = 1;
 	    setTimeout(function() {
-		if(window.updatingClientData) $('li#webui a span').addClass('altIcon');
+		if(window.updatingClientData) {
+		    $('li#webui a span').addClass('altIcon');
+		}
 	    },1500)
 
             $.get('torrentwatch.php', {
@@ -635,116 +637,108 @@ $(function() {
 	}
     }
 
-    updateClientButtons = function() {
+    updateClientButtons = function(fast) {
         var tor = new Array();
 	
-	if($('#transmission_data').is(":visible")) { 
-	    $('#clientButtons .add_fav, #clientButtons .start, #clientButtons .hide_item').hide();
-	    $('#clientButtons .move_button').show();
-	} else {
-	    $('#clientButtons .add_fav, #clientButtons .start, #clientButtons .hide_item').show();
-	    $('#clientButtons .move_button').hide();
-	}
+    	if($('#transmission_data').is(":visible")) { 
+    	    $('#clientButtons .add_fav, #clientButtons .start, #clientButtons .hide_item').hide();
+    	    $('#clientButtons .move_button').show();
+    	} else {
+    	    $('#clientButtons .add_fav, #clientButtons .start, #clientButtons .hide_item').show();
+    	    $('#clientButtons .move_button').hide();
+    	}
 
-	if($('#torrentlist_container .feed  li.torrent.selected').length) tor['fav'] = 1;
-	if($('#torrentlist_container .feed  li.torrent.selected.match_nomatch').length) tor['hide'] = 1;  
-	if($('#torrentlist_container .feed li.selected').not('.match_downloading').not('.match_downloaded').length) tor['start'] = 1;
+    	if($('#torrentlist_container .feed  li.torrent.selected').length) tor['fav'] = 1;
+    	if($('#torrentlist_container .feed  li.torrent.selected.match_nomatch').length) tor['hide'] = 1;  
+    	if($('#torrentlist_container .feed li.selected').not('.match_downloading').not('.match_downloaded').length) tor['start'] = 1;
 
-	if(window.client != 'folder') {
-	    if($('#torrentlist_container li.selected.paused').length) { 
-		tor['resume'] = 1;
-		tor['del'] = 1;
-		tor['trash'] = 1;
-		if($('#transmission_data').is(':visible')) tor['move']= 1;
-	    }
-	    if($('#torrentlist_container li.selected.match_downloading:not(.paused),' +
-		 '#torrentlist_container li.selected.match_downloaded:not(.paused),' +
-		 '#torrentlist_container li.selected.match_transmission:not(.paused)').length) {
-		tor['pause'] = 1
-		tor['del'] = 1;
-		tor['trash'] = 1;
-		if($('#transmission_data').is(':visible')) tor['move']= 1;
+    	if(window.client != 'folder') {
+    	    if($('#torrentlist_container li.selected.paused').length) { 
+    		tor['resume'] = 1;
+    		tor['del'] = 1;
+    		tor['trash'] = 1;
+    		if($('#transmission_data').is(':visible')) tor['move']= 1;
     	    }
-	} else {
-	    $('#clientButtons .resume, #clientButtons .pause, #clientButtons .trash, #clientButtons .delete, #clientButtons .move_data, #clientButtons .move_button').hide();
-	}
-	var buttons = '';
-	for(item in tor) {
-		if(item == 'start') buttons += "#clientButtons .start,";
-		if(item == 'fav') buttons += "#clientButtons .add_fav,";
-		if(item == 'hide') buttons += "#clientButtons .hide_item,";
-		if(item == 'pause') buttons += "#clientButtons .pause,";
-		if(item == 'resume') buttons += "#clientButtons .resume,";
-		if(item == 'del') buttons += "#clientButtons .delete,";
-		if(item == 'trash') buttons += "#clientButtons .trash,";
-		if(item == 'move') buttons += "#clientButtons .move_button, #clientButtons #Move,";
-	}
-	buttons = buttons.slice(0,buttons.length-1);
-	$('#clientButtons li.button:not(buttons)').addClass('disabled');
-	$(buttons).removeClass('disabled');
+    	    if($('#torrentlist_container li.selected.match_downloading:not(.paused),' +
+    		 '#torrentlist_container li.selected.match_downloaded:not(.paused),' +
+    		 '#torrentlist_container li.selected.match_transmission:not(.paused)').length) {
+    		tor['pause'] = 1
+    		tor['del'] = 1;
+    		tor['trash'] = 1;
+    		if($('#transmission_data').is(':visible')) tor['move']= 1;
+        	    }
+    	} else {
+    	    $('#clientButtons .resume, #clientButtons .pause, #clientButtons .trash, #clientButtons .delete, #clientButtons .move_data, #clientButtons .move_button').hide();
+    	}
+    	var buttons = '';
+    	for(item in tor) {
+    		if(item == 'start') buttons += "#clientButtons .start,";
+    		if(item == 'fav') buttons += "#clientButtons .add_fav,";
+    		if(item == 'hide') buttons += "#clientButtons .hide_item,";
+    		if(item == 'pause') buttons += "#clientButtons .pause,";
+    		if(item == 'resume') buttons += "#clientButtons .resume,";
+    		if(item == 'del') buttons += "#clientButtons .delete,";
+    		if(item == 'trash') buttons += "#clientButtons .trash,";
+    		if(item == 'move') buttons += "#clientButtons .move_button, #clientButtons #Move,";
+    	}
+    	buttons = buttons.slice(0,buttons.length-1);
+    	$('#clientButtons li.button:not(buttons)').addClass('disabled');
+    	$(buttons).removeClass('disabled');
 
-	toggleClientButtons();
+    	toggleClientButtons(fast);
     }
 
     toggleClientButtons = function(fast) {
-	if($('#torrentlist_container li.selected').length) {
-	    if(fast || $('#torrentlist_container li.selected').length > 1) {
-	        if($('#clientButtonsHolder').is(':visible') == false) $('#clientButtonsHolder').show();
-	    } else {
-	        if($('#clientButtonsHolder').is(':visible') == false) {
-	            $('#clientButtonsHolder').css('right', -$('#clientButtonsHolder').width());
-	            $('#clientButtonsHolder').show().animate({right: '+=' + ($('#clientButtonsHolder').width() + getScrollBarWidth() + 4)},300);
-	        }
-	    }
-	    if(navigator.userAgent.toLowerCase().search('(iphone|ipod|ipad|android)') > -1) {
-	        document.getElementById('clientButtonsHolder').style.top =
-		    ((window.pageYOffset + window.innerHeight - $('#clientButtonsHolder').height() - 6)) + 'px';
-	        $('#clientButtons').css('min-width', $('#clientButtons li.button:visible').length * 46);
-		$('#clientButtons').css('max-width', ($(window).width() - 15));
-	    } else {
-	        document.getElementById('clientButtonsHolder').style.top = 
-		    ($('#topmenu').height() + window.pageYOffset + 5) + 'px';
-	    }
-	} else {
-	    if(fast) {
-	        if($('#clientButtonsHolder').is(':visible') == true) $('#clientButtonsHolder').hide();
-	    } else {
-	        if($('#clientButtonsHolder').is(':visible') == true) {
-		    $('#clientButtonsHolder').show().animate({
-			right: '+=' + -$('#clientButtonsHolder').width()
-		    }, 300, function() {
-			$('#clientButtonsHolder').hide();
-		    })
-		}
-	    }
-	    $('#clientButtons .move_data').hide();
-	}
+    	if(navigator.userAgent.toLowerCase().search('(iphone|ipod|ipad|android)') > -1) fast = 1;
+    	if($('#torrentlist_container li.selected').length) {
+    	    if(fast || $('#torrentlist_container li.selected').length > 1) {
+    	        if($('#clientButtonsHolder').is(':visible') == false) $('#clientButtonsHolder').show();
+    	    } else {
+    	        if($('#clientButtonsHolder').is(':visible') == false) $('#clientButtonsHolder').fadeIn();
+    	    }
+    	    if(navigator.userAgent.toLowerCase().search('(iphone|ipod|ipad|android)') > -1) {
+    	        document.getElementById('clientButtonsHolder').style.top =
+    		    ((window.pageYOffset + window.innerHeight - $('#clientButtonsHolder').height() - 6)) + 'px';
+    	        $('#clientButtons').css('min-width', $('#clientButtons li.button:visible').length * 46);
+    		$('#clientButtons').css('max-width', ($(window).width() - 15));
+    	    } else {
+    	        document.getElementById('clientButtonsHolder').style.top = 
+    		    ($('#topmenu').height() + window.pageYOffset + 5) + 'px';
+    	    }
+    	} else {
+    	    if(fast) {
+    	        if($('#clientButtonsHolder').is(':visible') == true) $('#clientButtonsHolder').hide();
+    	    } else {
+    	        if($('#clientButtonsHolder').is(':visible') == true) $('#clientButtonsHolder').fadeOut(200);
+    	    }
+    	    $('#clientButtons .move_data').hide();
+    	}
     } 
-
+    
     function getScrollBarWidth() {  
-	var inner = document.createElement('p');  
-	inner.style.width = "100%";  
-	inner.style.height = "200px";  
+    	var inner = document.createElement('p');  
+    	inner.style.width = "100%";  
+    	inner.style.height = "200px";  
 
-	var outer = document.createElement('div');  
-	outer.style.position = "absolute";  
-	outer.style.top = "0px";  
-	outer.style.left = "0px";  
-	outer.style.visibility = "hidden";  
-	outer.style.width = "200px";  
-	outer.style.height = "150px";  
-	outer.style.overflow = "hidden";  
-	outer.appendChild (inner);  
+    	var outer = document.createElement('div');  
+    	outer.style.position = "absolute";  
+    	outer.style.top = "0px";  
+    	outer.style.left = "0px";  
+    	outer.style.visibility = "hidden";  
+    	outer.style.width = "200px";  
+    	outer.style.height = "150px";  
+    	outer.style.overflow = "hidden";  
+    	outer.appendChild (inner);  
 
-	document.body.appendChild (outer);  
-	var w1 = inner.offsetWidth;  
-	outer.style.overflow = 'scroll';  
-	var w2 = inner.offsetWidth;  
-	if (w1 == w2) w2 = outer.clientWidth;  
+    	document.body.appendChild (outer);  
+    	var w1 = inner.offsetWidth;  
+    	outer.style.overflow = 'scroll';  
+    	var w2 = inner.offsetWidth;  
+    	if (w1 == w2) w2 = outer.clientWidth;  
 
-	document.body.removeChild (outer);  
+    	document.body.removeChild (outer);  
 
-	return (w1 - w2);  
+    	return (w1 - w2);  
     };  
 
     $(document).ready(function() {
@@ -796,15 +790,26 @@ $(function() {
 
     // Ajax progress bar
     $('#refresh').ajaxStart(function() {
-	window.ajaxActive = 1;
+        window.ajaxActive = 1;
         if (!(window.hideProgressBar)) {
-	    $('#refresh a').html('<img src="images/ajax-loader-small.gif">');
+	        $('#refresh a').html('<img src="images/ajax-loader-small.gif">');
             if($('div.dialog').is(":visible")) $('#progress').removeClass('progress_full').fadeIn();
+    	    if($('ul#clientButtons').is(":visible")) {
+    	        window.visibleButtons = $('div#clientButtonsHolder li.button').not('.hidden');
+        		window.hideButtonHolder = setTimeout( function() { 
+        		    $(window.visibleButtons).hide()
+        		    $('ul#clientButtons').append('<div id="clientButtonsBusy"><img src="images/ajax-loader-small.gif">Working...</div>')
+    		    }, 500 );
+    	    }
         }
     }).ajaxStop(function() {
 	window.ajaxActive = 0;
 	$('#refresh a').html('<img src="images/refresh.png">');
 	$('#progress').fadeOut();
+	$('div#clientButtonsBusy').remove();
+	if(window.hideButtonHolder) clearTimeout(hideButtonHolder);
+    if(window.visibleButtons) $(window.visibleButtons).show()
+    updateClientButtons();
 	setTimeout(function() {
 	    $('#transmission_list li.torrent').markAlt();
 	},500);
@@ -1075,7 +1080,11 @@ $(function() {
     $.fn.markAlt = function() {
         return this.filter(":visible").removeClass('alt').filter(":visible:even").addClass('alt');
     };
-
+    
+    $.urlencode = function(str) {
+        return escape(str).replace(/\+/g,'%2B').replace(/%20/g, '+').replace(/\*/g, '%2A').replace(/\//g, '%2F').replace(/@/g, '%40');
+    }
+    
     $.addFavorite = function(feed, title) {
         $.get('torrentwatch.php', {
 	     matchTitle: 1,
@@ -1090,7 +1099,16 @@ $(function() {
 			if(!$('#twError p').length)  $('#twError').hide();
 		    },5000);
 		} else {
-		    $('input[value="' + response + '"]').parent().removeClass('match_nomatch').addClass('match_test')
+		    //$('input[value="' + response + '"]').parent().removeClass('match_nomatch').addClass('match_test')
+		    response = $.parseJSON(response);
+		    $.each($("ul#torrentlist li"), function(i, item) {    
+		        if($('li#' + item.id + ' input.show_title').val().match(response.title) &&
+		           $('li#' + item.id + ' input.show_quality').val().match(response.quality) && 
+		           ($.urlencode($('li#' + item.id + ' input.feed_link').val()).match(response.feed) ||
+		            response.feed == 'All')) {
+		               $('li#' + item.id).removeClass('match_nomatch').addClass('match_test');
+		        }
+		    });
 		}
 	    }, 'html');
     };
@@ -1342,40 +1360,40 @@ $(function() {
     }
 
     $.processSelected = function(action) {
-	if(!$('#torrentlist_container .torrent.selected').length) return;
+    	if(!$('#torrentlist_container .torrent.selected').length) return;
 
-	var list = ''; 
-	$.each($('#torrentlist_container li.torrent.selected'), function(i, item) {
-	    var trItem = '';
-	    if(this.className.match(/item_\w+/) && !this.className.match(/item_###torHash###/)) {
-		if(list) {
-		    list = list + ',' + this.className.match(/item_(\w+)/)[1];
-		} else {
-		    list = list + this.className.match(/item_(\w+)/)[1];
-		}
-	    }
-	})
+    	var list = ''; 
+    	$.each($('#torrentlist_container li.torrent.selected'), function(i, item) {
+    	    var trItem = '';
+    	    if(this.className.match(/item_\w+/) && !this.className.match(/item_###torHash###/)) {
+        		if(list) {
+        		    list = list + ',' + this.className.match(/item_(\w+)/)[1];
+        		} else {
+        		    list = list + this.className.match(/item_(\w+)/)[1];
+        		}
+    	    }
+    	})
 	
         if(action == 'trash') var trash = 1;
-	if((action == 'delete') || (action == 'trash')) { 
-	    $.delTorrent(list, trash, true);
-	}
-	if(action == 'start') $.stopStartTorrent('start', list, true);
-	if(action == 'stop') $.stopStartTorrent('stop', list, true);
-	if(action == 'move') $.moveTorrent(list, true);
+    	if((action == 'delete') || (action == 'trash')) { 
+    	    $.delTorrent(list, trash, true);
+    	}
+    	if(action == 'start') $.stopStartTorrent('start', list, true);
+    	if(action == 'stop') $.stopStartTorrent('stop', list, true);
+    	if(action == 'move') $.moveTorrent(list, true);
 	
-	$.each($('#torrentlist_container .feed li.selected'), function() {
-	    var title = $('li#' + this.id + ' input.title').val();
-	    var link = $('li#' + this.id + ' input.link').val();
-	    var feedLink = $('li#' + this.id + ' input.feed_link').val();
-	    var id = $('li#' + this.id + ' input.client_id').val(); 
+    	$.each($('#torrentlist_container .feed li.selected'), function() {
+    	    var title = $('li#' + this.id + ' input.title').val();
+    	    var link = $('li#' + this.id + ' input.link').val();
+    	    var feedLink = $('li#' + this.id + ' input.feed_link').val();
+    	    var id = $('li#' + this.id + ' input.client_id').val(); 
 
-      	    if(!$(this).hasClass('match_downloading') && !$(this).hasClass('match_downloaded')) {
-	        if(action == 'dlTorrent') $.dlTorrent(title, link, feedLink, id);
-	        if(action == 'hideItem')  $.hideItem(title, id);
-	    }
-	    if(action == 'addFavorite') $.addFavorite(feedLink, title);
-	})
+          	    if(!$(this).hasClass('match_downloading') && !$(this).hasClass('match_downloaded')) {
+    	        if(action == 'dlTorrent') $.dlTorrent(title, link, feedLink, id);
+    	        if(action == 'hideItem')  $.hideItem(title, id);
+    	    }
+    	    if(action == 'addFavorite') $.addFavorite(feedLink, title);
+    	})
     }
 
     $.noEnter = function(evt) { 

@@ -1,5 +1,5 @@
 <?php
-if(isset($item['title'])) $utitle = $item['title'];
+if(isset($item['title'])) $utitle = preg_replace('/&shy;/', '', $item['title']);
 if(isset($item['description'])) {
     $description = $item['description'];
 } else {
@@ -59,7 +59,7 @@ $show_quality = $guessed['data'];
 print <<< EOH
 
 <li id=id_$id name=$id class="torrent match_$matched $alt item_$torHash">
-<input type="hidden" class="title" value="$title" />
+<input type="hidden" class="title" value="$utitle" />
 <input type="hidden" class="show_title" value="$show_title" />
 <input type="hidden" class="show_quality" value="$show_quality" />
 <input type="hidden" class="link" value="$ulink" />

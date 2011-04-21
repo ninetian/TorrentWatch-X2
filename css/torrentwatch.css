@@ -376,6 +376,16 @@ ul#clientButtons {
     padding-right: 5px;
 }
 
+div#clientButtonsBusy {
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+div#clientButtonsBusy img {
+    float: left;
+    cursor: pointer;
+    margin-right: 5px;
+}
 ul#clientButtons li {
     float: left;
     cursor: pointer;

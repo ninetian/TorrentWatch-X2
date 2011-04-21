@@ -349,12 +349,17 @@ function add_favorite() {
    
   foreach($list as $key => $data) {
     if(isset($_GET[$key])) {
-      $config_values['Favorites'][$idx][$data] = urldecode($_GET[$key]);
+        $config_values['Favorites'][$idx][$data] = urldecode($_GET[$key]);
     } else {
       $config_values['Favorites'][$idx][$data] = "";
     }
   }
-  return(urldecode($_GET['name']));
+  
+  $favInfo['title'] = $_GET['name'];
+  $favInfo['quality'] = $_GET['quality'];
+  $favInfo['feed'] = urlencode($_GET['feed']);
+  
+  return(json_encode($favInfo));
 }
 
 function del_favorite() {

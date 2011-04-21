@@ -100,7 +100,7 @@ function parse_options() {
             exit;
         case 'updateFavorite':
             $response = update_favorite();
-            if($response) echo "<div id=\"fav_error\" class=\"dialog_window\" style=\"display: block\">$response</div>";
+            if(preg_match("/^Error:", $response)) echo "<div id=\"fav_error\" class=\"dialog_window\" style=\"display: block\">$response</div>";
             break;
         case 'updateFeed':
             update_feed();

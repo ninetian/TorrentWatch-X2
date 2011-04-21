@@ -33,6 +33,7 @@ function get_torrent_link($rs) {
   } else if (count($links) > 0) {
 	$link = choose_torrent_link($links);
   }
+  $link = str_replace(" ", "%20", $link);
   return html_entity_decode($link);
 }
 

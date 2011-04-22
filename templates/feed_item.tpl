@@ -46,6 +46,13 @@ if($matched == "downloading" || $matched == "downloaded" || $matched == "cachehi
   $hidden = "hidden";
 } 
 
+if($guess['episode'] != 'noShow') {
+  $epiDiv = "<div class=\"contextItem episodeInfo\" onclick='javascript:$.episodeInfo(\"$utitle\")' title=\"Delete torrent and its data\">Episode Info</p></div>";
+} else {
+  $epiDiv = '';
+}
+
+
 if(!isset($infoDiv)) $infoDiv = '';
 if(!isset($hideItem)) $hideItem = '';
 if(!isset($feedItem)) $feedItem = '';
@@ -83,7 +90,7 @@ print <<< EOH
 	<div class="contextItem activeTorrent delete $hidden" onclick='javascript:$.delTorrent("$torHash", "false")' title="Delete torrent but keep data">Remove from client</div>
 	<div class="contextItem activeTorrent trash $hidden" onclick='javascript:$.delTorrent("$torHash", "true")' title="Delete torrent and its data">Remove & Trash data</div>
         $hideItem
-	<div class="contextItem episodeInfo" onclick='javascript:$.episodeInfo("$utitle")' title="Delete torrent and its data">Episode Info</p></div>
+	$epiDiv
    </div>
    $progressBar
    $infoDiv

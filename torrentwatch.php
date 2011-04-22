@@ -239,8 +239,8 @@ function parse_options() {
                 case '#show_transmission':
                     display_transmission();
                     exit;
-				case '#episode_info':
-					episode_info(urldecode($_GET['episode_name']));
+				case '#show_info':
+					show_info(urldecode($_GET['episode_name']));
 					exit;
                 default:
                     exit;
@@ -412,7 +412,47 @@ function display_transmission() {
     ob_end_clean();
 }
 
-function episode_info($title) {
+function episode_info($show, $episode_num, $isShow, $epiInfo) {
+    $temp = explode('x', $episode_num);
+	$episode = $show->getEpisode($temp[0], $temp[1]);
+	_debug(print_r($episode,TRUE));
+    
+	$name = $show->seriesName;
+	$episode_name = $episode->name;
+	$text = empty($episode->overview) ? $show->overview : $episode->overview;
+	$image = empty($episode->filename)?'':cacheImage('http://thetvdb.com/banners/'.$episode->filename);
+	$rating = $show->rating;
+	$airdate = date('M d, Y', $episode->firstAired);
+	$actors = array();
+	if($episode->guestStars) {
+    	foreach ($episode->guestStars as $person_name) {
+    		$guests[] = $person_name;
+    	}
+	}
+	if($show->actors) {
+    	foreach ($show->actors as $person_name) {
+    		$actors[] = $person_name;
+    	}
+	}
+	$directors = array();
+	if($episode->directors) {
+    	foreach ($episode->directors as $person_name) {
+    		$directors[] = $person_name;
+    	}
+    }
+	$writers = array();
+	if($episode->writers) {
+    	foreach ($episode->writers as $person_name) {
+    		$writers[] = $person_name;
+    	}
+	}
+	ob_start();
+    require('templates/episode.tpl');
+    return ob_get_contents();
+    ob_end_clean();
+}
+
+function show_info($title) {
 	//Remove soft hyphens
 	$title = str_replace("\xC2\xAD", "", $title);
     $episode_data = guess_match($title, true);
@@ -422,62 +462,22 @@ function episode_info($title) {
 		$name = $title;
 		$data = '';
 	} else {
+	    if(preg_match('/\d+x\d+/', $episode_data['episode'])) { $epiInfo = 1; } else { $epiInfo = 0; };
 		$isShow = $episode_data['episode']=='noShow' ? false : true;
 		$name = $episode_data['key'];
 		$data = $episode_data['data'];
 	}
 	
-	if ($isShow) {
-		$episode_num = $episode_data['episode'];
-		$show = TV_Shows::searchSingle($name);
-    	
-		if ($show) {
-			$temp = explode('x', $episode_num);
-			$episode = $show->getEpisode($temp[0], $temp[1]);
-			
-			$name = $show->seriesName;
-			$episode_name = $episode->name;
-			$text = empty($episode->overview) ? $show->overview : $episode->overview;
-			$image = empty($episode->filename)?'':cacheImage('http://thetvdb.com/banners/'.$episode->filename);
-			$rating = $episode->rating;
-			$actors = array();
-			foreach ($episode->guestStars as $person_name) {
-				$actors[] = $person_name;
-			}
-			foreach ($show->actors as $person_name) {
-				$actors[] = $person_name;
-			}
-			$directors = array();
-			foreach ($episode->directors as $person_name) {
-				$directors[] = $person_name;
-			}
-			$writers = array();
-			foreach ($episode->writers as $person_name) {
-				$writers[] = $person_name;
-			}
-		}
-	} else {
-		$tmdb = new TMDb('fbfeef921665ac4649745ed210dd5baa');
-		$movie = json_decode($tmdb->searchMovie($name));
-		$movie = $movie[0];
-		$name = $movie->original_name;
-		$text = $movie->overview;
-		$date = $movie->released;
-		$rating = $movie->rating;
-		$certification = $movie->certification;
-		$image = "";
-		if (is_array($movie->posters)) {
-			foreach ($movie->posters as $poster) {
-				if ($poster->image->size == 'cover') {
-					$image = $poster->image->url;
-				}
-			}
-		}
-	}
-	ob_start();
-    require('templates/episode.tpl');
-    return ob_get_contents();
-    ob_end_clean();
+	$episode_num = $episode_data['episode'];
+	$shows = TV_Shows::search($name);
+	_debug("BLA: $isShow - $epiInfo - " . $episode_data['episode'] . " - " . count($shows) . "\n");
+	if(count($shows) == 1) { 
+	    episode_info($shows[0], $episode_num, $isShow, $epiInfo);
+    } else if(count($shows) > 1) {
+        episode_info($shows[0], $episode_num, $isShow, $epiInfo);
+    } else {
+        episode_info($shows[0], $episode_num, 0, 0);
+    }		
 }
 
 function cacheImage($url) {

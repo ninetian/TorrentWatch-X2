@@ -301,7 +301,7 @@ $(function() {
         '<li id="clientId_' + item.id + '" class="torrent item_' + item.hashString + ' match_transmission ' + liClass +'">' +
         '<table width="100%" cellspacing="0"><tr><td class="tr_identifier"></td>' +
         '<td class="torrent_name tor_client">' +
-        '<div class="torrent_name"><span class="torrent_title">' + item.name.replace(/[._]/g, '&shy;') + '</span></div>' +
+        '<div class="torrent_name"><span class="torrent_title">' + item.name.replace(/[._]/g, '.&shy;') + '</span></div>' +
         '<div style="width: 100%; margin-top: 2px; border: 1px solid #BFCEE3; background: #DFE3E8;">' + 
         '<div class="progressDiv" style="width: '+Percentage+'%; height: 3px;"></div></div>' +
         '<span class="dateAdded hidden">' + item.addedDate + '</span>' +
@@ -1190,7 +1190,7 @@ $(function() {
 	
     $.episodeInfo = function(torrentName) {
     	$('#progress').show();
-    	this.hash = '#episode_info';
+    	this.hash = '#show_info';
     	current_dialog = this.hash;
     	$.get('torrentwatch.php', {
     		get_dialog_data: this.hash,

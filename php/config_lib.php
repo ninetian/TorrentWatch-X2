@@ -13,6 +13,8 @@ function setup_default_config() {
     $config_values['Settings'] = array();
   // Sensible Defaults 
   $basedir = get_base_dir();
+  _default('Shows Only', '0');
+  _default('Combine Feeds', '0');
   _default('Transmission Login', '');
   _default('Transmission Password', '');
   _default('Transmission Host', 'localhost');
@@ -33,7 +35,6 @@ function setup_default_config() {
   _default('Download Proper', "1");
   _default('Default Feed All', "1");
   _default('Deep Directories', "0");
-  _default('Combine Feeds', '0');
   _default('Require Episode Info', '0');
   _default('Disable Hide List', '0');
   _default('History', $basedir."/rss_cache/rss_dl.history");
@@ -223,8 +224,9 @@ function update_global_config() {
                  'Deep Directories'   => 'deepdir',
                  'Default Seed Ratio' => 'defaultratio',
                  'Combine Feeds'      => 'combinefeeds',
+                 'Shows Only'         => 'showsonly',
                  'Require Episode Info' => 'require_epi_info',
-                 'Disable Hide List' => 'dishidelist',
+                 'Disable Hide List'  => 'dishidelist',
                  'Hide Donate Button' => 'hidedonate',
                  'Client'             => 'client',
                  'MatchStyle'         => 'matchstyle',
@@ -234,6 +236,7 @@ function update_global_config() {
                  'Extension'          => 'extension');
                  
   $checkboxs = array('Combine Feeds' => 'combinefeeds',
+                     'Shows Only' => 'showsonly',
                      'Require Episode Info' => 'require_epi_info',
                      'Disable Hide List' => 'dishidelist',
                      'Hide Donate Button' => 'hidedonate',

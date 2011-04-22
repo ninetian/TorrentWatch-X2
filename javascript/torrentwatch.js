@@ -1254,7 +1254,7 @@ $(function() {
 		},5000);
 	    } else {
 		$.each($('#torrentlist_container li'), function() {
-		    if($('#' + this.id + ' input.show_title').val() == response) $(this).hide();
+		    if($('#' + this.id + ' input.show_title').val() == response) $(this).removeClass('selected').hide();
 		});
 	    }
 	});

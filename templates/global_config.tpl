@@ -62,6 +62,14 @@
                                 	<input type="checkbox" name="dishidelist" value="1" <?php echo $dishidelist; ?>/>
 								</div>
                             </div>
+                            <div id="config_shows_only">
+								<div class="left">
+                                	<label class="item checkbox" title="Hide items with no episode info.">Show only TV Shows:</label>
+								</div>
+								<div class="right">
+                                	<input type="checkbox" name="showsonly" value="1" <?php echo $showsonly; ?>/>
+								</div>
+                            </div>
                             <div id="config_hide_donate">
 								<div class="left">
                                 	<label class="item checkbox" title="I have already donated.">Hide Donate Button:</label>

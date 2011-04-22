@@ -191,3 +191,7 @@ IMPORTANT: If you are updating from a previous version. Please copy php/config.p
 
 current:
     -- Disabled ssl checking so https feeds with non-official certs work as well.
+    -- Added "Show Only" option that filters items with no episode info.
+    -- Updated look of the item list.
+    -- Added mobile support (Android, IOS).
+    

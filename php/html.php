@@ -21,7 +21,7 @@ function show_transmission_div() {
 function show_torrent_html($item, $feed, $feedName, $alt, $torHash, $matched, $id) {
   global $html_out, $test_run, $config_values;
   $guess = guess_match($item['title']);
-  if($config_values['Settings']['Shows Only'] == 1 && $guess['episode'] == 'noShow') return;
+  if($config_values['Settings']['Episodes Only'] == 1 && $guess['episode'] == 'noShow') return;
 
   if(!$config_values['Settings']['Disable Hide List']) {
       if(isset($config_values['Hidden'][ucwords(trim(strtr($guess['key'], "._", "  ")))])) return;

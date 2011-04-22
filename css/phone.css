@@ -93,14 +93,18 @@ span.torEta { display: none; }
 
 span.contextButton { display: none; }
 
+div#clientButtonsHolder {
+    right: 5px;    
+}
+
 ul#clientButtons {
     height: 34px;
     padding: 0 0 0 5px;
 }
 
-ul#clientButtons li { zoom: 130%; }
+ul#clientButtons li { zoom: 120%; }
 
-ul#clientButtons li.move_data input { width: 294px; }
+ul#clientButtons li.move_data input { width: 320px; }
 
 span.torrent_title { 
     font-size: 15px;
@@ -126,7 +130,7 @@ span.torInfo {
     height: 12px;
 }
 
-@media only screen and (orientation:portrait){
+@media only screen and (orientation:portrait) {
    /* portrait styles here */
     div#torrentlist_container div.header,
     div#torrentlist_container div.header td.feed_title span.matches {
@@ -135,7 +139,7 @@ span.torInfo {
 	zoom: 120%;
     }
 
-    ul#clientButtons li.move_data input { width: 171px; }
+    ul#clientButtons li.move_data input { width: 189px; }
 
     div#trash_tor_data {
         left: 155px;

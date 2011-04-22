@@ -267,7 +267,7 @@ function display_global_config() {
     $savetorrent=$transmission="";
     $deepfull=$deeptitle=$deepTitleSeason=$deepoff=$verifyepisode="";
     $matchregexp=$matchglob=$matchsimple=$dishidelist=$hdiedonate=$mailonhit="";
-    $favdefaultall=$onlynewer=$fetchproper=$folderclient=$showsonly=$combinefeeds=$require_epi_info="";
+    $favdefaultall=$onlynewer=$fetchproper=$folderclient=$epionly=$combinefeeds=$require_epi_info="";
 
     switch($config_values['Settings']['Client']) {
         case 'Transmission':
@@ -280,8 +280,8 @@ function display_global_config() {
             // Shouldn't happen
             break;
     }
-    if($config_values['Settings']['Shows Only'] == 1)
-        $showsonly = 'checked=1';
+    if($config_values['Settings']['Episodes Only'] == 1)
+        $epionly = 'checked=1';
     if($config_values['Settings']['Combine Feeds'] == 1)
         $combinefeeds = 'checked=1';
     if($config_values['Settings']['Require Episode Info'] == 1)

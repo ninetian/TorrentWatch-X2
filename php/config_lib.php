@@ -13,7 +13,7 @@ function setup_default_config() {
     $config_values['Settings'] = array();
   // Sensible Defaults 
   $basedir = get_base_dir();
-  _default('Shows Only', '0');
+  _default('Episode Only', '0');
   _default('Combine Feeds', '0');
   _default('Transmission Login', '');
   _default('Transmission Password', '');
@@ -224,7 +224,7 @@ function update_global_config() {
                  'Deep Directories'   => 'deepdir',
                  'Default Seed Ratio' => 'defaultratio',
                  'Combine Feeds'      => 'combinefeeds',
-                 'Shows Only'         => 'showsonly',
+                 'Episode Only'         => 'epionly',
                  'Require Episode Info' => 'require_epi_info',
                  'Disable Hide List'  => 'dishidelist',
                  'Hide Donate Button' => 'hidedonate',
@@ -236,7 +236,7 @@ function update_global_config() {
                  'Extension'          => 'extension');
                  
   $checkboxs = array('Combine Feeds' => 'combinefeeds',
-                     'Shows Only' => 'showsonly',
+                     'Episodes Only' => 'epionly',
                      'Require Episode Info' => 'require_epi_info',
                      'Disable Hide List' => 'dishidelist',
                      'Hide Donate Button' => 'hidedonate',

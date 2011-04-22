@@ -699,7 +699,7 @@ $(function() {
     	    if(navigator.userAgent.toLowerCase().search('(iphone|ipod|ipad|android)') > -1) {
     	        document.getElementById('clientButtonsHolder').style.top =
     		    ((window.pageYOffset + window.innerHeight - $('#clientButtonsHolder').height() - 6)) + 'px';
-    	        $('#clientButtons').css('min-width', $('#clientButtons li.button:visible').length * 46);
+    	        $('#clientButtons').css('min-width', $('#clientButtons li.button:visible').length * 42);
     		$('#clientButtons').css('max-width', ($(window).width() - 15));
     	    } else {
     	        document.getElementById('clientButtonsHolder').style.top = 

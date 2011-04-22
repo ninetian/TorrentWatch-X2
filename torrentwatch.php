@@ -430,7 +430,7 @@ function episode_info($title) {
 	if ($isShow) {
 		$episode_num = $episode_data['episode'];
 		$show = TV_Shows::searchSingle($name);
-		
+    	
 		if ($show) {
 			$temp = explode('x', $episode_num);
 			$episode = $show->getEpisode($temp[0], $temp[1]);

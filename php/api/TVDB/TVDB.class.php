@@ -10,7 +10,7 @@
      * Constants defined here outside of class because class constants can't be 
      * the result of any operation (concatenation)
      */
-    define('PHPTVDB_URL', 'http://thetvdb.com/');
+    define('PHPTVDB_URL', 'http://cache.thetvdb.com/');
     define('PHPTVDB_API_URL', PHPTVDB_URL.'api/');
 	 
 	class TVDB {

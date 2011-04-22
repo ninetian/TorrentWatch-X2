@@ -1189,19 +1189,18 @@ $(function() {
     };
 	
     $.episodeInfo = function(torrentName) {
-	$('#progress').show();
-	this.hash = '#episode_info';
-	current_dialog = this.hash;
-	$.get('torrentwatch.php', {
-		get_dialog_data: this.hash,
-		episode_name: torrentName
-	    }, function (data) {
-		$('#dynamicdata.dyndata').append(data);
-		$('#dynamicdata .dialog_last').remove();
-		$('.dialog').show();
-		window.dialog = 1;
-	    }
-	);
+    	$('#progress').show();
+    	this.hash = '#episode_info';
+    	current_dialog = this.hash;
+    	$.get('torrentwatch.php', {
+    		get_dialog_data: this.hash,
+    		episode_name: torrentName
+    	    }, function (data) {
+    		$('#dynamicdata.dyndata').append(data);
+    		$('#dynamicdata .dialog_last').remove();
+    		$('.dialog').show();
+    		window.dialog = 1;
+	    });
     }
 	
     $.stopStartTorrent = function(stopStart, torHash, batch) {

@@ -27,6 +27,7 @@ function setup_default_config() {
       _default('Download Dir', '/mnt/Media/Downloads');
   }
   _default('Cache Dir', $basedir."/rss_cache/");
+  _default('TVDB Dir', $basedir."/tvdb_cache/");
   _default('Save Torrents', "0");
   _default('Run Torrentwatch', "True");
   _default('Client', "");

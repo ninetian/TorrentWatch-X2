@@ -485,8 +485,8 @@ function cacheImage($url) {
 	$path_parts = pathinfo($url);
 	$filename = $path_parts['filename'] . "." . $path_parts['extension'];
 	//TODO: Use non-harcoded cache path
-	$img_url = 'rss_cache/'.$filename;
-	$img_local = $config_values['Settings']['Cache Dir'] . $filename;
+	$img_url = 'tvdb_cache/'.$filename;
+	$img_local = $config_values['Settings']['TVDB Dir'] . $filename;
 	if (!file_exists($img_local)) {
 		$x =  file_put_contents($img_local, file_get_contents($url));
 	}

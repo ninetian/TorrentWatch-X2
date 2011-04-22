@@ -12,6 +12,7 @@ install()
                 chmod 777 /share/Apps/Torrentwatchx/etc
                 chmod 666 /share/Apps/Torrentwatchx/etc/torrentwatch.config
                 chmod 777 /share/Apps/Torrentwatchx/rss_cache
+                chmod 777 /share/Apps/Torrentwatchx/tvdb_cache
 }
 
 start()

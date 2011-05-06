@@ -10,7 +10,7 @@ function sendmail($msg, $subject) {
 		if(dns_get_record(gethostname())) {
 			$email->From = "TW-X@" . gethostname();
 		} else {
-			$email->From = "$emailAddress";
+			$email->From = "tw-x@nxdomain.org";
 		}
 		$email->FromName = "TorrentWatch-X";
 		$email->AddAddress("$emailAddress");

@@ -6,8 +6,12 @@ function sendmail($msg, $subject) {
 
 	if(!empty($emailAddress)) {
 		$email = new PHPMailer();
-		
-		$email->From     = "$emailAddress";
+	 	
+		if(dns_get_record(gethostname())) {
+			$email->From = "TW-X@" . gethostname();
+		} else {
+			$email->From = "$emailAddress";
+		}
 		$email->FromName = "TorrentWatch-X";
 		$email->AddAddress("$emailAddress");
 		$email->Subject  = $subject;

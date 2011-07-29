@@ -13,7 +13,7 @@ require_once('api/TMDb.php');
 require_once('api/TVDB.php');
 global $platform;
 
-$tw_version[0] = "0.7.1";
+$tw_version[0] = "0.8.0";
 
 if(file_exists(get_base_dir() . "/.hg")) {
     exec('hg id -i', $hgId, $return);

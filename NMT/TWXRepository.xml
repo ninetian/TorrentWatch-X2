@@ -3,8 +3,8 @@
     <Applications>
     <Application>
       <Name>TorrentWatch-X</Name>
-      <Version>0.7.1</Version>
-      <DownloadURL>http://torrentwatch-x.googlecode.com/files/TorrentWatchX-NMT-0.7.1.zip</DownloadURL>
+      <Version>0.8.0</Version>
+      <DownloadURL>http://torrentwatch-x.googlecode.com/files/TorrentWatchX-NMT-0.8.0.zip</DownloadURL>
       <Author>Wiebel</Author>
       <Maintainer>Wiebel</Maintainer>
       <Description>TorrentWatch-X is a web based tool to automate downloads of tv shows via torrents and rss. Based on the torrentwatch project (now known as NMTDVR).</Description>
@@ -13,7 +13,7 @@
       <WebInterfaceURL>http://[NMT_IP]:9999/Torrentwatchx_web/index.html</WebInterfaceURL>
       <GayaInterfaceURL />
       <Screenshots>
-	<URL>http://freshmeat.net/screenshots/d0/3c/d03c316ba0063b30190d3df816f1492a_medium.png?1290374088</URL>
+	<URL>http://freshmeat.net/screenshots/54/95/5495f777cce0bb8caec400b8f359f36b_medium.png?1311967438</URL>
 	<URL>http://freshmeat.net/screenshots/11/2f/112f055e8ccdd72eb4a98ef4f62dec48_medium.png?1290374111</URL>
 	<URL>http://freshmeat.net/screenshots/1f/16/1f160a709929e0848cc31b82a19927e2_medium.png?1290374144</URL>
 	<URL>http://freshmeat.net/screenshots/00/5f/005f32e1ec0424567b6c39469ee814b0_medium.png?1290374160</URL>

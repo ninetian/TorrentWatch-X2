@@ -189,9 +189,10 @@ IMPORTANT: If you are updating from a previous version. Please copy php/config.p
     -- Fixed issue causing torrents that failed to be added to transmission still got cached. (Thanks Henk for noticing)
     -- Fixed a bunch of other small bugs.
 
-current:
+0.8.0:
     -- Disabled ssl checking so https feeds with non-official certs work as well.
     -- Added "Show Only" option that filters items with no episode info.
     -- Updated look of the item list.
     -- Added mobile support (Android, IOS).
-    
+   
+current: 

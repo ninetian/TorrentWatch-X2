@@ -3,17 +3,17 @@ if [ -z $1 ] ; then
   echo "Usage: $0 <release nr>"
   exit
 fi
-hg archive -r $1 -X '.hg*' -X 'mk_archive.sh' -X 'robots.txt' -X 'php/config.php' -X 'wiki' -X 'NMT' -t tar /var/www/torrentwatch-x/releases/TorrentWatchX-$1.tar
+hg archive -r $1 -X '.hg*' -X 'mk_archive.sh' -X 'robots.txt' -X 'php/config.php' -X 'wiki' -X 'NMT' -t tar /data/www/torrentwatch-x-unstable/releases/TorrentWatchX-$1.tar
 mkdir -p TorrentWatchX-$1/docs
 for i in wiki/*.wiki ; do cp $i TorrentWatchX-$1/docs/ ; done
-tar uf /var/www/torrentwatch-x/releases/TorrentWatchX-$1.tar TorrentWatchX-$1/docs/
+tar uf /data/www/torrentwatch-x-unstable/releases/TorrentWatchX-$1.tar TorrentWatchX-$1/docs/
 rm -rf TorrentWAtchX-$1/ 
-gzip /var/www/torrentwatch-x/releases/TorrentWatchX-$1.tar
+gzip /data/www/torrentwatch-x-unstable/releases/TorrentWatchX-$1.tar
 
 #NMT Package
 
 echo "Building NMT-Package..."
-hg archive -r $1 -X '.hg*' -X 'mk_archive.sh' -X 'robots.txt' -X 'php/config.php' -X 'wiki' -X 'NMT' -p . -t tar /var/www/torrentwatch-x/releases/Torrentwatchx.tar
+hg archive -r $1 -X '.hg*' -X 'mk_archive.sh' -X 'robots.txt' -X 'php/config.php' -X 'wiki' -X 'NMT' -p . -t tar /data/www/torrentwatch-x-unstable/releases/Torrentwatchx.tar
 mkdir -p Torrentwatchx/docs
 
 cat <<EOF> Torrentwatchx/appinfo.json
@@ -31,7 +31,7 @@ EOF
 for i in wiki/*.wiki ; do cp $i Torrentwatchx/docs/ ; done
 cp -pr NMT/* Torrentwatchx/
 cd Torrentwatchx/
-sudo tar upf /var/www/torrentwatch-x/releases/Torrentwatchx.tar .
+sudo tar upf /data/www/torrentwatch-x-unstable/releases/Torrentwatchx.tar .
 cd ..
 rm -rf TorrentWatchX-$1/
 rm -rf Torrentwatchx/

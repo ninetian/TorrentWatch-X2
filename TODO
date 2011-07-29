@@ -1,11 +1,5 @@
-0.7
-- New look *
-- Search in hide list *
-- Build 'any' option for fav filter *
-- Progressbar for torrents *
-
 0.8
-- Delete old episodes from transmission which are replaces by REPACK or PROPER episodes.
+- New look for rss list.
 - Remove torrents which are done. (paused and met ratio requirements) *Allan*
 - Run script on download-finish. *Allan*
 - Option to add file/url directly. *Allan*
@@ -15,13 +9,12 @@
 - Command-line tools.
 
 0.9
-- New interface
+- Delete old episodes from transmission which are replaces by REPACK or PROPER episodes.
 - More modulair code
 - sqlite for caching + migration script.
 - Install/Setup script.
 - Movie support 
 - torrent rewriting
-- rtorrent support
 - nzb support
 
 1.0

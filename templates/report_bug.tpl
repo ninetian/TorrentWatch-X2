@@ -1,5 +1,5 @@
 <div id="bugDialog" class="dialog">
- <div class="title">
+ <div class="dialogTitle">
     <a class="toggleDialog button titleClose" href="#"></a>
     Report Bug
  </div>

@@ -9,6 +9,8 @@ ini_set('include_path', '.:./php');
 error_reporting(E_ERROR | E_WARNING | E_PARSE);
 // error_reporting(E_ALL);
 require_once('rss_dl_utils.php');
+require_once('api/TMDb.php');
+require_once('api/TVDB.php');
 global $platform;
 
 $tw_version[0] = "0.7.1";
@@ -81,24 +83,24 @@ function parse_options() {
             echo $response;
             exit;
         case 'delTorrent':
-            $response = delTorrent($_REQUEST['delTorrent'], $_REQUEST['trash']);
+            $response = delTorrent($_REQUEST['delTorrent'], $_REQUEST['trash'], $_REQUEST['batch']);
             echo "$response";
             exit;
         case 'stopTorrent':
-            $response = stopTorrent($_REQUEST['stopTorrent']);
+            $response = stopTorrent($_REQUEST['stopTorrent'], $_REQUEST['batch']);
             echo "$response";
             exit;
         case 'startTorrent':
-            $response = startTorrent($_REQUEST['startTorrent']);
+            $response = startTorrent($_REQUEST['startTorrent'], $_REQUEST['batch']);
             echo "$response";
             exit;
         case 'moveTo':
-            $response = moveTorrent($_REQUEST['moveTo'], $_REQUEST['torHash']);
+            $response = moveTorrent($_REQUEST['moveTo'], $_REQUEST['torHash'], $_REQUEST['batch']);
             echo "$response";
             exit;
         case 'updateFavorite':
             $response = update_favorite();
-            if($response) echo "<div id=\"fav_error\" class=\"dialog_window\" style=\"display: block\">$response</div>";
+            if(preg_match("/^Error:", $response)) echo "<div id=\"fav_error\" class=\"dialog_window\" style=\"display: block\">$response</div>";
             break;
         case 'updateFeed':
             update_feed();
@@ -148,12 +150,18 @@ function parse_options() {
             if($config_values['Settings']['Default Feed All'] && 
                 preg_match('/^(\d+)x(\d+)p?$|^(\d{8})$/i', $tmp['episode'])) $_GET['feed'] = 'All';
             $response = update_favorite();
-            if($response) echo "<div id=\"fav_error\" class=\"dialog_window\" style=\"display: block\">$response</div>";
-            break;
+            if($response) echo "$response";
+            //break;
+	    exit;
         case 'hide':
             $response = add_hidden(ucwords($_GET['hide']));
-            if($response) echo "<div id=\"fav_error\" class=\"dialog_window\" style=\"display: block\">$response</div>";
-            break;
+            if($response) {
+		echo "ERROR:$response";
+	    } else {
+                $guess = guess_match(html_entity_decode($_GET['hide']), TRUE);
+		echo $guess['key'];
+	    }
+            exit;
         case 'delHidden':
             del_hidden($_GET['unhide']);
             break;
@@ -231,6 +239,9 @@ function parse_options() {
                 case '#show_transmission':
                     display_transmission();
                     exit;
+				case '#show_info':
+					show_info(urldecode($_GET['episode_name']));
+					exit;
                 default:
                     exit;
             }
@@ -256,7 +267,7 @@ function display_global_config() {
     $savetorrent=$transmission="";
     $deepfull=$deeptitle=$deepTitleSeason=$deepoff=$verifyepisode="";
     $matchregexp=$matchglob=$matchsimple=$dishidelist=$hdiedonate=$mailonhit="";
-    $favdefaultall=$onlynewer=$fetchproper=$folderclient=$combinefeeds=$require_epi_info="";
+    $favdefaultall=$onlynewer=$fetchproper=$folderclient=$epionly=$combinefeeds=$require_epi_info="";
 
     switch($config_values['Settings']['Client']) {
         case 'Transmission':
@@ -269,6 +280,8 @@ function display_global_config() {
             // Shouldn't happen
             break;
     }
+    if($config_values['Settings']['Episodes Only'] == 1)
+        $epionly = 'checked=1';
     if($config_values['Settings']['Combine Feeds'] == 1)
         $combinefeeds = 'checked=1';
     if($config_values['Settings']['Require Episode Info'] == 1)
@@ -397,6 +410,88 @@ function display_transmission() {
     require('templates/transmission.tpl');
     return ob_get_contents();
     ob_end_clean();
+}
+
+function episode_info($show, $episode_num, $isShow, $epiInfo) {
+    $temp = explode('x', $episode_num);
+	$episode = $show->getEpisode($temp[0], $temp[1]);
+	_debug(print_r($episode,TRUE));
+    
+	$name = $show->seriesName;
+	$episode_name = $episode->name;
+	$text = empty($episode->overview) ? $show->overview : $episode->overview;
+	$image = empty($episode->filename)?'':cacheImage('http://thetvdb.com/banners/'.$episode->filename);
+	$rating = $show->rating;
+	$airdate = date('M d, Y', $episode->firstAired);
+	$actors = array();
+	if($episode->guestStars) {
+    	foreach ($episode->guestStars as $person_name) {
+    		$guests[] = $person_name;
+    	}
+	}
+	if($show->actors) {
+    	foreach ($show->actors as $person_name) {
+    		$actors[] = $person_name;
+    	}
+	}
+	$directors = array();
+	if($episode->directors) {
+    	foreach ($episode->directors as $person_name) {
+    		$directors[] = $person_name;
+    	}
+    }
+	$writers = array();
+	if($episode->writers) {
+    	foreach ($episode->writers as $person_name) {
+    		$writers[] = $person_name;
+    	}
+	}
+	ob_start();
+    require('templates/episode.tpl');
+    return ob_get_contents();
+    ob_end_clean();
+}
+
+function show_info($title) {
+	//Remove soft hyphens
+	$title = str_replace("\xC2\xAD", "", $title);
+    $episode_data = guess_match($title, true);
+	
+	if ( $episode_data===false ) {
+		$isShow = false;
+		$name = $title;
+		$data = '';
+	} else {
+	    if(preg_match('/\d+x\d+/', $episode_data['episode'])) { $epiInfo = 1; } else { $epiInfo = 0; };
+		$isShow = $episode_data['episode']=='noShow' ? false : true;
+		$name = $episode_data['key'];
+		$data = $episode_data['data'];
+	}
+	
+	$episode_num = $episode_data['episode'];
+	$shows = TV_Shows::search($name);
+	_debug("BLA: $isShow - $epiInfo - " . $episode_data['episode'] . " - " . count($shows) . "\n");
+	if(count($shows) == 1) { 
+	    episode_info($shows[0], $episode_num, $isShow, $epiInfo);
+    } else if(count($shows) > 1) {
+        episode_info($shows[0], $episode_num, $isShow, $epiInfo);
+    } else {
+        episode_info($shows[0], $episode_num, 0, 0);
+    }		
+}
+
+function cacheImage($url) {
+	global $config_values;
+	$path_parts = pathinfo($url);
+	$filename = $path_parts['filename'] . "." . $path_parts['extension'];
+	//TODO: Use non-harcoded cache path
+	$img_url = 'tvdb_cache/'.$filename;
+	$img_local = $config_values['Settings']['TVDB Dir'] . $filename;
+	if (!file_exists($img_local)) {
+		$x =  file_put_contents($img_local, file_get_contents($url));
+	}
+	
+	return $img_url;
 }
 
 function report_bug() {

@@ -6,8 +6,12 @@ function sendmail($msg, $subject) {
 
 	if(!empty($emailAddress)) {
 		$email = new PHPMailer();
-		
-		$email->From     = "$emailAddress";
+	 	
+		if(dns_get_record(gethostname())) {
+			$email->From = "TW-X@" . gethostname();
+		} else {
+			$email->From = "tw-x@nxdomain.org";
+		}
 		$email->FromName = "TorrentWatch-X";
 		$email->AddAddress("$emailAddress");
 		$email->Subject  = $subject;
@@ -155,8 +159,12 @@ function getClientData($recent) {
     }
 }
 
-function delTorrent($torHash, $trash) {
+function delTorrent($torHash, $trash, $batch=false) {
     global $config_values;
+
+    if($batch) {
+	$torHash = explode(',',$torHash); 
+    }
 
     switch($config_values['Settings']['Client']) {  
         case 'Transmission':
@@ -167,20 +175,30 @@ function delTorrent($torHash, $trash) {
     }
 }
 
-function stopTorrent($torHash) {
+function stopTorrent($torHash, $batch=false) {
     global $config_values;
+
+    if($batch) {
+	$torHash = explode(',',$torHash); 
+   	//$torHash = array_map(intval, $torHash);
+    }
 
     switch($config_values['Settings']['Client']) {  
         case 'Transmission':
             $request = array('arguments' => array('ids' => $torHash), 'method' => 'torrent-stop');
             $response = transmission_rpc($request);
+	    _debug(var_export($request,true));
             return json_encode($response);
         break;
     }
 }
 
-function startTorrent($torHash) {
+function startTorrent($torHash, $batch=false) {
     global $config_values;
+
+    if($batch) {
+	$torHash = explode(',',$torHash); 
+    }
 
     switch($config_values['Settings']['Client']) {  
         case 'Transmission':
@@ -191,8 +209,12 @@ function startTorrent($torHash) {
     }
 }
 
-function moveTorrent($location, $torHash) {
+function moveTorrent($location, $torHash, $batch=false) {
     global $config_values;
+
+    if($batch) {
+	$torHash = explode(',',$torHash); 
+    }
 
     switch($config_values['Settings']['Client']) {  
         case 'Transmission':

@@ -15,13 +15,13 @@ function finish_rss_list_html() {
 function show_transmission_div() {
   global $html_out;
   $html_out .= '<div id="transmission_data" class="transmission">';
-  $html_out .= '<div class="header">Transmission</div>';
   $html_out .= '<ul id="transmission_list" class="torrentlist">';
 }
 
 function show_torrent_html($item, $feed, $feedName, $alt, $torHash, $matched, $id) {
   global $html_out, $test_run, $config_values;
   $guess = guess_match($item['title']);
+  if($config_values['Settings']['Episodes Only'] == 1 && $guess['episode'] == 'noShow') return;
 
   if(!$config_values['Settings']['Disable Hide List']) {
       if(isset($config_values['Hidden'][ucwords(trim(strtr($guess['key'], "._", "  ")))])) return;
@@ -36,15 +36,11 @@ function show_torrent_html($item, $feed, $feedName, $alt, $torHash, $matched, $i
   }
   // add word-breaking flags after each period
   $title = preg_replace('/\./', '.&shy;', $item['title']);
-  // prepare items for use in a url
-  $utitle = urlencode($item['title']);
   // Copy feed cookies to item
   $ulink = get_torrent_link($item);
   if(($pos = strpos($feed, ':COOKIE:')) !== False) {
     $ulink .= substr($feed, $pos);
   }
-  $ulink = urlencode($ulink);
-  $feed = urlencode($feed);
 
   ob_start();
   require('templates/feed_item.tpl');
@@ -70,7 +66,7 @@ function show_feed_html($idx) {
       } else {
 	$title = $config_values['Feeds'][$idx]['Name'];
       }
-      $html_out .= "<td class='feed_title'>$title<span class='matches'></span></td>\n";
+      $html_out .= "<td class='feed_title'><span>$title</span><span class='matches'></span></td>\n";
       $html_out .= "<td class='hide_feed'>\n";
       $html_out .= "<span class=\"hide_feed_right\">\n";
       $html_out .= "<a href=\"#\" title=\"Hide this feed\" onclick=\"$.toggleFeed(".$idx.", 0)\">\n";

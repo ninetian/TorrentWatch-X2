@@ -261,7 +261,7 @@ function client_add_torrent($filename, $dest, $title, $feed = NULL, &$fav = NULL
   foreach($config_values['Feeds'] as $key => $feedLink) {
       if($feedLink['Link'] == "$feed") $idx = $key;
   }
-  if($config_values['Feeds'][$idx]['seedRatio']) {
+  if($config_values['Feeds'][$idx]['seedRatio'] >= 0) {
       $seedRatio = $config_values['Feeds'][$idx]['seedRatio'];
   } else {
       $seedRatio = $config_values['Settings']['Default Seed Ratio'];

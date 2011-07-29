@@ -1,6 +1,6 @@
   <script type="text/javascript" src="javascript/configure.js"></script>
       <div id="configDialog" class="dialog">
-        <div class="title">
+        <div class="dialogTitle">
     		<a class="toggleDialog button titleClose" href="#"></a>
             Configure
         </div>
@@ -46,9 +46,9 @@
 									</select>
 								</div>
                             </div>
-                            <div id="config_combinefeeds">
+                            <div id="config_combinefeeds" title="Combine all feeds into 1 list">
 								<div class="left">
-									<label class="item checkbox" title="Combine all feeds into 1 list">Combine Feeds:</label>
+									<label class="item checkbox">Combine Feeds:</label>
 								</div>
 								<div class="right">
 									<input type="checkbox" name="combinefeeds" value="1" <?php echo $combinefeeds; ?>/>
@@ -62,9 +62,17 @@
                                 	<input type="checkbox" name="dishidelist" value="1" <?php echo $dishidelist; ?>/>
 								</div>
                             </div>
-                            <div id="config_hide_donate">
+                            <div id="config_epi_only" title="Hide items without episode info.">
 								<div class="left">
-                                	<label class="item checkbox" title="I have already donated.">Hide Donate Button:</label>
+                                	<label class="item checkbox">Episodes only:</label>
+								</div>
+								<div class="right">
+                                	<input type="checkbox" name="epionly" value="1" <?php echo $epionly; ?>/>
+								</div>
+                            </div>
+                            <div id="config_hide_donate" title="I have already donated.">
+								<div class="left">
+                                	<label class="item checkbox">Hide Donate Button:</label>
 								</div>
 								<div class="right">
                                 	<input type="checkbox" name="hidedonate" value="1" <?php echo $hidedonate; ?>/>
@@ -74,9 +82,9 @@
                     </div>
                     <div id="config_torClient" class="configTab hidden">
                         <div class="tor_client_settings">
-                            <div id="config_torrentclient">
+                            <div id="config_torrentclient" title="Which torrent client to use">
 								<div class="left">
-									<label class="item select" title="Which torrent client to use">Client:</label> 
+									<label class="item select">Client:</label> 
 								</div>
 								<div class="right">
 									<select name="client" id="client" onchange="changeClient(this.options[this.selectedIndex].value)">
@@ -141,9 +149,9 @@
                     </div>
                     <div id="config_tor" class="configTab hidden">
                         <div class="tor_settings">
-                            <div id="config_deepdir">
+                            <div id="config_deepdir" title="Save downloads in multi-directory structure">
 								<div class="left">
-									<label class="item select" title="Save downloads in multi-directory structure">Deep Directories:</label>
+									<label class="item select">Deep Directories:</label>
 								</div>
 								<div class="right">
 									<select name="deepdir">
@@ -154,25 +162,25 @@
 									</select>
 								</div>
                             </div>
-                            <div id="default_ratio">
+                            <div id="default_ratio" title="Set default Seed Ratio">
 								<div class="left">
-                                	<label class="item textinput" title="Set default Seed Ratio">Default Seed Ratio:</label>
+                                	<label class="item textinput">Default Seed Ratio:</label>
 								</div>
 								<div class="right">
                                 	<input type="text" class="text" name="defaultratio" value="<?php echo $config_values['Settings']['Default Seed Ratio']; ?>"/>
 								</div>
                             </div>
-                            <div id="config_watchdir">
+                            <div id="config_watchdir" title="Directory to look for new .torrents">
 								<div class="left">
-                                	<label class="item textinput" title="Directory to look for new .torrents">Watch Dir:</label>
+                                	<label class="item textinput">Watch Dir:</label>
 								</div>
 								<div class="right">
                                 	<input type="text" class="text" name="watchdir" value="<?php echo $config_values['Settings']['Watch Dir']; ?>"/>
 								</div>
                             </div>
-                            <div id="config_savetorrent">
+                            <div id="config_savetorrent" title="Save torrent to download directory">
 								<div class="left">
-                                	<label class="item checkbox" title="Save torrent to download directory">Save torrent files:</label>
+                                	<label class="item checkbox">Save torrent files:</label>
 								</div>
 								<div class="right">
 									<input type="checkbox" name="savetorrents" value="1" <?php echo $savetorrent; ?>/> 
@@ -182,9 +190,9 @@
                     </div>
                     <div id="config_favorites" class="configTab hidden">
                         <div class="fav_settings">
-                            <div id="config_matchstyle">
+                            <div id="config_matchstyle" title="Type of filter to use">
 								<div class="left">
-									<label class="item select" title="Type of filter to use">Matching Style:</label>
+									<label class="item select">Matching Style:</label>
 								</div>
 								<div class="right">
 									<select name="matchstyle">
@@ -200,18 +208,17 @@
 									</select>
 								</div>
                             </div>
-                            <div>
+                            <div title="Set feed to all when adding favorite. (This doesn't affect existing favorites)">
 								<div class="left">
                                 	<label class="item checkbox">Set default feed to "All":</label>
 								</div>
 								<div class="right">
-									<input type="checkbox" name="favdefaultall" value="1" <?php echo $favdefaultall; ?>
-									title="Set feed to all when adding favorite. (This doesn't affect existing favorites)"/>
+									<input type="checkbox" name="favdefaultall" value="1" <?php echo $favdefaultall; ?>/>
 								</div>
                             </div>
-                            <div id="config_require_epi_info">
+                            <div id="config_require_epi_info" title="When enabled only shows with episode information (S01E12, 1x12, etc... ) wil be matched.">
 								<div class="left">
-                                	<label class="item checkbox" title="When enabled only shows with episode information (S01E12, 1x12, etc... ) wil be matched.">Require episode info:</label>
+                                	<label class="item checkbox">Require episode info:</label>
 								</div>
 								<div class="right">
 									<input type="checkbox" name="require_epi_info" value="1" <?php echo $require_epi_info; ?>/>
@@ -253,13 +260,12 @@
                                 	<input type="checkbox" name="mailonhit" value="1" <?php echo $mailonhit; ?>/> 
 								</div>
                             </div>
-                            <div id="email_address">
+                            <div id="email_address" title="Enter an email address here to send warnings and errors to.">
 								<div class="left">
 									<label class="item">Email Address:</label>
 								</div>
 								<div class="right">
 									<input type="text" name="emailAddress" class="text" 
-									title="Enter an email address here to send warnings and errors to."
 									value="<?php echo $config_values['Settings']['Email Address']; ?>"/>
 								</div>
                             </div>
@@ -272,23 +278,21 @@
 									value="<?php echo $config_values['Settings']['SMTP Server']; ?>"/>
 								</div>
                             </div>
-                            <div id="script">
+                            <div id="script" title="Configured script to run on certain events. (Read doc/script.txt for more info).">
 								<div class="left">
 									<label class="item">Script:</label>
 								</div>
 								<div class="right">
 									<input type="text" class="text" readonly="readonly"
-									title="Configured script to run on certain events. (Read doc/script.txt for more info)."
 									value="<?php echo $config_values['Settings']['Script']; ?>"/>
 								</div>
                             </div>
-                            <div id="tz">
+                            <div id="tz" title="Set your TimeZone (Default UTC). See http://nl2.php.net/manual/en/timezones.php for a list of supported timezones.">
 								<div class="left">
                                 	<label class="item">TimeZone:</label>
 								</div>
 								<div class="right">
                                		<input type="text" name="TZ" class="text"
-									title="Set your TimeZone (Default UTC). See http://nl2.php.net/manual/en/timezones.php for a list of supported timezones."
 									value="<?php echo $config_values['Settings']['TimeZone']; ?>"/>
 								</div>
 							</div>
@@ -335,9 +339,8 @@
                         <?php endforeach; ?>
                     <?php endif; ?>
                   </div>
-                  <div id="showURL">
-                      <input id="showURL" type="checkbox" onClick="$.toggleFeedNameUrl(<?php echo $key; ?>)"
-                          title="Toggle between name and link input fields">
+                  <div id="showURL" title="Toggle between name and link input fields">
+                      <input id="showURL" type="checkbox" onClick="$.toggleFeedNameUrl(<?php echo $key; ?>)">
                       </input>
                       <label id="showURLlabel" class="item">Show feed link</label>
                   </div>

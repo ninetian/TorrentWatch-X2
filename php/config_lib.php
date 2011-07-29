@@ -13,6 +13,8 @@ function setup_default_config() {
     $config_values['Settings'] = array();
   // Sensible Defaults 
   $basedir = get_base_dir();
+  _default('Episode Only', '0');
+  _default('Combine Feeds', '0');
   _default('Transmission Login', '');
   _default('Transmission Password', '');
   _default('Transmission Host', 'localhost');
@@ -25,6 +27,7 @@ function setup_default_config() {
       _default('Download Dir', '/mnt/Media/Downloads');
   }
   _default('Cache Dir', $basedir."/rss_cache/");
+  _default('TVDB Dir', $basedir."/tvdb_cache/");
   _default('Save Torrents', "0");
   _default('Run Torrentwatch', "True");
   _default('Client', "");
@@ -33,7 +36,6 @@ function setup_default_config() {
   _default('Download Proper', "1");
   _default('Default Feed All', "1");
   _default('Deep Directories', "0");
-  _default('Combine Feeds', '0');
   _default('Require Episode Info', '0');
   _default('Disable Hide List', '0');
   _default('History', $basedir."/rss_cache/rss_dl.history");
@@ -223,8 +225,9 @@ function update_global_config() {
                  'Deep Directories'   => 'deepdir',
                  'Default Seed Ratio' => 'defaultratio',
                  'Combine Feeds'      => 'combinefeeds',
+                 'Episode Only'         => 'epionly',
                  'Require Episode Info' => 'require_epi_info',
-                 'Disable Hide List' => 'dishidelist',
+                 'Disable Hide List'  => 'dishidelist',
                  'Hide Donate Button' => 'hidedonate',
                  'Client'             => 'client',
                  'MatchStyle'         => 'matchstyle',
@@ -234,6 +237,7 @@ function update_global_config() {
                  'Extension'          => 'extension');
                  
   $checkboxs = array('Combine Feeds' => 'combinefeeds',
+                     'Episodes Only' => 'epionly',
                      'Require Episode Info' => 'require_epi_info',
                      'Disable Hide List' => 'dishidelist',
                      'Hide Donate Button' => 'hidedonate',
@@ -323,7 +327,7 @@ function add_favorite() {
   
   if(!isset($_GET['idx']) || $_GET['idx'] == 'new' ) {
       foreach($config_values['Favorites'] as $fav) {
-          if($_GET['name'] == $fav['Name']) return("\"" . $_GET['name'] . "\" Allready exists in favorites");
+          if($_GET['name'] == $fav['Name']) return("Error: \"" . $_GET['name'] . "\" Allready exists in favorites");
       }
   }
   
@@ -334,7 +338,7 @@ function add_favorite() {
     $idx = end(array_keys($config_values['Favorites']));
     $_GET['idx'] = $idx; // So display_favorite_info() can see it
   } else
-    return("Bad form data, not added to favorites"); // Bad form data
+    return("Error: Bad form data, not added to favorites"); // Bad form data
 
   $list = array("name"      => "Name",
                 "filter"    => "Filter",
@@ -348,11 +352,18 @@ function add_favorite() {
                 "episode"   => "Episode");
    
   foreach($list as $key => $data) {
-    if(isset($_GET[$key]))
-      $config_values['Favorites'][$idx][$data] = urldecode($_GET[$key]);
-    else
+    if(isset($_GET[$key])) {
+        $config_values['Favorites'][$idx][$data] = urldecode($_GET[$key]);
+    } else {
       $config_values['Favorites'][$idx][$data] = "";
+    }
   }
+  
+  $favInfo['title'] = $_GET['name'];
+  $favInfo['quality'] = $_GET['quality'];
+  $favInfo['feed'] = urlencode($_GET['feed']);
+  
+  return(json_encode($favInfo));
 }
 
 function del_favorite() {

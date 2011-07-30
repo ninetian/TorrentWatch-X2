@@ -61,6 +61,9 @@ if(!(function_exists('get_curl_defaults'))) {
     function get_curl_defaults(&$curlopt) {
         if(extension_loaded("curl")) $curlopt[CURLOPT_CONNECTTIMEOUT] = 15;
 	$curlopt[CURLOPT_SSL_VERIFYPEER] = false;
+	$curlopt[CURLOPT_SSL_VERIFYHOST] = false;
+	$curlopt[CURLOPT_FOLLOWLOCATION] = true;
+	$curlopt[CURLOPT_UNRESTRICTED_AUTH] = true;
 	$curlopt[CURLOPT_TIMEOUT] = 20;
 	$curlopt[CURLOPT_RETURNTRANSFER] = true;
 	return($curlopt);

@@ -691,13 +691,13 @@ $(function() {
     toggleClientButtons = function(fast) {
     	if(navigator.userAgent.toLowerCase().search('(iphone|ipod|ipad|android)') > -1) fast = 1;
     	if($('#torrentlist_container li.selected').length) {
-	    if($('#moveTo').is(':focus')) return;
     	    if(fast || $('#torrentlist_container li.selected').length > 1) {
     	        if($('#clientButtonsHolder').is(':visible') == false) $('#clientButtonsHolder').show();
     	    } else {
     	        if($('#clientButtonsHolder').is(':visible') == false) $('#clientButtonsHolder').fadeIn();
     	    }
     	    if(navigator.userAgent.toLowerCase().search('(iphone|ipod|android)') > -1) {
+	        if($('#moveTo').is(':focus')) return;
     	        document.getElementById('clientButtonsHolder').style.top = 
     		    ((window.pageYOffset + window.innerHeight - $('#clientButtonsHolder').height() - 6)) + 'px';
     	        $('#clientButtons').css('min-width', $('#clientButtons li.button:visible').length * 42);

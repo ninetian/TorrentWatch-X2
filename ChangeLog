@@ -196,3 +196,5 @@ IMPORTANT: If you are updating from a previous version. Please copy php/config.p
     -- Added mobile support (Android, IOS).
    
 current: 
+    -- Updated css and javascript for mobile device support.
+    -- Upgraded to jquery 1.6.2

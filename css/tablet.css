@@ -4,7 +4,7 @@ div#topmenu {
 }
 div#torrentlist_container {
     position: static;
-    top: 56px;
+    margin-top: 56px;
 }
 
 ul#filterbar_container li:hover {

@@ -357,6 +357,7 @@ input#filter_text_input {
 div#clientButtonsHolder {
     display: none;
     position: fixed;
+    top: 72px;
     right: 20px;
     min-height: 28px;
     font-size: 12px;

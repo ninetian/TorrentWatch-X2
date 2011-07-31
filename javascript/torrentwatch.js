@@ -691,19 +691,17 @@ $(function() {
     toggleClientButtons = function(fast) {
     	if(navigator.userAgent.toLowerCase().search('(iphone|ipod|ipad|android)') > -1) fast = 1;
     	if($('#torrentlist_container li.selected').length) {
+	    if($('#moveTo').is(':focus')) return;
     	    if(fast || $('#torrentlist_container li.selected').length > 1) {
     	        if($('#clientButtonsHolder').is(':visible') == false) $('#clientButtonsHolder').show();
     	    } else {
     	        if($('#clientButtonsHolder').is(':visible') == false) $('#clientButtonsHolder').fadeIn();
     	    }
-    	    if(navigator.userAgent.toLowerCase().search('(iphone|ipod|ipad|android)') > -1) {
-    	        document.getElementById('clientButtonsHolder').style.top =
+    	    if(navigator.userAgent.toLowerCase().search('(iphone|ipod|android)') > -1) {
+    	        document.getElementById('clientButtonsHolder').style.top = 
     		    ((window.pageYOffset + window.innerHeight - $('#clientButtonsHolder').height() - 6)) + 'px';
     	        $('#clientButtons').css('min-width', $('#clientButtons li.button:visible').length * 42);
     		$('#clientButtons').css('max-width', ($(window).width() - 15));
-    	    } else {
-    	        document.getElementById('clientButtonsHolder').style.top = 
-    		    ($('#topmenu').height() + window.pageYOffset + 5) + 'px';
     	    }
     	} else {
     	    if(fast) {
@@ -808,8 +806,8 @@ $(function() {
 	$('#progress').fadeOut();
 	$('div#clientButtonsBusy').remove();
 	if(window.hideButtonHolder) clearTimeout(hideButtonHolder);
-    if(window.visibleButtons) $(window.visibleButtons).show()
-    updateClientButtons();
+	if(window.visibleButtons) $(window.visibleButtons).show()
+	updateClientButtons();
 	setTimeout(function() {
 	    $('#transmission_list li.torrent').markAlt();
 	},500);
@@ -864,29 +862,15 @@ $(function() {
 		    }
  		    $("#torrentlist_container li").hide();
 		    container.show(0,function() {
-	    		var clientButtonsTop = $(window).height() - $('#clientButtonsHolder').height();
 		        displayFilter(filter,1)
 			$('#dynamicdata').css('height', $(window).height() - ($('#topmenu').css('height') + 1));
-			$('#clientButtonsHolder').css('top', clientButtonsTop);
 			if('ontouchmove' in document.documentElement && navigator.userAgent.toLowerCase().search('android') == -1) {
 			    $('#torrentlist_container').bind('touchstart', function() {
 			        $('#torrentlist_container').bind('touchmove', function() { $('#clientButtonsHolder').hide(); });
 			    });
 			} else if('ontouchstart' in document.documentElement) {
-			    $('#torrentlist_container').bind('touchstart', function() { $('#clientButtonsHolder').hide(); });
+			     $('#torrentlist_container').bind('touchstart', function() { $('#clientButtonsHolder').hide(); });
 			}
-
-			/*if(navigator.userAgent.toLowerCase().search('(iphone|ipod)') > -1) {
-			    setTimeout(function() { window.scrollTo(0, 1); }, 500);
-			    $('#torrentlist_container').bind('touchmove', function() { $('#clientButtonsHolder').hide(); });
-			} else {
-			    window.scrollTo(0, 2)
-			    if('ontouchstart' in document.documentElement)
-				$('#torrentlist_container').bind('touchstart', function() {
-			            $('#torrentlist_container').bind('touchmove', function() { $('#clientButtonsHolder').hide(); });
-				    //$('#clientButtonsHolder').hide();
-				});
-			}*/
 
 			if(window.addEventListener) window.addEventListener('scroll', function(){ toggleClientButtons(1); }, false);
 		    });
@@ -1272,12 +1256,10 @@ $(function() {
             }
         } else {
             if($.cookie('feed_' + feed) == 1) {
-	    console.log(feed + ' show');
                 $("#feed_" + feed + " ul").removeClass("hiddenFeed").slideDown();
                 $("#feed_" + feed + " .header").removeClass("header_hidden");
                 $.cookie('feed_' + feed , null, { expires: 666 });
             } else {
-	    console.log(feed + ' hide');
                 $("#feed_" + feed + " ul").slideUp().addClass("hiddenFeed");
                 $("#feed_" + feed + " .header").addClass("header_hidden");    
                 $.cookie('feed_' + feed , 1, { expires: 666 });

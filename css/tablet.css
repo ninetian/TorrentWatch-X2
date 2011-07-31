@@ -45,9 +45,14 @@ ul#clientButtons {
     height: 34px; 
 }
 
+div#clientButtonsHolder {
+    position: fixed;
+    right: 5px;
+}
+
 ul#clientButtons li { zoom: 130%; }
 
-ul#clientButtons li.move_data input { width: 525px; }
+ul#clientButtons li.move_data input { width: 515px; }
 
 div.dialogTitle {
     display: none;
@@ -102,7 +107,7 @@ div#trash_tor_data div {
         width: 480px;
     }
 
-    ul#clientButtons li.move_data input { width: 330px; }
+    ul#clientButtons li.move_data input { width: 310px; }
 
     div#transmissionDialog .dialogTitle {
 	padding-top: 2px;

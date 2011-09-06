@@ -23,7 +23,7 @@ cat <<EOF> Torrentwatchx/appinfo.json
     version="NMT-$1",
     enabled="1",
     daemon_script="daemon.sh",
-    webui_path="#PATH#"
+    webui_path="#PATH#",
     setup_script="daemon.sh"
 }
 EOF
@@ -31,7 +31,7 @@ EOF
 for i in wiki/*.wiki ; do cp $i Torrentwatchx/docs/ ; done
 cp -pr NMT/* Torrentwatchx/
 cd Torrentwatchx/
-sudo tar upf /data/www/torrentwatch-x/releases/Torrentwatchx.tar .
+tar upf /data/www/torrentwatch-x/releases/Torrentwatchx.tar .
 cd ..
 rm -rf TorrentWatchX-$1/
 rm -rf Torrentwatchx/

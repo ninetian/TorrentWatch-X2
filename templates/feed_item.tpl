@@ -46,11 +46,15 @@ if($matched == "downloading" || $matched == "downloaded" || $matched == "cachehi
   $hidden = "hidden";
 } 
 
+// Disabled for now
+/*
 if($guess['episode'] != 'noShow') {
-  $epiDiv = "<div class=\"contextItem episodeInfo\" onclick='javascript:$.episodeInfo(\"$utitle\")' title=\"Delete torrent and its data\">Episode Info</p></div>";
+  $epiDiv = "<div class=\"contextItem episodeInfo\" onclick='javascript:$.episodeInfo(\"$utitle\")'>Episode Info</p></div>";
 } else {
   $epiDiv = '';
 }
+*/
+$epiDiv = '';
 
 
 if(!isset($infoDiv)) $infoDiv = '';

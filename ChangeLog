@@ -195,6 +195,7 @@ IMPORTANT: If you are updating from a previous version. Please copy php/config.p
     -- Updated look of the item list.
     -- Added mobile support (Android, IOS).
    
-current: 
+0.8.1: 
     -- Updated css and javascript for mobile device support.
     -- Upgraded to jquery 1.6.2
+    -- Fixed issue where install on NMT fails. (this actualy means tarring on linux, not bsd...)

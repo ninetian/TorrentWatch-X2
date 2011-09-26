@@ -48,6 +48,7 @@ function guess_match($title, $normalize = FALSE) {
     $quality.='TVCap'   .'|';
     $quality.='WebRip'  .'|';
     $quality.='WEB-DL'  .'|';
+    $quality.='WEB.DL'  .'|';
     $quality.='720p'    .'|';
     $quality.='1080i'   .'|';
     $quality.='1080p)[_. -)]/i';

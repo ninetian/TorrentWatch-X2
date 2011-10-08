@@ -23,7 +23,7 @@ start()
                 #    echo "*/15 * * * * /share/Apps/Torrentwatchx/crontab.sh >/dev/null 2>&1" >> /tmp/tw.cron.tmp
                 #    crontab /tmp/tw.cron.tmp
                 #fi
-		if ! ps ax | grep twx-poller.sh ; then
+		if ! ps ax | grep twx-poller.sh | grep -v grep ; then
 			nohup /share/Apps/Torrentwatchx/twx-poller.sh &
 		fi
 }

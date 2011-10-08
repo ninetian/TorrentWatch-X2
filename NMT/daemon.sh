@@ -13,15 +13,19 @@ install()
                 chmod 666 /share/Apps/Torrentwatchx/etc/torrentwatch.config
                 chmod 777 /share/Apps/Torrentwatchx/rss_cache
                 chmod 777 /share/Apps/Torrentwatchx/tvdb_cache
+		chmod 777 /share/Apps/Torrentwatchx/twx-poller.sh
 }
 
 start()
 {
-                crontab -l >/tmp/tw.cron.tmp
-                if ! grep -q "Torrentwatchx" "/tmp/tw.cron.tmp" ; then
-                    echo "*/15 * * * * /share/Apps/Torrentwatchx/crontab.sh >/dev/null 2>&1" >> /tmp/tw.cron.tmp
-                    crontab /tmp/tw.cron.tmp
-                fi
+                #crontab -l >/tmp/tw.cron.tmp
+                #if ! grep -q "Torrentwatchx" "/tmp/tw.cron.tmp" ; then
+                #    echo "*/15 * * * * /share/Apps/Torrentwatchx/crontab.sh >/dev/null 2>&1" >> /tmp/tw.cron.tmp
+                #    crontab /tmp/tw.cron.tmp
+                #fi
+		if ! ps ax | grep twx-poller.sh ; then
+			nohup /share/Apps/Torrentwatchx/twx-poller.sh &
+		fi
 }
 
  #########################################################################

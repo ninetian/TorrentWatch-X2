@@ -108,6 +108,13 @@ function torInfo($torHash) {
                 $peersSendingToUs = $response['arguments']['torrents']['0']['peersSendingToUs'];
                 $peersGettingFromUs = $response['arguments']['torrents']['0']['peersGettingFromUs'];
                 $peersConnected = $response['arguments']['torrents']['0']['peersConnected'];
+
+		#FIX ME! BUILD DECENT STATUS TABLE!
+		if($status == 0) $status = 16;
+		if($status == 3) $status = 4;
+		if($status == 5) $status = 8;
+		if($status == 6) $status = 8;
+
                 if($status == 1) {
                     $stats = "Waiting to verify";
                 } else if($status == 2) {

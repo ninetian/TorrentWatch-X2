@@ -436,6 +436,15 @@ $(function() {
                 Percentage = 0;
             }
 
+
+	    // FIX ME!!!!!!
+	    // BUILD DESCENT MAPPING TABLE!!!!!
+
+	    if ( item.status == 0 ) item.status = 16;
+	    if ( item.status == 3 ) item.status = 4;
+	    if ( item.status == 5 ) item.status = 8;
+	    if ( item.status == 6 ) item.status = 8;
+
 	    $('li.item_'+item.hashString+' div.progressBarContainer').show();
 	    $('li.item_'+item.hashString+' div.progressDiv').width(Percentage+"%").height(3);
 
@@ -881,7 +890,7 @@ $(function() {
 			    clearInterval(initGetData);
 			    $('div.progressBarContainer').removeClass('init');
 			    if(window.getDataLoop) clearInterval(window.getDataLoop);
-		    	    window.getDataLoop = setInterval(getClientData, 5000);            
+		    	    window.getDataLoop = setInterval(getClientData, 10000);            
 			} else {
 			    setTimeout(getClientData,10);
 			}

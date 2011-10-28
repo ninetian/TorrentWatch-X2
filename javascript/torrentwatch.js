@@ -438,7 +438,7 @@ $(function() {
 
 
 	    // FIX ME!!!!!!
-	    // BUILD DESCENT MAPPING TABLE!!!!!
+	    // BUILD DECENT MAPPING TABLE!!!!!
 
 	    if ( item.status == 0 ) item.status = 16;
 	    if ( item.status == 3 ) item.status = 4;

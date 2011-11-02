@@ -9,8 +9,8 @@ ini_set('include_path', '.:./php');
 error_reporting(E_ERROR | E_WARNING | E_PARSE);
 // error_reporting(E_ALL);
 require_once('rss_dl_utils.php');
-require_once('api/TMDb.php');
-require_once('api/TVDB.php');
+//require_once('api/TMDb.php');
+//require_once('api/TVDB.php');
 global $platform;
 
 $tw_version[0] = "0.8.1";

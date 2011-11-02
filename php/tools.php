@@ -144,10 +144,8 @@ function torInfo($torHash) {
     }
 }
 
-function getClientData($recent) {
-    global $config_values;
-
-    switch($config_values['Settings']['Client']) {  
+function getClientData($recent, $client='Transmission') {
+    switch($client) {  
         case 'Transmission':
             if($recent) {
               $request = array('arguments' => array('fields' => array('id', 'name', 'status', 'errorString', 'hashString',

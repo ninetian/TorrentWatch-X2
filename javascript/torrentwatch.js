@@ -890,7 +890,7 @@ $(function() {
 			    clearInterval(initGetData);
 			    $('div.progressBarContainer').removeClass('init');
 			    if(window.getDataLoop) clearInterval(window.getDataLoop);
-		    	    window.getDataLoop = setInterval(getClientData, 10000);            
+		    	    window.getDataLoop = setInterval(getClientData, 5000);            
 			} else {
 			    setTimeout(getClientData,10);
 			}

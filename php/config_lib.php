@@ -214,6 +214,7 @@ function write_config_file() {
 
   if(flock($fp, LOCK_EX)) {
 	fwrite($fp, $config_out);
+	flock($fp, LOCK_UN);
 	if($platform == 'NMT') {
 	    chmod($config_file, 0666);
 	} else {

@@ -97,33 +97,36 @@ function read_config_file() {
     _debug("read_config_file: Could not open $config_file\n", 0);
     exit(1);
   }
-    
-  while (!feof($fp)) {
-    $line = trim(fgets($fp));
-    if ($line && !preg_match("/^$comment/", $line)) {
-      if (preg_match("/^\[/", $line) && preg_match("/\]$/", $line)) {
-        $line = trim($line,"[");
-        $line = trim($line, "]");
-        $group = trim($line);
-      } else {
-        $pieces = explode("=", $line, 2);
-        $pieces[0] = trim($pieces[0] , "\"");
-        $pieces[1] = trim($pieces[1] , "\"");
-        $option = trim($pieces[0]);
-        $value = trim($pieces[1]);
-        if(preg_match("/\[\]$/", $option)) {
-          $option = substr($option, 0, strlen($option)-2);
-          $pieces = explode("=>", $value, 2);
-          if(isset($pieces[1])) {
-            $config_values[$group][$option][trim($pieces[0])] = trim($pieces[1]);
-          } else {
-            $config_values[$group][$option][] = $value;
-          }
+   
+  if(flock($fp, LOCK_EX)) {
+    while (!feof($fp)) {
+      $line = trim(fgets($fp));
+      if ($line && !preg_match("/^$comment/", $line)) {
+        if (preg_match("/^\[/", $line) && preg_match("/\]$/", $line)) {
+          $line = trim($line,"[");
+          $line = trim($line, "]");
+          $group = trim($line);
         } else {
-          $config_values[$group][$option] = $value;
-        }        
+          $pieces = explode("=", $line, 2);
+          $pieces[0] = trim($pieces[0] , "\"");
+          $pieces[1] = trim($pieces[1] , "\"");
+          $option = trim($pieces[0]);
+          $value = trim($pieces[1]);
+          if(preg_match("/\[\]$/", $option)) {
+            $option = substr($option, 0, strlen($option)-2);
+            $pieces = explode("=>", $value, 2);
+            if(isset($pieces[1])) {
+              $config_values[$group][$option][trim($pieces[0])] = trim($pieces[1]);
+            } else {
+              $config_values[$group][$option][] = $value;
+            }
+          } else {
+            $config_values[$group][$option] = $value;
+          }        
+        }
       }
     }
+    flock($fp, LOCK_UN);
   }
   
   fclose($fp);

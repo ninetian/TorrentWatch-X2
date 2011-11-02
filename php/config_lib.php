@@ -206,11 +206,19 @@ function write_config_file() {
     }
   }
   $config_out = html_entity_decode($config_out);
-  file_put_contents($config_file, $config_out);
-  if($platform == 'NMT') {
-      chmod($config_file, 0666);
-  } else {
-      chmod($config_file, 0600);
+
+  if(!($fp = fopen($config_file, "a"))) {
+    _debug("read_config_file: Could not open $config_file\n", 0);
+    exit(1);
+  }
+
+  if(flock($fp, LOCK_EX)) {
+	fwrite($fp, $config_out);
+	if($platform == 'NMT') {
+	    chmod($config_file, 0666);
+	} else {
+	    chmod($config_file, 0600);
+	}
   }
   unset($config_out);
 }

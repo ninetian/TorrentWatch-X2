@@ -93,7 +93,6 @@ function transmission_rpc($request) {
                        );
     get_curl_defaults($curl_options);
     curl_setopt_array($post, $curl_options);
-
     $raw = curl_exec($post);
     curl_close($post);
     if(preg_match('/409:? Conflict/', $raw)) {
@@ -105,6 +104,8 @@ function transmission_rpc($request) {
     }
   }
   return json_decode($raw, TRUE);
+
+
 }
 
 function get_deep_dir($dest, $tor_name) {

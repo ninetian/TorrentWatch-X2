@@ -9,22 +9,21 @@ ini_set('include_path', '.:./php');
 error_reporting(E_ERROR | E_WARNING | E_PARSE);
 // error_reporting(E_ALL);
 require_once('rss_dl_utils.php');
-//require_once('api/TMDb.php');
-//require_once('api/TVDB.php');
+
+// TVDB and TMDB Disabled for now
+/*
+require_once('api/TMDb.php');
+require_once('api/TVDB.php');
+*/
+
 global $platform;
 
 $tw_version[0] = "0.8.1";
 
-if(file_exists(get_base_dir() . "/.hg")) {
-    exec('hg id -i', $hgId, $return);
-    if($return == 0) {
-        $tw_version[1] = $hgId[0];
-    } else {
-        $tw_version[1] = "unknown";
-    }
-} else if($platform == 'NMT') {
+if($platform == 'NMT') {
     $tw_version[1] = 'NMT';
-    
+} else {
+    $tw_version[1] = php_uname("s");
 }
 
 $test_run = 0;
@@ -55,6 +54,7 @@ if(!(file_exists('php/config.php'))) {
 
 // This function parses commands sent from a PC browser
 function parse_options() {
+
     global $html_out, $config_values;
     $filler = "<br>";
 
@@ -624,6 +624,7 @@ function get_client() {
     echo "</div>";
 }
 
+
 //
 //
 // MAIN Function
@@ -657,7 +658,7 @@ get_client();
 close_html();
 
 $footer = "<div id=\"footer\">TorrentWatch-X version $tw_version[0]";
-if($tw_version[1]) $footer.= " build $tw_version[1]";
+if($tw_version[1]) $footer.= " - $tw_version[1]";
 echo "$footer</div>";
 
 if (!$config_values['Settings']['Hide Donate Button']) {

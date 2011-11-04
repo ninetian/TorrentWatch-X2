@@ -890,7 +890,11 @@ $(function() {
 			    clearInterval(initGetData);
 			    $('div.progressBarContainer').removeClass('init');
 			    if(window.getDataLoop) clearInterval(window.getDataLoop);
-		    	    window.getDataLoop = setInterval(getClientData, 5000);            
+			    if(navigator.userAgent.toLowerCase().search('(iphone|ipod|ipad|android)') > -1) {
+		    	        window.getDataLoop = setInterval(getClientData, 10000);            
+			    } else {
+		    	        window.getDataLoop = setInterval(getClientData, 5000);            
+			    }
 			} else {
 			    setTimeout(getClientData,10);
 			}
@@ -1092,11 +1096,11 @@ $(function() {
 			if(!$('#twError p').length)  $('#twError').hide();
 		    },5000);
 		} else {
-		    //$('input[value="' + response + '"]').parent().removeClass('match_nomatch').addClass('match_test')
 		    response = $.parseJSON(response);
-		    $.each($("ul#torrentlist li"), function(i, item) {    
-		        if($('li#' + item.id + ' input.show_title').val().match(response.title) &&
-		           $('li#' + item.id + ' input.show_quality').val().match(response.quality) && 
+		    $.each($("ul#torrentlist li"), function(i, item) {
+			console.log(title);
+		        if($('li#' + item.id + ' input.show_title').val().toLowerCase().match(response.title.toLowerCase()) &&
+		           $('li#' + item.id + ' input.show_quality').val().toLowerCase().match(response.quality.toLowerCase()) && 
 		           ($.urlencode($('li#' + item.id + ' input.feed_link').val()).match(response.feed) ||
 		            response.feed == 'All')) {
 		               $('li#' + item.id).removeClass('match_nomatch').addClass('match_test');

@@ -1083,6 +1083,7 @@ $(function() {
     }
     
     $.addFavorite = function(feed, title) {
+	window.favving = 1;
         $.get('torrentwatch.php', {
 	     matchTitle: 1,
 	     title: title,
@@ -1107,6 +1108,7 @@ $(function() {
 		        }
 		    });
 		}
+		window.favving = 0;
 	    }, 'html');
     };
 
@@ -1384,7 +1386,6 @@ $(function() {
     	    var feedLink = $('li#' + this.id + ' input.feed_link').val();
     	    var id = $('li#' + this.id + ' input.client_id').val(); 
 
-
             if(!$(this).hasClass('match_downloading') && !$(this).hasClass('match_downloaded')) {
     	        if(action == 'dlTorrent') $.dlTorrent(title, link, feedLink, id);
     	        if(action == 'hideItem') {
@@ -1395,8 +1396,15 @@ $(function() {
 			}
 		    }, 100);
 		}
+    	        if(action == 'addFavorite') {
+		    var favInterval = setInterval(function() {
+			if(window.favving != 1) {
+			    $.addFavorite(feedLink, title);
+			    clearInterval(favInterval);
+			}
+		    }, 100);
+	        }
     	    }
-    	    if(action == 'addFavorite') $.addFavorite(feedLink, title);
     	})
     }
 

@@ -1240,6 +1240,7 @@ $(function() {
     }
     
     $.hideItem = function(title, id) {
+        window.hiding = 1;
         $.get('torrentwatch.php', { hide: title }, function(response) {
 	    if(response.match(/^ERROR:/)) {
 		var errorID = new Date().getTime();
@@ -1253,6 +1254,7 @@ $(function() {
 		    if($('#' + this.id + ' input.show_title').val() == response) $(this).removeClass('selected').hide();
 		});
 	    }
+	    window.hiding = null;
 	});
     }
     
@@ -1382,9 +1384,17 @@ $(function() {
     	    var feedLink = $('li#' + this.id + ' input.feed_link').val();
     	    var id = $('li#' + this.id + ' input.client_id').val(); 
 
+
             if(!$(this).hasClass('match_downloading') && !$(this).hasClass('match_downloaded')) {
     	        if(action == 'dlTorrent') $.dlTorrent(title, link, feedLink, id);
-    	        if(action == 'hideItem')  $.hideItem(title, id);
+    	        if(action == 'hideItem') {
+		    var hideInterval = setInterval(function() {
+			if(window.hiding != 1) {
+			    $.hideItem(title, id);
+			    clearInterval(hideInterval);
+			}
+		    }, 100);
+		}
     	    }
     	    if(action == 'addFavorite') $.addFavorite(feedLink, title);
     	})

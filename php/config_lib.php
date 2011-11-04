@@ -96,8 +96,9 @@ function read_config_file() {
   }
 
   $CacheAge = time() - filemtime("/tmp/twx-config.cache");
+  $ConfigAge = time() - filemtime($config_file);
   _debug("Bla: $CacheAge \n");
-  if(file_exists("/tmp/twx-config.cache") && $CacheAge <= 300) {
+  if(file_exists("/tmp/twx-config.cache") && $CacheAge <= 300 && $CacheAge <= $ConfigAge) {
 	$config_values = unserialize(base64_decode(file_get_contents("/tmp/twx-config.cache")));
   } else {
 

@@ -707,8 +707,13 @@ $(function() {
     	    }
     	    if(navigator.userAgent.toLowerCase().search('(iphone|ipod|android)') > -1) {
 	        if($('#moveTo').is(':focus')) return;
-    	        document.getElementById('clientButtonsHolder').style.top = 
+		if(navigator.userAgent.match('iPhone OS 5')) {
+    	          document.getElementById('clientButtonsHolder').style.top = 
+    		    ((window.innerHeight - $('#clientButtonsHolder').height() - 6)) + 'px';
+		} else {
+    	          document.getElementById('clientButtonsHolder').style.top = 
     		    ((window.pageYOffset + window.innerHeight - $('#clientButtonsHolder').height() - 6)) + 'px';
+		}
     	        $('#clientButtons').css('min-width', $('#clientButtons li.button:visible').length * 42);
     		$('#clientButtons').css('max-width', ($(window).width() - 15));
     	    }

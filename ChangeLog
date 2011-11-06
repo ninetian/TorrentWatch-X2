@@ -199,3 +199,12 @@ IMPORTANT: If you are updating from a previous version. Please copy php/config.p
     -- Updated css and javascript for mobile device support.
     -- Upgraded to jquery 1.6.2
     -- Fixed issue where install on NMT fails. (this actualy means tarring on linux, not bsd...)
+
+0.8.2:
+	-- Moved from cron to a poller script on NMT. This because some NMT apps empty cron on install.
+	-- Added locking on config so config won't be erased if disk is full.
+	-- Added configfile caching for performance boost.
+	-- Fixed compat with transmission 2.4x
+	-- Better support for android and IOS devices.
+    -- Fixed issue where hiding a batch of shows would only hide half.
+    -- Fixed issue where adding a batch of shows as favorites would only add half.

@@ -18,7 +18,7 @@ require_once('api/TVDB.php');
 
 global $platform;
 
-$tw_version[0] = "0.8.1";
+$tw_version[0] = "0.8.2";
 
 if($platform == 'NMT') {
     $tw_version[1] = 'NMT';

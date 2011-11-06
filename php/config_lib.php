@@ -27,7 +27,6 @@ function setup_default_config() {
       _default('Download Dir', '/mnt/Media/Downloads');
   }
   _default('Cache Dir', $basedir."/rss_cache/");
-  _default('Config Cache', '/tmp/twx-config.cache');
   _default('TVDB Dir', $basedir."/tvdb_cache/");
   _default('Save Torrents', "0");
   _default('Run Torrentwatch', "True");
@@ -86,6 +85,7 @@ if(!(function_exists('get_item_filter'))) {
 function read_config_file() {
   global $config_values;
   $config_file = platform_getConfigFile();
+  $config_cache = platform_getConfigCache();
 
   $comment = ";";
   $group = "NONE";
@@ -95,11 +95,11 @@ function read_config_file() {
     return FALSE;
   }
 
-  $CacheAge = time() - filemtime("/tmp/twx-config.cache");
+  $CacheAge = time() - filemtime($config_cache);
   $ConfigAge = time() - filemtime($config_file);
   _debug("Bla: $CacheAge \n");
-  if(file_exists("/tmp/twx-config.cache") && $CacheAge <= 300 && $CacheAge <= $ConfigAge) {
-	$config_values = unserialize(base64_decode(file_get_contents("/tmp/twx-config.cache")));
+  if(file_exists($config_cache) && $CacheAge <= 300 && $CacheAge <= $ConfigAge) {
+	$config_values = unserialize(base64_decode(file_get_contents($config_cache)));
   } else {
 
     if(!($fp = fopen($config_file, "r"))) {
@@ -138,8 +138,8 @@ function read_config_file() {
       flock($fp, LOCK_UN);
     }
     fclose($fp);
-    file_put_contents("/tmp/twx-config.cache", base64_encode(serialize($config_values)));
-    chmod("/tmp/twx-config.cache", 0660);
+    file_put_contents($config_cache, base64_encode(serialize($config_values)));
+    chmod($config_cache, 0660);
   } 
 
   // Create the base arrays if not already
@@ -234,7 +234,7 @@ function write_config_file() {
 	} else {
 	    chmod($config_file, 0600);
 	}
-	unlink("/tmp/twx-config.cache");
+	unlink($config_cache);
   }
   unset($config_out);
 }

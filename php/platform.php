@@ -15,4 +15,8 @@ function platform_getConfigFile() {
   return platform_getConfigDir() . "/torrentwatch.config";
 }
 
+function platform_getConfigCache() {
+  return platform_getConfigDir() . "/twx-config.cache";
+}
+
 ?>

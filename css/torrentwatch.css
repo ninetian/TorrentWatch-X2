@@ -340,11 +340,10 @@ input#filter_text_input {
     height: 17px;
     width: 200px;
     border: 1px solid #5D80A1;
-    padding: 1px 10px 1px 18px;
     border-radius: 10px;
     -moz-border-radius: 10px;
-    background: #FFF url('../images/filter_icon.png') top left no-repeat;
-    padding: 2px 2px 0 20px;
+    background: #FFF url('../images/filter_icon.png') left no-repeat;
+    padding: 1px 2px 2px 20px;
     margin: 1px 5px 1px 0;
 }
 

@@ -169,4 +169,9 @@ div#trash_tor_data .buttonContainer a.wide {
         left: 315px;
         margin-left: -300px;
     }
+
+    #progressbar {
+	width: 240px;
+	margin-left: -126px;
+    }
 }

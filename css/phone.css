@@ -130,6 +130,30 @@ span.torInfo {
     height: 12px;
 }
 
+div#trash_tor_data {
+    font-size: 0.5em;
+}
+
+div#trash_tor_data {
+    margin-top: 50px;
+    font-size: 0.4em;
+    width: 280px;
+    margin-left: -145px;
+}
+
+div#trash_tor_data .buttonContainer {
+    font-size: 0.8em;
+    margin-right: 4px;
+}
+
+div#trash_tor_data .buttonContainer a {
+    width: 20px;
+}
+
+div#trash_tor_data .buttonContainer a.wide {
+    width: 50px;
+}
+
 @media only screen and (orientation:portrait) {
    /* portrait styles here */
     div#torrentlist_container div.header,
@@ -142,6 +166,7 @@ span.torInfo {
     ul#clientButtons li.move_data input { width: 189px; }
 
     div#trash_tor_data {
-        left: 155px;
+        left: 315px;
+        margin-left: -300px;
     }
 }

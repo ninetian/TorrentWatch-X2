@@ -154,6 +154,18 @@ div#trash_tor_data .buttonContainer a.wide {
     width: 50px;
 }
 
+div#twError {
+    margin-top: -20px;
+    margin-left: -120px;
+    max-width: 230px;
+}
+
+div#newVersion {
+    margin-top: -20px;
+    margin-left: -120px;
+    max-width: 230px;
+}
+
 @media only screen and (orientation:portrait) {
    /* portrait styles here */
     div#torrentlist_container div.header,
@@ -173,5 +185,13 @@ div#trash_tor_data .buttonContainer a.wide {
     #progressbar {
 	width: 240px;
 	margin-left: -126px;
+    }
+
+    div#twError {
+	margin-top: -90px;
+    }
+
+    div#newVersion {
+	margin-top: -90px;
     }
 }

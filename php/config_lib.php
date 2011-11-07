@@ -97,7 +97,6 @@ function read_config_file() {
 
   $CacheAge = time() - filemtime($config_cache);
   $ConfigAge = time() - filemtime($config_file);
-  _debug("Bla: $CacheAge \n");
   if(file_exists($config_cache) && $CacheAge <= 300 && $CacheAge <= $ConfigAge) {
 	$config_values = unserialize(base64_decode(file_get_contents($config_cache)));
   } else {

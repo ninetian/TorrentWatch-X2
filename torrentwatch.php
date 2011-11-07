@@ -6,8 +6,8 @@ header( "Cache-Control: no-cache, must-revalidate" );
 header( "Pragma: no-cache" );
 
 ini_set('include_path', '.:./php');
-error_reporting(E_ERROR | E_WARNING | E_PARSE);
-// error_reporting(E_ALL);
+// error_reporting(E_ERROR | E_WARNING | E_PARSE);
+error_reporting(E_ALL);
 require_once('rss_dl_utils.php');
 
 // TVDB and TMDB Disabled for now
@@ -18,7 +18,7 @@ require_once('api/TVDB.php');
 
 global $platform;
 
-$tw_version[0] = "0.8.2";
+$tw_version[0] = "0.8.3";
 
 if($platform == 'NMT') {
     $tw_version[1] = 'NMT';

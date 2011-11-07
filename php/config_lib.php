@@ -166,6 +166,7 @@ function get_client_passwd() {
 function write_config_file() {
   global $config_values, $config_out, $platform;
   $config_file = platform_getConfigFile();
+  $config_cache = platform_getConfigCache();
 
   _debug("Preparing to write config file to $config_file\n");
 

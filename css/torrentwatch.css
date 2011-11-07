@@ -363,6 +363,7 @@ div#clientButtonsHolder {
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#D3D3D3,endColorstr=#F8F8F8);
     background: -webkit-gradient(linear, left top, left bottom, from(#EEE), to(#CCC));
     background:	-moz-linear-gradient(top, #D3D3D3, #F8F8F8);
+    background: #ddd;
     opacity: .90;
     filter: alpha(opacity = 90);
     border: 1px solid #aaa;
@@ -397,7 +398,7 @@ ul#clientButtons li {
 
 ul#clientButtons li img {
     opacity: .80;
-    filter: alpha(opacity = 80);
+    filter: alpha(opacity=80);
 }
 
 ul#clientButtons li#Move {
@@ -430,14 +431,14 @@ ul#clientButtons li.button {
     padding: 0px 5px 0px 5px;
 }
 
-ul#clientButtons li.button.disabled,
-ul#clientButtons li.button.disabled:hover {
+ul#clientButtons li.disabled,
+ul#clientButtons li.disabled:hover {
     border-bottom: 1px solid #aaa;
     border-right: 1px solid #aaa;
     background-color: #none;
     cursor: default;
     opacity: .30;
-    filter: alpha(opacity = 30);
+    filter: alpha(opacity=30);
 }
 
 ul#clientButtons li.button:hover:not(.disabled) {

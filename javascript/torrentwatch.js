@@ -680,15 +680,15 @@ $(function() {
     	    $('#clientButtons .resume, #clientButtons .pause, #clientButtons .trash, #clientButtons .delete, #clientButtons .move_data, #clientButtons .move_button').hide();
     	}
     	var buttons = '';
-    	for(item in tor) {
-    		if(item == 'start') buttons += "#clientButtons .start,";
-    		if(item == 'fav') buttons += "#clientButtons .add_fav,";
-    		if(item == 'hide') buttons += "#clientButtons .hide_item,";
-    		if(item == 'pause') buttons += "#clientButtons .pause,";
-    		if(item == 'resume') buttons += "#clientButtons .resume,";
-    		if(item == 'del') buttons += "#clientButtons .delete,";
-    		if(item == 'trash') buttons += "#clientButtons .trash,";
-    		if(item == 'move') buttons += "#clientButtons .move_button, #clientButtons #Move,";
+    	for(obj in tor) {
+    		if(obj == 'start') buttons += "#clientButtons .start,";
+    		if(obj == 'fav') buttons += "#clientButtons .add_fav,";
+    		if(obj == 'hide') buttons += "#clientButtons .hide_item,";
+    		if(obj == 'pause') buttons += "#clientButtons .pause,";
+    		if(obj == 'resume') buttons += "#clientButtons .resume,";
+    		if(obj == 'del') buttons += "#clientButtons .delete,";
+    		if(obj == 'trash') buttons += "#clientButtons .trash,";
+    		if(obj == 'move') buttons += "#clientButtons .move_button, #clientButtons #Move,";
     	}
     	buttons = buttons.slice(0,buttons.length-1);
     	$('#clientButtons li.button:not(buttons)').addClass('disabled');
@@ -1113,7 +1113,6 @@ $(function() {
 		} else {
 		    response = $.parseJSON(response);
 		    $.each($("ul#torrentlist li"), function(i, item) {
-			console.log(title);
 		        if($('li#' + item.id + ' input.show_title').val().toLowerCase().match(response.title.toLowerCase()) &&
 		           $('li#' + item.id + ' input.show_quality').val().toLowerCase().match(response.quality.toLowerCase()) && 
 		           ($.urlencode($('li#' + item.id + ' input.feed_link').val()).match(response.feed) ||

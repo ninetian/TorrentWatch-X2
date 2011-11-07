@@ -753,10 +753,19 @@ $(function() {
     	return (w1 - w2);  
     };  
 
+    function toggleFilter() {
+	if($(window).width() < 900) $("li#filter_bytext").hide()
+	if($(window).width() >= 900) $("li#filter_bytext").show()
+    }
+
     $(document).ready(function() {
+	toggleFilter();
 	var supportsOrientationChange = "onorientationchange" in window,
 	    orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
 	window.addEventListener(orientationEvent, toggleClientButtons, false);
+	window.onresize = function(event) {
+		toggleFilter();
+	}
 	waitForDynData = setInterval(function() {
 	    if($('#dynamicdata').length) {
 		listSelector();

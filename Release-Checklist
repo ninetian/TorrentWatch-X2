@@ -1,0 +1,13 @@
+- disable php notices in torrentwatch.php
+- update version in torrentwatch.php
+- finish Changelog
+- commit changes
+- tag release
+- build packages
+- upload packages
+- update TWXRepository.xml
+- update tw-version VERSION file.
+- update freshmeat
+- update http://www.networkedmediatank.com/
+- bump to uneven version
+- enable php notices in torrentwatch.php

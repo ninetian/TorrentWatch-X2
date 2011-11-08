@@ -4,28 +4,33 @@ function sendmail($msg, $subject) {
 
     $emailAddress = $config_values['Settings']['Email Address'];
 
-	if(!empty($emailAddress)) {
-		$email = new PHPMailer();
-	 	
-		if(dns_get_record(gethostname())) {
-			$email->From = "TW-X@" . gethostname();
-		} else {
-			$email->From = "tw-x@nxdomain.org";
-		}
-		$email->FromName = "TorrentWatch-X";
-		$email->AddAddress("$emailAddress");
-		$email->Subject  = $subject;
+    if(!empty($emailAddress)) {
+	$email = new PHPMailer();
+	
+	if(dns_get_record(gethostname())) {
+		$email->From = "TW-X@" . gethostname();
+	} else {
+		$email->From = "tw-x@nxdomain.org";
+	}
+	$email->FromName = "TorrentWatch-X";
+	$email->AddAddress("$emailAddress");
+	$email->Subject  = $subject;
 
-		$email->Host     = $config_values['Settings']['SMTP Server'];
-		$email->Mailer   = "smtp";
-		
-		$mail = @file_get_contents("templates/email.tpl");
-		$mail = str_replace('[MSG]', $msg, $mail);
-		if (empty($mail)) {
-			$mail = $msg;
-		}
-		$email->Body = $mail;
-		$email->Send();
+	$email->Host     = $config_values['Settings']['SMTP Server'];
+	$email->Mailer   = "smtp";
+	
+	$mail = @file_get_contents("templates/email.tpl");
+	$mail = str_replace('[MSG]', $msg, $mail);
+	if (empty($mail)) {
+		$mail = $msg;
+	}
+	$email->Body = $mail;
+
+	if(!$email->Send()) {
+	    _debug("Mailer Error: " . $mail->ErrorInfo . "\n");
+	} else {
+	    _debug("Mail sent to $emailAddress with subject: $subject via: " . $config_values['Settings']['SMTP Server'] . "\n");
+	}
     }
 }
 

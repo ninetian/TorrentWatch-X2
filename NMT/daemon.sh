@@ -19,7 +19,7 @@ install()
 start()
 {
 		if ! ps ax | grep twx-poller.sh | grep -v grep ; then
-			nohup /share/Apps/Torrentwatchx/twx-poller.sh &
+			/share/Apps/Torrentwatchx/twx-poller.sh &
 		fi
 }
 

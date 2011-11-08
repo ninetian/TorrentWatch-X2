@@ -9,7 +9,6 @@ body {
 div#topmenu { 
     zoom: 130%;
     height: 29px;
-    z-index: 3;
 }
 
 ul#mainoptions { display: none; }
@@ -154,16 +153,24 @@ div#trash_tor_data .buttonContainer a.wide {
     width: 50px;
 }
 
-div#twError {
-    margin-top: -20px;
-    margin-left: -120px;
-    max-width: 230px;
+div.dialog_window {
+    top: 40px;
 }
 
-div#newVersion {
-    margin-top: -20px;
-    margin-left: -120px;
-    max-width: 230px;
+div#twError,
+div#newVersion,
+div#clientError {
+    border-top: 0 !important;
+    border-left: 0 !important;
+    border-right: 0 !important;
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+    background: -webkit-gradient(linear, left top, left bottom, from(#bbb), to(#999));
+    top: 28px !important;
+    font-size: 0.8em !important;
+    margin-left: -172px;
+    width: 333px;
+    z-index: 100;
 }
 
 @media only screen and (orientation:portrait) {
@@ -187,11 +194,11 @@ div#newVersion {
 	margin-left: -126px;
     }
 
-    div#twError {
-	margin-top: -90px;
-    }
-
-    div#newVersion {
-	margin-top: -90px;
+    div#twError,
+    div#newVersion,
+    div#clientError {
+        top: 31px !important;
+        margin-left: -128px;
+        width: 247px;
     }
 }

@@ -945,7 +945,7 @@ div#transmissionWindow {
 
 div.dialog {
     display:		none;
-    position:		absolute;
+    position:		fixed;
     left:		0;
     right:		0;
     top:		29px;

@@ -61,7 +61,6 @@ div.dialogTitle {
 div.dialog_window:not(#trash_tor_data):not(#transmissionWindow) {
     border-radius: 5px;
     top: 50px;
-    zoom: 140%;
 }
 
 div#torrentlist_container {
@@ -96,7 +95,6 @@ div#trash_tor_data div {
 
     div.dialog_window:not(#trash_tor_data):not(#transmissionWindow) {
         top: 130px;
-        zoom: 125%;
     }
 
     div.dialog_window#favorites {
@@ -124,4 +122,5 @@ div#trash_tor_data div {
         width: 650px;
         height: 750px;
     }
+
 }

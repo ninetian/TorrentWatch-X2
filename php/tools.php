@@ -7,7 +7,7 @@ function MailNotify($msg, $subject) {
     if(!empty($emailAddress)) {
 	$email = new PHPMailer();
 	
-	if(dns_get_record(gethostname())) {
+	if(function_exists(dns_get_record) && dns_get_record(gethostname) && dns_get_record(gethostname())) {
 		$email->From = "TW-X@" . gethostname();
 	} else {
 		$email->From = "tw-x@nxdomain.org";

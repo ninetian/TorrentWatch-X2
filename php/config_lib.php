@@ -272,9 +272,9 @@ function update_global_config() {
                      'Disable Hide List' => 'dishidelist',
                      'Hide Donate Button' => 'hidedonate',
                      'Verify Episode' => 'verifyepisodes',
-                     'Save Torrents'  => 'savetorrents',
-                     'Only Newer'     => 'onlynewer',
-                     'Download Proper'     => 'fetchproper',
+                     'Save Torrents' => 'savetorrents',
+                     'Only Newer' => 'onlynewer',
+                     'Download Proper' => 'fetchproper',
                      'Default Feed All' => 'favdefaultall',
                      'Email Notifications' => 'mailonhit');
                      
@@ -283,7 +283,8 @@ function update_global_config() {
       $config_values['Settings'][$key] = $_GET[$data];
 
   foreach($checkboxs as $key => $data) 
-    $config_values['Settings'][$key] = isset($_GET[$data]);
+    if($val = isset($_GET[$data])) 
+	$config_values['Settings'][$key] = $val;
 
   return;
 }

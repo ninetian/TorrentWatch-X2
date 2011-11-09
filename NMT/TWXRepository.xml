@@ -3,8 +3,8 @@
     <Applications>
     <Application>
       <Name>TorrentWatch-X</Name>
-      <Version>0.8.2</Version>
-      <DownloadURL>http://torrentwatch-x.googlecode.com/files/TorrentWatchX-NMT-0.8.2.zip</DownloadURL>
+      <Version>0.8.4</Version>
+      <DownloadURL>http://torrentwatch-x.googlecode.com/files/TorrentWatchX-NMT-0.8.4.zip</DownloadURL>
       <Author>Wiebel</Author>
       <Maintainer>Wiebel</Maintainer>
       <Description>TorrentWatch-X is a web based tool to automate downloads of tv shows via torrents and rss. Based on the torrentwatch project (now known as NMTDVR).</Description>
@@ -21,13 +21,38 @@
       <UsageInstructions />
       <Forum />
       <Changelog>
-	-- Moved from cron to a poller script on NMT. This because some NMT apps empty cron on install.
-	-- Added locking on config so config won't be erased if disk is full.
-	-- Added configfile caching for performance boost.
-	-- Fixed compat with transmission 2.4x
-	-- Better support for android and IOS devices.
-	-- Fixed issue where hiding a batch of shows would only hide half.
-	-- Fixed issue where adding a batch of shows as favorites would only add half.
+	0.8.4:
+
+	* Fixed issue where twx-poller won't run when busybox is not installed on NMT. This caused auto-starting not to work.
+	* Fixed issue that caused the config cache not to be cleared when config was changed.
+	* Better mobile support.
+	* Updated to jquery 1.7
+	* Updated to PHPMailer 5.2.0
+	* Moved to direct smtp mailing instead of using mail binary
+	* Small css updates.
+
+	0.8.2:
+
+        * Moved from cron to a poller script on NMT. This because some NMT apps empty cron on install.
+        * Added locking on config so config won't be erased if disk is full.
+        * Added configfile caching for performance boost.
+        * Fixed compat with transmission 2.4x
+        * Better support for android and IOS devices.
+	* Fixed issue where hiding a batch of shows would only hide half.
+	* Fixed issue where adding a batch of shows as favorites would only add half.
+   
+	0.8.1: 
+
+	* Updated css and javascript for mobile device support.
+	* Upgraded to jquery 1.6.2
+	* Fixed issue where install on NMT fails. (this actualy means tarring on linux, not bsd...)
+
+	0.8.0:
+
+	* Disabled ssl checking so https feeds with non-official certs work as well.
+	* Added "Show Only" option that filters items with no episode info.
+	* Updated look of the item list.
+	* Added mobile support (Android, IOS).
       </Changelog>
     </Application>
     </Applications>

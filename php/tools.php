@@ -1,5 +1,5 @@
 <?php
-function sendmail($msg, $subject) {
+function MailNotify($msg, $subject) {
     global $config_values;
 
     $emailAddress = $config_values['Settings']['Email Address'];
@@ -43,7 +43,7 @@ function run_script($param, $torrent, $error = "") {
         if(!is_file($script)) {
             $msg = "The configured script is not a single file. Parameters are not allowed because of security reasons.";
             $subject = "TW-X: security error";
-            sendmail($msg, $subject);
+            MailNotify($msg, $subject);
             return;
         }
         _debug("Running $script $param $torrent $error \n", -1);
@@ -59,7 +59,7 @@ function run_script($param, $torrent, $error = "") {
             
             _debug("$msg\n");
             $subject = "TW-X: $script returned error.";
-            sendmail($msg, $subject);
+            MailNotify($msg, $subject);
         }
     }
 }

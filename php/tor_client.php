@@ -287,7 +287,7 @@ function client_add_torrent($filename, $dest, $title, $feed = NULL, &$fav = NULL
       if($config_values['Settings']['Email Notifications'] == 1) {
           $subject = "TW-X: $tor_name started downloading.";
           $msg = "TorrentWatch started downloading $tor_name";
-          sendmail($msg, $subject);
+          MailNotify($msg, $subject);
       }
       if(!$any) {
 	updateFavoriteEpisode($fav, $title);
@@ -306,7 +306,7 @@ function client_add_torrent($filename, $dest, $title, $feed = NULL, &$fav = NULL
     $msg.= "$return\n";
 
     $subject = "TW-X: Error while trying to start $tor_name.";
-    sendmail($msg, $subject);
+    MailNotify($msg, $subject);
     run_script('error', $title, $msg);
     return "Error: $return";
   }

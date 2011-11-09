@@ -443,7 +443,7 @@ function updateFavoriteEpisode(&$fav, $title) {
       $msg.= "If you don't, the next match wil be \"Season: $curSeason Episode: $newEpisode\" or \"Season $newSeason Episode: 1\".\n";
 
       $subject = "TorrentWatch-X: got $show $episode, expected $expected";
-      sendmail($msg, $subject);
+      MailNotify($msg, $subject);
       $msg = escapeshellarg($msg);
       run_script('error', $title, $msg);
   }

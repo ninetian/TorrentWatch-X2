@@ -98,7 +98,7 @@ function read_config_file() {
   $CacheAge = time() - filemtime($config_cache);
   $ConfigAge = time() - filemtime($config_file);
   if(file_exists($config_cache) && $CacheAge <= 300 && $CacheAge <= $ConfigAge) {
-	$config_values = unserialize(base64_decode(file_get_contents($config_cache)));
+	$config_values = unserialize(file_get_contents($config_cache));
   } else {
 
     if(!($fp = fopen($config_file, "r"))) {
@@ -137,7 +137,7 @@ function read_config_file() {
       flock($fp, LOCK_UN);
     }
     fclose($fp);
-    file_put_contents($config_cache, base64_encode(serialize($config_values)));
+    file_put_contents($config_cache, serialize($config_values));
     chmod($config_cache, 0660);
   } 
 

@@ -20,11 +20,13 @@ global $platform;
 
 $tw_version[0] = "0.8.5";
 
+$tw_version[1] = "";
+
 if($platform == 'NMT') {
-    $tw_version[1] += 'NMT';
+    $tw_version[1] .= 'NMT - ';
 }
 
-$tw_version[1] += " - " . php_uname("s") . " " . php_uname("r") . " " . php_uname("m");
+$tw_version[1] .= php_uname("s") . " " . php_uname("r") . " " . php_uname("m");
 
 $test_run = 0;
 $firstrun = 0;
@@ -658,7 +660,7 @@ get_client();
 close_html();
 
 $footer = "<div id=\"footer\">TorrentWatch-X version $tw_version[0]";
-if($tw_version[1]) $footer.= " - $tw_version[1]";
+if(isset($tw_version[1])) $footer .= " - $tw_version[1]";
 echo "$footer</div>";
 
 if (!$config_values['Settings']['Hide Donate Button']) {

@@ -99,8 +99,11 @@ function read_config_file() {
   $ConfigAge = time() - filemtime($config_file);
   if(file_exists($config_cache) && $CacheAge <= 300 && $CacheAge <= $ConfigAge) {
 	$config_values = unserialize(file_get_contents($config_cache));
+	if(!$config_values['Settings']) {
+	    unlink($config_cache);
+	    read_config_file();
+	}
   } else {
-
     if(!($fp = fopen($config_file, "r"))) {
       _debug("read_config_file: Could not open $config_file\n", 0);
       exit(1);

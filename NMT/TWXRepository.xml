@@ -55,6 +55,22 @@
 	* Added mobile support (Android, IOS).
       </Changelog>
     </Application>
+    <Application>
+      <Name>TorrentWatch-X</Name>
+      <Version>TIP</Version>
+      <DownloadURL>http://torrentwatch.wiebel.nl/releases/TorrentWatchX-NMT-tip.zip</DownloadURL>
+      <Author>Wiebel</Author>
+      <Maintainer>Wiebel</Maintainer>
+      <Description>Tests build of TW-X</Description>
+      <Homepage>http://code.google.com/p/torrentwatch-x/</Homepage>
+      <InstallScript>Apps/AppInit/appinit.cgi?install&amp;Torrentwatchx.tar</InstallScript>
+      <WebInterfaceURL>http://[NMT_IP]:9999/Torrentwatchx_web/index.html</WebInterfaceURL>
+      <GayaInterfaceURL />
+      <Screenshots />
+      <UsageInstructions />
+      <Forum />
+      <Changelog />
+    </Application>
     </Applications>
     <Themes/>
     <Indexes/>

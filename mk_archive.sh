@@ -31,7 +31,7 @@ EOF
 for i in wiki/*.wiki ; do cp $i Torrentwatchx/docs/ ; done
 cp -pr NMT/* Torrentwatchx/
 cd Torrentwatchx/
-sudo tar upf /var/www/torrentwatch-x/releases/Torrentwatchx.tar .
+tar upf /var/www/torrentwatch-x/releases/Torrentwatchx.tar .
 cd ..
 rm -rf TorrentWatchX-$1/
 rm -rf Torrentwatchx/

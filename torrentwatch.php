@@ -18,11 +18,13 @@ require_once('api/TVDB.php');
 
 global $platform;
 
-$tw_version[0] = "0.8.5 - " . php_uname("s") . " " . php_uname("r") . " " . php_uname("m");
+$tw_version[0] = "0.8.5";
 
 if($platform == 'NMT') {
-    $tw_version[1] += ' - NMT';
+    $tw_version[1] += 'NMT';
 }
+
+$tw_version[1] += " - " . php_uname("s") . " " . php_uname("r") . " " . php_uname("m");
 
 $test_run = 0;
 $firstrun = 0;

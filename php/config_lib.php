@@ -286,8 +286,11 @@ function update_global_config() {
       $config_values['Settings'][$key] = $_GET[$data];
 
   foreach($checkboxs as $key => $data) 
-    if($val = isset($_GET[$data])) 
-	$config_values['Settings'][$key] = $val;
+    if(!$config_values['Settings']['FirstRun']) {
+	$config_values['Settings'][$key] = $_GET[$data];
+    } else if($config_values['Settings'][FirstRun] == 1 && isset($_GET[$data])) {
+	$config_values['Settings'][$key] = $_GET[$data];
+    }
 
   return;
 }

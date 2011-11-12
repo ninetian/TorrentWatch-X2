@@ -265,9 +265,9 @@ function display_global_config() {
         case 'Transmission':
             $transmission = 'selected="selected"';
             break;
-                case 'folder':
-                        $folderclient = 'selected="selected"';
-                        break;
+	case 'folder':
+	    $folderclient = 'selected="selected"';
+	    break;
         default:
             // Shouldn't happen
             break;
@@ -460,7 +460,6 @@ function show_info($title) {
 	
 	$episode_num = $episode_data['episode'];
 	$shows = TV_Shows::search($name);
-	_debug("BLA: $isShow - $epiInfo - " . $episode_data['episode'] . " - " . count($shows) . "\n");
 	if(count($shows) == 1) { 
 	    episode_info($shows[0], $episode_num, $isShow, $epiInfo);
     } else if(count($shows) > 1) {
@@ -511,7 +510,8 @@ function close_html() {
 function check_requirements() {
     if(!(function_exists('json_encode'))) {
         echo "<div id=\"errorDialog\" class=\"dialog_window\" style=\"display: block\">
-            No json support found. Please make sure php is compiled with json support.<br> In some cases there is a package like php5-json that has to be installed.</div>";
+            No json support found. Please make sure php is compiled with json support.<br>
+	    In some cases there is a package like php5-json that has to be installed.</div>";
         return 1;
     }
     if(!(function_exists('curl_init'))) {
@@ -527,7 +527,7 @@ function check_files() {
     $myuid = posix_getuid();
     $configDir = platform_getConfigDir() . '/';
     if(!is_writable($configDir)) {
-    echo "<div id=\"errorDialog\" class=\"dialog_window\" style=\"display: block\">Please create the directory $configDir and make sure it's readable and writeable for the user running the webserver (uid: $myuid). </div>";
+	echo "<div id=\"errorDialog\" class=\"dialog_window\" style=\"display: block\">Please create the directory $configDir and make sure it's readable and writeable for the user running the webserver (uid: $myuid). </div>";
     }
     $cwd = getcwd();
     if(!(get_base_dir() == $cwd)) {
@@ -638,7 +638,6 @@ flush();
 
 // Feeds
 load_feeds($config_values['Feeds']);
-_debug(print_r($config_values['Feeds'], TRUE));
 feeds_perform_matching($config_values['Feeds']);
 
 get_client();

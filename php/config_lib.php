@@ -30,7 +30,7 @@ function setup_default_config() {
   _default('TVDB Dir', $basedir."/tvdb_cache/");
   _default('Save Torrents', "0");
   _default('Run Torrentwatch', "True");
-  _default('Client', "");
+  _default('Client', "Transmission");
   _default('Verify Episode', "1");
   _default('Only Newer', "1");
   _default('Download Proper', "1");

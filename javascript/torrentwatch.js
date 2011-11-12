@@ -858,11 +858,7 @@ $(function() {
             .find("form").initForm().end().initConfigDialog().appendTo("body");
             setTimeout(function() {
             	var container = $("#torrentlist_container");
-                if (!container.length && !$("#errorDialog").length) {
-                    current_dialog = '#welcome1';
-                    $("#welcome_form").show();
-		    $(current_dialog).show();
-                } else {
+                
 		    var filter = $.cookie('TWFILTER');
 	            $('li.torrent:not(.match_to_check) div.progressBarContainer').hide();
 		    if (!(filter)) {
@@ -913,7 +909,6 @@ $(function() {
 			    setTimeout(getClientData,10);
 			}
 		    },500);
-                }
 
         	window.client = $('#clientId').html();
 		changeClient(window.client);

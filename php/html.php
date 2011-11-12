@@ -7,15 +7,15 @@ function setup_rss_list_html() {
   $html_out =  "<div id='torrentlist_container'>\n";
 }
 
-function finish_rss_list_html() {
-  global $html_out;
-  $html_out .=  "</div>\n";
-}
-
 function show_transmission_div() {
   global $html_out;
   $html_out .= '<div id="transmission_data" class="transmission">';
   $html_out .= '<ul id="transmission_list" class="torrentlist">';
+
+  function finish_rss_list_html() {
+    global $html_out;
+    $html_out .=  "</div>\n";
+  }
 }
 
 function show_torrent_html($item, $feed, $feedName, $alt, $torHash, $matched, $id) {

@@ -29,7 +29,6 @@ if($platform == 'NMT') {
 $tw_version[1] .= php_uname("s") . " " . php_uname("r") . " " . php_uname("m");
 
 $test_run = 0;
-$firstrun = 0;
 $verbosity = 0;
 
 if (get_magic_quotes_gpc()) {
@@ -68,14 +67,6 @@ function parse_options() {
         $commands[0] = preg_replace("/^\//", '', $commands[0]);
     }
     switch($commands[0]) {
-        case 'firstRun':
-            foreach($_GET['link'] as $link) {
-                add_feed($link);
-            }
-            update_global_config();
-            $config_values['Settings']['FirstRun'] = FALSE;
-            write_config_file();
-            break;
         case 'getClientData':
             if($_REQUEST['recent']) {
                 $response = getClientData(1);
@@ -112,7 +103,6 @@ function parse_options() {
             break;
         case 'setGlobals':
             update_global_config();
-            $config_values['Settings']['FirstRun'] = FALSE;
             write_config_file();
             break;
         case 'matchTitle':
@@ -320,13 +310,11 @@ function display_global_config() {
         default: $matchregexp="selected='selected'";break;
     }
 
-    if(!($config_values['Settings']['FirstRun'])) {
-        // Include the templates and append the results to html_out
-        ob_start();
-        require('templates/global_config.tpl');
-        return ob_get_contents();
-        ob_end_clean();
-    }
+    // Include the templates and append the results to html_out
+    ob_start();
+    require('templates/global_config.tpl');
+    return ob_get_contents();
+    ob_end_clean();
 }
 
 function display_favorites_info($item, $key) {
@@ -548,8 +536,6 @@ function check_files() {
     }
     
 
-    if($config_values['Settings']['FirstRun']) return 0;
-
     $toCheck['cache_dir'] = $config_values['Settings']['Cache Dir'];
     if(strtolower($config_values['Settings']['Transmission Host']) == 'localhost' ||
          $config_values['Settings']['Transmission Host'] == '127.0.0.1') {
@@ -635,8 +621,7 @@ function get_client() {
 $main_timer = timer_init();
 platform_initialize();
 setup_default_config();
-if(file_exists(platform_getConfigFile()))
-    read_config_file();
+read_config_file();
 
 $config_values['Global']['HTMLOutput'] = 1;
 $html_out = "";
@@ -652,10 +637,10 @@ $html_out = "";
 flush();
 
 // Feeds
-if(isset($config_values['Feeds'])) {
-    load_feeds($config_values['Feeds']);
-    feeds_perform_matching($config_values['Feeds']);
-}
+load_feeds($config_values['Feeds']);
+_debug(print_r($config_values['Feeds'], TRUE));
+feeds_perform_matching($config_values['Feeds']);
+
 get_client();
 close_html();
 

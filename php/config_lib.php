@@ -40,7 +40,6 @@ function setup_default_config() {
   _default('Disable Hide List', '0');
   _default('History', $basedir."/rss_cache/rss_dl.history");
   _default('MatchStyle',"regexp");
-  _default('FirstRun',"1");
   _default('Extension',"torrent");
   _default('verbosity','0');
   _default('Default Seed Ratio', '-1');
@@ -91,8 +90,8 @@ function read_config_file() {
   $group = "NONE";
 
   if(!file_exists($config_file)) {
-    _debug("No Config File Found\n", 0);
-    return FALSE;
+    _debug("No Config File Found, Creating default config\n", 0);
+    write_config_file();
   }
 
   $CacheAge = time() - filemtime($config_cache);
@@ -150,8 +149,35 @@ function read_config_file() {
     $config_values['Favorites'] = array();  
   if(!isset($config_values['Hidden']))
     $config_values['Hidden'] = array();
-  if(!isset($config_values['Feeds']))
-    $config_values['Feeds'] = array();
+  if(!isset($config_values['Feeds'])) {
+    $config_values['Feeds'] = array(
+                                0 => array(
+                                    'Link' => 'http://ezrss.it/feed/',
+                                    'Type' => 'RSS',
+                                    'seedRatio' => '-1',
+                                    'Name' => 'ezRSS - Latest torrent releases'
+                                ),
+				1=> array(
+				    'Link' => 'http://rss.bt-chat.com/?group=3&cat=9',
+				    'Type' => 'RSS',
+				    'seedRatio' => '-1',
+				    'Name' => 'BT-Chat.com'
+				),
+			        2 => array(
+				    'Link' => 'http://rss.thepiratebay.org/205',
+				    'Type' => 'RSS',
+				    'seedRatio' => '-1',
+				    'Name' => 'The Pirate Bay - TV shows'
+				),
+			        3 => array(
+				    'Link' => 'http://rss.thepiratebay.org/208',
+				    'Type' => 'RSS',
+				    'seedRatio' => '-1',
+				    'Name' => 'The Pirate Bay - Highres - TV shows'
+				),
+                              );
+    write_config_file();
+  }
     
   if(isset($config_values['Settings']['TimeZone'])) {
     date_default_timezone_set($config_values['Settings']['TimeZone']);
@@ -286,11 +312,7 @@ function update_global_config() {
       $config_values['Settings'][$key] = $_GET[$data];
 
   foreach($checkboxs as $key => $data) 
-    if(!$config_values['Settings']['FirstRun']) {
 	$config_values['Settings'][$key] = $_GET[$data];
-    } else if($config_values['Settings'][FirstRun] == 1 && isset($_GET[$data])) {
-	$config_values['Settings'][$key] = $_GET[$data];
-    }
 
   return;
 }

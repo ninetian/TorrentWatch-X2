@@ -23,7 +23,6 @@ Require Episode Info =
 Disable Hide List =
 History = /share/Apps/Torrentwatchx/rss_cache/rss_dl.history
 MatchStyle = simple
-FirstRun =
 Extension = torrent
 verbosity = 0
 Default Seed Ratio = -1

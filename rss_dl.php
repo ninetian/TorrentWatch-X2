@@ -6,12 +6,11 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 // rss_dl.php
 // This program is a command line interface to torrentwatch
 // 
-ini_set('include_path', '.:'.dirname(__FILE__).'/php');
+ini_set('include_path', '.:'.dirname(__FILE__).'/web/php');
 ini_set("precision", 4);
    
 // These are our extra functions
 require_once('rss_dl_utils.php');
-authenticate();
 
 $config_values;
 $test_run = 0;

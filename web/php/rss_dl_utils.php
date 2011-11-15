@@ -6,6 +6,7 @@ require_once("atomparser.php");
 require_once("cache.php");
 require_once("class.bdecode.php"); 
 require_once("class.phpmailer.php");
+require_once("platform.php");
 if (!extension_loaded("curl")) {
     require_once("curl.php");
 }
@@ -16,7 +17,6 @@ require_once("feeds.php");
 require_once("html.php");
 require_once("lastRSS.php");
 require_once("tor_client.php");
-require_once("platform.php");
 require_once("guess.php");
 
 $config_values['Global'] = array();

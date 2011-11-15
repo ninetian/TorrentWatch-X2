@@ -64,7 +64,7 @@
     </Application>
     <Application>
       <Name>TorrentWatch-X Test</Name>
-      <Version>0.8.5</Version>
+      <Version>0.8.7</Version>
       <DownloadURL>http://torrentwatch.wiebel.nl/releases/TorrentWatchX-NMT-tip.zip</DownloadURL>
       <Author>Wiebel</Author>
       <Maintainer>Wiebel</Maintainer>

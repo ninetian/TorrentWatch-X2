@@ -14,6 +14,13 @@ install()
                 chmod 777 /share/Apps/Torrentwatchx/rss_cache
                 chmod 777 /share/Apps/Torrentwatchx/tvdb_cache
 		chmod 777 /share/Apps/Torrentwatchx/twx-poller.sh
+		cd /share/Apps/Torrentwatchx/web
+		find ./ -type -f -exec rm ..\{} \;
+		cd ..
+		rm -rf css/
+		rm -rf php/
+		rm -rf templates/
+		rm -rf images/
 }
 
 start()

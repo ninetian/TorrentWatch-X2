@@ -244,7 +244,7 @@ function moveTorrent($location, $torHash, $batch=false) {
 function authenticate() {
   global $config_values;
 
-  if ($_SERVER['PHP_AUTH_USER'] == 'admin' && $_SERVER['PHP_AUTH_PW'] == 'test'
+  if ($_SERVER['PHP_AUTH_USER'] == 'twx' && $_SERVER['PHP_AUTH_PW'] == 'twx'
 ) {   
       $_SESSION['http_logged'] = 1;
   } else {

@@ -20,7 +20,7 @@ install()
 		if [ -d css ] ; then rm -rf css/ ; fi
 		if [ -d php ] ; then rm rm -rf php/ ; fi
 		if [ -d templates ] ; then rm -rf templates/ ; fi
-		if [ -d javascript ] ; then rm -rf templates/ ; fi
+		if [ -d javascript ] ; then rm -rf javascript/ ; fi
 		if [ -d images ] ; then rm -rf images/ ; fi
 		if [ -e info.php ] ; then rm info.php ; fi
 		if [ -e TWXRepository.xml ] ; then rm TWXRepository.xml ; fi

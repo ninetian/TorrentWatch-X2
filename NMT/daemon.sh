@@ -22,6 +22,8 @@ install()
 		if [ -d templates ] ; then rm -rf templates/ ; fi
 		if [ -d images ] ; then rm -rf images/ ; fi
 		if [ -e info.php ] ; then rm info.php ; fi
+		if [ -e TWXRepository.xml ] ; then rm TWXRepository.xml ; fi
+		if [ -e Release-Checklist ] ; then rm Release-Checklist ; fi
 		if [ -e etc/torrentwatch.config.dist ] ; then rm etc/torrentwatch.config.dist ; fi
 }
 

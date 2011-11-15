@@ -1,7 +1,11 @@
 #!/bin/sh
 
 cd `dirname $0`/web
-find ./ -type f -exec "if [ -e {} ] ; then rm ..\{} ; fi" \;
+pwd
+for i in `find ./ -type f` ; do
+  if [ -e "../$i" ] ; then rm ../${i} ; fi
+done
+
 cd ..
 if [ -d css ] ; then rm -rf css/ ; fi
 if [ -d php ] ; then rm rm -rf php/ ; fi

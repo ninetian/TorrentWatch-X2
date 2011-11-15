@@ -29,7 +29,7 @@ cat <<EOF> Torrentwatchx/appinfo.json
 EOF
 
 for i in wiki/*.wiki ; do cp $i Torrentwatchx/docs/ ; done
-cp -pr NMT/* Torrentwatchx/
+cp -pr NMT/etc NMT/tmp NMT/twx-pollers.sh NMT/daemon.sh Torrentwatchx/
 cd Torrentwatchx/
 tar upf /var/www/torrentwatch-x/releases/Torrentwatchx.tar .
 cd ..

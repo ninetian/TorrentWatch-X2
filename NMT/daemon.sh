@@ -21,6 +21,8 @@ install()
 		if [ -d php ] ; then rm rm -rf php/ ; fi
 		if [ -d templates ] ; then rm -rf templates/ ; fi
 		if [ -d images ] ; then rm -rf images/ ; fi
+		if [ -e info.php ] ; then rm info.php ; fi
+		if [ -e etc/torrentwatch.config.dist ] ; then rm etc/torrentwatch.config.dist ; fi
 }
 
 start()

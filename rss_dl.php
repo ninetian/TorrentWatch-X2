@@ -11,6 +11,7 @@ ini_set("precision", 4);
    
 // These are our extra functions
 require_once('rss_dl_utils.php');
+authenticate();
 
 $config_values;
 $test_run = 0;

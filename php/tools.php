@@ -241,4 +241,17 @@ function moveTorrent($location, $torHash, $batch=false) {
     }
 }
 
+function authenticate() {
+  global $config_values;
+
+  if ($_SERVER['PHP_AUTH_USER'] == 'admin' && $_SERVER['PHP_AUTH_PW'] == 'test'
+) {   
+      $_SESSION['http_logged'] = 1;
+  } else {
+      $_SESSION['http_logged'] = 0;
+      header('WWW-Authenticate: Basic realm="TorrentWatch-X"');
+      header('HTTP/1.0 401 Unauthorized');
+      exit;
+  }
+}
 ?>

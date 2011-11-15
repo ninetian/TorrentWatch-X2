@@ -612,7 +612,6 @@ function get_client() {
     echo "</div>";
 }
 
-
 //
 //
 // MAIN Function
@@ -622,6 +621,7 @@ $main_timer = timer_init();
 platform_initialize();
 setup_default_config();
 read_config_file();
+authenticate();
 
 $config_values['Global']['HTMLOutput'] = 1;
 $html_out = "";

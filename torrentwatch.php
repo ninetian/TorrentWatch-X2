@@ -256,7 +256,7 @@ function parse_options() {
 function display_global_config() {
     global $config_values, $html_out;
 
-    $savetorrent=$transmission="";
+    $hidedonate=$savetorrent=$transmission="";
     $deepfull=$deeptitle=$deepTitleSeason=$deepoff=$verifyepisode="";
     $matchregexp=$matchglob=$matchsimple=$dishidelist=$hdiedonate=$mailonhit="";
     $favdefaultall=$onlynewer=$fetchproper=$folderclient=$epionly=$combinefeeds=$require_epi_info="";
@@ -647,7 +647,7 @@ $footer = "<div id=\"footer\">TorrentWatch-X version $tw_version[0]";
 if(isset($tw_version[1])) $footer .= " - $tw_version[1]";
 echo "$footer</div>";
 
-if (!$config_values['Settings']['Hide Donate Button']) {
+if (!isset($config_values['Settings']['Hide Donate Button'])) {
     echo '<div id="donate">
 	<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 	<input type="hidden" name="cmd" value="_s-xclick">

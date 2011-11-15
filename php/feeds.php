@@ -463,7 +463,7 @@ function feeds_perform_matching($feeds) {
 
   if(isset($config_values['Global']['HTMLOutput'])) {
     echo('</div>');
-    if(function_exists(finish_rss_list_html)) finish_rss_list_html();
+    if(function_exists('finish_rss_list_html')) finish_rss_list_html();
   }
 }
 

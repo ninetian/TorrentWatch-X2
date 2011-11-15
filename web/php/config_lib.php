@@ -26,8 +26,8 @@ function setup_default_config() {
   } else {
       _default('Download Dir', '/mnt/Media/Downloads');
   }
-  _default('Cache Dir', $basedir."/rss_cache/");
-  _default('TVDB Dir', $basedir."/tvdb_cache/");
+  _default('Cache Dir', $basedir."/../rss_cache/");
+  _default('TVDB Dir', $basedir."/../tvdb_cache/");
   _default('Save Torrents', "0");
   _default('Run Torrentwatch', "True");
   _default('Client', "Transmission");
@@ -38,7 +38,7 @@ function setup_default_config() {
   _default('Deep Directories', "0");
   _default('Require Episode Info', '0');
   _default('Disable Hide List', '0');
-  _default('History', $basedir."/rss_cache/rss_dl.history");
+  _default('History', $basedir."/../rss_cache/rss_dl.history");
   _default('MatchStyle',"regexp");
   _default('Extension',"torrent");
   _default('verbosity','0');

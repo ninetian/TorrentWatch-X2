@@ -530,7 +530,7 @@ function check_files() {
 	echo "<div id=\"errorDialog\" class=\"dialog_window\" style=\"display: block\">Please create the directory $configDir and make sure it's readable and writeable for the user running the webserver (uid: $myuid). </div>";
     }
     $cwd = getcwd();
-    if(!(get_base_dir() == $cwd)) {
+    if(!(get_base_dir() . '/web' == $cwd)) {
         echo "<div id=\"errorDialog\" class=\"dialog_window\" style=\"display: block\">Please edit the config.php file and set the basedir to:<br /> \"$cwd\".<br />Then click your browsers refresh button.</div>";
     return;
     }

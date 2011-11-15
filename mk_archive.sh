@@ -21,7 +21,7 @@ cat <<EOF> Torrentwatchx/appinfo.json
     enabled="1",
     appinfo_format="1",
     name="Torrentwatchx",
-    version="NMT-$1",
+    version="$1",
     webui_path="#PATH#/web",
     setup_script="daemon.sh",
     daemon_script="daemon.sh"

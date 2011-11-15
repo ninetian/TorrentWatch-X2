@@ -217,3 +217,10 @@ IMPORTANT: If you are updating from a previous version. Please copy php/config.p
     * Updated to PHPMailer 5.2.0
     * Moved to direct smtp mailing instead of using mail binary
     * Small css updates.
+
+0.8.6:
+    * Fixed issue that caused the config-cache to corrupt. Causing errors Like: cache_dir: ""  does not exist / have the wrong rights.
+    * Moved web files to 'web' directory. I've included a cleanup.sh script to remove old files after updating. Make sure you backup config.php and move it to 'web/php' (or create a new one).
+    * Replaced first run wizzard with default config.
+    * Fixed a number of smaller bugs.
+

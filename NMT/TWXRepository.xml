@@ -7,9 +7,7 @@
       <DownloadURL>http://torrentwatch-x.googlecode.com/files/TorrentWatchX-NMT-0.8.6.zip</DownloadURL>
       <Author>Wiebel</Author>
       <Maintainer>Wiebel</Maintainer>
-      <Description>
-	TorrentWatch-X is a web based tool to automate downloads of tv shows via torrents and rss. Based on the torrentwatch project (now known as NMTDVR).
-	It's recommended that lighttpd is also installed for performance gain.
+      <Description>TorrentWatch-X is a web based tool to automate downloads of tv shows via torrents and rss. Based on the torrentwatch project (now known as NMTDVR). It's recommended that lighttpd is also installed for performance gain.
       </Description>
       <Homepage>http://code.google.com/p/torrentwatch-x/</Homepage>
       <InstallScript>Apps/AppInit/appinit.cgi?install&amp;Torrentwatchx.tar</InstallScript>

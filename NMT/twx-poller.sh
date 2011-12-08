@@ -16,6 +16,11 @@ then
 PHPCGI="/mnt/syb8634/server/php5-cgi"
 fi
 
+if [ -e "/share/Apps/local/bin/php-fcgi" ];
+then
+PHPCGI="/share/Apps/local/bin/php-fcgi";
+fi
+
 if [ -e "/share/Apps/lighttpd/bin/php-cgi" ];
 then
 PHPCGI="/share/Apps/lighttpd/bin/php-cgi";

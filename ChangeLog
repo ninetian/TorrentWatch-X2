@@ -224,3 +224,5 @@ IMPORTANT: If you are updating from a previous version. Please copy php/config.p
     * Replaced first run wizzard with default config.
     * Fixed a number of smaller bugs.
 
+Current:
+    * Updated jquery to 1.7.1

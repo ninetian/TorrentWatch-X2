@@ -157,11 +157,20 @@ function transmission_add_torrent($tor, $dest, $title, $seedRatio) {
   // transmission dies with bad folder if it doesn't end in a /
   if(substr($dest, strlen($dest)-1, 1) != '/')
     $dest .= '/';
-  $request = array('method' => 'torrent-add',
+
+  if(preg_match('/^magnet:/', $tor)) {
+    $request = array('method' => 'torrent-add',
                    'arguments' => array('download-dir' => $dest,
-                                        'metainfo' => base64_encode($tor)
+			    		'filename' => $tor
                                        )
                                );
+  } else {
+    $request = array('method' => 'torrent-add',
+                   'arguments' => array('download-dir' => $dest,
+    					'metainfo' => base64_encode($tor)
+                                       )
+                               );
+  }
   $response = transmission_rpc($request);
 
   $torHash = $response['arguments']['torrent-added']['hashString'];
@@ -197,27 +206,36 @@ function client_add_torrent($filename, $dest, $title, $feed = NULL, &$fav = NULL
   global $config_values, $hit;
   if(strtolower($fav['Filter']) == "any") $any=1;
   $hit = 1;
-  $filename = htmlspecialchars_decode($filename);
 
-  // Detect and append cookies from the feed url
-  $url = $filename;
-  if($feed && preg_match('/:COOKIE:/', $feed) && (!(preg_match('/:COOKIE:/', $url)))) {
-    $url .= stristr($feed, ':COOKIE:');    
+  if(preg_match("/^magnet:/", $filename)) { 
+    $tor = $filename;
+    $magnet = 1;
   }
-  $get = curl_init();
-  $response = check_for_cookies($url);
-  if($response) {
+
+  if(!$magnet) {
+    $filename = htmlspecialchars_decode($filename);
+
+    // Detect and append cookies from the feed url
+    $url = $filename;
+    if($feed && preg_match('/:COOKIE:/', $feed) && (!(preg_match('/:COOKIE:/', $url)))) {
+      $url .= stristr($feed, ':COOKIE:');    
+    }
+
+    $get = curl_init();
+    $response = check_for_cookies($url);
+    if($response) {
       $url = $response['url'];
       $cookies = $response['cookies'];
-  }
-  $getOptions[CURLOPT_URL] = $url;
-  if(isset($cookies)) $getOptions[CURLOPT_COOKIE] = $cookies;
-  //$getOptions[CURLOPT_USERAGENT] = 'Python-urllib/1.17';  
-  get_curl_defaults($getOptions);
-  curl_setopt_array($get, $getOptions);
-  $tor = curl_exec($get);
-  curl_close($get);
-  if (strncasecmp($tor, 'd8:announce', 11) != 0) { // Check for torrent magic-entry
+    }
+    $getOptions[CURLOPT_URL] = $url;
+    if(isset($cookies)) $getOptions[CURLOPT_COOKIE] = $cookies;
+    //$getOptions[CURLOPT_USERAGENT] = 'Python-urllib/1.17';  
+    get_curl_defaults($getOptions);
+    curl_setopt_array($get, $getOptions);
+    $tor = curl_exec($get);
+    curl_close($get);
+
+    if (strncasecmp($tor, 'd8:announce', 11) != 0) { // Check for torrent magic-entry
 	//This was not a torrent-file, so it's poroperly some kind og xml / html.
 	if(!$retried) {
 	    //Try to retrieve a .torrent link from the content.
@@ -228,7 +246,9 @@ function client_add_torrent($filename, $dest, $title, $feed = NULL, &$fav = NULL
 	    if(isset($retried)) $url = $retried;
 	    return "Error: No torrent file found on $url.";
 	}
+    }
   }
+
   if(!$tor) {
   print '<pre>'.print_r($_GET, TRUE).'</pre>';
     _debug("Couldn't open torrent: $filename \n",-1);

@@ -1,5 +1,5 @@
 <?php
-ini_set('include_path', '.:./php');
+ini_set('include_path', '.:./web/php');
 require_once('rss_dl_utils.php');
 
 read_config_file();

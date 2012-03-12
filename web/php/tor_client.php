@@ -295,7 +295,12 @@ function client_add_torrent($filename, $dest, $title, $feed = NULL, &$fav = NULL
       $return = transmission_add_torrent($tor, $dest, $title, _isset($fav, '$seedRatio', $seedRatio));
       break;
     case 'folder':
-      $return = folder_add_torrent($tor, $dest, $tor_name);
+      if($magnet) {
+	_debug("Can not save magnet links to a folder");
+	$return = "Can not save magnet links to a folder";
+      } else
+	$return = folder_add_torrent($tor, $dest, $tor_name);
+      }
       break;
     default:
       _debug("Invalid Torrent Client: ".$config_values['Settings']['Client']."\n",-1);

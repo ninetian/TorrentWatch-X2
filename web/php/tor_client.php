@@ -175,15 +175,6 @@ function transmission_add_torrent($tor, $dest, $title, $seedRatio) {
 
   $torHash = $response['arguments']['torrent-added']['hashString'];
 
-  if($seedRatio >= 0 && ($torHash)) {
-    $request = array('method' => 'torrent-set',
-             'arguments' => array('ids' => $torHash,
-             'seedRatioLimit' => $seedRatio,
-             'seedRatioMode' => 1)
-            );
-    $response = transmission_rpc($request);
-  } 
-
   if(isset($response['result']) AND ($response['result'] == 'success')) {
     $cache = $config_values['Settings']['Cache Dir'] . "/rss_dl_" . filename_encode($title);
     if($torHash) {
@@ -191,6 +182,18 @@ function transmission_add_torrent($tor, $dest, $title, $seedRatio) {
       fwrite($handle, $torHash);
       fclose($handle);
     }
+    if($seedRatio >= 0 && ($torHash)) {
+      $request = array('method' => 'torrent-set',
+             'arguments' => array('ids' => $torHash,
+             'seedRatioLimit' => $seedRatio,
+             'seedRatioMode' => 1)
+            );
+      $response = transmission_rpc($request);
+      if($response['result'] != 'success') {
+	_debug("Failed setting ratio limit for $title\n");
+      }
+  } 
+
     return 0;
   } else if ($response['result'] == 'duplicate torrent') {
       return "Duplicate Torrent";
@@ -247,12 +250,12 @@ function client_add_torrent($filename, $dest, $title, $feed = NULL, &$fav = NULL
 	    return "Error: No torrent file found on $url.";
 	}
     }
-  }
 
-  if(!$tor) {
-  print '<pre>'.print_r($_GET, TRUE).'</pre>';
-    _debug("Couldn't open torrent: $filename \n",-1);
-    return "Error: Couldn't open torrent: $filename";
+    if(!$tor) {
+      print '<pre>'.print_r($_GET, TRUE).'</pre>';
+      _debug("Couldn't open torrent: $filename \n",-1);
+      return "Error: Couldn't open torrent: $filename";
+    }
   }
   
   $tor_info = new BDecode("", $tor);

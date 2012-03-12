@@ -175,7 +175,6 @@ function transmission_add_torrent($tor, $dest, $title, $seedRatio) {
     $response = transmission_rpc($request);
   } 
 
-
   if(isset($response['result']) AND ($response['result'] == 'success')) {
     $cache = $config_values['Settings']['Cache Dir'] . "/rss_dl_" . filename_encode($title);
     if($torHash) {
@@ -270,7 +269,7 @@ function client_add_torrent($filename, $dest, $title, $feed = NULL, &$fav = NULL
   
   switch($config_values['Settings']['Client']) {
     case 'Transmission':
-      $return = transmission_add_torrent($tor, $dest, $title, _isset($fav, 'seedRatio', $seedRatio));
+      $return = transmission_add_torrent($tor, $dest, $title, _isset($fav, '$seedRatio', $seedRatio));
       break;
     case 'folder':
       $return = folder_add_torrent($tor, $dest, $tor_name);

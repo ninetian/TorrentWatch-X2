@@ -1129,6 +1129,10 @@ $(function() {
 	      id: id
 	},
         function(torHash) {
+	    if(link.match(/^magnet:/) && window.client == 'folder') {
+		alert('Can not save magnet links to a folder')
+		return;
+	    }
             if(torHash.match(/Error:\s\w+/) && window.client != 'folder') {
                 alert('Something went wrong while adding this torrent. ' + torHash);
                 return;

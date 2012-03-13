@@ -228,3 +228,4 @@ Current:
     * Updated jquery to 1.7.1
     * Fixed issue where ratio limit where not passed correctly to transmission.
     * Fixed issue where rss feeds with magnet links would not be added to transmission.
+    * Better hidelist handling.

@@ -354,7 +354,7 @@ function add_hidden($name) {
         $name = strtolower(trim(strtr($guess['key'], array(":" => "", "," => "", "'" => "", "." => " ",  "_" => " "))));
 
         foreach($config_values['Favorites'] as $fav) {
-            if($name == strtolower(strtr($fav['Name'], array(":" => "", "," => "", "'" => "", "." => " ",  "_" => " ")))) return("$name exists in favorites. Not adding to hide list.");
+            if($name == strtolower(strtr($fav['Name'], array(":" => "", "," => "", "'" => "", "." => " ",  "_" => " ")))) return($fav['Name'] . " exists in favorites. Not adding to hide list.");
         }
           
         if(isset($name)) {

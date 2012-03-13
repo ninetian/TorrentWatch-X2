@@ -81,6 +81,7 @@ function guess_match($title, $normalize = FALSE) {
             $quality_guess. "(.*$)/", '\1', $title), ' .');
         $episode_guess = "noShow";
     } else {
+        $episode_guess = "noMatch";
         return False;
     }
     

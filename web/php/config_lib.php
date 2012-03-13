@@ -47,6 +47,7 @@ function setup_default_config() {
   _default('Email Notifications', '');
   _default('SMTP Server', 'localhost');
   _default('TimeZone', 'UTC');
+  _default('Sanitize Hidelist', '0');
 }
 
 if(!(function_exists('get_base_dir'))) {

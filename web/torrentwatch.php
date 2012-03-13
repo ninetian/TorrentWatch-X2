@@ -621,6 +621,12 @@ $main_timer = timer_init();
 platform_initialize();
 setup_default_config();
 read_config_file();
+if($config_values['Settings']['Sanitize Hidelist'] != 1 ) {
+	include 'update_hidelist.php';
+	$config_values['Settings']['Sanitize Hidelist'] = 1;
+	_debug("Updated Hidelist\n");
+	write_config_file();
+}
 //authenticate();
 
 $config_values['Global']['HTMLOutput'] = 1;

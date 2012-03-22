@@ -95,8 +95,11 @@ function read_config_file() {
     write_config_file();
   }
 
-  $CacheAge = time() - filemtime($config_cache);
-  $ConfigAge = time() - filemtime($config_file);
+  if(file_exists($config_cache) {
+	$CacheAge = time() - filemtime($config_cache);
+	$ConfigAge = time() - filemtime($config_file);
+  }
+
   if(file_exists($config_cache) && $CacheAge <= 300 && $CacheAge <= $ConfigAge) {
 	$config_values = unserialize(file_get_contents($config_cache));
 	if(!$config_values['Settings']) {

@@ -95,7 +95,7 @@ function read_config_file() {
     write_config_file();
   }
 
-  if(file_exists($config_cache) {
+  if(file_exists($config_cache)) {
 	$CacheAge = time() - filemtime($config_cache);
 	$ConfigAge = time() - filemtime($config_file);
   }

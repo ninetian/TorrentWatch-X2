@@ -229,3 +229,6 @@ IMPORTANT: If you are updating from a previous version. Please copy php/config.p
     * Fixed issue where ratio limit where not passed correctly to transmission.
     * Fixed issue where rss feeds with magnet links would not be added to transmission.
     * Better hidelist handling.
+
+0.8.9:
+    * Added UserAgent, fixes some issues with some feeds.

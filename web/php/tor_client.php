@@ -206,7 +206,7 @@ function transmission_add_torrent($tor, $dest, $title, $seedRatio) {
 }
 
 function client_add_torrent($filename, $dest, $title, $feed = NULL, &$fav = NULL, $retried=false) {
-  global $config_values, $hit;
+  global $config_values, $hit, $tw_version;
   if(strtolower($fav['Filter']) == "any") $any=1;
   $hit = 1;
 
@@ -233,6 +233,7 @@ function client_add_torrent($filename, $dest, $title, $feed = NULL, &$fav = NULL
     $getOptions[CURLOPT_URL] = $url;
     if(isset($cookies)) $getOptions[CURLOPT_COOKIE] = $cookies;
     //$getOptions[CURLOPT_USERAGENT] = 'Python-urllib/1.17';  
+    $getOptions[CURLOPT_USERAGENT] = "TWX/$tw_version[0]";  
     get_curl_defaults($getOptions);
     curl_setopt_array($get, $getOptions);
     $tor = curl_exec($get);

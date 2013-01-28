@@ -64,6 +64,7 @@ if(!(function_exists('get_curl_defaults'))) {
 	$curlopt[CURLOPT_SSL_VERIFYHOST] = false;
 	$curlopt[CURLOPT_FOLLOWLOCATION] = true;
 	$curlopt[CURLOPT_UNRESTRICTED_AUTH] = true;
+	$curlopt[CURLOPT_ENCODING] = true;
 	$curlopt[CURLOPT_TIMEOUT] = 20;
 	$curlopt[CURLOPT_RETURNTRANSFER] = true;
 	return($curlopt);

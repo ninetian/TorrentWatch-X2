@@ -15,7 +15,7 @@ html {
 }
 
 body {
-    font: 85% "lucida grande", Tahoma, Verdana, Arial, Helvetica, sans-serif;
+    font: 85% Verdana, Arial, Helvetica, sans-serif;
     color: #323232 !important;
     text-align: left;
     overflow: hidden;
@@ -636,7 +636,7 @@ ul.torrentlist td.buttons {
 }
 
 ul.torrentlist td.identifier {
-    width: 5px;
+    width: 10px;
 }
 
 ul.torrentlist td.tr_identifier {
@@ -644,33 +644,40 @@ ul.torrentlist td.tr_identifier {
 }
 
 div#show_legend li.legend.match_nomatch,
-ul.torrentlist li.match_nomatch td.identifier {
-    background-color: #D6ABAB;
+ul.torrentlist li.match_nomatch td.identifier,
+ul.torrentlist li.match_nomatch a.contextButton {
+    background-color: #DDDDDD;
 }
 
 div#show_legend li.legend.match_season,
-ul.torrentlist li.match_season td.identifier {
+ul.torrentlist li.match_season td.identifier,
+ul.torrentlist li.match_season a.contextButton {
     background-color: #99CCBB;
 }
 
 div#show_legend li.legend.match_old_download,
-ul.torrentlist li.match_old_download td.identifier {
-    background-color: #bbb;
+ul.torrentlist li.match_old_download td.identifier,
+ul.torrentlist li.match_old_download a.contextButton {
+    background-color: #D6ABAB;
 }
 
 div#show_legend li.legend.match_match,
-ul.torrentlist li.match_match td.identifier {
+ul.torrentlist li.match_match td.identifier,
+ul.torrentlist li.match_match a.contextButton {
     background-color: #FFEFCF;
 }
 
 div#show_legend li.legend.match_old,
 ul.torrentlist li.match_duplicate td.identifier,
-ul.torrentlist li.match_old td.identifier {
+ul.torrentlist li.match_old td.identifier,
+ul.torrentlist li.match_duplicate a.contextButton,
+ul.torrentlist li.match_old a.contextButton {
     background-color: #A2A2E8;
 }
 
 div#show_legend li.legend.match_test,
-ul.torrentlist li.match_test td.identifier {
+ul.torrentlist li.match_test td.identifier,
+ul.torrentlist li.match_test a.contextButton {
     background-color: #C975C9;
 }
 
@@ -680,7 +687,12 @@ ul.torrentlist li.match_cachehit td.identifier,
 ul.torrentlist li.match_to_check td.identifier,
 ul.torrentlist li.match_downloaded td.identifier,
 ul.torrentlist li.match_downloading td.identifier,
-ul.torrentlist li.match_transmission td.tr_identifier {
+ul.torrentlist li.match_transmission td.tr_identifier,
+ul.torrentlist li.match_cachehit a.contextButton,
+ul.torrentlist li.match_to_check a.contextButton,
+ul.torrentlist li.match_downloaded a.contextButton,
+ul.torrentlist li.match_downloading a.contextButton,
+ul.torrentlist li.match_transmission a.contextButton {
     background-color: #C1E0C1;
 }
 
@@ -726,7 +738,7 @@ ul.torrentlist .torInfoErr {
 }
 
 div.torrent_name a.contextButton {
-    background: #F0F0F0;
+    /* background: #F0F0F0; */
     background-image: url('../images/dropdown.png');
     background-repeat: no-repeat;
     background-position: 0 2px;

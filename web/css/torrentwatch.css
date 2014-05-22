@@ -24,26 +24,9 @@ body {
 
 input, select {
     margin-left: 5px;
-}
-
-select {
     border: 1px solid #787878;
 }
 
-input[type=text] {
-    border: 1px solid #787878;
-    margin-left: 5px;
-}
-
-input[type=password] {
-    border: 1px solid #787878;
-    margin-left: 5px;
-}
-
-input[type=hidden] {
-    display: none;
-}
-    
 input[type=checkbox] {
     margin-top: 2px;
 }
@@ -1445,11 +1428,11 @@ div#feedItemTitles {
 div#feedNameUrl {
     margin-left: 0;
     float: left;
-    width: 315px;
+    width: 295px;
 }
 
 div#addFeed input.feed_link[type=text] {
-    width: 310px;
+    width: 290px;
     margin: 0 0;
     padding: 1px 3px;
     left: 87px;
@@ -1474,7 +1457,7 @@ div#config_feeds div.feeditem label.item {
 }
 
 div#config_feeds div.feeditem input[type=text] {
-    width: 296px;
+    width: 276px;
     margin: 3px 0;
     padding: 1px 3px 1px 3px;
     left: 0px;
@@ -1646,17 +1629,16 @@ form.favinfo input#idx {
     display: none;
     }
 
-form.favinfo select {
-    position: absolute;
-    right: 15px;
-    width: 272px;
-}
-
 form.favinfo input.text,
+form.favinfo select,
 form.favinfo input[type=text] {
     position: absolute;
     right: 15px;
     width: 270px;
+}
+
+form.favinfo select {
+    width: 274px;
 }
 
 form.favinfo div.favorite_seed_and_episode {
